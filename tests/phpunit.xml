@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<phpunit bootstrap="bootstrap.php" colors="true" verbose="true">
+	
+	<testsuites>
+		<testsuite name="DMS Suite">
+			<directory>DMS</directory>
+		</testsuite>
+		<testsuite name="Filter">
+			<directory>DMS/Filter</directory>
+		</testsuite>
+	</testsuites>
+	
+	<filter>
+		<blacklist>
+			<directory>../tests</directory>
+		</blacklist>
+		<whitelist>
+			<directory suffix=".php">../src</directory>
+		</whitelist>
+	</filter>
+	
+	<logging>
+		<log type="coverage-html" target="_reports/coverage/" charset="UTF-8" yui="true" highlight="false" lowUpperBound="35" highLowerBound="70"/>
+		<log type="testdox-text" target="_reports/testdox/tests.txt"/>
+		<log type="testdox-html" target="_reports/testdox/tests.html"/>
+	</logging>
+</phpunit>
