@@ -59,6 +59,13 @@ class Filter implements FilterInterface
         return $this->metadataFactory;
     }
     
+    /**
+     * Iterates over annotated properties in an object filtering the selected
+     * values
+     * 
+     * @param object $object
+     * @param string $limitProperty
+     */
     protected function walkObject($object, $limitProperty = null) {
         
         if ( $object === null ) {
