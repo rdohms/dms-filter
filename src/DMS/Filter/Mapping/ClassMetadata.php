@@ -2,11 +2,107 @@
 
 namespace DMS\Filter\Mapping;
 
-class ClassMetadata
+/**
+ * Represents a class that has Annotations
+ */
+class ClassMetadata implements ClassMetadataInterface
 {
+    /**
+     * @var string
+     */
+    public $className;
     
-    public $name;
-    public $properties;
+    /**
+     * Properties that contain filtering rules
+     * @var array
+     */
+    public $filteredProperties = array();
+    
+    /**
+     * @var ReflectionClass 
+     */
     private $reflClass;
     
+    /**
+     * Constructor
+     * 
+     * @param string $class 
+     */
+    public function __construct($class)
+    {
+        $this->className = $class;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public function getFilteredProperties()
+    {
+        return array_keys($this->filteredProperties);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPropertyRules($property)
+    {
+        if ( ! isset($this->filteredProperties[$property])) return;
+        
+        return $this->filteredProperties[$property]['rules'];
+    }
+
+    /**
+     * {@inheritDoc}
+     * 
+     * @todo bend this method into calestenics
+     */
+    public function mergeRules($metadata)
+    {
+        foreach ( $metadata->getFilteredProperties() as $property ) {
+            
+            foreach ($metadata->getPropertyRules($property) as $rule) {
+                $this->addPropertyRule($property, clone $rule);
+            }
+            
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     * 
+     * @todo check for duplicate rules
+     */
+    public function addPropertyRule($property, $rule) 
+    {
+        if (!isset ($this->filteredProperties[$property])) {
+            $this->filteredProperties[$property] = array('rules' => array());
+        }
+        
+        $this->filteredProperties[$property]['rules'][] = $rule;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public function getClassName()
+    {
+        return $this->className;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public function getReflectionClass()
+    {
+        if (!$this->reflClass) {
+            $this->reflClass = new \ReflectionClass($this->getClassName());
+        }
+
+        return $this->reflClass;
+    }
+    
+
+
+
+
 }

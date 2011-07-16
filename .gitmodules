@@ -1,0 +1,3 @@
+[submodule "tests/Resources/vendors/doctrine2"]
+	path = tests/Resources/vendors/doctrine2
+	url = git://github.com/doctrine/doctrine2.git
