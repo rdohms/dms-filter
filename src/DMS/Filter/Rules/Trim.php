@@ -3,27 +3,27 @@
 namespace DMS\Filter\Rules;
 
 /**
- * StripTags Rule
+ * Trim Rule
  * 
  * @package DMS
  * @subpackage Filter
  * 
  */
-class StripTags extends Rule
+class Trim extends Rule
 {
     /**
      * Comma separated string of allowed tags
      * 
      * @var string
      */
-    public $allowed = null;
+    public $trimCharlist = null;
     
     /**
      * {@inheritDoc}
      */
     public function applyFilter($value)
     {
-        return strip_tags($value, $this->allowed);
+        return trim($value, $this->trimCharlist);
     }
 
     /**
@@ -31,6 +31,6 @@ class StripTags extends Rule
      */
     public function getDefaultOption()
     {
-        return 'allowed';
+        return 'trimCharlist';
     }
 }

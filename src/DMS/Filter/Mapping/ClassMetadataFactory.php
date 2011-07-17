@@ -2,16 +2,39 @@
 
 namespace DMS\Filter\Mapping;
 
+use Doctrine\Common\Cache\Cache;
+
+/**
+ * Responsible for loading metadata for selected classes
+ * 
+ * @package DMS
+ * @subpackage Filter
+ */
 class ClassMetadataFactory
 {
-    
+    /**
+     * @var Loader\LoaderInterface 
+     */
     protected $loader;
     
+    /**
+     * @var Doctrine\Common\Cache\Cache 
+     */
     protected $cache;
     
+    /**
+     * @var array
+     */
     protected $parsedClasses = array();
     
-    public function __construct(Loader\LoaderInterface $loader, Cache\CacheInterface $cache = null)
+    /**
+     * Constructor
+     * Receives a Loader and a Doctrine Compatible cache instance
+     * 
+     * @param Loader\LoaderInterface $loader
+     * @param Cache $cache 
+     */
+    public function __construct(Loader\LoaderInterface $loader, Cache $cache = null)
     {
         $this->loader = $loader;
         $this->cache = $cache;
@@ -31,9 +54,9 @@ class ClassMetadataFactory
         }
         
         //Check Cache for it
-        if ($this->cache !== null && $this->cache->has($class)) {
+        if ($this->cache !== null && $this->cache->contains($class)) {
             
-            $this->setParsedClass($class, $this->cache->read($class));
+            $this->setParsedClass($class, $this->cache->fetch($class));
             return $this->getParsedClass($class);
             
         }
@@ -63,7 +86,7 @@ class ClassMetadataFactory
         $this->setParsedClass($class, $metadata);
         
         if ($this->cache !== null) {
-            $this->cache->write($metadata);
+            $this->cache->write($class, $metadata);
         }
         
         return $metadata;    

@@ -13,6 +13,7 @@
 	<filter>
 		<blacklist>
 			<directory>../tests</directory>
+                        <directory>../vendors</directory>
 		</blacklist>
 		<whitelist>
 			<directory suffix=".php">../src</directory>
