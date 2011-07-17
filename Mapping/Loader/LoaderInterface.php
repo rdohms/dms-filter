@@ -2,6 +2,12 @@
 
 namespace DMS\Filter\Mapping\Loader;
 
+/**
+ * Interface for a Loader
+ * 
+ * @package DMS
+ * @subpackage Filter
+ */
 interface LoaderInterface
 {
     /**

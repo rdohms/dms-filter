@@ -2,6 +2,12 @@
 
 namespace DMS\Filter\Mapping;
 
+/**
+ * Method required by a ClassMetadata class
+ * 
+ * @package DMS
+ * @subpackage Filter
+ */
 interface ClassMetadataInterface
 {
     /**

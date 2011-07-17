@@ -2,6 +2,12 @@
 
 namespace DMS\Filter\Mapping;
 
+/**
+ * Required methods of a Metadata Factory class
+ * 
+ * @package DMS
+ * @subpackage Filter
+ */
 interface ClassMetadataFactoryInterface
 {
     /**

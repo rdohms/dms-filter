@@ -4,6 +4,9 @@ namespace DMS\Filter\Mapping;
 
 /**
  * Represents a class that has Annotations
+ * 
+ * @package DMS
+ * @subpackage Filter
  */
 class ClassMetadata implements ClassMetadataInterface
 {

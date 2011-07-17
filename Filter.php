@@ -3,7 +3,8 @@
 namespace DMS\Filter;
 
 /**
- * 
+ * Filter Object, responsible for retrieving the filtering rules
+ * for the object and applying them
  * 
  * @package DMS
  * @subpackage Filter

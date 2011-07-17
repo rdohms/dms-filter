@@ -6,23 +6,34 @@ use Doctrine\Common\Annotations\Reader,
     DMS\Filter\Rules;
 
 /**
- * @todo document
+ * Loader that reads filtering data from Annotations
+ * 
+ * @package DMS
+ * @subpackage Filter
  */
 class AnnotationLoader implements LoaderInterface
 {
-    
+    /**
+     *
+     * @var Doctrine\Common\Annotations\Reader 
+     */
     protected $reader;
     
+    /**
+     * Constructor
+     * 
+     * @param Doctrine\Common\Annotations\Reader $reader 
+     */
     public function __construct(Reader $reader)
     {
         $this->reader = $reader;
     }
     
     /**
-     *
-     * @param ClassMetadata $metadata 
+     * Loads annotations data present in the class, using a Doctrine
+     * annotation reader
      * 
-     * @todo calesthenics
+     * @param ClassMetadata $metadata 
      */
     public function loadClassMetadata(ClassMetadata $metadata)
     {
@@ -31,19 +42,41 @@ class AnnotationLoader implements LoaderInterface
         
         //Iterate over properties to get annotations
         foreach($reflClass->getProperties() as $property) {
-            if ($property->getDeclaringClass()->getName() == $reflClass->getClassName()) {
-                
-                foreach($this->reader->getPropertyAnnotations($property) as $rule) {
-                    
-                    if ( $rule instanceof Rules\Rule ) {
-                        $metadata->addPropertyRule($property->getName(), $rule);
-                    }
-                    
-                }
-                
-            }
+            
+            $this->readProperty($property, $metadata);
+            
         }
         
+    }
+    
+    /**
+     * Reads annotations for a selected property in the class
+     * 
+     * @param ReflectionProperty $property
+     * @param ClassMetadata $metadata
+     */
+    private function readProperty($property, $metadata)
+    {
+        $reflClass = $metadata->getReflectionClass();
+        
+        // Skip if this property is not from this class
+        if ($property->getDeclaringClass()->getName()
+            != $reflClass->getClassName()
+        ) {
+            return;
+        }
+
+        //Iterate over all annotations
+        foreach($this->reader->getPropertyAnnotations($property) as $rule) {
+
+            //Skip is its not a rule
+            if ( ! $rule instanceof Rules\Rule ) continue;
+            
+            //Add Rule
+            $metadata->addPropertyRule($property->getName(), $rule);
+
+        }
+
     }
 
 }

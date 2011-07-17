@@ -4,6 +4,9 @@ namespace DMS\Filter;
 
 /**
  * Filters the values of a given object
+ * 
+ * @package DMS
+ * @subpackage Filter
  */
 interface FilterInterface
 {
