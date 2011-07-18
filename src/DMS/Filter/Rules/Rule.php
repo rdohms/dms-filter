@@ -2,6 +2,10 @@
 
 namespace DMS\Filter\Rules;
 
+use DMS\Filter\Exception\InvalidOptionsException,
+    DMS\Filter\Exception\MissingOptionsException,
+    DMS\Filter\Exception\RuleDefinitionException;
+
 /**
  * Base class for a Filtering Rule, it implements common behaviour
  * 
@@ -40,6 +44,7 @@ abstract class Rule
      *                                       NULL
      * 
      * @link https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Validator/Constraint.php
+     * @todo rewrite this
      */
     public function __construct($options = null)
     {
@@ -63,7 +68,7 @@ abstract class Rule
             $option = $this->getDefaultOption();
 
             if (null === $option) {
-                throw new ConstraintDefinitionException(
+                throw new RuleDefinitionException(
                     sprintf('No default option is configured for constraint %s', get_class($this))
                 );
             }
