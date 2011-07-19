@@ -3,7 +3,9 @@
 namespace DMS\Filter\Mapping\Loader;
 
 use Doctrine\Common\Annotations\Reader,
-    DMS\Filter\Rules;
+    Doctrine\Common\Annotations\AnnotationRegistry,
+    DMS\Filter\Rules,
+    DMS\Filter\Mapping;
 
 /**
  * Loader that reads filtering data from Annotations
@@ -27,6 +29,10 @@ class AnnotationLoader implements LoaderInterface
     public function __construct(Reader $reader)
     {
         $this->reader = $reader;
+        
+        //Register Filter Rules Annotation Namespace
+        AnnotationRegistry::registerAutoloadNamespace('DMS\Filter\Rules', __DIR__ . '/../../../../');
+        
     }
     
     /**
@@ -35,7 +41,7 @@ class AnnotationLoader implements LoaderInterface
      * 
      * @param ClassMetadata $metadata 
      */
-    public function loadClassMetadata(ClassMetadata $metadata)
+    public function loadClassMetadata(Mapping\ClassMetadataInterface $metadata)
     {
         
         $reflClass = $metadata->getReflectionClass();
@@ -61,7 +67,7 @@ class AnnotationLoader implements LoaderInterface
         
         // Skip if this property is not from this class
         if ($property->getDeclaringClass()->getName()
-            != $reflClass->getClassName()
+            != $metadata->getClassName()
         ) {
             return;
         }

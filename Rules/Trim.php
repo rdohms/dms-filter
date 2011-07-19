@@ -8,6 +8,7 @@ namespace DMS\Filter\Rules;
  * @package DMS
  * @subpackage Filter
  * 
+ * @Annotation
  */
 class Trim extends Rule
 {
@@ -16,14 +17,21 @@ class Trim extends Rule
      * 
      * @var string
      */
-    public $trimCharlist = null;
+    public $charlist = null;
     
     /**
      * {@inheritDoc}
      */
     public function applyFilter($value)
     {
-        return trim($value, $this->trimCharlist);
+        //trim() only operates in default mode
+        //if no second argument is passed, it
+        //cannot be passed as null
+        if ($this->charlist === null) {
+            return trim($value);
+        }
+        
+        return trim($value, $this->charlist);
     }
 
     /**
@@ -31,6 +39,6 @@ class Trim extends Rule
      */
     public function getDefaultOption()
     {
-        return 'trimCharlist';
+        return 'charlist';
     }
 }

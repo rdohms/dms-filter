@@ -135,7 +135,7 @@ class ClassMetadataFactory
      */
     protected function loadParentMetadata($metadata)
     {
-        $parent = $metadata->getReflectionClass->getParentClass();
+        $parent = $metadata->getReflectionClass()->getParentClass();
         
         if ($parent) {
             $metadata->mergeRules($this->getClassMetadata($parent->getName()));

@@ -8,6 +8,7 @@ namespace DMS\Filter\Rules;
  * @package DMS
  * @subpackage Filter
  * 
+ * @Annotation
  */
 class StripTags extends Rule
 {
