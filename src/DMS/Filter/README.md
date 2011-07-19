@@ -18,7 +18,7 @@ This library provides a service that can be used to filter object values based o
     $metadataFactory = new Mapping\ClassMetadataFactory($loader);
 
     //Get a Filter
-    $filter = new Filter($metadataFactory);
+    $filter = new DMS\Filter\Filter($metadataFactory);
 
     //Filter object
     $filter->filter($object);
