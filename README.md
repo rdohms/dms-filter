@@ -1,6 +1,6 @@
 # DMS Component Library
 
-The objective of this repo is to consolidate various components I carry around with me in various systems and to offer some of them as standalone libraries, like Filter.
+The objective of this repository is to consolidate various components I carry around with me in various systems and to offer some of them as standalone libraries, like Filter.
 
 # Components
 

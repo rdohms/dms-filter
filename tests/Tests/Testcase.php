@@ -7,6 +7,9 @@ use DMS\Filter\Mapping,
 
 class Testcase extends \PHPUnit_Framework_TestCase
 {
+    
+    protected $loader;
+    
     public function setUp()
     {
         parent::setUp();
@@ -23,6 +26,7 @@ class Testcase extends \PHPUnit_Framework_TestCase
         $reader->setEnableParsePhpImports(true);
         
         $loader = new Mapping\Loader\AnnotationLoader($reader);
+        $this->loader = $loader;
         
         $metadataFactory = new Mapping\ClassMetadataFactory($loader);
         

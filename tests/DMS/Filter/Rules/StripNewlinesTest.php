@@ -4,7 +4,7 @@ namespace DMS\Filter\Rules;
 
 use Tests;
 
-class StripTagsTest extends Tests\Testcase
+class StripNewlinesTest extends Tests\Testcase
 {
     
     public function setUp()
@@ -22,7 +22,7 @@ class StripTagsTest extends Tests\Testcase
      */
     public function testRule($options, $value, $expectedResult)
     {
-        $rule = new StripTags($options);
+        $rule = new StripNewlines($options);
         
         $result = $rule->applyFilter($value);
         
@@ -32,9 +32,11 @@ class StripTagsTest extends Tests\Testcase
     public function provideForRule()
     {
         return array(
-            array(array(), "<b>my text</b>", "my text"),
-            array(array('allowed' => "<p>"), "<b><p>my text</p></b>", "<p>my text</p>"),
-            array("<p>", "<b><p>my text</p></b>", "<p>my text</p>"),
+            array(null, "My \n Text", "My  Text"),
+            array(null, "My \n\r Text", "My  Text"),
+            array(null, "My \r\n Text", "My  Text"),
+            array(null, "My
+Text", "MyText"),
         );
     }
 }

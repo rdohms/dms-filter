@@ -81,5 +81,16 @@ class RuleTest extends Tests\Testcase
     }
     
     
-    
+    public function testOptionExceptionInformation()
+    {
+        try {
+            $rule = new Dummy\Rules\MultipleOptionsRule(array('invalid' => 'option'));
+        } catch (\DMS\Filter\Exception\InvalidOptionsException $e) {
+            
+            $this->assertInternalType('array', $e->getOptions());
+            
+            $this->assertContains('invalid', $e->getOptions());
+            
+        }
+    }
 }

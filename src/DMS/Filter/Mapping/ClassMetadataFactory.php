@@ -10,7 +10,7 @@ use Doctrine\Common\Cache\Cache;
  * @package DMS
  * @subpackage Filter
  */
-class ClassMetadataFactory
+class ClassMetadataFactory implements ClassMetadataFactoryInterface
 {
     /**
      * @var Loader\LoaderInterface 
@@ -86,7 +86,7 @@ class ClassMetadataFactory
         $this->setParsedClass($class, $metadata);
         
         if ($this->cache !== null) {
-            $this->cache->write($class, $metadata);
+            $this->cache->save($class, $metadata);
         }
         
         return $metadata;    
