@@ -7,3 +7,6 @@
 [submodule "vendors/Symfony/Component/ClassLoader"]
 	path = vendors/Symfony/Component/ClassLoader
 	url = https://github.com/symfony/ClassLoader.git
+[submodule "vendors/doctrine-common"]
+	path = vendors/doctrine-common
+	url = https://github.com/doctrine/common.git

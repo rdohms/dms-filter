@@ -20,7 +20,38 @@ class RuleTest extends Tests\Testcase
     
     public function testConstructorHappyPath()
     {
-        $rule = new Dummy\Rules\HappyPathRule();
+        $rule = new Dummy\Rules\NoOptionsRule();
+        
+        $this->assertInstanceOf('DMS\Filter\Rules\Rule', $rule);
+    }
+    
+    public function testConstructorDefaultOption()
+    {
+        $rule = new Dummy\Rules\DefaultOptionRule('value');
+        
+        $this->assertInstanceOf('DMS\Filter\Rules\Rule', $rule);
+    }
+    
+    public function testConstructorDefaultOptionInArray()
+    {
+        $rule = new Dummy\Rules\DefaultOptionRule(array('value' => 'optionvalue'));
+        
+        $this->assertInstanceOf('DMS\Filter\Rules\Rule', $rule);
+    }
+    
+    public function testConstructorHappyPathWithRequired()
+    {
+        $rule = new Dummy\Rules\RequiredOptionsRule(array('config' => 'value', 'path' => '/path/to/'));
+        
+        $this->assertInstanceOf('DMS\Filter\Rules\Rule', $rule);  
+    }
+    
+    /**
+     * @expectedException DMS\Filter\Exception\RuleDefinitionException
+     */
+    public function testConstructorNoDefinedDefaultOption()
+    {
+        $rule = new Dummy\Rules\NoOptionsRule('value');
         
         $this->assertInstanceOf('DMS\Filter\Rules\Rule', $rule);
     }
@@ -30,7 +61,25 @@ class RuleTest extends Tests\Testcase
      */
     public function testConstructorInvalidOption()
     {
-        $rule = new Dummy\Rules\HappyPathRule(array('invalid' => 'option'));
+        $rule = new Dummy\Rules\MultipleOptionsRule(array('invalid' => 'option'));
     }
+
+    /**
+     * @expectedException DMS\Filter\Exception\InvalidOptionsException
+     */
+    public function testConstructorInvalidDefaultOption()
+    {
+        $rule = new Dummy\Rules\InvalidDefaultOptionRule('value');
+    }
+
+    /**
+     * @expectedException DMS\Filter\Exception\MissingOptionsException
+     */
+    public function testConstructorMissingOption()
+    {
+        $rule = new Dummy\Rules\RequiredOptionsRule(array('config' => 'option'));
+    }
+    
+    
     
 }

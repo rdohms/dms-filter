@@ -14,6 +14,7 @@ $loader->registerNamespaces(array(
     'Symfony\Component' => 
             array(VENDOR_DIR . '/Symfony', 
                   VENDOR_DIR . '/doctrine2/lib/vendor/Symfony'),
+    'Doctrine' => array(VENDOR_DIR . '/doctrine-common/lib'),
     'DMS' => array(ROOT_DIR . '/src', ROOT_DIR . 'tests'),
     'Tests' => ROOT_DIR . '/tests',
 ));

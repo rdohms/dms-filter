@@ -27,7 +27,6 @@ abstract class Rule
     abstract function applyFilter($value);
     
     /**
-     * ** Attribution: This function is based on the Symfony Validator Constraint **
      * 
      * Initializes the filter rule with its options
      *
@@ -42,58 +41,107 @@ abstract class Rule
      * @throws ConstraintDefinitionException When you don't pass an associative
      *                                       array, but getDefaultOption() returns
      *                                       NULL
-     * 
-     * @link https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Validator/Constraint.php
-     * @todo rewrite this
      */
     public function __construct($options = null)
     {
-        $invalidOptions = array();
-        $missingOptions = array_flip((array) $this->getRequiredOptions());
+        
+        $result = $this->parseOptions($options);
+        
+        if (count($result->invalidOptions) > 0) {
+            throw new InvalidOptionsException(
+                sprintf('The options "%s" do not exist in rule %s', implode('", "', $result->invalidOptions), get_class($this)),
+                $result->invalidOptions
+            );
+        }
 
+        if (count($result->missingOptions) > 0) {
+            throw new MissingOptionsException(
+                sprintf('The options "%s" must be set for rule %s', implode('", "', array_keys($result->missingOptions)), get_class($this)),
+                array_keys($result->missingOptions)
+            );
+        }
+    }
+    
+    /**
+     * Parses provided options into their properties and returns results
+     * for the parsing process
+     * 
+     * @param mixed $options
+     * @return \stdClass 
+     */
+    private function parseOptions($options)
+    {
+        $parseResult = new \stdClass();
+        $parseResult->invalidOptions = array();
+        $parseResult->missingOptions = array_flip((array) $this->getRequiredOptions());
+        
+        //Doctrine parses constructor parameter into 'value' array param, restore it
         if (is_array($options) && count($options) == 1 && isset($options['value'])) {
             $options = $options['value'];
         }
-
+        
+        //Parse Option Array
         if (is_array($options) && count($options) > 0 && is_string(key($options))) {
-            foreach ($options as $option => $value) {
-                if (property_exists($this, $option)) {
-                    $this->$option = $value;
-                    unset($missingOptions[$option]);
-                } else {
-                    $invalidOptions[] = $option;
-                }
-            }
-        } else if (null !== $options && ! (is_array($options) && count($options) === 0)) {
-            $option = $this->getDefaultOption();
-
-            if (null === $option) {
-                throw new RuleDefinitionException(
-                    sprintf('No default option is configured for constraint %s', get_class($this))
-                );
-            }
-
-            if (property_exists($this, $option)) {
-                $this->$option = $options;
-                unset($missingOptions[$option]);
-            } else {
-                $invalidOptions[] = $option;
-            }
+            $this->parseOptionsArray($options, $parseResult);
+            return $parseResult;
         }
+        
+        //Parse Single Value
+        if (null !== $options && ! (is_array($options) && count($options) === 0)) {
+            $this->parseSingleOption($options, $parseResult);
+            return $parseResult;
+        }
+        
+        return $parseResult;
+    }
+    
+    /**
+     * Parses Options in the array format
+     * 
+     * @param array $options
+     * @param \stdClass $result 
+     */
+    private function parseOptionsArray($options, $result)
+    {
+        foreach ($options as $option => $value) {
+            
+            if (!property_exists($this, $option)) {
+                $result->invalidOptions[] = $option;
+                continue;
+            }
+            
+            //Define Option
+            $this->$option = $value;
+            unset($result->missingOptions[$option]);
+        }
+    }
+    
+    /**
+     * Parses single option received
+     * 
+     * @param string $options
+     * @param \stdClass $result 
+     */
+    private function parseSingleOption($options, $result)
+    {
+        $option = $this->getDefaultOption();
 
-        if (count($invalidOptions) > 0) {
-            throw new InvalidOptionsException(
-                sprintf('The options "%s" do not exist in constraint %s', implode('", "', $invalidOptions), get_class($this)),
-                $invalidOptions
+        //No Default set, usnsure what to do
+        if (null === $option) {
+            throw new RuleDefinitionException(
+                sprintf('No default option is configured for rule %s', get_class($this))
             );
         }
-
-        if (count($missingOptions) > 0) {
-            throw new MissingOptionsException(
-                sprintf('The options "%s" must be set for constraint %s', implode('", "', array_keys($missingOptions)), get_class($this)),
-                array_keys($missingOptions)
-            );
+        
+        //Default option points to invalid one
+        if (!property_exists($this, $option)) {
+            $result->invalidOptions[] = $option;
+            return;
         }
+        
+        //Define Option
+        $this->$option = $options;
+        unset($result->missingOptions[$option]);
     }
     
     /**
