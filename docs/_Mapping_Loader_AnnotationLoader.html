@@ -1,0 +1,214 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DMS</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script>
+      $(document).ready(function() {
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().css('cursor', 'pointer');
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().click(function() {
+          if ($(this).next().is(':hidden'))
+          {
+            $(this).children('img')[0].src = 'images/arrow_down.gif';
+          } else
+          {
+            $(this).children('img')[0].src = 'images/arrow_right.gif';
+          }
+          $(this).next().slideToggle();
+        });
+      $('dl.function-info, dl.constant-info, dl.property-info').hide();
+      $('dl.function-info img, dl.constant-info img, dl.property-info img').show();
+      });
+    </script><a name="top"></a><h1 class="file">Mapping/Loader/AnnotationLoader.php</h1>
+<div class="file_menu">
+<a href="#classes">Classes</a> </div>
+<dl class="file-info">
+<dt>Classes</dt>
+<dd><a class="class" href="#%5CDMS%5CFilter%5CMapping%5CLoader%5CAnnotationLoader">AnnotationLoader</a></dd>
+</dl>
+<a name="classes"></a><a id="\DMS\Filter\Mapping\Loader\AnnotationLoader"></a><h2 class="class">\DMS\Filter\Mapping\Loader\AnnotationLoader<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<dl class="class-info">
+<dt>Implements</dt>
+<dd><a href="_Mapping_Loader_LoaderInterface.html#%5CDMS%5CFilter%5CMapping%5CLoader%5CLoaderInterface">\DMS\Filter\Mapping\Loader\LoaderInterface</a></dd>
+<dt>package</dt>
+<dd>DMS</dd>
+<dt>subpackage</dt>
+<dd>Filter</dd>
+<dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
+                Properties
+              </a></dt>
+<dd><a class="property protected" href="#%5CDMS%5CFilter%5CMapping%5CLoader%5CAnnotationLoader::%24reader">$reader</a></dd>
+<dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
+                Methods
+              </a></dt>
+<dd><a class="method public" href="#%5CDMS%5CFilter%5CMapping%5CLoader%5CAnnotationLoader::__construct()">__construct</a></dd>
+<dd><a class="method public" href="#%5CDMS%5CFilter%5CMapping%5CLoader%5CAnnotationLoader::loadClassMetadata()">loadClassMetadata</a></dd>
+<dd><a class="method private" href="#%5CDMS%5CFilter%5CMapping%5CLoader%5CAnnotationLoader::readProperty()">readProperty</a></dd>
+</dl>
+<h3>Description</h3>
+<p class="short-description">Loader that reads filtering data from Annotations</p>
+<div class="long-description">
+</div>
+<h3>Properties</h3>
+<div>
+<a id="\DMS\Filter\Mapping\Loader\AnnotationLoader::$reader"></a><h4 class="property protected">$reader<div class="to-top"><a href="#%5CDMS%5CFilter%5CMapping%5CLoader%5CAnnotationLoader">jump to class</a></div>
+</h4>
+<div class="property">
+<code>\Doctrine\Common\Annotations\Reader <span class="highlight">$reader</span> = ''</code><p class="short-description"></p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>\Doctrine\Common\Annotations\Reader<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\DMS\Filter\Mapping\Loader\AnnotationLoader::__construct()"></a><h4 class="method public">__construct<div class="to-top"><a href="#AnnotationLoader">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">__construct</span><span class="nb-faded-text">(
+          \Doctrine\Common\Annotations\Reader $reader
+          )
+        </span>
+        :
+        </code><p class="short-description">Constructor</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$reader</dt>
+<dd>\Doctrine\Common\Annotations\Reader<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DMS\Filter\Mapping\Loader\AnnotationLoader::loadClassMetadata()"></a><h4 class="method public">loadClassMetadata<div class="to-top"><a href="#AnnotationLoader">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">loadClassMetadata</span><span class="nb-faded-text">(
+          \DMS\Filter\Mapping\Loader\ClassMetadata $metadata
+          )
+        </span>
+        :
+        <a href="_Rules_Boolean.html#Boolean">Boolean</a></code><p class="short-description">Loads annotations data present in the class, using a Doctrine
+annotation reader</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$metadata</dt>
+<dd>\DMS\Filter\Mapping\Loader\ClassMetadata<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_Rules_Boolean.html#Boolean">Boolean</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DMS\Filter\Mapping\Loader\AnnotationLoader::readProperty()"></a><h4 class="method private">readProperty<div class="to-top"><a href="#AnnotationLoader">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">readProperty</span><span class="nb-faded-text">(
+          \DMS\Filter\Mapping\Loader\ReflectionProperty $property, \DMS\Filter\Mapping\Loader\ClassMetadata $metadata
+          )
+        </span>
+        :
+        </code><p class="short-description">Reads annotations for a selected property in the class</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$property</dt>
+<dd>\DMS\Filter\Mapping\Loader\ReflectionProperty<br><em></em>
+</dd>
+<dt>$metadata</dt>
+<dd>\DMS\Filter\Mapping\Loader\ClassMetadata<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>private</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.12.0</a>.
+    </small></body></html>

@@ -1,0 +1,327 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DMS</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script>
+      $(document).ready(function() {
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().css('cursor', 'pointer');
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().click(function() {
+          if ($(this).next().is(':hidden'))
+          {
+            $(this).children('img')[0].src = 'images/arrow_down.gif';
+          } else
+          {
+            $(this).children('img')[0].src = 'images/arrow_right.gif';
+          }
+          $(this).next().slideToggle();
+        });
+      $('dl.function-info, dl.constant-info, dl.property-info').hide();
+      $('dl.function-info img, dl.constant-info img, dl.property-info img').show();
+      });
+    </script><a name="top"></a><h1 class="file">Filter.php</h1>
+<div class="file_menu">
+<a href="#classes">Classes</a> </div>
+<dl class="file-info">
+<dt>Classes</dt>
+<dd><a class="class" href="#%5CDMS%5CFilter%5CFilter">Filter</a></dd>
+</dl>
+<a name="classes"></a><a id="\DMS\Filter\Filter"></a><h2 class="class">\DMS\Filter\Filter<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<dl class="class-info">
+<dt>Implements</dt>
+<dd><a href="_FilterInterface.html#%5CDMS%5CFilter%5CFilterInterface">\DMS\Filter\FilterInterface</a></dd>
+<dt>package</dt>
+<dd>DMS</dd>
+<dt>subpackage</dt>
+<dd>Filter</dd>
+<dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
+                Properties
+              </a></dt>
+<dd><a class="property protected" href="#%5CDMS%5CFilter%5CFilter::%24metadataFactory">$metadataFactory</a></dd>
+<dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
+                Methods
+              </a></dt>
+<dd><a class="method public" href="#%5CDMS%5CFilter%5CFilter::__construct()">__construct</a></dd>
+<dd><a class="method public" href="#%5CDMS%5CFilter%5CFilter::filter()">filter</a></dd>
+<dd><a class="method public" href="#%5CDMS%5CFilter%5CFilter::filterProperty()">filterProperty</a></dd>
+<dd><a class="method public" href="#%5CDMS%5CFilter%5CFilter::filterValue()">filterValue</a></dd>
+<dd><a class="method public" href="#%5CDMS%5CFilter%5CFilter::getMetadataFactory()">getMetadataFactory</a></dd>
+<dd><a class="method protected" href="#%5CDMS%5CFilter%5CFilter::walkObject()">walkObject</a></dd>
+</dl>
+<h3>Description</h3>
+<p class="short-description">Filter Object, responsible for retrieving the filtering rules
+for the object and applying them</p>
+<div class="long-description">
+</div>
+<h3>Properties</h3>
+<div>
+<a id="\DMS\Filter\Filter::$metadataFactory"></a><h4 class="property protected">$metadataFactory<div class="to-top"><a href="#%5CDMS%5CFilter%5CFilter">jump to class</a></div>
+</h4>
+<div class="property">
+<code>\Mapping\ClassMetadataFactory <span class="highlight">$metadataFactory</span> = ''</code><p class="short-description"></p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>\Mapping\ClassMetadataFactory<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\DMS\Filter\Filter::__construct()"></a><h4 class="method public">__construct<div class="to-top"><a href="#Filter">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">__construct</span><span class="nb-faded-text">(
+          \Mapping\ClassMetadataFactory $metadataFactory
+          )
+        </span>
+        :
+        </code><p class="short-description">Constructor</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$metadataFactory</dt>
+<dd>\Mapping\ClassMetadataFactory<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DMS\Filter\Filter::filter()"></a><h4 class="method public">filter<div class="to-top"><a href="#Filter">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">filter</span><span class="nb-faded-text">(
+          mixed $object
+          )
+        </span>
+        :
+        </code><p class="short-description">{@inheritDoc}</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$object</dt>
+<dd>mixed<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DMS\Filter\Filter::filterProperty()"></a><h4 class="method public">filterProperty<div class="to-top"><a href="#Filter">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">filterProperty</span><span class="nb-faded-text">(
+          mixed $object, string $property
+          )
+        </span>
+        :
+        </code><p class="short-description">{@inheritDoc}</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$object</dt>
+<dd>mixed<br><em></em>
+</dd>
+<dt>$property</dt>
+<dd>string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DMS\Filter\Filter::filterValue()"></a><h4 class="method public">filterValue<div class="to-top"><a href="#Filter">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">filterValue</span><span class="nb-faded-text">(
+          mixed $value, \Rules\Rule $filter
+          )
+        </span>
+        :
+        mixed</code><p class="short-description">{@inheritDoc}</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$value</dt>
+<dd>mixed<br><em></em>
+</dd>
+<dt>$filter</dt>
+<dd>\Rules\Rule<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>mixed</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DMS\Filter\Filter::getMetadataFactory()"></a><h4 class="method public">getMetadataFactory<div class="to-top"><a href="#Filter">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getMetadataFactory</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        \Mapping\ClassMetadataFactoryInterface</code><p class="short-description">{@inheritDoc}</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\Mapping\ClassMetadataFactoryInterface</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DMS\Filter\Filter::walkObject()"></a><h4 class="method protected">walkObject<div class="to-top"><a href="#Filter">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">walkObject</span><span class="nb-faded-text">(
+          object $object, string $limitProperty
+              =
+              null
+          )
+        </span>
+        :
+        </code><p class="short-description">Iterates over annotated properties in an object filtering the selected
+values</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$object</dt>
+<dd>object<br><em></em>
+</dd>
+<dt>$limitProperty</dt>
+<dd>string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.12.0</a>.
+    </small></body></html>

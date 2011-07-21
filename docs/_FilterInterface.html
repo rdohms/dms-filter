@@ -1,0 +1,216 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DMS</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script>
+      $(document).ready(function() {
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().css('cursor', 'pointer');
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().click(function() {
+          if ($(this).next().is(':hidden'))
+          {
+            $(this).children('img')[0].src = 'images/arrow_down.gif';
+          } else
+          {
+            $(this).children('img')[0].src = 'images/arrow_right.gif';
+          }
+          $(this).next().slideToggle();
+        });
+      $('dl.function-info, dl.constant-info, dl.property-info').hide();
+      $('dl.function-info img, dl.constant-info img, dl.property-info img').show();
+      });
+    </script><a name="top"></a><h1 class="file">FilterInterface.php</h1>
+<div class="file_menu"><a href="#interfaces">Interfaces</a></div>
+<dl class="file-info">
+<dt>Interfaces</dt>
+<dd><a class="interface" href="#%5CDMS%5CFilter%5CFilterInterface">FilterInterface</a></dd>
+</dl>
+<a name="interfaces"></a><a id="\DMS\Filter\FilterInterface"></a><h2 class="interface">\DMS\Filter\FilterInterface<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<dl class="class-info">
+<dt>package</dt>
+<dd>DMS</dd>
+<dt>subpackage</dt>
+<dd>Filter</dd>
+<dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
+                Methods
+              </a></dt>
+<dd><a class="method public" href="#%5CDMS%5CFilter%5CFilterInterface::filter()">filter</a></dd>
+<dd><a class="method public" href="#%5CDMS%5CFilter%5CFilterInterface::filterProperty()">filterProperty</a></dd>
+<dd><a class="method public" href="#%5CDMS%5CFilter%5CFilterInterface::filterValue()">filterValue</a></dd>
+<dd><a class="method public" href="#%5CDMS%5CFilter%5CFilterInterface::getMetadataFactory()">getMetadataFactory</a></dd>
+</dl>
+<h3>Description</h3>
+<p class="short-description">Filters the values of a given object</p>
+<div class="long-description">
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\DMS\Filter\FilterInterface::filter()"></a><h4 class="method public">filter<div class="to-top"><a href="#FilterInterface">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">filter</span><span class="nb-faded-text">(
+          mixed $object
+          )
+        </span>
+        :
+        </code><p class="short-description">Iterates over the properties of the object applying filters and
+replacing values</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$object</dt>
+<dd>mixed<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DMS\Filter\FilterInterface::filterProperty()"></a><h4 class="method public">filterProperty<div class="to-top"><a href="#FilterInterface">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">filterProperty</span><span class="nb-faded-text">(
+          mixed $object, string $property
+          )
+        </span>
+        :
+        </code><p class="short-description">Filters a specific property in an object, replacing the current value</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$object</dt>
+<dd>mixed<br><em></em>
+</dd>
+<dt>$property</dt>
+<dd>string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DMS\Filter\FilterInterface::filterValue()"></a><h4 class="method public">filterValue<div class="to-top"><a href="#FilterInterface">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">filterValue</span><span class="nb-faded-text">(
+          mixed $value, \Rules\Rule $filter
+          )
+        </span>
+        :
+        mixed</code><p class="short-description">Runs a given value through a filter rule returning the filtered value</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$value</dt>
+<dd>mixed<br><em></em>
+</dd>
+<dt>$filter</dt>
+<dd>\Rules\Rule<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>mixed</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DMS\Filter\FilterInterface::getMetadataFactory()"></a><h4 class="method public">getMetadataFactory<div class="to-top"><a href="#FilterInterface">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getMetadataFactory</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        \Mapping\ClassMetadataFactoryInterface</code><p class="short-description">Retrieves the metadata factory for class metdatas</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\Mapping\ClassMetadataFactoryInterface</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.12.0</a>.
+    </small></body></html>

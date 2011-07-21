@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="DMS" default="package" basedir="..">
+	
+	<target name="docs">
+		<exec command="docblox run -v -d ${project.basedir}/src -t ${project.basedir}/docs --title DMS " />
+	</target>
+	
+    <target name="package" description="prepares for packaging">
+        <phingcall target="docs" />
+    </target>
+
+</project>

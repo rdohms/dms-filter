@@ -1,0 +1,224 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DMS</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script>
+      $(document).ready(function() {
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().css('cursor', 'pointer');
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().click(function() {
+          if ($(this).next().is(':hidden'))
+          {
+            $(this).children('img')[0].src = 'images/arrow_down.gif';
+          } else
+          {
+            $(this).children('img')[0].src = 'images/arrow_right.gif';
+          }
+          $(this).next().slideToggle();
+        });
+      $('dl.function-info, dl.constant-info, dl.property-info').hide();
+      $('dl.function-info img, dl.constant-info img, dl.property-info img').show();
+      });
+    </script><a name="top"></a><h1 class="file">Rules/Alnum.php</h1>
+<div class="file_menu">
+<a href="#classes">Classes</a> </div>
+<dl class="file-info">
+<dt>Classes</dt>
+<dd><a class="class" href="#%5CDMS%5CFilter%5CRules%5CAlnum">Alnum</a></dd>
+</dl>
+<a name="classes"></a><a id="\DMS\Filter\Rules\Alnum"></a><h2 class="class">\DMS\Filter\Rules\Alnum<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<dl class="class-info">
+<dt>Extends from</dt>
+<dd><a href="_Rules_Rule.html#%5CDMS%5CFilter%5CRules%5CRule">\DMS\Filter\Rules\Rule</a></dd>
+<dt>Annotation</dt>
+<dd></dd>
+<dt>package</dt>
+<dd>DMS</dd>
+<dt>subpackage</dt>
+<dd>Filter</dd>
+<dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
+                Properties
+              </a></dt>
+<dd><a class="property public" href="#%5CDMS%5CFilter%5CRules%5CAlnum::%24allowWhitespace">$allowWhitespace</a></dd>
+<dd><a class="property protected" href="#%5CDMS%5CFilter%5CRules%5CAlnum::%24unicodeEnabled">$unicodeEnabled</a></dd>
+<dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
+                Methods
+              </a></dt>
+<dd><a class="method public" href="#%5CDMS%5CFilter%5CRules%5CAlnum::applyFilter()">applyFilter</a></dd>
+<dd><a class="method public" href="#%5CDMS%5CFilter%5CRules%5CAlnum::checkUnicodeSupport()">checkUnicodeSupport</a></dd>
+<dd><a class="method public" href="#%5CDMS%5CFilter%5CRules%5CAlnum::getDefaultOption()">getDefaultOption</a></dd>
+</dl>
+<h3>Description</h3>
+<p class="short-description">Alnum Rule (Alpanumeric)</p>
+<div class="long-description">
+</div>
+<h3>Properties</h3>
+<div>
+<a id="\DMS\Filter\Rules\Alnum::$allowWhitespace"></a><h4 class="property public">$allowWhitespace<div class="to-top"><a href="#%5CDMS%5CFilter%5CRules%5CAlnum">jump to class</a></div>
+</h4>
+<div class="property">
+<code> <span class="highlight">$allowWhitespace</span> = 'true'</code><div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd>true</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DMS\Filter\Rules\Alnum::$unicodeEnabled"></a><h4 class="property protected">$unicodeEnabled<div class="to-top"><a href="#%5CDMS%5CFilter%5CRules%5CAlnum">jump to class</a></div>
+</h4>
+<div class="property">
+<code> <span class="highlight">$unicodeEnabled</span> = ''</code><div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\DMS\Filter\Rules\Alnum::applyFilter()"></a><h4 class="method public">applyFilter<div class="to-top"><a href="#Alnum">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">applyFilter</span><span class="nb-faded-text">(
+          mixed $value
+          )
+        </span>
+        :
+        mixed</code><p class="short-description">{@inheritDoc}</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$value</dt>
+<dd>mixed<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>mixed</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DMS\Filter\Rules\Alnum::checkUnicodeSupport()"></a><h4 class="method public">checkUnicodeSupport<div class="to-top"><a href="#Alnum">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">checkUnicodeSupport</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        boolean</code><p class="short-description">Verifies that Regular Expression functions support unicode</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>boolean</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DMS\Filter\Rules\Alnum::getDefaultOption()"></a><h4 class="method public">getDefaultOption<div class="to-top"><a href="#Alnum">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getDefaultOption</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        string</code><p class="short-description">{@inheritDoc}</p>
+<div class="long-description"><p>Override this method to define a default option.</p>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.12.0</a>.
+    </small></body></html>

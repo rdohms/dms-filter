@@ -1,0 +1,1585 @@
+<?xml version="1.0"?>
+<project version="0.12.0" title="DMS">
+  <file path="Exception/FilterException.php" hash="4934f68788ca8e60f0cb8f535bbc7977">
+    <class final="false" abstract="false" line="12" namespace="DMS\Filter\Exception">
+      <name>FilterException</name>
+      <extends>\RuntimeException</extends>
+      <full_name>\DMS\Filter\Exception\FilterException</full_name>
+      <docblock>
+        <description>Base Exception for Filter Package</description>
+        <long-description>
+</long-description>
+        <tag name="package" description="DMS" line="5"/>
+        <tag name="subpackage" description="Filter" line="5"/>
+        <tag name="category" description="Exception" line="5"/>
+      </docblock>
+    </class>
+  </file>
+  <file path="Exception/InvalidOptionsException.php" hash="00ab34aab6c95019a3cba4a33428b736">
+    <class final="false" abstract="false" line="12" namespace="DMS\Filter\Exception">
+      <name>InvalidOptionsException</name>
+      <extends>\DMS\Filter\Exception\RuleOptionsException</extends>
+      <full_name>\DMS\Filter\Exception\InvalidOptionsException</full_name>
+      <docblock>
+        <description>Invalid option passed to rule</description>
+        <long-description>
+</long-description>
+        <tag name="package" description="DMS" line="5"/>
+        <tag name="subpackage" description="Filter" line="5"/>
+        <tag name="category" description="Exception" line="5"/>
+      </docblock>
+    </class>
+  </file>
+  <file path="Exception/MissingOptionsException.php" hash="70c5ad19f07bbdde727c21de05048077">
+    <class final="false" abstract="false" line="12" namespace="DMS\Filter\Exception">
+      <name>MissingOptionsException</name>
+      <extends>\DMS\Filter\Exception\RuleOptionsException</extends>
+      <full_name>\DMS\Filter\Exception\MissingOptionsException</full_name>
+      <docblock>
+        <description>Required options were not passed to rule</description>
+        <long-description>
+</long-description>
+        <tag name="package" description="DMS" line="5"/>
+        <tag name="subpackage" description="Filter" line="5"/>
+        <tag name="category" description="Exception" line="5"/>
+      </docblock>
+    </class>
+  </file>
+  <file path="Exception/RuleDefinitionException.php" hash="81444c8d94be3898817ddb3adfec1e31">
+    <class final="false" abstract="false" line="12" namespace="DMS\Filter\Exception">
+      <name>RuleDefinitionException</name>
+      <extends>\DMS\Filter\Exception\FilterException</extends>
+      <full_name>\DMS\Filter\Exception\RuleDefinitionException</full_name>
+      <docblock>
+        <description>Malformed Rule definition</description>
+        <long-description>
+</long-description>
+        <tag name="package" description="DMS" line="5"/>
+        <tag name="subpackage" description="Filter" line="5"/>
+        <tag name="category" description="Exception" line="5"/>
+      </docblock>
+    </class>
+  </file>
+  <file path="Exception/RuleOptionsException.php" hash="95ae4813ed71f0d80b8d075de5dd0223">
+    <class final="false" abstract="false" line="12" namespace="DMS\Filter\Exception">
+      <name>RuleOptionsException</name>
+      <extends>\DMS\Filter\Exception\FilterException</extends>
+      <full_name>\DMS\Filter\Exception\RuleOptionsException</full_name>
+      <docblock>
+        <description>Base Exception for errors with rule options</description>
+        <long-description>
+</long-description>
+        <tag name="package" description="DMS" line="5"/>
+        <tag name="subpackage" description="Filter" line="5"/>
+        <tag name="category" description="Exception" line="5"/>
+      </docblock>
+      <property final="false" static="false" visibility="private" line="17">
+        <name>$options</name>
+        <default/>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="array" line="14">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" line="25">
+        <name>__construct</name>
+        <docblock>
+          <description>Constructor</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="string" variable="$message" line="19">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="param" description="" type="array" variable="$options" line="19">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="25">
+          <name>$message</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="25">
+          <name>$options</name>
+          <default/>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="37">
+        <name>getOptions</name>
+        <docblock>
+          <description>Retrieve options that triggered exception</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="array" line="32">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+    </class>
+  </file>
+  <file path="Filter.php" hash="5ea60f1f22cd1eff542b2f577254f9c9">
+    <class final="false" abstract="false" line="13" namespace="DMS\Filter">
+      <name>Filter</name>
+      <extends/>
+      <full_name>\DMS\Filter\Filter</full_name>
+      <docblock>
+        <description>Filter Object, responsible for retrieving the filtering rules
+for the object and applying them</description>
+        <long-description>
+</long-description>
+        <tag name="package" description="DMS" line="5"/>
+        <tag name="subpackage" description="Filter" line="5"/>
+      </docblock>
+      <implements>\DMS\Filter\FilterInterface</implements>
+      <property final="false" static="false" visibility="protected" line="19">
+        <name>$metadataFactory</name>
+        <default/>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="\Mapping\ClassMetadataFactory" line="15">
+            <type by_reference="false">\Mapping\ClassMetadataFactory</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" line="26">
+        <name>__construct</name>
+        <docblock>
+          <description>Constructor</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="\Mapping\ClassMetadataFactory" variable="$metadataFactory" line="21">
+            <type by_reference="false">\Mapping\ClassMetadataFactory</type>
+          </tag>
+        </docblock>
+        <argument line="26">
+          <name>$metadataFactory</name>
+          <default/>
+          <type>ClassMetadataFactory</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="34">
+        <name>filter</name>
+        <docblock>
+          <description>{@inheritDoc}</description>
+          <long-description>
+</long-description>
+        </docblock>
+        <argument line="34">
+          <name>$object</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="42">
+        <name>filterProperty</name>
+        <docblock>
+          <description>{@inheritDoc}</description>
+          <long-description>
+</long-description>
+        </docblock>
+        <argument line="42">
+          <name>$object</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="42">
+          <name>$property</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="50">
+        <name>filterValue</name>
+        <docblock>
+          <description>{@inheritDoc}</description>
+          <long-description>
+</long-description>
+        </docblock>
+        <argument line="50">
+          <name>$value</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="50">
+          <name>$filter</name>
+          <default/>
+          <type>Rule</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="58">
+        <name>getMetadataFactory</name>
+        <docblock>
+          <description>{@inheritDoc}</description>
+          <long-description>
+</long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" line="70">
+        <name>walkObject</name>
+        <docblock>
+          <description>Iterates over annotated properties in an object filtering the selected
+values</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="object" variable="$object" line="63">
+            <type by_reference="false">object</type>
+          </tag>
+          <tag name="param" description="" type="string" variable="$limitProperty" line="63">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="70">
+          <name>$object</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="70">
+          <name>$limitProperty</name>
+          <default>null</default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <file path="FilterInterface.php" hash="77e9211a05d4b8931dc3e44fda5370aa">
+    <interface namespace="DMS\Filter" line="11">
+      <name>FilterInterface</name>
+      <extends/>
+      <full_name>\DMS\Filter\FilterInterface</full_name>
+      <docblock>
+        <description>Filters the values of a given object</description>
+        <long-description>
+</long-description>
+        <tag name="package" description="DMS" line="5"/>
+        <tag name="subpackage" description="Filter" line="5"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" line="19">
+        <name>filter</name>
+        <docblock>
+          <description>Iterates over the properties of the object applying filters and
+replacing values</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="mixed" variable="$object" line="13">
+            <type by_reference="false">mixed</type>
+          </tag>
+        </docblock>
+        <argument line="19">
+          <name>$object</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="27">
+        <name>filterProperty</name>
+        <docblock>
+          <description>Filters a specific property in an object, replacing the current value</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="mixed" variable="$object" line="21">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag name="param" description="" type="string" variable="$property" line="21">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="27">
+          <name>$object</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="27">
+          <name>$property</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="37">
+        <name>filterValue</name>
+        <docblock>
+          <description>Runs a given value through a filter rule returning the filtered value</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="mixed" variable="$value" line="29">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag name="param" description="" type="\Rules\Rule" variable="$filter" line="29">
+            <type by_reference="false">\Rules\Rule</type>
+          </tag>
+          <tag name="return" description="" type="mixed" line="29">
+            <type by_reference="false">mixed</type>
+          </tag>
+        </docblock>
+        <argument line="37">
+          <name>$value</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="37">
+          <name>$filter</name>
+          <default/>
+          <type>Rule</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="44">
+        <name>getMetadataFactory</name>
+        <docblock>
+          <description>Retrieves the metadata factory for class metdatas</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="\Mapping\ClassMetadataFactoryInterface" line="39">
+            <type by_reference="false">\Mapping\ClassMetadataFactoryInterface</type>
+          </tag>
+        </docblock>
+      </method>
+    </interface>
+  </file>
+  <file path="Mapping/ClassMetadata.php" hash="edf28ffcd92f548e8bd0dd5f10849488">
+    <class final="false" abstract="false" line="11" namespace="DMS\Filter\Mapping">
+      <name>ClassMetadata</name>
+      <extends/>
+      <full_name>\DMS\Filter\Mapping\ClassMetadata</full_name>
+      <docblock>
+        <description>Represents a class that has Annotations</description>
+        <long-description>
+</long-description>
+        <tag name="package" description="DMS" line="5"/>
+        <tag name="subpackage" description="Filter" line="5"/>
+      </docblock>
+      <implements>\DMS\Filter\Mapping\ClassMetadataInterface</implements>
+      <property final="false" static="false" visibility="public" line="16">
+        <name>$className</name>
+        <default/>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="string" line="13">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="public" line="22">
+        <name>$filteredProperties</name>
+        <default>array</default>
+        <docblock>
+          <description>Properties that contain filtering rules</description>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="array" line="18">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="private" line="27">
+        <name>$reflClass</name>
+        <default/>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="\DMS\Filter\Mapping\ReflectionClass" line="24">
+            <type by_reference="false">\DMS\Filter\Mapping\ReflectionClass</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" line="34">
+        <name>__construct</name>
+        <docblock>
+          <description>Constructor</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="string" variable="$class" line="29">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="34">
+          <name>$class</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="42">
+        <name>getFilteredProperties</name>
+        <docblock>
+          <description>{@inheritDoc}</description>
+          <long-description>
+</long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="50">
+        <name>getPropertyRules</name>
+        <docblock>
+          <description>{@inheritDoc}</description>
+          <long-description>
+</long-description>
+        </docblock>
+        <argument line="50">
+          <name>$property</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="62">
+        <name>mergeRules</name>
+        <docblock>
+          <description>{@inheritDoc}</description>
+          <long-description>
+</long-description>
+          <tag name="todo" description="bend this method into calestenics" line="57"/>
+        </docblock>
+        <argument line="62">
+          <name>$metadata</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="78">
+        <name>addPropertyRule</name>
+        <docblock>
+          <description>{@inheritDoc}</description>
+          <long-description>
+</long-description>
+          <tag name="todo" description="check for duplicate rules" line="73"/>
+        </docblock>
+        <argument line="78">
+          <name>$property</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="78">
+          <name>$rule</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="90">
+        <name>getClassName</name>
+        <docblock>
+          <description>{@inheritDoc}</description>
+          <long-description>
+</long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="98">
+        <name>getReflectionClass</name>
+        <docblock>
+          <description>{@inheritDoc}</description>
+          <long-description>
+</long-description>
+        </docblock>
+      </method>
+    </class>
+  </file>
+  <file path="Mapping/ClassMetadataFactory.php" hash="69156b1837c6edb9fe986491f8c1dcaa">
+    <namespace-alias name="Cache">Doctrine\Common\Cache\Cache</namespace-alias>
+    <class final="false" abstract="false" line="13" namespace="DMS\Filter\Mapping">
+      <name>ClassMetadataFactory</name>
+      <extends/>
+      <full_name>\DMS\Filter\Mapping\ClassMetadataFactory</full_name>
+      <docblock>
+        <description>Responsible for loading metadata for selected classes</description>
+        <long-description>
+</long-description>
+        <tag name="package" description="DMS" line="7"/>
+        <tag name="subpackage" description="Filter" line="7"/>
+      </docblock>
+      <implements>\DMS\Filter\Mapping\ClassMetadataFactoryInterface</implements>
+      <property final="false" static="false" visibility="protected" line="18">
+        <name>$loader</name>
+        <default/>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="\Loader\LoaderInterface" line="15">
+            <type by_reference="false">\Loader\LoaderInterface</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="23">
+        <name>$cache</name>
+        <default/>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="\Doctrine\Common\Cache\Cache" line="20">
+            <type by_reference="false">\Doctrine\Common\Cache\Cache</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="28">
+        <name>$parsedClasses</name>
+        <default>array</default>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="array" line="25">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" line="37">
+        <name>__construct</name>
+        <docblock>
+          <description>Constructor
+Receives a Loader and a Doctrine Compatible cache instance</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="\Loader\LoaderInterface" variable="$loader" line="30">
+            <type by_reference="false">\Loader\LoaderInterface</type>
+          </tag>
+          <tag name="param" description="" type="\Doctrine\Common\Cache\Cache" variable="$cache" line="30">
+            <type by_reference="false">\Doctrine\Common\Cache\Cache</type>
+          </tag>
+        </docblock>
+        <argument line="37">
+          <name>$loader</name>
+          <default/>
+          <type>LoaderInterface</type>
+        </argument>
+        <argument line="37">
+          <name>$cache</name>
+          <default>null</default>
+          <type>Cache</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="46">
+        <name>getClassMetadata</name>
+        <docblock>
+          <description>{@inheritDoc}</description>
+          <long-description>
+</long-description>
+        </docblock>
+        <argument line="46">
+          <name>$class</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" line="74">
+        <name>parseClassMetadata</name>
+        <docblock>
+          <description>Reads class metadata for a new and unparsed class</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="string" variable="$class" line="68">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="return" description="" type="\DMS\Filter\Mapping\ClassMetadata" line="68">
+            <type by_reference="false">\DMS\Filter\Mapping\ClassMetadata</type>
+          </tag>
+        </docblock>
+        <argument line="74">
+          <name>$class</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" line="101">
+        <name>isParsed</name>
+        <docblock>
+          <description>Checks if a class has already been parsed</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="string" variable="$class" line="95">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="return" description="" type="\DMS\Filter\Mapping\booelan" line="95">
+            <type by_reference="false">\DMS\Filter\Mapping\booelan</type>
+          </tag>
+        </docblock>
+        <argument line="101">
+          <name>$class</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" line="112">
+        <name>getParsedClass</name>
+        <docblock>
+          <description>Retrieves data from a class already parsed</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="string" variable="$class" line="106">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="return" description="" type="\DMS\Filter\Mapping\ClassMetadata" line="106">
+            <type by_reference="false">\DMS\Filter\Mapping\ClassMetadata</type>
+          </tag>
+        </docblock>
+        <argument line="112">
+          <name>$class</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" line="125">
+        <name>setParsedClass</name>
+        <docblock>
+          <description>Stores data from a parsed class</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="string" variable="$class" line="119">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="param" description="" type="\DMS\Filter\Mapping\ClassMetadata" variable="$metadata" line="119">
+            <type by_reference="false">\DMS\Filter\Mapping\ClassMetadata</type>
+          </tag>
+        </docblock>
+        <argument line="125">
+          <name>$class</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="125">
+          <name>$metadata</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" line="136">
+        <name>loadParentMetadata</name>
+        <docblock>
+          <description>Checks if the class being parsed has a parent and cascades parsing
+to its parent</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="\DMS\Filter\Mapping\ClassMetadata" variable="$metadata" line="130">
+            <type by_reference="false">\DMS\Filter\Mapping\ClassMetadata</type>
+          </tag>
+        </docblock>
+        <argument line="136">
+          <name>$metadata</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" line="151">
+        <name>loadInterfaceMetadata</name>
+        <docblock>
+          <description>Checks if the object has interfaces and cascades parsing of annotatiosn
+to all the interfaces</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="\DMS\Filter\Mapping\ClassMetadata" variable="$metadata" line="145">
+            <type by_reference="false">\DMS\Filter\Mapping\ClassMetadata</type>
+          </tag>
+        </docblock>
+        <argument line="151">
+          <name>$metadata</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <file path="Mapping/ClassMetadataFactoryInterface.php" hash="aa3d6a0861fe9462a46c76fd42bc12c9">
+    <interface namespace="DMS\Filter\Mapping" line="11">
+      <name>ClassMetadataFactoryInterface</name>
+      <extends/>
+      <full_name>\DMS\Filter\Mapping\ClassMetadataFactoryInterface</full_name>
+      <docblock>
+        <description>Required methods of a Metadata Factory class</description>
+        <long-description>
+</long-description>
+        <tag name="package" description="DMS" line="5"/>
+        <tag name="subpackage" description="Filter" line="5"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" line="19">
+        <name>getClassMetadata</name>
+        <docblock>
+          <description>Retrieve metadata for the provided class</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="string" variable="$class" line="13">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="return" description="" type="\DMS\Filter\Mapping\ClassMetadataInterface" line="13">
+            <type by_reference="false">\DMS\Filter\Mapping\ClassMetadataInterface</type>
+          </tag>
+        </docblock>
+        <argument line="19">
+          <name>$class</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+    </interface>
+  </file>
+  <file path="Mapping/ClassMetadataInterface.php" hash="6db93b1763455e6605d6b4ff2cb766fc">
+    <interface namespace="DMS\Filter\Mapping" line="11">
+      <name>ClassMetadataInterface</name>
+      <extends/>
+      <full_name>\DMS\Filter\Mapping\ClassMetadataInterface</full_name>
+      <docblock>
+        <description>Method required by a ClassMetadata class</description>
+        <long-description>
+</long-description>
+        <tag name="package" description="DMS" line="5"/>
+        <tag name="subpackage" description="Filter" line="5"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" line="19">
+        <name>getFilteredProperties</name>
+        <docblock>
+          <description>Retrieve a list of the object's properties that have filters attached
+to them</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="array" line="13">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="27">
+        <name>getPropertyRules</name>
+        <docblock>
+          <description>Retrieve s list of filtering rules attached to a property</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="string" variable="$property" line="21">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="return" description="" type="array" line="21">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="27">
+          <name>$property</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="34">
+        <name>mergeRules</name>
+        <docblock>
+          <description>Merges rules from another metadata object into this one</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="\DMS\Filter\Mapping\ClassMetadata" variable="$metadata" line="29">
+            <type by_reference="false">\DMS\Filter\Mapping\ClassMetadata</type>
+          </tag>
+        </docblock>
+        <argument line="34">
+          <name>$metadata</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="41">
+        <name>getClassName</name>
+        <docblock>
+          <description>Get name of class represented in this Metadata object</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="string" line="36">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="48">
+        <name>getReflectionClass</name>
+        <docblock>
+          <description>Returns a ReflectionClass instance for this class.</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="\DMS\Filter\Mapping\ReflectionClass" line="43">
+            <type by_reference="false">\DMS\Filter\Mapping\ReflectionClass</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="56">
+        <name>addPropertyRule</name>
+        <docblock>
+          <description>Adds a new rule to a property</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="string" variable="$property" line="50">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="param" description="" type="\Rules\Rule" variable="$rule" line="50">
+            <type by_reference="false">\Rules\Rule</type>
+          </tag>
+        </docblock>
+        <argument line="56">
+          <name>$property</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="56">
+          <name>$rule</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+    </interface>
+  </file>
+  <file path="Mapping/Loader/AnnotationLoader.php" hash="b67ae028d3933abeef09f7a2e88c6bc1">
+    <namespace-alias name="Reader">Doctrine\Common\Annotations\Reader</namespace-alias>
+    <namespace-alias name="AnnotationRegistry">Doctrine\Common\Annotations\AnnotationRegistry</namespace-alias>
+    <namespace-alias name="Rules">DMS\Filter\Rules</namespace-alias>
+    <namespace-alias name="Mapping">DMS\Filter\Mapping</namespace-alias>
+    <class final="false" abstract="false" line="16" namespace="DMS\Filter\Mapping\Loader">
+      <name>AnnotationLoader</name>
+      <extends/>
+      <full_name>\DMS\Filter\Mapping\Loader\AnnotationLoader</full_name>
+      <docblock>
+        <description>Loader that reads filtering data from Annotations</description>
+        <long-description>
+</long-description>
+        <tag name="package" description="DMS" line="10"/>
+        <tag name="subpackage" description="Filter" line="10"/>
+      </docblock>
+      <implements>\DMS\Filter\Mapping\Loader\LoaderInterface</implements>
+      <property final="false" static="false" visibility="protected" line="22">
+        <name>$reader</name>
+        <default/>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="\Doctrine\Common\Annotations\Reader" line="18">
+            <type by_reference="false">\Doctrine\Common\Annotations\Reader</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" line="29">
+        <name>__construct</name>
+        <docblock>
+          <description>Constructor</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="\Doctrine\Common\Annotations\Reader" variable="$reader" line="24">
+            <type by_reference="false">\Doctrine\Common\Annotations\Reader</type>
+          </tag>
+        </docblock>
+        <argument line="29">
+          <name>$reader</name>
+          <default/>
+          <type>Reader</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="44">
+        <name>loadClassMetadata</name>
+        <docblock>
+          <description>Loads annotations data present in the class, using a Doctrine
+annotation reader</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="\DMS\Filter\Mapping\Loader\ClassMetadata" variable="$metadata" line="38">
+            <type by_reference="false">\DMS\Filter\Mapping\Loader\ClassMetadata</type>
+          </tag>
+        </docblock>
+        <argument line="44">
+          <name>$metadata</name>
+          <default/>
+          <type>ClassMetadataInterface</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" line="64">
+        <name>readProperty</name>
+        <docblock>
+          <description>Reads annotations for a selected property in the class</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="\DMS\Filter\Mapping\Loader\ReflectionProperty" variable="$property" line="58">
+            <type by_reference="false">\DMS\Filter\Mapping\Loader\ReflectionProperty</type>
+          </tag>
+          <tag name="param" description="" type="\DMS\Filter\Mapping\Loader\ClassMetadata" variable="$metadata" line="58">
+            <type by_reference="false">\DMS\Filter\Mapping\Loader\ClassMetadata</type>
+          </tag>
+        </docblock>
+        <argument line="64">
+          <name>$property</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="64">
+          <name>$metadata</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <file path="Mapping/Loader/LoaderInterface.php" hash="4cf33743025ce961d4bc2f6a46ccf169">
+    <namespace-alias name="Mapping">DMS\Filter\Mapping</namespace-alias>
+    <interface namespace="DMS\Filter\Mapping\Loader" line="13">
+      <name>LoaderInterface</name>
+      <extends/>
+      <full_name>\DMS\Filter\Mapping\Loader\LoaderInterface</full_name>
+      <docblock>
+        <description>Interface for a Loader</description>
+        <long-description>
+</long-description>
+        <tag name="package" description="DMS" line="7"/>
+        <tag name="subpackage" description="Filter" line="7"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" line="22">
+        <name>loadClassMetadata</name>
+        <docblock>
+          <description>Load a Class Metadata.</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="A metadata" type="\DMS\Filter\Mapping\Loader\ClassMetadata" variable="$metadata" line="15">
+            <type by_reference="false">\DMS\Filter\Mapping\Loader\ClassMetadata</type>
+          </tag>
+          <tag name="return" description="" type="Boolean" line="15">
+            <type by_reference="false">Boolean</type>
+          </tag>
+        </docblock>
+        <argument line="22">
+          <name>$metadata</name>
+          <default/>
+          <type>ClassMetadataInterface</type>
+        </argument>
+      </method>
+    </interface>
+  </file>
+  <file path="ObjectWalker.php" hash="8d87577556787f002322c934580942be">
+    <class final="false" abstract="false" line="12" namespace="DMS\Filter">
+      <name>ObjectWalker</name>
+      <extends/>
+      <full_name>\DMS\Filter\ObjectWalker</full_name>
+      <docblock>
+        <description>Walks over the properties of an object applying the filters
+that were defined for them</description>
+        <long-description>
+</long-description>
+        <tag name="package" description="DMS" line="5"/>
+        <tag name="subpackage" description="Filter" line="5"/>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="17">
+        <name>$object</name>
+        <default/>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="object" line="14">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="22">
+        <name>$reflClass</name>
+        <default/>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="\DMS\Filter\ReflectionClass" line="19">
+            <type by_reference="false">\DMS\Filter\ReflectionClass</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" line="29">
+        <name>__construct</name>
+        <docblock>
+          <description>Constructor</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="object" variable="$object" line="24">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+        <argument line="29">
+          <name>$object</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="41">
+        <name>applyFilterRules</name>
+        <docblock>
+          <description>Applies the selected rules to a property in the object</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="string" variable="$property" line="35">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="param" description="" type="array" variable="$filterRules" line="35">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="41">
+          <name>$property</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="41">
+          <name>$filterRules</name>
+          <default>array</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="54">
+        <name>applyFilterRule</name>
+        <docblock>
+          <description>Applies a Filtering Rule to a property</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="string" variable="$property" line="48">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="param" description="" type="\Rules\Rule" variable="$filterRule" line="48">
+            <type by_reference="false">\Rules\Rule</type>
+          </tag>
+        </docblock>
+        <argument line="54">
+          <name>$property</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="54">
+          <name>$filterRule</name>
+          <default/>
+          <type>Rule</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" line="71">
+        <name>getPropertyValue</name>
+        <docblock>
+          <description>Retrieves the value of the property, overcoming visibility problems</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="string" variable="$property" line="65">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="return" description="" type="mixed" line="65">
+            <type by_reference="false">mixed</type>
+          </tag>
+        </docblock>
+        <argument line="71">
+          <name>$propertyName</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" line="83">
+        <name>setPropertyValue</name>
+        <docblock>
+          <description>Overrides the value of a property, overcoming visibility problems</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="string" variable="$property" line="77">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="param" description="" type="mixed" variable="$value" line="77">
+            <type by_reference="false">mixed</type>
+          </tag>
+        </docblock>
+        <argument line="83">
+          <name>$propertyName</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="83">
+          <name>$value</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" line="95">
+        <name>getAccessibleReflectionProperty</name>
+        <docblock>
+          <description>Retrieves a property from the object and makes it visible</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="string" variable="$propertyName" line="89">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="return" description="" type="\DMS\Filter\ReflectionProperty" line="89">
+            <type by_reference="false">\DMS\Filter\ReflectionProperty</type>
+          </tag>
+        </docblock>
+        <argument line="95">
+          <name>$propertyName</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <file path="Rules/Alnum.php" hash="0308731a4328068b95c828aa54bad3db">
+    <class final="false" abstract="false" line="13" namespace="DMS\Filter\Rules">
+      <name>Alnum</name>
+      <extends>\DMS\Filter\Rules\Rule</extends>
+      <full_name>\DMS\Filter\Rules\Alnum</full_name>
+      <docblock>
+        <description>Alnum Rule (Alpanumeric)</description>
+        <long-description>
+</long-description>
+        <tag name="package" description="DMS" line="5"/>
+        <tag name="subpackage" description="Filter" line="5"/>
+        <tag name="Annotation" description="" line="5"/>
+      </docblock>
+      <property final="false" static="true" visibility="protected" line="15">
+        <name>$unicodeEnabled</name>
+        <default/>
+      </property>
+      <property final="false" static="false" visibility="public" line="17">
+        <name>$allowWhitespace</name>
+        <default>true</default>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" line="22">
+        <name>applyFilter</name>
+        <docblock>
+          <description>{@inheritDoc}</description>
+          <long-description>
+</long-description>
+        </docblock>
+        <argument line="22">
+          <name>$value</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="39">
+        <name>checkUnicodeSupport</name>
+        <docblock>
+          <description>Verifies that Regular Expression functions support unicode</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="boolean" line="35">
+            <type by_reference="false">boolean</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="51">
+        <name>getDefaultOption</name>
+        <docblock>
+          <description>{@inheritDoc}</description>
+          <long-description>
+</long-description>
+        </docblock>
+      </method>
+    </class>
+  </file>
+  <file path="Rules/Boolean.php" hash="6c38cd915e7f70ccd86878c46fb7d8a4">
+    <class final="false" abstract="false" line="13" namespace="DMS\Filter\Rules">
+      <name>Boolean</name>
+      <extends>\DMS\Filter\Rules\Rule</extends>
+      <full_name>Boolean</full_name>
+      <docblock>
+        <description>Boolean Rule</description>
+        <long-description>
+</long-description>
+        <tag name="package" description="DMS" line="5"/>
+        <tag name="subpackage" description="Filter" line="5"/>
+        <tag name="Annotation" description="" line="5"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" line="18">
+        <name>applyFilter</name>
+        <docblock>
+          <description>{@inheritDoc}</description>
+          <long-description>
+</long-description>
+        </docblock>
+        <argument line="18">
+          <name>$value</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <file path="Rules/Float.php" hash="e02ca0f747ebaae17b6bd1371b65a510">
+    <class final="false" abstract="false" line="14" namespace="DMS\Filter\Rules">
+      <name>Float</name>
+      <extends>\DMS\Filter\Rules\Rule</extends>
+      <full_name>Float</full_name>
+      <docblock>
+        <description>Float Rule
+Converts content into a Float</description>
+        <long-description>
+</long-description>
+        <tag name="package" description="DMS" line="5"/>
+        <tag name="subpackage" description="Filter" line="5"/>
+        <tag name="Annotation" description="" line="5"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" line="19">
+        <name>applyFilter</name>
+        <docblock>
+          <description>{@inheritDoc}</description>
+          <long-description>
+</long-description>
+        </docblock>
+        <argument line="19">
+          <name>$value</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <file path="Rules/Int.php" hash="787a61cbb2cdc5fafe43f423976a89c5">
+    <class final="false" abstract="false" line="14" namespace="DMS\Filter\Rules">
+      <name>Int</name>
+      <extends>\DMS\Filter\Rules\Rule</extends>
+      <full_name>Int</full_name>
+      <docblock>
+        <description>Int Rule
+Converts content into an Int</description>
+        <long-description>
+</long-description>
+        <tag name="package" description="DMS" line="5"/>
+        <tag name="subpackage" description="Filter" line="5"/>
+        <tag name="Annotation" description="" line="5"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" line="19">
+        <name>applyFilter</name>
+        <docblock>
+          <description>{@inheritDoc}</description>
+          <long-description>
+</long-description>
+        </docblock>
+        <argument line="19">
+          <name>$value</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <file path="Rules/Rule.php" hash="250e46ae13b5f16a5330fdec667a8ef1">
+    <namespace-alias name="InvalidOptionsException">DMS\Filter\Exception\InvalidOptionsException</namespace-alias>
+    <namespace-alias name="MissingOptionsException">DMS\Filter\Exception\MissingOptionsException</namespace-alias>
+    <namespace-alias name="RuleDefinitionException">DMS\Filter\Exception\RuleDefinitionException</namespace-alias>
+    <class final="false" abstract="true" line="17" namespace="DMS\Filter\Rules">
+      <name>Rule</name>
+      <extends/>
+      <full_name>\DMS\Filter\Rules\Rule</full_name>
+      <docblock>
+        <description>Base class for a Filtering Rule, it implements common behaviour</description>
+        <long-description>
+</long-description>
+        <tag name="package" description="DMS" line="9"/>
+        <tag name="subpackage" description="Filter" line="9"/>
+        <tag name="category" description="Rule" line="9"/>
+      </docblock>
+      <method final="false" abstract="true" static="false" visibility="public" line="27">
+        <name>applyFilter</name>
+        <docblock>
+          <description>Applies actual filter rule to the value and returns the filtered
+value to be replaced in the original object</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="mixed" variable="$value" line="20">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag name="return" description="" type="mixed" line="20">
+            <type by_reference="false">mixed</type>
+          </tag>
+        </docblock>
+        <argument line="27">
+          <name>$value</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="45">
+        <name>__construct</name>
+        <docblock>
+          <description>Initializes the filter rule with its options</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="The options (as associative array) or the value for the default option (any other type)" type="mixed" variable="$options" line="29">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag name="throws" description="When you pass the names of non-existing options" type="\DMS\Filter\Exception\InvalidOptionsException" line="29">
+            <type by_reference="false">\DMS\Filter\Exception\InvalidOptionsException</type>
+          </tag>
+          <tag name="throws" description="When you don&amp;#039;t pass any of the options returned by getRequiredOptions()" type="\DMS\Filter\Exception\MissingOptionsException" line="29">
+            <type by_reference="false">\DMS\Filter\Exception\MissingOptionsException</type>
+          </tag>
+          <tag name="throws" description="When you don&amp;#039;t pass an associative array, but getDefaultOption() returns NULL" type="\DMS\Filter\Rules\ConstraintDefinitionException" line="29">
+            <type by_reference="false">\DMS\Filter\Rules\ConstraintDefinitionException</type>
+          </tag>
+        </docblock>
+        <argument line="45">
+          <name>$options</name>
+          <default>null</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" line="72">
+        <name>parseOptions</name>
+        <docblock>
+          <description>Parses provided options into their properties and returns results
+for the parsing process</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="mixed" variable="$options" line="65">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag name="return" description="" type="\stdClass" line="65">
+            <type by_reference="false">\stdClass</type>
+          </tag>
+        </docblock>
+        <argument line="72">
+          <name>$options</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" line="104">
+        <name>parseOptionsArray</name>
+        <docblock>
+          <description>Parses Options in the array format</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="array" variable="$options" line="98">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag name="param" description="" type="\stdClass" variable="$result" line="98">
+            <type by_reference="false">\stdClass</type>
+          </tag>
+        </docblock>
+        <argument line="104">
+          <name>$options</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="104">
+          <name>$result</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" line="125">
+        <name>parseSingleOption</name>
+        <docblock>
+          <description>Parses single option received</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="string" variable="$options" line="119">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="param" description="" type="\stdClass" variable="$result" line="119">
+            <type by_reference="false">\stdClass</type>
+          </tag>
+        </docblock>
+        <argument line="125">
+          <name>$options</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="125">
+          <name>$result</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="155">
+        <name>getRequiredOptions</name>
+        <docblock>
+          <description>Returns the name of the required options</description>
+          <long-description>&lt;p&gt;Override this method if you want to define required options.&lt;/p&gt;
+</long-description>
+          <tag name="return" description="" type="array" line="147">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag name="see" description="__construct()" line="147"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="168">
+        <name>getDefaultOption</name>
+        <docblock>
+          <description>Returns the name of the default option</description>
+          <long-description>&lt;p&gt;Override this method to define a default option.&lt;/p&gt;
+</long-description>
+          <tag name="return" description="" type="string" line="160">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="see" description="__construct()" line="160"/>
+        </docblock>
+      </method>
+    </class>
+  </file>
+  <file path="Rules/StripNewlines.php" hash="dd90ae530035465ec5de1718288b0a89">
+    <class final="false" abstract="false" line="13" namespace="DMS\Filter\Rules">
+      <name>StripNewlines</name>
+      <extends>\DMS\Filter\Rules\Rule</extends>
+      <full_name>\DMS\Filter\Rules\StripNewlines</full_name>
+      <docblock>
+        <description>StripNewlines Rule</description>
+        <long-description>
+</long-description>
+        <tag name="package" description="DMS" line="5"/>
+        <tag name="subpackage" description="Filter" line="5"/>
+        <tag name="Annotation" description="" line="5"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" line="18">
+        <name>applyFilter</name>
+        <docblock>
+          <description>{@inheritDoc}</description>
+          <long-description>
+</long-description>
+        </docblock>
+        <argument line="18">
+          <name>$value</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <file path="Rules/StripTags.php" hash="6ddae94ef220241bf9e18b2b6de05d38">
+    <class final="false" abstract="false" line="13" namespace="DMS\Filter\Rules">
+      <name>StripTags</name>
+      <extends>\DMS\Filter\Rules\Rule</extends>
+      <full_name>\DMS\Filter\Rules\StripTags</full_name>
+      <docblock>
+        <description>StripTags Rule</description>
+        <long-description>
+</long-description>
+        <tag name="package" description="DMS" line="5"/>
+        <tag name="subpackage" description="Filter" line="5"/>
+        <tag name="Annotation" description="" line="5"/>
+      </docblock>
+      <property final="false" static="false" visibility="public" line="20">
+        <name>$allowed</name>
+        <default>null</default>
+        <docblock>
+          <description>Comma separated string of allowed tags</description>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="string" line="15">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" line="25">
+        <name>applyFilter</name>
+        <docblock>
+          <description>{@inheritDoc}</description>
+          <long-description>
+</long-description>
+        </docblock>
+        <argument line="25">
+          <name>$value</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="33">
+        <name>getDefaultOption</name>
+        <docblock>
+          <description>{@inheritDoc}</description>
+          <long-description>
+</long-description>
+        </docblock>
+      </method>
+    </class>
+  </file>
+  <file path="Rules/Trim.php" hash="71bdd3cad75bc4959af234394669f076">
+    <class final="false" abstract="false" line="13" namespace="DMS\Filter\Rules">
+      <name>Trim</name>
+      <extends>\DMS\Filter\Rules\Rule</extends>
+      <full_name>\DMS\Filter\Rules\Trim</full_name>
+      <docblock>
+        <description>Trim Rule</description>
+        <long-description>
+</long-description>
+        <tag name="package" description="DMS" line="5"/>
+        <tag name="subpackage" description="Filter" line="5"/>
+        <tag name="Annotation" description="" line="5"/>
+      </docblock>
+      <property final="false" static="false" visibility="public" line="20">
+        <name>$charlist</name>
+        <default>null</default>
+        <docblock>
+          <description>Comma separated string of allowed tags</description>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="string" line="15">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" line="25">
+        <name>applyFilter</name>
+        <docblock>
+          <description>{@inheritDoc}</description>
+          <long-description>
+</long-description>
+        </docblock>
+        <argument line="25">
+          <name>$value</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="40">
+        <name>getDefaultOption</name>
+        <docblock>
+          <description>{@inheritDoc}</description>
+          <long-description>
+</long-description>
+        </docblock>
+      </method>
+    </class>
+  </file>
+  <file path="Version.php" hash="072c0921b29a004165142bb502ba2408">
+    <class final="false" abstract="false" line="11" namespace="DMS\Filter">
+      <name>Version</name>
+      <extends/>
+      <full_name>\DMS\Filter\Version</full_name>
+      <docblock>
+        <description>Holds version information for the Filter package</description>
+        <long-description>
+</long-description>
+        <tag name="package" description="DMS" line="5"/>
+        <tag name="subpackage" description="Filter" line="5"/>
+      </docblock>
+      <constant namespace="DMS\Filter" line="13">
+        <name>VERSION</name>
+        <value>0.1-DEV</value>
+      </constant>
+      <method final="false" abstract="false" static="true" visibility="public" line="22">
+        <name>compare</name>
+        <docblock>
+          <description>Compares a version with the current one.</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="Version to compare." type="string" variable="$version" line="15">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="return" description="Returns -1 if older, 0 if it is the same, 1 if version passed as argument is newer." type="int" line="15">
+            <type by_reference="false">int</type>
+          </tag>
+        </docblock>
+        <argument line="22">
+          <name>$version</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <package name=""/>
+  <package name="DMS">
+    <subpackage>Filter</subpackage>
+  </package>
+  <namespace name="DMS">
+    <namespace name="Filter">
+      <namespace name="Exception"/>
+      <namespace name="Mapping">
+        <namespace name="Loader"/>
+      </namespace>
+      <namespace name="Rules"/>
+    </namespace>
+  </namespace>
+  <marker>todo</marker>
+  <marker>fixme</marker>
+</project>
