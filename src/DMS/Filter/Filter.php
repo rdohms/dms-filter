@@ -47,9 +47,14 @@ class Filter implements FilterInterface
     /**
      * {@inheritDoc}
      */
-    public function filterValue($value, Rules\Rule $filter)
+    public function filterValue($value, $filter)
     {
-        return $filter->applyFilter($value);
+        
+        if ($filter instanceof Rules\Rule) {
+            return $filter->applyFilter($value);
+        }
+        
+        return $this->walkRuleChain($value, $filter);
     }
 
     /**
@@ -88,6 +93,23 @@ class Filter implements FilterInterface
             
         }
         
+    }
+    
+    /**
+     * Iterates over an array of filters applying all to the value
+     * 
+     * @param mixed $value
+     * @param array $filters
+     * @return mixed 
+     */
+    protected function walkRuleChain($value, $filters)
+    {
+        
+        foreach($filters as $filter) {
+            $value = $filter->applyFilter($value);
+        }
+        
+        return $value;
     }
     
 }

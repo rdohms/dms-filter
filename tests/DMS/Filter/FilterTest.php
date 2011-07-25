@@ -93,6 +93,20 @@ class FilterTest extends \Tests\Testcase
         $this->assertNotContains('<p>', $filtered);
     }
     
+    public function testFilterValueWithArray()
+    {
+        $value = "this is <b> a string<p> with<b> tags</p> and\n malformed";
+        
+        $filters = array(new Rules\StripTags(), new Rules\StripNewlines());
+        $filtered = $this->filter->filterValue($value, $filters);
+        
+        $this->assertNotEquals($value, $filtered);
+        
+        $this->assertNotContains('<b>', $filtered);
+        $this->assertNotContains('<p>', $filtered);
+        $this->assertNotContains('\n', $filtered);
+    }
+    
     public function testNotFailOnNull()
     {
         $this->filter->filter(null);

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="DMS" default="package" basedir="..">
 	
+	<property name="distributiondir"  value="${project.basedir}/_distribution" override="true" />
+	
 	<target name="docs">
 		<exec command="docblox run -v -d ${project.basedir}/src -t ${project.basedir}/docs --title DMS " />
 	</target>
@@ -9,4 +11,12 @@
         <phingcall target="docs" />
     </target>
 
+	<target name="split_filter" description="Does a sub-tree split of the filter package">
+		<delete dir="${distributiondir}/Filter" />
+		<exec command="git clone git@github.com:rdohms/DMS.git ${distributiondir}/Filter" />
+		<exec command="git filter-branch --prune-empty --subdirectory-filter src/DMS/Filter master" dir="${distributiondir}/Filter" />
+		<exec command="git remote rm origin" dir="${distributiondir}/Filter" />
+		<exec command="git remote add origin git@github.com:rdohms/DMS-Filter.git" dir="${distributiondir}/Filter" />
+		<exec command="git push origin master --force" dir="${distributiondir}/Filter" />
+	</target>
 </project>

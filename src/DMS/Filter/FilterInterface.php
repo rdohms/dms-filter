@@ -27,14 +27,15 @@ interface FilterInterface
     public function filterProperty($object, $property);
 
     /**
-     * Runs a given value through a filter rule returning the filtered value
+     * Runs a given value through one or more filter rules returning the 
+     * filtered value
      * 
      * @param mixed $value
-     * @param Rules\Rule $filter
+     * @param array|Rules\Rule $filter
      * 
      * @return mixed
      */
-    public function filterValue($value, Rules\Rule $filter);
+    public function filterValue($value,  $filter);
     
     /**
      * Retrieves the metadata factory for class metdatas

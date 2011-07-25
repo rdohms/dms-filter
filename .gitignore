@@ -1,3 +1,4 @@
 .DS_Store
 tests/_reports/*
 /_build/
+_distribution
