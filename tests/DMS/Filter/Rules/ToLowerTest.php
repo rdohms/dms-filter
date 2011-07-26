@@ -52,6 +52,7 @@ class ToLowerTest extends Tests\Testcase
             array(array('encoding' => 'utf-8'), "MY TEXT", "my text", true),
             array(array('encoding' => 'utf-8'), "MY Ã TEXT", "my ã text", true),
             array(array('encoding' => 'utf-8'), "MY Á TEXT", "my á text", true),
+            array('utf-8', "MY Á TEXT", "my á text", true),
             array(array(), "MY TEXT", "my text", false ),
             array(array(), "MY TEXT", "my text", false ),
         );

@@ -52,6 +52,7 @@ class ToUpperTest extends Tests\Testcase
             array(array('encoding' => 'utf-8'), "my text", "MY TEXT", true),
             array(array('encoding' => 'utf-8'), "my ã text", "MY Ã TEXT", true),
             array(array('encoding' => 'utf-8'), "my á text", "MY Á TEXT", true),
+            array('utf-8', "my á text", "MY Á TEXT", true),
             array(array(), "my text", "MY TEXT", false ),
             array(array(), "my text", "MY TEXT", false ),
         );
