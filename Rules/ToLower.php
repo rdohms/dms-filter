@@ -62,4 +62,11 @@ class ToLower extends Rule
         return true;
     }
      
+    /**
+     * {@inheritDoc}
+     */
+    public function getDefaultOption()
+    {
+        return 'encoding';
+    }
 }

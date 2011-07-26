@@ -62,4 +62,11 @@ class ToUpper extends Rule
         return true;
     }
     
+    /**
+     * {@inheritDoc}
+     */
+    public function getDefaultOption()
+    {
+        return 'encoding';
+    }
 }
