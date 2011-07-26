@@ -31,116 +31,78 @@
       $('dl.function-info, dl.constant-info, dl.property-info').hide();
       $('dl.function-info img, dl.constant-info img, dl.property-info img').show();
       });
-    </script><a name="top"></a><h1 class="file">FilterInterface.php</h1>
-<div class="file_menu"><a href="#interfaces">Interfaces</a></div>
+    </script><a name="top"></a><h1 class="file">Rules/ToUpper.php</h1>
+<div class="file_menu">
+<a href="#classes">Classes</a> </div>
 <dl class="file-info">
-<dt>Interfaces</dt>
-<dd><a class="interface" href="#%5CDMS%5CFilter%5CFilterInterface">FilterInterface</a></dd>
+<dt>Classes</dt>
+<dd><a class="class" href="#%5CDMS%5CFilter%5CRules%5CToUpper">ToUpper</a></dd>
 </dl>
-<a name="interfaces"></a><a id="\DMS\Filter\FilterInterface"></a><h2 class="interface">\DMS\Filter\FilterInterface<div class="to-top"><a href="#top">jump to top</a></div>
+<a name="classes"></a><a id="\DMS\Filter\Rules\ToUpper"></a><h2 class="class">\DMS\Filter\Rules\ToUpper<div class="to-top"><a href="#top">jump to top</a></div>
 </h2>
 <div class="class">
 <dl class="class-info">
+<dt>Extends from</dt>
+<dd><a href="_Rules_Rule.html#%5CDMS%5CFilter%5CRules%5CRule">\DMS\Filter\Rules\Rule</a></dd>
+<dt>Annotation</dt>
+<dd></dd>
 <dt>package</dt>
 <dd>DMS</dd>
 <dt>subpackage</dt>
 <dd>Filter</dd>
 <dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
+                Properties
+              </a></dt>
+<dd><a class="property public" href="#%5CDMS%5CFilter%5CRules%5CToUpper::%24encoding">$encoding</a></dd>
+<dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
                 Methods
               </a></dt>
-<dd><a class="method public" href="#%5CDMS%5CFilter%5CFilterInterface::filter()">filter</a></dd>
-<dd><a class="method public" href="#%5CDMS%5CFilter%5CFilterInterface::filterProperty()">filterProperty</a></dd>
-<dd><a class="method public" href="#%5CDMS%5CFilter%5CFilterInterface::filterValue()">filterValue</a></dd>
-<dd><a class="method public" href="#%5CDMS%5CFilter%5CFilterInterface::getMetadataFactory()">getMetadataFactory</a></dd>
+<dd><a class="method public" href="#%5CDMS%5CFilter%5CRules%5CToUpper::applyFilter()">applyFilter</a></dd>
+<dd><a class="method public" href="#%5CDMS%5CFilter%5CRules%5CToUpper::useEncoding()">useEncoding</a></dd>
 </dl>
 <h3>Description</h3>
-<p class="short-description">Filters the values of a given object</p>
+<p class="short-description">ToUpper Rule</p>
 <div class="long-description">
+</div>
+<h3>Properties</h3>
+<div>
+<a id="\DMS\Filter\Rules\ToUpper::$encoding"></a><h4 class="property public">$encoding<div class="to-top"><a href="#%5CDMS%5CFilter%5CRules%5CToUpper">jump to class</a></div>
+</h4>
+<div class="property">
+<code>string <span class="highlight">$encoding</span> = 'null'</code><p class="short-description">Encoding to be used</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>string<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd>null</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
 </div>
 <h3>Methods</h3>
 <div>
-<a id="\DMS\Filter\FilterInterface::filter()"></a><h4 class="method public">filter<div class="to-top"><a href="#FilterInterface">jump to class</a></div>
+<a id="\DMS\Filter\Rules\ToUpper::applyFilter()"></a><h4 class="method public">applyFilter<div class="to-top"><a href="#ToUpper">jump to class</a></div>
 </h4>
 <div class="method">
-<code><span class="highlight">filter</span><span class="nb-faded-text">(
-          mixed $object
+<code><span class="highlight">applyFilter</span><span class="nb-faded-text">(
+          mixed $value
           )
         </span>
         :
-        </code><p class="short-description">Iterates over the properties of the object applying filters and
-replacing values</p>
-<div class="long-description">
-</div>
-<div class="api-section">
-<h5 class="arguments">Arguments</h5>
-<dl class="argument-info">
-<dt>$object</dt>
-<dd>mixed<br><em></em>
-</dd>
-</dl>
-<div class="clear"></div>
-</div>
-<div class="api-section">
-<h5 class="info">
-<img src="images/arrow_right.gif"> Details</h5>
-<dl class="function-info">
-<dt>visibility</dt>
-<dd>public</dd>
-<dt>final</dt>
-<dd>false</dd>
-<dt>static</dt>
-<dd>false</dd>
-</dl>
-<div class="clear"></div>
-</div>
-</div>
-<a id="\DMS\Filter\FilterInterface::filterProperty()"></a><h4 class="method public">filterProperty<div class="to-top"><a href="#FilterInterface">jump to class</a></div>
-</h4>
-<div class="method">
-<code><span class="highlight">filterProperty</span><span class="nb-faded-text">(
-          mixed $object, string $property
-          )
-        </span>
-        :
-        </code><p class="short-description">Filters a specific property in an object, replacing the current value</p>
-<div class="long-description">
-</div>
-<div class="api-section">
-<h5 class="arguments">Arguments</h5>
-<dl class="argument-info">
-<dt>$object</dt>
-<dd>mixed<br><em></em>
-</dd>
-<dt>$property</dt>
-<dd>string<br><em></em>
-</dd>
-</dl>
-<div class="clear"></div>
-</div>
-<div class="api-section">
-<h5 class="info">
-<img src="images/arrow_right.gif"> Details</h5>
-<dl class="function-info">
-<dt>visibility</dt>
-<dd>public</dd>
-<dt>final</dt>
-<dd>false</dd>
-<dt>static</dt>
-<dd>false</dd>
-</dl>
-<div class="clear"></div>
-</div>
-</div>
-<a id="\DMS\Filter\FilterInterface::filterValue()"></a><h4 class="method public">filterValue<div class="to-top"><a href="#FilterInterface">jump to class</a></div>
-</h4>
-<div class="method">
-<code><span class="highlight">filterValue</span><span class="nb-faded-text">(
-          mixed $value, array|\Rules\Rule $filter
-          )
-        </span>
-        :
-        mixed</code><p class="short-description">Runs a given value through one or more filter rules returning the
-filtered value</p>
+        mixed</code><p class="short-description">{@inheritDoc}</p>
 <div class="long-description">
 </div>
 <div class="api-section">
@@ -148,9 +110,6 @@ filtered value</p>
 <dl class="argument-info">
 <dt>$value</dt>
 <dd>mixed<br><em></em>
-</dd>
-<dt>$filter</dt>
-<dd>array\Rules\Rule<br><em></em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -177,21 +136,22 @@ filtered value</p>
 <div class="clear"></div>
 </div>
 </div>
-<a id="\DMS\Filter\FilterInterface::getMetadataFactory()"></a><h4 class="method public">getMetadataFactory<div class="to-top"><a href="#FilterInterface">jump to class</a></div>
+<a id="\DMS\Filter\Rules\ToUpper::useEncoding()"></a><h4 class="method public">useEncoding<div class="to-top"><a href="#ToUpper">jump to class</a></div>
 </h4>
 <div class="method">
-<code><span class="highlight">getMetadataFactory</span><span class="nb-faded-text">(
+<code><span class="highlight">useEncoding</span><span class="nb-faded-text">(
           
           )
         </span>
         :
-        \Mapping\ClassMetadataFactoryInterface</code><p class="short-description">Retrieves the metadata factory for class metdatas</p>
+        boolean</code><p class="short-description">Verify is encoding is set and if we have the proper
+function to use it</p>
 <div class="long-description">
 </div>
 <div class="api-section">
 <h5 class="output">Output</h5>
 <dl class="return-info">
-<dt>\Mapping\ClassMetadataFactoryInterface</dt>
+<dt>boolean</dt>
 <dd><em></em></dd>
 </dl>
 <div class="clear"></div>

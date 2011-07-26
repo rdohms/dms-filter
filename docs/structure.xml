@@ -122,7 +122,7 @@
       </method>
     </class>
   </file>
-  <file path="Filter.php" hash="5ea60f1f22cd1eff542b2f577254f9c9">
+  <file path="Filter.php" hash="69e9b43f7283062f70fdb3082e8b7017">
     <class final="false" abstract="false" line="13" namespace="DMS\Filter">
       <name>Filter</name>
       <extends/>
@@ -210,10 +210,10 @@ for the object and applying them</description>
         <argument line="50">
           <name>$filter</name>
           <default/>
-          <type>Rule</type>
+          <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="58">
+      <method final="false" abstract="false" static="false" visibility="public" line="63">
         <name>getMetadataFactory</name>
         <docblock>
           <description>{@inheritDoc}</description>
@@ -221,34 +221,61 @@ for the object and applying them</description>
 </long-description>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" line="70">
+      <method final="false" abstract="false" static="false" visibility="protected" line="75">
         <name>walkObject</name>
         <docblock>
           <description>Iterates over annotated properties in an object filtering the selected
 values</description>
           <long-description>
 </long-description>
-          <tag name="param" description="" type="object" variable="$object" line="63">
+          <tag name="param" description="" type="object" variable="$object" line="68">
             <type by_reference="false">object</type>
           </tag>
-          <tag name="param" description="" type="string" variable="$limitProperty" line="63">
+          <tag name="param" description="" type="string" variable="$limitProperty" line="68">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="70">
+        <argument line="75">
           <name>$object</name>
           <default/>
           <type/>
         </argument>
-        <argument line="70">
+        <argument line="75">
           <name>$limitProperty</name>
           <default>null</default>
           <type/>
         </argument>
       </method>
+      <method final="false" abstract="false" static="false" visibility="protected" line="105">
+        <name>walkRuleChain</name>
+        <docblock>
+          <description>Iterates over an array of filters applying all to the value</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="mixed" variable="$value" line="98">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag name="param" description="" type="array" variable="$filters" line="98">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag name="return" description="" type="mixed" line="98">
+            <type by_reference="false">mixed</type>
+          </tag>
+        </docblock>
+        <argument line="105">
+          <name>$value</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="105">
+          <name>$filters</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
     </class>
   </file>
-  <file path="FilterInterface.php" hash="77e9211a05d4b8931dc3e44fda5370aa">
+  <file path="FilterInterface.php" hash="6489fbae810e5274d38ec50bf7c85df2">
     <interface namespace="DMS\Filter" line="11">
       <name>FilterInterface</name>
       <extends/>
@@ -301,40 +328,42 @@ replacing values</description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="37">
+      <method final="false" abstract="false" static="false" visibility="public" line="38">
         <name>filterValue</name>
         <docblock>
-          <description>Runs a given value through a filter rule returning the filtered value</description>
+          <description>Runs a given value through one or more filter rules returning the
+filtered value</description>
           <long-description>
 </long-description>
           <tag name="param" description="" type="mixed" variable="$value" line="29">
             <type by_reference="false">mixed</type>
           </tag>
-          <tag name="param" description="" type="\Rules\Rule" variable="$filter" line="29">
+          <tag name="param" description="" type="array|\Rules\Rule" variable="$filter" line="29">
+            <type by_reference="false">array</type>
             <type by_reference="false">\Rules\Rule</type>
           </tag>
           <tag name="return" description="" type="mixed" line="29">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
-        <argument line="37">
+        <argument line="38">
           <name>$value</name>
           <default/>
           <type/>
         </argument>
-        <argument line="37">
+        <argument line="38">
           <name>$filter</name>
           <default/>
-          <type>Rule</type>
+          <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="44">
+      <method final="false" abstract="false" static="false" visibility="public" line="45">
         <name>getMetadataFactory</name>
         <docblock>
           <description>Retrieves the metadata factory for class metdatas</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="\Mapping\ClassMetadataFactoryInterface" line="39">
+          <tag name="return" description="" type="\Mapping\ClassMetadataFactoryInterface" line="40">
             <type by_reference="false">\Mapping\ClassMetadataFactoryInterface</type>
           </tag>
         </docblock>
@@ -1478,6 +1507,112 @@ for the parsing process</description>
           <description>{@inheritDoc}</description>
           <long-description>
 </long-description>
+        </docblock>
+      </method>
+    </class>
+  </file>
+  <file path="Rules/ToLower.php" hash="49559407af76fa355c5d5a4b2bff6207">
+    <namespace-alias name="FilterException">DMS\Filter\Exception\FilterException</namespace-alias>
+    <class final="false" abstract="false" line="15" namespace="DMS\Filter\Rules">
+      <name>ToLower</name>
+      <extends>\DMS\Filter\Rules\Rule</extends>
+      <full_name>\DMS\Filter\Rules\ToLower</full_name>
+      <docblock>
+        <description>ToLower Rule</description>
+        <long-description>
+</long-description>
+        <tag name="package" description="DMS" line="7"/>
+        <tag name="subpackage" description="Filter" line="7"/>
+        <tag name="Annotation" description="" line="7"/>
+      </docblock>
+      <property final="false" static="false" visibility="public" line="22">
+        <name>$encoding</name>
+        <default>null</default>
+        <docblock>
+          <description>Encoding to be used</description>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="string" line="17">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" line="27">
+        <name>applyFilter</name>
+        <docblock>
+          <description>{@inheritDoc}</description>
+          <long-description>
+</long-description>
+        </docblock>
+        <argument line="27">
+          <name>$value</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="42">
+        <name>useEncoding</name>
+        <docblock>
+          <description>Verify is encoding is set and if we have the proper
+function to use it</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="boolean" line="36">
+            <type by_reference="false">boolean</type>
+          </tag>
+        </docblock>
+      </method>
+    </class>
+  </file>
+  <file path="Rules/ToUpper.php" hash="71f7604dca34315f26c696b48756c6b7">
+    <namespace-alias name="FilterException">DMS\Filter\Exception\FilterException</namespace-alias>
+    <class final="false" abstract="false" line="15" namespace="DMS\Filter\Rules">
+      <name>ToUpper</name>
+      <extends>\DMS\Filter\Rules\Rule</extends>
+      <full_name>\DMS\Filter\Rules\ToUpper</full_name>
+      <docblock>
+        <description>ToUpper Rule</description>
+        <long-description>
+</long-description>
+        <tag name="package" description="DMS" line="7"/>
+        <tag name="subpackage" description="Filter" line="7"/>
+        <tag name="Annotation" description="" line="7"/>
+      </docblock>
+      <property final="false" static="false" visibility="public" line="22">
+        <name>$encoding</name>
+        <default>null</default>
+        <docblock>
+          <description>Encoding to be used</description>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="string" line="17">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" line="27">
+        <name>applyFilter</name>
+        <docblock>
+          <description>{@inheritDoc}</description>
+          <long-description>
+</long-description>
+        </docblock>
+        <argument line="27">
+          <name>$value</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="42">
+        <name>useEncoding</name>
+        <docblock>
+          <description>Verify is encoding is set and if we have the proper
+function to use it</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="boolean" line="36">
+            <type by_reference="false">boolean</type>
+          </tag>
         </docblock>
       </method>
     </class>

@@ -61,6 +61,7 @@
 <dd><a class="method public" href="#%5CDMS%5CFilter%5CFilter::filterValue()">filterValue</a></dd>
 <dd><a class="method public" href="#%5CDMS%5CFilter%5CFilter::getMetadataFactory()">getMetadataFactory</a></dd>
 <dd><a class="method protected" href="#%5CDMS%5CFilter%5CFilter::walkObject()">walkObject</a></dd>
+<dd><a class="method protected" href="#%5CDMS%5CFilter%5CFilter::walkRuleChain()">walkRuleChain</a></dd>
 </dl>
 <h3>Description</h3>
 <p class="short-description">Filter Object, responsible for retrieving the filtering rules
@@ -206,7 +207,7 @@ for the object and applying them</p>
 </h4>
 <div class="method">
 <code><span class="highlight">filterValue</span><span class="nb-faded-text">(
-          mixed $value, \Rules\Rule $filter
+          mixed $value, array|\Rules\Rule $filter
           )
         </span>
         :
@@ -220,7 +221,7 @@ for the object and applying them</p>
 <dd>mixed<br><em></em>
 </dd>
 <dt>$filter</dt>
-<dd>\Rules\Rule<br><em></em>
+<dd>array\Rules\Rule<br><em></em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -303,6 +304,51 @@ values</p>
 <dt>$limitProperty</dt>
 <dd>string<br><em></em>
 </dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DMS\Filter\Filter::walkRuleChain()"></a><h4 class="method protected">walkRuleChain<div class="to-top"><a href="#Filter">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">walkRuleChain</span><span class="nb-faded-text">(
+          mixed $value, array $filters
+          )
+        </span>
+        :
+        mixed</code><p class="short-description">Iterates over an array of filters applying all to the value</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$value</dt>
+<dd>mixed<br><em></em>
+</dd>
+<dt>$filters</dt>
+<dd>array<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>mixed</dt>
+<dd><em></em></dd>
 </dl>
 <div class="clear"></div>
 </div>
