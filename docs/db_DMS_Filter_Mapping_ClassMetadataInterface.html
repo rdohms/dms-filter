@@ -1,0 +1,253 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DMS</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">DMS/Filter/Mapping/ClassMetadataInterface.php</h1>
+<div class="file-nav">
+<ul id="file-nav"><li><a href="#top">Global</a></li></ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top"></a><a name="interfaces"></a><a id="\DMS\Filter\Mapping\ClassMetadataInterface"></a><h2 class="interface">\DMS\Filter\Mapping\ClassMetadataInterface<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>DMS\Filter</small><p class="short-description">Method required by a ClassMetadata class</p>
+<div class="long-description">
+</div>
+<dl class="class-info"></dl>
+<h3>Methods</h3>
+<div>
+<a id="\DMS\Filter\Mapping\ClassMetadataInterface::addPropertyRule()"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">addPropertyRule</span><span class="nb-faded-text">(
+          string $property, \Rules\Rule $rule
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Adds a new rule to a property</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$property</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$rule</th>
+<td>\Rules\Rule</td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DMS\Filter\Mapping\ClassMetadataInterface::getClassName()"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getClassName</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Get name of class represented in this Metadata object</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DMS\Filter\Mapping\ClassMetadataInterface::getFilteredProperties()"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getFilteredProperties</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Retrieve a list of the object's properties that have filters attached
+to them</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DMS\Filter\Mapping\ClassMetadataInterface::getPropertyRules()"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getPropertyRules</span><span class="nb-faded-text">(
+          string $property
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Retrieve s list of filtering rules attached to a property</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$property</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DMS\Filter\Mapping\ClassMetadataInterface::getReflectionClass()"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getReflectionClass</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \DMS\Filter\Mapping\ReflectionClass</code><div class="description"><p class="short_description">Returns a ReflectionClass instance for this class.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\DMS\Filter\Mapping\ReflectionClass</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DMS\Filter\Mapping\ClassMetadataInterface::mergeRules()"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">mergeRules</span><span class="nb-faded-text">(
+          <a href="db_DMS_Filter_Mapping_ClassMetadata.html#%5CDMS%5CFilter%5CMapping%5CClassMetadata">\DMS\Filter\Mapping\ClassMetadata</a> $metadata
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Merges rules from another metadata object into this one</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$metadata</th>
+<td><a href="db_DMS_Filter_Mapping_ClassMetadata.html#%5CDMS%5CFilter%5CMapping%5CClassMetadata">\DMS\Filter\Mapping\ClassMetadata</a></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.0</a>.
+    </small></body></html>
