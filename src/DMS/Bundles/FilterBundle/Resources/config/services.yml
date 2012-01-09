@@ -1,0 +1,3 @@
+services:
+    dms.filter:
+        class: DMS\Bundles\FilterBundle\Service\Filter
