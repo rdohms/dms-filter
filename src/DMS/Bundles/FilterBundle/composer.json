@@ -1,0 +1,27 @@
+{
+    "name":        "dms/dms-filter-bundle",
+    "type":        "symfony-bundle",
+    "description": "DMS Filter Bundle, makes Annotation based entity filtering available in Symfony",
+    "keywords":    ["filter", "dms", "symfony", "bundle"],
+    "homepage":    "https://github.com/rdohms/DMSFilterBundle",
+    "license":     "MIT",
+
+    "authors": [
+        {
+            "name": "Rafael Dohms",
+            "homepage": "http://doh.ms"
+        }
+    ],
+
+    "require": {
+        "php":                      ">=5.3.2",
+    },
+
+    "autoload": {
+        "psr-0": {
+            "DMS\\Bundles\\FilterBundle": ""
+        }
+    },
+
+    "target-dir": "DMS/Bundles/FilterBundle"
+}

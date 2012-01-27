@@ -2,3 +2,4 @@
 tests/_reports/*
 /_build/
 _distribution
+.idea/
