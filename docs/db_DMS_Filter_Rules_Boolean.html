@@ -1,5 +1,5 @@
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>DMS</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+<title>DMS</title><link rel="stylesheet" href="css/jquery-ui.css" type="text/css"></link><link rel="stylesheet" href="css/docblox/jquery-ui-1.8.16.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.tools.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
             $(document).ready(function() {
                 $(".filetree").treeview({
                     collapsed: true,
@@ -15,14 +15,14 @@
                 $(".tabs").tabs();
             });
         </script></head><body><div xmlns="" id="content">
-<script type="text/javascript" src="js/menu.js"></script><script>
+<script xmlns:dbx="http://docblox-project.org/xsl/functions">
 
       function filterElements()
       {
-        inherited = !$('a#show-inherited').hasClass('deselected');
-        public    = !$('a#show-public').hasClass('deselected');
-        protected = !$('a#show-protected').hasClass('deselected');
-        private   = !$('a#show-private').hasClass('deselected');
+        inherited = !$('#show-inherited').hasClass('deselected');
+        public    = !$('#show-public').hasClass('deselected');
+        protected = !$('#show-protected').hasClass('deselected');
+        private   = !$('#show-private').hasClass('deselected');
 
         $('div.public').each(function(index, val) {
             $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
@@ -53,43 +53,54 @@
         $('div.code-tabs').hide();
         $('a.gripper').show();
         $('div.code-tabs:empty').prevAll('a.gripper').html('');
-        $('div.file-nav').show();
 
-        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
-            $(this).toggleClass('deselected');
-            if ($(this).hasClass('deselected')) {
-              $(this).fadeTo('fast', '0.4');
-            } else {
-              $(this).fadeTo('fast', '1.0');
-            }
-            filterElements();
-            return false;
+        $('#show-public, #show-protected, #show-private, #show-inherited')
+            .css('cursor', 'pointer')
+            .click(function(){
+                $(this).toggleClass('deselected');
+                if ($(this).hasClass('deselected')) {
+                  $(this).fadeTo('fast', '0.4');
+                } else {
+                  $(this).fadeTo('fast', '1.0');
+                }
+                filterElements();
+                return false;
+            });
+        $('#show-protected, #show-private').click();
+
+        // add the sliding behaviour to the file navigation and show it
+        // it is initially hidden for non-JS users.
+        $("#file-nav-box").show().hover(function() {
+            $("#file-nav-container").slideDown(400);
+        }, function() {
+            $("#file-nav-container").slideUp(400);
         });
-        $('a#show-protected, a#show-private').click();
-
       });
+
       
-    </script><h1 class="file">DMS/Filter/Rules/Boolean.php</h1>
-<div class="file-nav">
-<ul id="file-nav">
-<li><a href="#top">Global</a></li>
-<li>
-<a href="#classes"><img src="images/icons/class.png" height="14">
-                      Classes
-                  </a><ul><li><a href="#Boolean">Boolean</a></li></ul>
-</li>
-</ul>
-<div style="float: right;padding-right: 20px;">
+    </script><h1 xmlns:dbx="http://docblox-project.org/xsl/functions" class="file">DMS/Filter/Rules/Boolean.php</h1>
+<div xmlns:dbx="http://docblox-project.org/xsl/functions" id="file-nav-box">
+<div id="file-nav-options">
               Show:
-              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+              <img src="images/icons/visibility_public.png" id="show-public"><img src="images/icons/visibility_protected.png" id="show-protected"><img src="images/icons/visibility_private.png" id="show-private"><span class="attribute" id="show-inherited">inherited</span>
 </div>
+<div id="file-nav-container">
+<ul id="file-nav"><li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                          Classes
+                      </a><ul><li><a href="#%5CDMS%5CFilter%5CRules%5CBoolean">\DMS\Filter\Rules\Boolean</a></li></ul>
+</li></ul>
+<div style="clear: left;"></div>
 </div>
-<a name="top"></a><a name="classes"></a><a id="Boolean"></a><h2 class="class">Boolean<div class="to-top"><a href="#top">jump to top</a></div>
+<div id="file-nav-tab">
+              Table of Contents
+          </div>
+</div>
+<a xmlns:dbx="http://docblox-project.org/xsl/functions" name="top" class="anchor"></a><a name="classes" class="anchor"></a><a xmlns:dbx="http://docblox-project.org/xsl/functions" id="\DMS\Filter\Rules\Boolean" class="anchor"></a><h2 xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">\DMS\Filter\Rules\Boolean<div class="to-top"><a href="#top">jump to top</a></div>
 </h2>
-<div class="class">
+<div xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">
 <small class="package"><b>Package: </b>DMS\Filter</small><p class="short-description">Boolean Rule</p>
-<div class="long-description">
-</div>
+<div class="long-description"></div>
 <dl class="class-info">
 <dt>Parent(s)</dt>
 <dd><a href="db_DMS_Filter_Rules_Rule.html#%5CDMS%5CFilter%5CRules%5CRule">\DMS\Filter\Rules\Rule</a></dd>
@@ -100,67 +111,15 @@
 </dl>
 <h3>Methods</h3>
 <div>
-<a id="Boolean::__construct()"></a><div class="method public inherited_from ">
-<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">__construct</span><span class="nb-faded-text">(
-          mixed $options
-              =
-              null
-          )
-        </span>
-        :
-          void</code><div class="description">
-<span class="attribute">inherited</span><p class="short_description">Initializes the filter rule with its options</p>
-<small>Inherited from:
-                    <a href="db_DMS_Filter_Rules_Rule.html#%5CDMS%5CFilter%5CRules%5CRule::__construct()">\DMS\Filter\Rules\Rule::__construct()</a></small>
-</div>
-<div class="code-tabs">
-<div class="long-description">
-</div>
-<strong>Parameters</strong><table class="argument-info">
-<thead><tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr></thead>
-<tr>
-<th>$options</th>
-<td>mixed</td>
-<td><em><p>The options (as associative array) or the value for the default option (any other type)</p>
-</em></td>
-</tr>
-</table>
-<strong>Throws</strong><table class="argument-info">
-<thead><tr>
-<th>Exception</th>
-<th>Description</th>
-</tr></thead>
-<tr>
-<td><a href="db_DMS_Filter_Exception_InvalidOptionsException.html#%5CDMS%5CFilter%5CException%5CInvalidOptionsException">\DMS\Filter\Exception\InvalidOptionsException</a></td>
-<td><em>When you pass the names of non-existing options</em></td>
-</tr>
-<tr>
-<td><a href="db_DMS_Filter_Exception_MissingOptionsException.html#%5CDMS%5CFilter%5CException%5CMissingOptionsException">\DMS\Filter\Exception\MissingOptionsException</a></td>
-<td><em>When you don't pass any of the options returned by getRequiredOptions()</em></td>
-</tr>
-<tr>
-<td>\DMS\Filter\Rules\ConstraintDefinitionException</td>
-<td><em>When you don't pass an associative array, but getDefaultOption() returns NULL</em></td>
-</tr>
-</table>
-</div>
-<div class="clear"></div>
-</div>
-<a id="Boolean::applyFilter()"></a><div class="method public">
+<a id="\DMS\Filter\Rules\Boolean::applyFilter()" class="anchor"></a><div class="method public">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">applyFilter</span><span class="nb-faded-text">(
-          mixed $value
+           $value
           )
         </span>
         :
-          mixed</code><div class="description"><p class="short_description">Applies actual filter rule to the value and returns the filtered
-value to be replaced in the original object</p></div>
+          void</code><div class="description"><p class="short_description">{@inheritDoc}</p></div>
 <div class="code-tabs">
-<div class="long-description">
-</div>
+<div class="long-description"></div>
 <strong>Parameters</strong><table class="argument-info">
 <thead><tr>
 <th>Name</th>
@@ -169,91 +128,15 @@ value to be replaced in the original object</p></div>
 </tr></thead>
 <tr>
 <th>$value</th>
-<td>mixed</td>
+<td></td>
 <td><em></em></td>
 </tr>
 </table>
-<strong>Returns</strong><table class="argument-info">
-<thead><tr>
-<th>Type</th>
-<th>Description</th>
-</tr></thead>
-<tr>
-<td>mixed</td>
-<td></td>
-</tr>
-</table>
-</div>
-<div class="clear"></div>
-</div>
-<a id="Boolean::getDefaultOption()"></a><div class="method public inherited_from ">
-<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getDefaultOption</span><span class="nb-faded-text">(
-          
-          )
-        </span>
-        :
-          string</code><div class="description">
-<span class="attribute">inherited</span><p class="short_description">Returns the name of the default option</p>
-<small>Inherited from:
-                    <a href="db_DMS_Filter_Rules_Rule.html#%5CDMS%5CFilter%5CRules%5CRule::getDefaultOption()">\DMS\Filter\Rules\Rule::getDefaultOption()</a></small>
-</div>
-<div class="code-tabs">
-<div class="long-description"><p>Override this method to define a default option.</p>
-</div>
-<strong>Returns</strong><table class="argument-info">
-<thead><tr>
-<th>Type</th>
-<th>Description</th>
-</tr></thead>
-<tr>
-<td>string</td>
-<td></td>
-</tr>
-</table>
-<strong>Details</strong><dl class="function-info">
-<dt>See</dt>
-<dd>\DMS\Filter\Rules\__construct()
-         
-    </dd>
-</dl>
-</div>
-<div class="clear"></div>
-</div>
-<a id="Boolean::getRequiredOptions()"></a><div class="method public inherited_from ">
-<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getRequiredOptions</span><span class="nb-faded-text">(
-          
-          )
-        </span>
-        :
-          array</code><div class="description">
-<span class="attribute">inherited</span><p class="short_description">Returns the name of the required options</p>
-<small>Inherited from:
-                    <a href="db_DMS_Filter_Rules_Rule.html#%5CDMS%5CFilter%5CRules%5CRule::getRequiredOptions()">\DMS\Filter\Rules\Rule::getRequiredOptions()</a></small>
-</div>
-<div class="code-tabs">
-<div class="long-description"><p>Override this method if you want to define required options.</p>
-</div>
-<strong>Returns</strong><table class="argument-info">
-<thead><tr>
-<th>Type</th>
-<th>Description</th>
-</tr></thead>
-<tr>
-<td>array</td>
-<td></td>
-</tr>
-</table>
-<strong>Details</strong><dl class="function-info">
-<dt>See</dt>
-<dd>\DMS\Filter\Rules\__construct()
-         
-    </dd>
-</dl>
 </div>
 <div class="clear"></div>
 </div>
 </div>
 </div>
 </div>
-<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.0</a>.
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.17.2</a>.
     </small></body></html>

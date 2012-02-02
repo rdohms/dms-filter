@@ -4,7 +4,7 @@ This bundle makes DMS/Filter available for use in your application for input fil
 
 ## Install
 
-### 1. Impor libraries  
+### 1. Import libraries
 
 Option A) Use the vendors script.
 
@@ -54,7 +54,7 @@ Use the `dms.filter` service along with annotations in the Entity to filter data
 	    $oldEntity = clone $entity;
         
 	    $filterService = $this->get('dms.filter');
-	    $filterService->filter($entity);
+	    $filterService->filterEntity($entity);
         
 	    return array('entity' => $entity, "old" => $oldEntity);
 	}

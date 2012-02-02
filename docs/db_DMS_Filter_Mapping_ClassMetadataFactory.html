@@ -1,5 +1,5 @@
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>DMS</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+<title>DMS</title><link rel="stylesheet" href="css/jquery-ui.css" type="text/css"></link><link rel="stylesheet" href="css/docblox/jquery-ui-1.8.16.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.tools.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
             $(document).ready(function() {
                 $(".filetree").treeview({
                     collapsed: true,
@@ -15,14 +15,14 @@
                 $(".tabs").tabs();
             });
         </script></head><body><div xmlns="" id="content">
-<script type="text/javascript" src="js/menu.js"></script><script>
+<script xmlns:dbx="http://docblox-project.org/xsl/functions">
 
       function filterElements()
       {
-        inherited = !$('a#show-inherited').hasClass('deselected');
-        public    = !$('a#show-public').hasClass('deselected');
-        protected = !$('a#show-protected').hasClass('deselected');
-        private   = !$('a#show-private').hasClass('deselected');
+        inherited = !$('#show-inherited').hasClass('deselected');
+        public    = !$('#show-public').hasClass('deselected');
+        protected = !$('#show-protected').hasClass('deselected');
+        private   = !$('#show-private').hasClass('deselected');
 
         $('div.public').each(function(index, val) {
             $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
@@ -53,57 +53,67 @@
         $('div.code-tabs').hide();
         $('a.gripper').show();
         $('div.code-tabs:empty').prevAll('a.gripper').html('');
-        $('div.file-nav').show();
 
-        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
-            $(this).toggleClass('deselected');
-            if ($(this).hasClass('deselected')) {
-              $(this).fadeTo('fast', '0.4');
-            } else {
-              $(this).fadeTo('fast', '1.0');
-            }
-            filterElements();
-            return false;
+        $('#show-public, #show-protected, #show-private, #show-inherited')
+            .css('cursor', 'pointer')
+            .click(function(){
+                $(this).toggleClass('deselected');
+                if ($(this).hasClass('deselected')) {
+                  $(this).fadeTo('fast', '0.4');
+                } else {
+                  $(this).fadeTo('fast', '1.0');
+                }
+                filterElements();
+                return false;
+            });
+        $('#show-protected, #show-private').click();
+
+        // add the sliding behaviour to the file navigation and show it
+        // it is initially hidden for non-JS users.
+        $("#file-nav-box").show().hover(function() {
+            $("#file-nav-container").slideDown(400);
+        }, function() {
+            $("#file-nav-container").slideUp(400);
         });
-        $('a#show-protected, a#show-private').click();
-
       });
+
       
-    </script><h1 class="file">DMS/Filter/Mapping/ClassMetadataFactory.php</h1>
-<div class="file-nav">
-<ul id="file-nav">
-<li><a href="#top">Global</a></li>
-<li>
-<a href="#classes"><img src="images/icons/class.png" height="14">
-                      Classes
-                  </a><ul><li><a href="#%5CDMS%5CFilter%5CMapping%5CClassMetadataFactory">\DMS\Filter\Mapping\ClassMetadataFactory</a></li></ul>
-</li>
-</ul>
-<div style="float: right;padding-right: 20px;">
+    </script><h1 xmlns:dbx="http://docblox-project.org/xsl/functions" class="file">DMS/Filter/Mapping/ClassMetadataFactory.php</h1>
+<div xmlns:dbx="http://docblox-project.org/xsl/functions" id="file-nav-box">
+<div id="file-nav-options">
               Show:
-              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+              <img src="images/icons/visibility_public.png" id="show-public"><img src="images/icons/visibility_protected.png" id="show-protected"><img src="images/icons/visibility_private.png" id="show-private"><span class="attribute" id="show-inherited">inherited</span>
 </div>
+<div id="file-nav-container">
+<ul id="file-nav"><li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                          Classes
+                      </a><ul><li><a href="#%5CDMS%5CFilter%5CMapping%5CClassMetadataFactory">\DMS\Filter\Mapping\ClassMetadataFactory</a></li></ul>
+</li></ul>
+<div style="clear: left;"></div>
 </div>
-<a name="top"></a><a name="classes"></a><a id="\DMS\Filter\Mapping\ClassMetadataFactory"></a><h2 class="class">\DMS\Filter\Mapping\ClassMetadataFactory<div class="to-top"><a href="#top">jump to top</a></div>
+<div id="file-nav-tab">
+              Table of Contents
+          </div>
+</div>
+<a xmlns:dbx="http://docblox-project.org/xsl/functions" name="top" class="anchor"></a><a name="classes" class="anchor"></a><a xmlns:dbx="http://docblox-project.org/xsl/functions" id="\DMS\Filter\Mapping\ClassMetadataFactory" class="anchor"></a><h2 xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">\DMS\Filter\Mapping\ClassMetadataFactory<div class="to-top"><a href="#top">jump to top</a></div>
 </h2>
-<div class="class">
+<div xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">
 <small class="package"><b>Package: </b>DMS\Filter</small><p class="short-description">Responsible for loading metadata for selected classes</p>
-<div class="long-description">
-</div>
+<div class="long-description"></div>
 <dl class="class-info">
 <dt>Implements</dt>
 <dd><a href="db_DMS_Filter_Mapping_ClassMetadataFactoryInterface.html#%5CDMS%5CFilter%5CMapping%5CClassMetadataFactoryInterface">\DMS\Filter\Mapping\ClassMetadataFactoryInterface</a></dd>
 </dl>
 <h3>Properties</h3>
 <div>
-<a id="\DMS\Filter\Mapping\ClassMetadataFactory::$cache"></a><div class="property protected">
+<a id="\DMS\Filter\Mapping\ClassMetadataFactory::$cache" class="anchor"></a><div class="property protected">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">\Doctrine\Common\Cache\Cache
                  <span class="highlight">$cache</span>= ''
                 </code><div class="description">
 <p class="short-description"></p></div>
 <div class="code-tabs">
-<div class="long-description">
-</div>
+<div class="long-description"></div>
 <strong>Details</strong><dl class="property-info">
 <dt>Type</dt>
 <dd>\Doctrine\Common\Cache\Cache</dd>
@@ -111,14 +121,13 @@
 </div>
 <div class="clear"></div>
 </div>
-<a id="\DMS\Filter\Mapping\ClassMetadataFactory::$loader"></a><div class="property protected">
+<a id="\DMS\Filter\Mapping\ClassMetadataFactory::$loader" class="anchor"></a><div class="property protected">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">\Loader\LoaderInterface
                  <span class="highlight">$loader</span>= ''
                 </code><div class="description">
 <p class="short-description"></p></div>
 <div class="code-tabs">
-<div class="long-description">
-</div>
+<div class="long-description"></div>
 <strong>Details</strong><dl class="property-info">
 <dt>Type</dt>
 <dd>\Loader\LoaderInterface</dd>
@@ -126,15 +135,14 @@
 </div>
 <div class="clear"></div>
 </div>
-<a id="\DMS\Filter\Mapping\ClassMetadataFactory::$parsedClasses"></a><div class="property protected">
+<a id="\DMS\Filter\Mapping\ClassMetadataFactory::$parsedClasses" class="anchor"></a><div class="property protected">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">array
-                 <span class="highlight">$parsedClasses</span>= 'array'
+                 <span class="highlight">$parsedClasses</span>= 'array()'
                 </code><div class="description">
 <p class="short-description"></p></div>
 <div class="code-tabs">
-<div class="long-description">
-</div>
-<strong>Default value</strong><code>array</code><strong>Details</strong><dl class="property-info">
+<div class="long-description"></div>
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
 <dt>Type</dt>
 <dd>array</dd>
 </dl>
@@ -144,7 +152,7 @@
 </div>
 <h3>Methods</h3>
 <div>
-<a id="\DMS\Filter\Mapping\ClassMetadataFactory::__construct()"></a><div class="method public">
+<a id="\DMS\Filter\Mapping\ClassMetadataFactory::__construct()" class="anchor"></a><div class="method public">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">__construct</span><span class="nb-faded-text">(
           \Loader\LoaderInterface $loader, \Doctrine\Common\Cache\Cache $cache
               =
@@ -155,8 +163,7 @@
           void</code><div class="description"><p class="short_description">Constructor
 Receives a Loader and a Doctrine Compatible cache instance</p></div>
 <div class="code-tabs">
-<div class="long-description">
-</div>
+<div class="long-description"></div>
 <strong>Parameters</strong><table class="argument-info">
 <thead><tr>
 <th>Name</th>
@@ -177,16 +184,15 @@ Receives a Loader and a Doctrine Compatible cache instance</p></div>
 </div>
 <div class="clear"></div>
 </div>
-<a id="\DMS\Filter\Mapping\ClassMetadataFactory::getClassMetadata()"></a><div class="method public">
+<a id="\DMS\Filter\Mapping\ClassMetadataFactory::getClassMetadata()" class="anchor"></a><div class="method public">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getClassMetadata</span><span class="nb-faded-text">(
-          string $class
+           $class
           )
         </span>
         :
-          <a href="db_DMS_Filter_Mapping_ClassMetadataInterface.html#%5CDMS%5CFilter%5CMapping%5CClassMetadataInterface">\DMS\Filter\Mapping\ClassMetadataInterface</a></code><div class="description"><p class="short_description">Retrieve metadata for the provided class</p></div>
+          void</code><div class="description"><p class="short_description">{@inheritDoc}</p></div>
 <div class="code-tabs">
-<div class="long-description">
-</div>
+<div class="long-description"></div>
 <strong>Parameters</strong><table class="argument-info">
 <thead><tr>
 <th>Name</th>
@@ -195,24 +201,14 @@ Receives a Loader and a Doctrine Compatible cache instance</p></div>
 </tr></thead>
 <tr>
 <th>$class</th>
-<td>string</td>
-<td><em></em></td>
-</tr>
-</table>
-<strong>Returns</strong><table class="argument-info">
-<thead><tr>
-<th>Type</th>
-<th>Description</th>
-</tr></thead>
-<tr>
-<td><a href="db_DMS_Filter_Mapping_ClassMetadataInterface.html#%5CDMS%5CFilter%5CMapping%5CClassMetadataInterface">\DMS\Filter\Mapping\ClassMetadataInterface</a></td>
 <td></td>
+<td><em></em></td>
 </tr>
 </table>
 </div>
 <div class="clear"></div>
 </div>
-<a id="\DMS\Filter\Mapping\ClassMetadataFactory::getParsedClass()"></a><div class="method private">
+<a id="\DMS\Filter\Mapping\ClassMetadataFactory::getParsedClass()" class="anchor"></a><div class="method private">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private"><span class="highlight">getParsedClass</span><span class="nb-faded-text">(
           string $class
           )
@@ -220,8 +216,7 @@ Receives a Loader and a Doctrine Compatible cache instance</p></div>
         :
           <a href="db_DMS_Filter_Mapping_ClassMetadata.html#%5CDMS%5CFilter%5CMapping%5CClassMetadata">\DMS\Filter\Mapping\ClassMetadata</a></code><div class="description"><p class="short_description">Retrieves data from a class already parsed</p></div>
 <div class="code-tabs">
-<div class="long-description">
-</div>
+<div class="long-description"></div>
 <strong>Parameters</strong><table class="argument-info">
 <thead><tr>
 <th>Name</th>
@@ -247,7 +242,7 @@ Receives a Loader and a Doctrine Compatible cache instance</p></div>
 </div>
 <div class="clear"></div>
 </div>
-<a id="\DMS\Filter\Mapping\ClassMetadataFactory::isParsed()"></a><div class="method private">
+<a id="\DMS\Filter\Mapping\ClassMetadataFactory::isParsed()" class="anchor"></a><div class="method private">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private"><span class="highlight">isParsed</span><span class="nb-faded-text">(
           string $class
           )
@@ -255,8 +250,7 @@ Receives a Loader and a Doctrine Compatible cache instance</p></div>
         :
           \DMS\Filter\Mapping\booelan</code><div class="description"><p class="short_description">Checks if a class has already been parsed</p></div>
 <div class="code-tabs">
-<div class="long-description">
-</div>
+<div class="long-description"></div>
 <strong>Parameters</strong><table class="argument-info">
 <thead><tr>
 <th>Name</th>
@@ -282,7 +276,7 @@ Receives a Loader and a Doctrine Compatible cache instance</p></div>
 </div>
 <div class="clear"></div>
 </div>
-<a id="\DMS\Filter\Mapping\ClassMetadataFactory::loadInterfaceMetadata()"></a><div class="method protected">
+<a id="\DMS\Filter\Mapping\ClassMetadataFactory::loadInterfaceMetadata()" class="anchor"></a><div class="method protected">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected"><span class="highlight">loadInterfaceMetadata</span><span class="nb-faded-text">(
           <a href="db_DMS_Filter_Mapping_ClassMetadata.html#%5CDMS%5CFilter%5CMapping%5CClassMetadata">\DMS\Filter\Mapping\ClassMetadata</a> $metadata
           )
@@ -291,8 +285,7 @@ Receives a Loader and a Doctrine Compatible cache instance</p></div>
           void</code><div class="description"><p class="short_description">Checks if the object has interfaces and cascades parsing of annotatiosn
 to all the interfaces</p></div>
 <div class="code-tabs">
-<div class="long-description">
-</div>
+<div class="long-description"></div>
 <strong>Parameters</strong><table class="argument-info">
 <thead><tr>
 <th>Name</th>
@@ -308,7 +301,7 @@ to all the interfaces</p></div>
 </div>
 <div class="clear"></div>
 </div>
-<a id="\DMS\Filter\Mapping\ClassMetadataFactory::loadParentMetadata()"></a><div class="method protected">
+<a id="\DMS\Filter\Mapping\ClassMetadataFactory::loadParentMetadata()" class="anchor"></a><div class="method protected">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected"><span class="highlight">loadParentMetadata</span><span class="nb-faded-text">(
           <a href="db_DMS_Filter_Mapping_ClassMetadata.html#%5CDMS%5CFilter%5CMapping%5CClassMetadata">\DMS\Filter\Mapping\ClassMetadata</a> $metadata
           )
@@ -317,8 +310,7 @@ to all the interfaces</p></div>
           void</code><div class="description"><p class="short_description">Checks if the class being parsed has a parent and cascades parsing
 to its parent</p></div>
 <div class="code-tabs">
-<div class="long-description">
-</div>
+<div class="long-description"></div>
 <strong>Parameters</strong><table class="argument-info">
 <thead><tr>
 <th>Name</th>
@@ -334,7 +326,7 @@ to its parent</p></div>
 </div>
 <div class="clear"></div>
 </div>
-<a id="\DMS\Filter\Mapping\ClassMetadataFactory::parseClassMetadata()"></a><div class="method private">
+<a id="\DMS\Filter\Mapping\ClassMetadataFactory::parseClassMetadata()" class="anchor"></a><div class="method private">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private"><span class="highlight">parseClassMetadata</span><span class="nb-faded-text">(
           string $class
           )
@@ -342,8 +334,7 @@ to its parent</p></div>
         :
           <a href="db_DMS_Filter_Mapping_ClassMetadata.html#%5CDMS%5CFilter%5CMapping%5CClassMetadata">\DMS\Filter\Mapping\ClassMetadata</a></code><div class="description"><p class="short_description">Reads class metadata for a new and unparsed class</p></div>
 <div class="code-tabs">
-<div class="long-description">
-</div>
+<div class="long-description"></div>
 <strong>Parameters</strong><table class="argument-info">
 <thead><tr>
 <th>Name</th>
@@ -369,7 +360,7 @@ to its parent</p></div>
 </div>
 <div class="clear"></div>
 </div>
-<a id="\DMS\Filter\Mapping\ClassMetadataFactory::setParsedClass()"></a><div class="method private">
+<a id="\DMS\Filter\Mapping\ClassMetadataFactory::setParsedClass()" class="anchor"></a><div class="method private">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private"><span class="highlight">setParsedClass</span><span class="nb-faded-text">(
           string $class, <a href="db_DMS_Filter_Mapping_ClassMetadata.html#%5CDMS%5CFilter%5CMapping%5CClassMetadata">\DMS\Filter\Mapping\ClassMetadata</a> $metadata
           )
@@ -377,8 +368,7 @@ to its parent</p></div>
         :
           void</code><div class="description"><p class="short_description">Stores data from a parsed class</p></div>
 <div class="code-tabs">
-<div class="long-description">
-</div>
+<div class="long-description"></div>
 <strong>Parameters</strong><table class="argument-info">
 <thead><tr>
 <th>Name</th>
@@ -402,5 +392,5 @@ to its parent</p></div>
 </div>
 </div>
 </div>
-<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.0</a>.
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.17.2</a>.
     </small></body></html>

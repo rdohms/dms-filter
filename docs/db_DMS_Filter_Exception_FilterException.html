@@ -1,5 +1,5 @@
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>DMS</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+<title>DMS</title><link rel="stylesheet" href="css/jquery-ui.css" type="text/css"></link><link rel="stylesheet" href="css/docblox/jquery-ui-1.8.16.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.tools.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
             $(document).ready(function() {
                 $(".filetree").treeview({
                     collapsed: true,
@@ -15,14 +15,14 @@
                 $(".tabs").tabs();
             });
         </script></head><body><div xmlns="" id="content">
-<script type="text/javascript" src="js/menu.js"></script><script>
+<script xmlns:dbx="http://docblox-project.org/xsl/functions">
 
       function filterElements()
       {
-        inherited = !$('a#show-inherited').hasClass('deselected');
-        public    = !$('a#show-public').hasClass('deselected');
-        protected = !$('a#show-protected').hasClass('deselected');
-        private   = !$('a#show-private').hasClass('deselected');
+        inherited = !$('#show-inherited').hasClass('deselected');
+        public    = !$('#show-public').hasClass('deselected');
+        protected = !$('#show-protected').hasClass('deselected');
+        private   = !$('#show-private').hasClass('deselected');
 
         $('div.public').each(function(index, val) {
             $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
@@ -53,43 +53,54 @@
         $('div.code-tabs').hide();
         $('a.gripper').show();
         $('div.code-tabs:empty').prevAll('a.gripper').html('');
-        $('div.file-nav').show();
 
-        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
-            $(this).toggleClass('deselected');
-            if ($(this).hasClass('deselected')) {
-              $(this).fadeTo('fast', '0.4');
-            } else {
-              $(this).fadeTo('fast', '1.0');
-            }
-            filterElements();
-            return false;
+        $('#show-public, #show-protected, #show-private, #show-inherited')
+            .css('cursor', 'pointer')
+            .click(function(){
+                $(this).toggleClass('deselected');
+                if ($(this).hasClass('deselected')) {
+                  $(this).fadeTo('fast', '0.4');
+                } else {
+                  $(this).fadeTo('fast', '1.0');
+                }
+                filterElements();
+                return false;
+            });
+        $('#show-protected, #show-private').click();
+
+        // add the sliding behaviour to the file navigation and show it
+        // it is initially hidden for non-JS users.
+        $("#file-nav-box").show().hover(function() {
+            $("#file-nav-container").slideDown(400);
+        }, function() {
+            $("#file-nav-container").slideUp(400);
         });
-        $('a#show-protected, a#show-private').click();
-
       });
+
       
-    </script><h1 class="file">DMS/Filter/Exception/FilterException.php</h1>
-<div class="file-nav">
-<ul id="file-nav">
-<li><a href="#top">Global</a></li>
-<li>
-<a href="#classes"><img src="images/icons/class.png" height="14">
-                      Classes
-                  </a><ul><li><a href="#%5CDMS%5CFilter%5CException%5CFilterException">\DMS\Filter\Exception\FilterException</a></li></ul>
-</li>
-</ul>
-<div style="float: right;padding-right: 20px;">
+    </script><h1 xmlns:dbx="http://docblox-project.org/xsl/functions" class="file">DMS/Filter/Exception/FilterException.php</h1>
+<div xmlns:dbx="http://docblox-project.org/xsl/functions" id="file-nav-box">
+<div id="file-nav-options">
               Show:
-              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+              <img src="images/icons/visibility_public.png" id="show-public"><img src="images/icons/visibility_protected.png" id="show-protected"><img src="images/icons/visibility_private.png" id="show-private"><span class="attribute" id="show-inherited">inherited</span>
 </div>
+<div id="file-nav-container">
+<ul id="file-nav"><li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                          Classes
+                      </a><ul><li><a href="#%5CDMS%5CFilter%5CException%5CFilterException">\DMS\Filter\Exception\FilterException</a></li></ul>
+</li></ul>
+<div style="clear: left;"></div>
 </div>
-<a name="top"></a><a name="classes"></a><a id="\DMS\Filter\Exception\FilterException"></a><h2 class="class">\DMS\Filter\Exception\FilterException<div class="to-top"><a href="#top">jump to top</a></div>
+<div id="file-nav-tab">
+              Table of Contents
+          </div>
+</div>
+<a xmlns:dbx="http://docblox-project.org/xsl/functions" name="top" class="anchor"></a><a name="classes" class="anchor"></a><a xmlns:dbx="http://docblox-project.org/xsl/functions" id="\DMS\Filter\Exception\FilterException" class="anchor"></a><h2 xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">\DMS\Filter\Exception\FilterException<div class="to-top"><a href="#top">jump to top</a></div>
 </h2>
-<div class="class">
+<div xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">
 <small class="package"><b>Package: </b>DMS\Filter</small><p class="short-description">Base Exception for Filter Package</p>
-<div class="long-description">
-</div>
+<div class="long-description"></div>
 <dl class="class-info">
 <dt>Parent(s)</dt>
 <dd><a href="http://php.net/manual/en/class.runtimeexception.php">\RuntimeException</a></dd>
@@ -103,128 +114,106 @@
 </dl>
 <h3>Methods</h3>
 <div>
-<a id="\DMS\Filter\Exception\FilterException::__construct()"></a><div class="method public inherited_from ">
+<a id="\DMS\Filter\Exception\FilterException::__construct()" class="anchor"></a><div class="method public">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">__construct</span><span class="nb-faded-text">(
           
           )
         </span>
         :
-          void</code><div class="description">
-<span class="attribute">inherited</span><p class="short_description"></p>
-<small>Inherited from:
-                    \RuntimeException::__construct()</small>
-</div>
+          void</code><div class="description"><p class="short_description"></p></div>
 <div class="code-tabs"></div>
 <div class="clear"></div>
 </div>
-<a id="\DMS\Filter\Exception\FilterException::__toString()"></a><div class="method public inherited_from ">
+<a id="\DMS\Filter\Exception\FilterException::__toString()" class="anchor"></a><div class="method public">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">__toString</span><span class="nb-faded-text">(
           
           )
         </span>
         :
-          void</code><div class="description">
-<span class="attribute">inherited</span><p class="short_description"></p>
-<small>Inherited from:
-                    \RuntimeException::__toString()</small>
-</div>
+          void</code><div class="description"><p class="short_description"></p></div>
 <div class="code-tabs"></div>
 <div class="clear"></div>
 </div>
-<a id="\DMS\Filter\Exception\FilterException::getCode()"></a><div class="method public inherited_from ">
+<a id="\DMS\Filter\Exception\FilterException::getCode()" class="anchor"></a><div class="method public">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getCode</span><span class="nb-faded-text">(
           
           )
         </span>
         :
           void</code><div class="description">
-<span class="attribute">final</span><span class="attribute">inherited</span><p class="short_description"></p>
-<small>Inherited from:
-                    \RuntimeException::getCode()</small>
+<span class="attribute">final</span><p class="short_description"></p>
 </div>
 <div class="code-tabs"></div>
 <div class="clear"></div>
 </div>
-<a id="\DMS\Filter\Exception\FilterException::getFile()"></a><div class="method public inherited_from ">
+<a id="\DMS\Filter\Exception\FilterException::getFile()" class="anchor"></a><div class="method public">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getFile</span><span class="nb-faded-text">(
           
           )
         </span>
         :
           void</code><div class="description">
-<span class="attribute">final</span><span class="attribute">inherited</span><p class="short_description"></p>
-<small>Inherited from:
-                    \RuntimeException::getFile()</small>
+<span class="attribute">final</span><p class="short_description"></p>
 </div>
 <div class="code-tabs"></div>
 <div class="clear"></div>
 </div>
-<a id="\DMS\Filter\Exception\FilterException::getLine()"></a><div class="method public inherited_from ">
+<a id="\DMS\Filter\Exception\FilterException::getLine()" class="anchor"></a><div class="method public">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getLine</span><span class="nb-faded-text">(
           
           )
         </span>
         :
           void</code><div class="description">
-<span class="attribute">final</span><span class="attribute">inherited</span><p class="short_description"></p>
-<small>Inherited from:
-                    \RuntimeException::getLine()</small>
+<span class="attribute">final</span><p class="short_description"></p>
 </div>
 <div class="code-tabs"></div>
 <div class="clear"></div>
 </div>
-<a id="\DMS\Filter\Exception\FilterException::getMessage()"></a><div class="method public inherited_from ">
+<a id="\DMS\Filter\Exception\FilterException::getMessage()" class="anchor"></a><div class="method public">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getMessage</span><span class="nb-faded-text">(
           
           )
         </span>
         :
           void</code><div class="description">
-<span class="attribute">final</span><span class="attribute">inherited</span><p class="short_description"></p>
-<small>Inherited from:
-                    \RuntimeException::getMessage()</small>
+<span class="attribute">final</span><p class="short_description"></p>
 </div>
 <div class="code-tabs"></div>
 <div class="clear"></div>
 </div>
-<a id="\DMS\Filter\Exception\FilterException::getPrevious()"></a><div class="method public inherited_from ">
+<a id="\DMS\Filter\Exception\FilterException::getPrevious()" class="anchor"></a><div class="method public">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getPrevious</span><span class="nb-faded-text">(
           
           )
         </span>
         :
           void</code><div class="description">
-<span class="attribute">final</span><span class="attribute">inherited</span><p class="short_description"></p>
-<small>Inherited from:
-                    \RuntimeException::getPrevious()</small>
+<span class="attribute">final</span><p class="short_description"></p>
 </div>
 <div class="code-tabs"></div>
 <div class="clear"></div>
 </div>
-<a id="\DMS\Filter\Exception\FilterException::getTrace()"></a><div class="method public inherited_from ">
+<a id="\DMS\Filter\Exception\FilterException::getTrace()" class="anchor"></a><div class="method public">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getTrace</span><span class="nb-faded-text">(
           
           )
         </span>
         :
           void</code><div class="description">
-<span class="attribute">final</span><span class="attribute">inherited</span><p class="short_description"></p>
-<small>Inherited from:
-                    \RuntimeException::getTrace()</small>
+<span class="attribute">final</span><p class="short_description"></p>
 </div>
 <div class="code-tabs"></div>
 <div class="clear"></div>
 </div>
-<a id="\DMS\Filter\Exception\FilterException::getTraceAsString()"></a><div class="method public inherited_from ">
+<a id="\DMS\Filter\Exception\FilterException::getTraceAsString()" class="anchor"></a><div class="method public">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getTraceAsString</span><span class="nb-faded-text">(
           
           )
         </span>
         :
           void</code><div class="description">
-<span class="attribute">final</span><span class="attribute">inherited</span><p class="short_description"></p>
-<small>Inherited from:
-                    \RuntimeException::getTraceAsString()</small>
+<span class="attribute">final</span><p class="short_description"></p>
 </div>
 <div class="code-tabs"></div>
 <div class="clear"></div>
@@ -232,5 +221,5 @@
 </div>
 </div>
 </div>
-<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.0</a>.
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.17.2</a>.
     </small></body></html>

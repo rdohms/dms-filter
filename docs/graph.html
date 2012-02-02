@@ -1,5 +1,5 @@
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>DMS</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+<title>DMS</title><link rel="stylesheet" href="css/jquery-ui.css" type="text/css"></link><link rel="stylesheet" href="css/docblox/jquery-ui-1.8.16.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.tools.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
             $(document).ready(function() {
                 $(".filetree").treeview({
                     collapsed: true,
@@ -14,17 +14,28 @@
 
                 $(".tabs").tabs();
             });
-        </script></head><body><div xmlns="" id="content"><table width="100%" height="100%">
-<tr><td height="60px"><div style="font-size: 10px; white-space: normal;">
-          The following actions are supported in this diagram:
-          <ul>
+        </script></head><body><script xmlns="" type="text/javascript" src="js/jquery.panzoom.js"></script><script xmlns="">
+            $(document).ready(function () {
+                $('#pan img').panZoom({
+                    'directedit': true,
+                    'debug':      false,
+                    'zoom_step':  9
+                });
+                $('#pan img').panZoom('fit');
+            });
+        </script><div xmlns="" id="content">
+<div style="font-size: 10px; white-space: normal;">
+                The following actions are supported in this diagram:
+                <ul>
 <li>
-<b>Zoom</b>, you can use the scrollwheel to zoom in or out</li>
+<b>Zoom</b>, you can use the scrollwheel, or double-click,
+                        to zoom in or out
+                    </li>
 <li>
-<b>Move</b>, you can move around by dragging the Diagram</li>
-<li>
-<b>Go to class</b>, you can view the details of a class by clicking on it</li>
+<b>Move</b>, you can move around by dragging
+                        the Diagram
+                    </li>
 </ul>
-</div></td></tr>
-<tr><td><embed src="classes.svg" width="100%" height="100%"></embed></td></tr>
-</table></div></body></html>
+</div>
+<div id="pan" style="width: 600px; height: 600px; overflow: hidden"><img src="classes.svg"></div>
+</div></body></html>

@@ -1,5 +1,5 @@
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>DMS</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+<title>DMS</title><link rel="stylesheet" href="css/jquery-ui.css" type="text/css"></link><link rel="stylesheet" href="css/docblox/jquery-ui-1.8.16.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.tools.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
             $(document).ready(function() {
                 $(".filetree").treeview({
                     collapsed: true,
@@ -14,10 +14,206 @@
 
                 $(".tabs").tabs();
             });
-        </script></head><body><div xmlns="" id="accordion">
-<h1><a href="#">Namespaces</a></h1>
-<div style="padding: 0px;"><ul id="namespaces-" class="filetree"><li class="closed">
-<span class="folder">DMS</span><ul><li class="closed">
+        </script></head><body><script xmlns="" type="text/javascript" src="js/sidebar.js"></script><div xmlns="" id="sidebar">
+<div id="sidebar-header">
+<h1>DMS</h1>
+<div style="clear: both"></div>
+</div>
+<div id="sidebar-nav">
+<h3 id="sidebar-dashboard">
+<img class="icon" src="css/docblox/images/icons/dashboard.png" alt="Dashboard"><a href="content.html" class="link" target="content">Dashboard</a>
+</h3>
+<div style="display: none"></div>
+<h3 id="sidebar-files">
+<img src="css/docblox/images/icons/files.png" alt="Files"><a href="#files">Files</a>
+</h3>
+<div class="sidebar-section">
+<div class="search-bar">
+<a href="#" onclick="$(this).parent().next().find('.collapsable-hitarea').click(); return false;"><img src="images/collapse_all.png" title="Collapse all" alt="Collapse all"></a><a href="#" onclick="$(this).parent().next().find('.expandable-hitarea').click(); return false;"><img src="images/expand_all.png" title="Expand all" alt="Expand all"></a><div><input type="text" onkeyup="tree_search(this);"></div>
+</div>
+<ul class="sidebar-nav-tree">
+<li class="closed">
+<span class="file"><a href="db_DMS_Bundles_FilterBundle_DMSFilterBundle.html" target="content">DMS/Bundles/FilterBundle/DMSFilterBundle.php</a></span><ul id="files_b3618a5f3317e9a3a9b58f9b53eee3b0" class="filetree"><li><span class="class"><a href="db_DMS_Bundles_FilterBundle_DMSFilterBundle.html#%5CDMS%5CBundles%5CFilterBundle%5CDMSFilterBundle" target="content">DMSFilterBundle<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_DMS_Bundles_FilterBundle_DependencyInjection_Configuration.html" target="content">DMS/Bundles/FilterBundle/DependencyInjection/Configuration.php</a></span><ul id="files_a58c6f986ac98e3897581c534922b6a2" class="filetree"><li><span class="class"><a href="db_DMS_Bundles_FilterBundle_DependencyInjection_Configuration.html#%5CDMS%5CBundles%5CFilterBundle%5CDependencyInjection%5CConfiguration" target="content">Configuration<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_DMS_Bundles_FilterBundle_DependencyInjection_DMSFilterExtension.html" target="content">DMS/Bundles/FilterBundle/DependencyInjection/DMSFilterExtension.php</a></span><ul id="files_8ac137ec3cf30f041a78bbaae88b1b1c" class="filetree"><li><span class="class"><a href="db_DMS_Bundles_FilterBundle_DependencyInjection_DMSFilterExtension.html#%5CDMS%5CBundles%5CFilterBundle%5CDependencyInjection%5CDMSFilterExtension" target="content">DMSFilterExtension<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_DMS_Bundles_FilterBundle_Service_Filter.html" target="content">DMS/Bundles/FilterBundle/Service/Filter.php</a></span><ul id="files_65c56cb7fafe7a007fad03af4dffadfc" class="filetree"><li><span class="class"><a href="db_DMS_Bundles_FilterBundle_Service_Filter.html#%5CDMS%5CBundles%5CFilterBundle%5CService%5CFilter" target="content">Filter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_DMS_Bundles_FilterBundle_Tests_Service_FilterTest.html" target="content">DMS/Bundles/FilterBundle/Tests/Service/FilterTest.php</a></span><ul id="files_45862eb7c717674e8656ef86d223209b" class="filetree"><li><span class="class"><a href="db_DMS_Bundles_FilterBundle_Tests_Service_FilterTest.html#%5CDMS%5CBundles%5CFilterBundle%5CTests%5CService%5CFilterTest" target="content">FilterTest<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_DMS_Bundles_FilterBundle_Tests_bootstrap.html" target="content">DMS/Bundles/FilterBundle/Tests/bootstrap.php</a></span><ul id="files_bc379ccbea75e509cc4f5ea2a4ade404" class="filetree"></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_DMS_Filter_Exception_FilterException.html" target="content">DMS/Filter/Exception/FilterException.php</a></span><ul id="files_4934f68788ca8e60f0cb8f535bbc7977" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Exception_FilterException.html#%5CDMS%5CFilter%5CException%5CFilterException" target="content">FilterException<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_DMS_Filter_Exception_InvalidOptionsException.html" target="content">DMS/Filter/Exception/InvalidOptionsException.php</a></span><ul id="files_00ab34aab6c95019a3cba4a33428b736" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Exception_InvalidOptionsException.html#%5CDMS%5CFilter%5CException%5CInvalidOptionsException" target="content">InvalidOptionsException<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_DMS_Filter_Exception_MissingOptionsException.html" target="content">DMS/Filter/Exception/MissingOptionsException.php</a></span><ul id="files_70c5ad19f07bbdde727c21de05048077" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Exception_MissingOptionsException.html#%5CDMS%5CFilter%5CException%5CMissingOptionsException" target="content">MissingOptionsException<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_DMS_Filter_Exception_RuleDefinitionException.html" target="content">DMS/Filter/Exception/RuleDefinitionException.php</a></span><ul id="files_81444c8d94be3898817ddb3adfec1e31" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Exception_RuleDefinitionException.html#%5CDMS%5CFilter%5CException%5CRuleDefinitionException" target="content">RuleDefinitionException<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_DMS_Filter_Exception_RuleOptionsException.html" target="content">DMS/Filter/Exception/RuleOptionsException.php</a></span><ul id="files_95ae4813ed71f0d80b8d075de5dd0223" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Exception_RuleOptionsException.html#%5CDMS%5CFilter%5CException%5CRuleOptionsException" target="content">RuleOptionsException<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_DMS_Filter_Filter.html" target="content">DMS/Filter/Filter.php</a></span><ul id="files_ce4124a4b725e7040856a641b871574a" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Filter.html#%5CDMS%5CFilter%5CFilter" target="content">Filter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_DMS_Filter_FilterInterface.html" target="content">DMS/Filter/FilterInterface.php</a></span><ul id="files_520ef5f0743fe967ce6e8edc1f0a3b4e" class="filetree"><li><span class="interface"><a href="db_DMS_Filter_FilterInterface.html#%5CDMS%5CFilter%5CFilterInterface" target="content">FilterInterface<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_DMS_Filter_Mapping_ClassMetadata.html" target="content">DMS/Filter/Mapping/ClassMetadata.php</a></span><ul id="files_edf28ffcd92f548e8bd0dd5f10849488" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Mapping_ClassMetadata.html#%5CDMS%5CFilter%5CMapping%5CClassMetadata" target="content">ClassMetadata<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_DMS_Filter_Mapping_ClassMetadataFactory.html" target="content">DMS/Filter/Mapping/ClassMetadataFactory.php</a></span><ul id="files_69156b1837c6edb9fe986491f8c1dcaa" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Mapping_ClassMetadataFactory.html#%5CDMS%5CFilter%5CMapping%5CClassMetadataFactory" target="content">ClassMetadataFactory<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_DMS_Filter_Mapping_ClassMetadataFactoryInterface.html" target="content">DMS/Filter/Mapping/ClassMetadataFactoryInterface.php</a></span><ul id="files_aa3d6a0861fe9462a46c76fd42bc12c9" class="filetree"><li><span class="interface"><a href="db_DMS_Filter_Mapping_ClassMetadataFactoryInterface.html#%5CDMS%5CFilter%5CMapping%5CClassMetadataFactoryInterface" target="content">ClassMetadataFactoryInterface<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_DMS_Filter_Mapping_ClassMetadataInterface.html" target="content">DMS/Filter/Mapping/ClassMetadataInterface.php</a></span><ul id="files_6db93b1763455e6605d6b4ff2cb766fc" class="filetree"><li><span class="interface"><a href="db_DMS_Filter_Mapping_ClassMetadataInterface.html#%5CDMS%5CFilter%5CMapping%5CClassMetadataInterface" target="content">ClassMetadataInterface<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_DMS_Filter_Mapping_Loader_AnnotationLoader.html" target="content">DMS/Filter/Mapping/Loader/AnnotationLoader.php</a></span><ul id="files_b67ae028d3933abeef09f7a2e88c6bc1" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Mapping_Loader_AnnotationLoader.html#%5CDMS%5CFilter%5CMapping%5CLoader%5CAnnotationLoader" target="content">AnnotationLoader<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_DMS_Filter_Mapping_Loader_LoaderInterface.html" target="content">DMS/Filter/Mapping/Loader/LoaderInterface.php</a></span><ul id="files_4cf33743025ce961d4bc2f6a46ccf169" class="filetree"><li><span class="interface"><a href="db_DMS_Filter_Mapping_Loader_LoaderInterface.html#%5CDMS%5CFilter%5CMapping%5CLoader%5CLoaderInterface" target="content">LoaderInterface<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_DMS_Filter_ObjectWalker.html" target="content">DMS/Filter/ObjectWalker.php</a></span><ul id="files_8d87577556787f002322c934580942be" class="filetree"><li><span class="class"><a href="db_DMS_Filter_ObjectWalker.html#%5CDMS%5CFilter%5CObjectWalker" target="content">ObjectWalker<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_DMS_Filter_Rules_Alnum.html" target="content">DMS/Filter/Rules/Alnum.php</a></span><ul id="files_0308731a4328068b95c828aa54bad3db" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Rules_Alnum.html#%5CDMS%5CFilter%5CRules%5CAlnum" target="content">Alnum<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_DMS_Filter_Rules_Boolean.html" target="content">DMS/Filter/Rules/Boolean.php</a></span><ul id="files_6c38cd915e7f70ccd86878c46fb7d8a4" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Rules_Boolean.html#%5CDMS%5CFilter%5CRules%5CBoolean" target="content">Boolean<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_DMS_Filter_Rules_Float.html" target="content">DMS/Filter/Rules/Float.php</a></span><ul id="files_e02ca0f747ebaae17b6bd1371b65a510" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Rules_Float.html#%5CDMS%5CFilter%5CRules%5CFloat" target="content">Float<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_DMS_Filter_Rules_Int.html" target="content">DMS/Filter/Rules/Int.php</a></span><ul id="files_787a61cbb2cdc5fafe43f423976a89c5" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Rules_Int.html#%5CDMS%5CFilter%5CRules%5CInt" target="content">Int<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_DMS_Filter_Rules_Rule.html" target="content">DMS/Filter/Rules/Rule.php</a></span><ul id="files_250e46ae13b5f16a5330fdec667a8ef1" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Rules_Rule.html#%5CDMS%5CFilter%5CRules%5CRule" target="content">Rule<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_DMS_Filter_Rules_StripNewlines.html" target="content">DMS/Filter/Rules/StripNewlines.php</a></span><ul id="files_dd90ae530035465ec5de1718288b0a89" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Rules_StripNewlines.html#%5CDMS%5CFilter%5CRules%5CStripNewlines" target="content">StripNewlines<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_DMS_Filter_Rules_StripTags.html" target="content">DMS/Filter/Rules/StripTags.php</a></span><ul id="files_6ddae94ef220241bf9e18b2b6de05d38" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Rules_StripTags.html#%5CDMS%5CFilter%5CRules%5CStripTags" target="content">StripTags<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_DMS_Filter_Rules_ToLower.html" target="content">DMS/Filter/Rules/ToLower.php</a></span><ul id="files_63047a6c3005041022734eebfb24ec6a" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Rules_ToLower.html#%5CDMS%5CFilter%5CRules%5CToLower" target="content">ToLower<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_DMS_Filter_Rules_ToUpper.html" target="content">DMS/Filter/Rules/ToUpper.php</a></span><ul id="files_c2f8a529b66ab79251ff7f03216c2dc5" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Rules_ToUpper.html#%5CDMS%5CFilter%5CRules%5CToUpper" target="content">ToUpper<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_DMS_Filter_Rules_Trim.html" target="content">DMS/Filter/Rules/Trim.php</a></span><ul id="files_71bdd3cad75bc4959af234394669f076" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Rules_Trim.html#%5CDMS%5CFilter%5CRules%5CTrim" target="content">Trim<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_DMS_Filter_Version.html" target="content">DMS/Filter/Version.php</a></span><ul id="files_072c0921b29a004165142bb502ba2408" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Version.html#%5CDMS%5CFilter%5CVersion" target="content">Version<br></a></span></li></ul>
+</li>
+</ul>
+</div>
+<h3 id="sidebar-packages">
+<img src="css/docblox/images/icons/packages.png" alt="Packages"><a href="#packages">Packages</a>
+</h3>
+<div class="sidebar-section sidebar-tree">
+<div class="search-bar">
+<a href="#" onclick="$(this).parent().next().find('.collapsable-hitarea').click(); return false;"><img src="images/collapse_all.png" title="Collapse all" alt="Collapse all"></a><a href="#" onclick="$(this).parent().next().find('.expandable-hitarea').click(); return false;"><img src="images/expand_all.png" title="Expand all" alt="Expand all"></a><div><input type="text" onkeyup="tree_search(this);"></div>
+</div>
+<ul class="sidebar-nav-tree">
+<li class="closed">
+<span class="folder">DMS</span><ul>
+<li class="closed">
+<span class="folder">Bundles</span><ul>
+<li><span class="class"><a href="db_DMS_Bundles_FilterBundle_DMSFilterBundle.html#%5CDMS%5CBundles%5CFilterBundle%5CDMSFilterBundle" target="content">DMSFilterBundle</a></span></li>
+<li><span class="class"><a href="db_DMS_Bundles_FilterBundle_Service_Filter.html#%5CDMS%5CBundles%5CFilterBundle%5CService%5CFilter" target="content">Filter</a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="folder">Filter</span><ul>
+<li><span class="class"><a href="db_DMS_Filter_Rules_Alnum.html#%5CDMS%5CFilter%5CRules%5CAlnum" target="content">Alnum</a></span></li>
+<li><span class="class"><a href="db_DMS_Filter_Mapping_Loader_AnnotationLoader.html#%5CDMS%5CFilter%5CMapping%5CLoader%5CAnnotationLoader" target="content">AnnotationLoader</a></span></li>
+<li><span class="class"><a href="db_DMS_Filter_Rules_Boolean.html#%5CDMS%5CFilter%5CRules%5CBoolean" target="content">Boolean</a></span></li>
+<li><span class="class"><a href="db_DMS_Filter_Mapping_ClassMetadata.html#%5CDMS%5CFilter%5CMapping%5CClassMetadata" target="content">ClassMetadata</a></span></li>
+<li><span class="class"><a href="db_DMS_Filter_Mapping_ClassMetadataFactory.html#%5CDMS%5CFilter%5CMapping%5CClassMetadataFactory" target="content">ClassMetadataFactory</a></span></li>
+<li><span class="interface"><a href="db_DMS_Filter_Mapping_ClassMetadataFactoryInterface.html#%5CDMS%5CFilter%5CMapping%5CClassMetadataFactoryInterface" target="content">ClassMetadataFactoryInterface</a></span></li>
+<li><span class="interface"><a href="db_DMS_Filter_Mapping_ClassMetadataInterface.html#%5CDMS%5CFilter%5CMapping%5CClassMetadataInterface" target="content">ClassMetadataInterface</a></span></li>
+<li><span class="class"><a href="db_DMS_Filter_Filter.html#%5CDMS%5CFilter%5CFilter" target="content">Filter</a></span></li>
+<li><span class="class"><a href="db_DMS_Filter_Exception_FilterException.html#%5CDMS%5CFilter%5CException%5CFilterException" target="content">FilterException</a></span></li>
+<li><span class="interface"><a href="db_DMS_Filter_FilterInterface.html#%5CDMS%5CFilter%5CFilterInterface" target="content">FilterInterface</a></span></li>
+<li><span class="class"><a href="db_DMS_Filter_Rules_Float.html#%5CDMS%5CFilter%5CRules%5CFloat" target="content">Float</a></span></li>
+<li><span class="class"><a href="db_DMS_Filter_Rules_Int.html#%5CDMS%5CFilter%5CRules%5CInt" target="content">Int</a></span></li>
+<li><span class="class"><a href="db_DMS_Filter_Exception_InvalidOptionsException.html#%5CDMS%5CFilter%5CException%5CInvalidOptionsException" target="content">InvalidOptionsException</a></span></li>
+<li><span class="interface"><a href="db_DMS_Filter_Mapping_Loader_LoaderInterface.html#%5CDMS%5CFilter%5CMapping%5CLoader%5CLoaderInterface" target="content">LoaderInterface</a></span></li>
+<li><span class="class"><a href="db_DMS_Filter_Exception_MissingOptionsException.html#%5CDMS%5CFilter%5CException%5CMissingOptionsException" target="content">MissingOptionsException</a></span></li>
+<li><span class="class"><a href="db_DMS_Filter_ObjectWalker.html#%5CDMS%5CFilter%5CObjectWalker" target="content">ObjectWalker</a></span></li>
+<li><span class="class"><a href="db_DMS_Filter_Rules_Rule.html#%5CDMS%5CFilter%5CRules%5CRule" target="content">Rule</a></span></li>
+<li><span class="class"><a href="db_DMS_Filter_Exception_RuleDefinitionException.html#%5CDMS%5CFilter%5CException%5CRuleDefinitionException" target="content">RuleDefinitionException</a></span></li>
+<li><span class="class"><a href="db_DMS_Filter_Exception_RuleOptionsException.html#%5CDMS%5CFilter%5CException%5CRuleOptionsException" target="content">RuleOptionsException</a></span></li>
+<li><span class="class"><a href="db_DMS_Filter_Rules_StripNewlines.html#%5CDMS%5CFilter%5CRules%5CStripNewlines" target="content">StripNewlines</a></span></li>
+<li><span class="class"><a href="db_DMS_Filter_Rules_StripTags.html#%5CDMS%5CFilter%5CRules%5CStripTags" target="content">StripTags</a></span></li>
+<li><span class="class"><a href="db_DMS_Filter_Rules_ToLower.html#%5CDMS%5CFilter%5CRules%5CToLower" target="content">ToLower</a></span></li>
+<li><span class="class"><a href="db_DMS_Filter_Rules_ToUpper.html#%5CDMS%5CFilter%5CRules%5CToUpper" target="content">ToUpper</a></span></li>
+<li><span class="class"><a href="db_DMS_Filter_Rules_Trim.html#%5CDMS%5CFilter%5CRules%5CTrim" target="content">Trim</a></span></li>
+<li><span class="class"><a href="db_DMS_Filter_Version.html#%5CDMS%5CFilter%5CVersion" target="content">Version</a></span></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="closed">
+<span class="folder">Default</span><ul>
+<li><span class="class"><a href="db_DMS_Bundles_FilterBundle_DependencyInjection_Configuration.html#%5CDMS%5CBundles%5CFilterBundle%5CDependencyInjection%5CConfiguration" target="content">Configuration</a></span></li>
+<li><span class="class"><a href="db_DMS_Bundles_FilterBundle_DependencyInjection_DMSFilterExtension.html#%5CDMS%5CBundles%5CFilterBundle%5CDependencyInjection%5CDMSFilterExtension" target="content">DMSFilterExtension</a></span></li>
+<li><span class="class"><a href="db_DMS_Bundles_FilterBundle_Tests_Service_FilterTest.html#%5CDMS%5CBundles%5CFilterBundle%5CTests%5CService%5CFilterTest" target="content">FilterTest</a></span></li>
+</ul>
+</li>
+</ul>
+</div>
+<h3 id="sidebar-namespaces">
+<img src="css/docblox/images/icons/namespaces.png" alt="Namespaces"><a href="#namespaces">Namespaces</a>
+</h3>
+<div class="sidebar-section sidebar-tree">
+<div class="search-bar">
+<a href="#" onclick="$(this).parent().next().find('.collapsable-hitarea').click(); return false;"><img src="images/collapse_all.png" title="Collapse all" alt="Collapse all"></a><a href="#" onclick="$(this).parent().next().find('.expandable-hitarea').click(); return false;"><img src="images/expand_all.png" title="Expand all" alt="Expand all"></a><div><input type="text" onkeyup="tree_search(this);"></div>
+</div>
+<ul class="sidebar-nav-tree"><li class="closed">
+<span class="folder">DMS</span><ul>
+<li class="closed">
+<span class="folder">Bundles</span><ul><li class="closed">
+<span class="folder">FilterBundle</span><ul>
+<li class="closed">
+<span class="folder">DependencyInjection</span><ul>
+<li><span class="class"><a href="db_DMS_Bundles_FilterBundle_DependencyInjection_Configuration.html#%5CDMS%5CBundles%5CFilterBundle%5CDependencyInjection%5CConfiguration" target="content">Configuration</a></span></li>
+<li><span class="class"><a href="db_DMS_Bundles_FilterBundle_DependencyInjection_DMSFilterExtension.html#%5CDMS%5CBundles%5CFilterBundle%5CDependencyInjection%5CDMSFilterExtension" target="content">DMSFilterExtension</a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="folder">Service</span><ul><li><span class="class"><a href="db_DMS_Bundles_FilterBundle_Service_Filter.html#%5CDMS%5CBundles%5CFilterBundle%5CService%5CFilter" target="content">Filter</a></span></li></ul>
+</li>
+<li class="closed">
+<span class="folder">Tests</span><ul><li class="closed">
+<span class="folder">Service</span><ul><li><span class="class"><a href="db_DMS_Bundles_FilterBundle_Tests_Service_FilterTest.html#%5CDMS%5CBundles%5CFilterBundle%5CTests%5CService%5CFilterTest" target="content">FilterTest</a></span></li></ul>
+</li></ul>
+</li>
+<li><span class="class"><a href="db_DMS_Bundles_FilterBundle_DMSFilterBundle.html#%5CDMS%5CBundles%5CFilterBundle%5CDMSFilterBundle" target="content">DMSFilterBundle</a></span></li>
+</ul>
+</li></ul>
+</li>
+<li class="closed">
 <span class="folder">Filter</span><ul>
 <li class="closed">
 <span class="folder">Exception</span><ul>
@@ -45,9 +241,9 @@
 <li class="closed">
 <span class="folder">Rules</span><ul>
 <li><span class="class"><a href="db_DMS_Filter_Rules_Alnum.html#%5CDMS%5CFilter%5CRules%5CAlnum" target="content">Alnum</a></span></li>
-<li><span class="class"><a href="db_DMS_Filter_Rules_Boolean.html#Boolean" target="content">Boolean</a></span></li>
-<li><span class="class"><a href="db_DMS_Filter_Rules_Float.html#Float" target="content">Float</a></span></li>
-<li><span class="class"><a href="db_DMS_Filter_Rules_Int.html#Int" target="content">Int</a></span></li>
+<li><span class="class"><a href="db_DMS_Filter_Rules_Boolean.html#%5CDMS%5CFilter%5CRules%5CBoolean" target="content">Boolean</a></span></li>
+<li><span class="class"><a href="db_DMS_Filter_Rules_Float.html#%5CDMS%5CFilter%5CRules%5CFloat" target="content">Float</a></span></li>
+<li><span class="class"><a href="db_DMS_Filter_Rules_Int.html#%5CDMS%5CFilter%5CRules%5CInt" target="content">Int</a></span></li>
 <li><span class="class"><a href="db_DMS_Filter_Rules_Rule.html#%5CDMS%5CFilter%5CRules%5CRule" target="content">Rule</a></span></li>
 <li><span class="class"><a href="db_DMS_Filter_Rules_StripNewlines.html#%5CDMS%5CFilter%5CRules%5CStripNewlines" target="content">StripNewlines</a></span></li>
 <li><span class="class"><a href="db_DMS_Filter_Rules_StripTags.html#%5CDMS%5CFilter%5CRules%5CStripTags" target="content">StripTags</a></span></li>
@@ -61,116 +257,24 @@
 <li><span class="class"><a href="db_DMS_Filter_ObjectWalker.html#%5CDMS%5CFilter%5CObjectWalker" target="content">ObjectWalker</a></span></li>
 <li><span class="class"><a href="db_DMS_Filter_Version.html#%5CDMS%5CFilter%5CVersion" target="content">Version</a></span></li>
 </ul>
-</li></ul>
-</li></ul></div>
-<h1><a href="#">Packages</a></h1>
-<div style="padding: 0px;"><ul id="packages-" class="filetree"><li class="closed">
-<span class="folder">DMS</span><ul><li class="closed">
-<span class="folder">Filter</span><ul>
-<li><span class="class"><a href="db_DMS_Filter_Rules_Alnum.html#%5CDMS%5CFilter%5CRules%5CAlnum" target="content">Alnum</a></span></li>
-<li><span class="class"><a href="db_DMS_Filter_Mapping_Loader_AnnotationLoader.html#%5CDMS%5CFilter%5CMapping%5CLoader%5CAnnotationLoader" target="content">AnnotationLoader</a></span></li>
-<li><span class="class"><a href="db_DMS_Filter_Rules_Boolean.html#Boolean" target="content">Boolean</a></span></li>
-<li><span class="class"><a href="db_DMS_Filter_Mapping_ClassMetadata.html#%5CDMS%5CFilter%5CMapping%5CClassMetadata" target="content">ClassMetadata</a></span></li>
-<li><span class="class"><a href="db_DMS_Filter_Mapping_ClassMetadataFactory.html#%5CDMS%5CFilter%5CMapping%5CClassMetadataFactory" target="content">ClassMetadataFactory</a></span></li>
-<li><span class="interface"><a href="db_DMS_Filter_Mapping_ClassMetadataFactoryInterface.html#%5CDMS%5CFilter%5CMapping%5CClassMetadataFactoryInterface" target="content">ClassMetadataFactoryInterface</a></span></li>
-<li><span class="interface"><a href="db_DMS_Filter_Mapping_ClassMetadataInterface.html#%5CDMS%5CFilter%5CMapping%5CClassMetadataInterface" target="content">ClassMetadataInterface</a></span></li>
-<li><span class="class"><a href="db_DMS_Filter_Filter.html#%5CDMS%5CFilter%5CFilter" target="content">Filter</a></span></li>
-<li><span class="class"><a href="db_DMS_Filter_Exception_FilterException.html#%5CDMS%5CFilter%5CException%5CFilterException" target="content">FilterException</a></span></li>
-<li><span class="interface"><a href="db_DMS_Filter_FilterInterface.html#%5CDMS%5CFilter%5CFilterInterface" target="content">FilterInterface</a></span></li>
-<li><span class="class"><a href="db_DMS_Filter_Rules_Float.html#Float" target="content">Float</a></span></li>
-<li><span class="class"><a href="db_DMS_Filter_Rules_Int.html#Int" target="content">Int</a></span></li>
-<li><span class="class"><a href="db_DMS_Filter_Exception_InvalidOptionsException.html#%5CDMS%5CFilter%5CException%5CInvalidOptionsException" target="content">InvalidOptionsException</a></span></li>
-<li><span class="interface"><a href="db_DMS_Filter_Mapping_Loader_LoaderInterface.html#%5CDMS%5CFilter%5CMapping%5CLoader%5CLoaderInterface" target="content">LoaderInterface</a></span></li>
-<li><span class="class"><a href="db_DMS_Filter_Exception_MissingOptionsException.html#%5CDMS%5CFilter%5CException%5CMissingOptionsException" target="content">MissingOptionsException</a></span></li>
-<li><span class="class"><a href="db_DMS_Filter_ObjectWalker.html#%5CDMS%5CFilter%5CObjectWalker" target="content">ObjectWalker</a></span></li>
-<li><span class="class"><a href="db_DMS_Filter_Rules_Rule.html#%5CDMS%5CFilter%5CRules%5CRule" target="content">Rule</a></span></li>
-<li><span class="class"><a href="db_DMS_Filter_Exception_RuleDefinitionException.html#%5CDMS%5CFilter%5CException%5CRuleDefinitionException" target="content">RuleDefinitionException</a></span></li>
-<li><span class="class"><a href="db_DMS_Filter_Exception_RuleOptionsException.html#%5CDMS%5CFilter%5CException%5CRuleOptionsException" target="content">RuleOptionsException</a></span></li>
-<li><span class="class"><a href="db_DMS_Filter_Rules_StripNewlines.html#%5CDMS%5CFilter%5CRules%5CStripNewlines" target="content">StripNewlines</a></span></li>
-<li><span class="class"><a href="db_DMS_Filter_Rules_StripTags.html#%5CDMS%5CFilter%5CRules%5CStripTags" target="content">StripTags</a></span></li>
-<li><span class="class"><a href="db_DMS_Filter_Rules_ToLower.html#%5CDMS%5CFilter%5CRules%5CToLower" target="content">ToLower</a></span></li>
-<li><span class="class"><a href="db_DMS_Filter_Rules_ToUpper.html#%5CDMS%5CFilter%5CRules%5CToUpper" target="content">ToUpper</a></span></li>
-<li><span class="class"><a href="db_DMS_Filter_Rules_Trim.html#%5CDMS%5CFilter%5CRules%5CTrim" target="content">Trim</a></span></li>
-<li><span class="class"><a href="db_DMS_Filter_Version.html#%5CDMS%5CFilter%5CVersion" target="content">Version</a></span></li>
+</li>
 </ul>
 </li></ul>
-</li></ul></div>
-<h1><a href="#">Files</a></h1>
-<div style="padding: 0px;"><ul id="files-" class="filetree">
-<li class="closed">
-<span class="file"><a href="db_DMS_Filter_Exception_FilterException.html" target="content">DMS/Filter/Exception/FilterException.php</a></span><ul id="files_4934f68788ca8e60f0cb8f535bbc7977" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Exception_FilterException.html#%5CDMS%5CFilter%5CException%5CFilterException" target="content">FilterException<br></a></span></li></ul>
-</li>
-<li class="closed">
-<span class="file"><a href="db_DMS_Filter_Exception_InvalidOptionsException.html" target="content">DMS/Filter/Exception/InvalidOptionsException.php</a></span><ul id="files_00ab34aab6c95019a3cba4a33428b736" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Exception_InvalidOptionsException.html#%5CDMS%5CFilter%5CException%5CInvalidOptionsException" target="content">InvalidOptionsException<br></a></span></li></ul>
-</li>
-<li class="closed">
-<span class="file"><a href="db_DMS_Filter_Exception_MissingOptionsException.html" target="content">DMS/Filter/Exception/MissingOptionsException.php</a></span><ul id="files_70c5ad19f07bbdde727c21de05048077" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Exception_MissingOptionsException.html#%5CDMS%5CFilter%5CException%5CMissingOptionsException" target="content">MissingOptionsException<br></a></span></li></ul>
-</li>
-<li class="closed">
-<span class="file"><a href="db_DMS_Filter_Exception_RuleDefinitionException.html" target="content">DMS/Filter/Exception/RuleDefinitionException.php</a></span><ul id="files_81444c8d94be3898817ddb3adfec1e31" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Exception_RuleDefinitionException.html#%5CDMS%5CFilter%5CException%5CRuleDefinitionException" target="content">RuleDefinitionException<br></a></span></li></ul>
-</li>
-<li class="closed">
-<span class="file"><a href="db_DMS_Filter_Exception_RuleOptionsException.html" target="content">DMS/Filter/Exception/RuleOptionsException.php</a></span><ul id="files_95ae4813ed71f0d80b8d075de5dd0223" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Exception_RuleOptionsException.html#%5CDMS%5CFilter%5CException%5CRuleOptionsException" target="content">RuleOptionsException<br></a></span></li></ul>
-</li>
-<li class="closed">
-<span class="file"><a href="db_DMS_Filter_Filter.html" target="content">DMS/Filter/Filter.php</a></span><ul id="files_69e9b43f7283062f70fdb3082e8b7017" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Filter.html#%5CDMS%5CFilter%5CFilter" target="content">Filter<br></a></span></li></ul>
-</li>
-<li class="closed">
-<span class="file"><a href="db_DMS_Filter_FilterInterface.html" target="content">DMS/Filter/FilterInterface.php</a></span><ul id="files_6489fbae810e5274d38ec50bf7c85df2" class="filetree"><li><span class="interface"><a href="db_DMS_Filter_FilterInterface.html#%5CDMS%5CFilter%5CFilterInterface" target="content">FilterInterface<br></a></span></li></ul>
-</li>
-<li class="closed">
-<span class="file"><a href="db_DMS_Filter_Mapping_ClassMetadata.html" target="content">DMS/Filter/Mapping/ClassMetadata.php</a></span><ul id="files_edf28ffcd92f548e8bd0dd5f10849488" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Mapping_ClassMetadata.html#%5CDMS%5CFilter%5CMapping%5CClassMetadata" target="content">ClassMetadata<br></a></span></li></ul>
-</li>
-<li class="closed">
-<span class="file"><a href="db_DMS_Filter_Mapping_ClassMetadataFactory.html" target="content">DMS/Filter/Mapping/ClassMetadataFactory.php</a></span><ul id="files_69156b1837c6edb9fe986491f8c1dcaa" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Mapping_ClassMetadataFactory.html#%5CDMS%5CFilter%5CMapping%5CClassMetadataFactory" target="content">ClassMetadataFactory<br></a></span></li></ul>
-</li>
-<li class="closed">
-<span class="file"><a href="db_DMS_Filter_Mapping_ClassMetadataFactoryInterface.html" target="content">DMS/Filter/Mapping/ClassMetadataFactoryInterface.php</a></span><ul id="files_aa3d6a0861fe9462a46c76fd42bc12c9" class="filetree"><li><span class="interface"><a href="db_DMS_Filter_Mapping_ClassMetadataFactoryInterface.html#%5CDMS%5CFilter%5CMapping%5CClassMetadataFactoryInterface" target="content">ClassMetadataFactoryInterface<br></a></span></li></ul>
-</li>
-<li class="closed">
-<span class="file"><a href="db_DMS_Filter_Mapping_ClassMetadataInterface.html" target="content">DMS/Filter/Mapping/ClassMetadataInterface.php</a></span><ul id="files_6db93b1763455e6605d6b4ff2cb766fc" class="filetree"><li><span class="interface"><a href="db_DMS_Filter_Mapping_ClassMetadataInterface.html#%5CDMS%5CFilter%5CMapping%5CClassMetadataInterface" target="content">ClassMetadataInterface<br></a></span></li></ul>
-</li>
-<li class="closed">
-<span class="file"><a href="db_DMS_Filter_Mapping_Loader_AnnotationLoader.html" target="content">DMS/Filter/Mapping/Loader/AnnotationLoader.php</a></span><ul id="files_b67ae028d3933abeef09f7a2e88c6bc1" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Mapping_Loader_AnnotationLoader.html#%5CDMS%5CFilter%5CMapping%5CLoader%5CAnnotationLoader" target="content">AnnotationLoader<br></a></span></li></ul>
-</li>
-<li class="closed">
-<span class="file"><a href="db_DMS_Filter_Mapping_Loader_LoaderInterface.html" target="content">DMS/Filter/Mapping/Loader/LoaderInterface.php</a></span><ul id="files_4cf33743025ce961d4bc2f6a46ccf169" class="filetree"><li><span class="interface"><a href="db_DMS_Filter_Mapping_Loader_LoaderInterface.html#%5CDMS%5CFilter%5CMapping%5CLoader%5CLoaderInterface" target="content">LoaderInterface<br></a></span></li></ul>
-</li>
-<li class="closed">
-<span class="file"><a href="db_DMS_Filter_ObjectWalker.html" target="content">DMS/Filter/ObjectWalker.php</a></span><ul id="files_8d87577556787f002322c934580942be" class="filetree"><li><span class="class"><a href="db_DMS_Filter_ObjectWalker.html#%5CDMS%5CFilter%5CObjectWalker" target="content">ObjectWalker<br></a></span></li></ul>
-</li>
-<li class="closed">
-<span class="file"><a href="db_DMS_Filter_Rules_Alnum.html" target="content">DMS/Filter/Rules/Alnum.php</a></span><ul id="files_0308731a4328068b95c828aa54bad3db" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Rules_Alnum.html#%5CDMS%5CFilter%5CRules%5CAlnum" target="content">Alnum<br></a></span></li></ul>
-</li>
-<li class="closed">
-<span class="file"><a href="db_DMS_Filter_Rules_Boolean.html" target="content">DMS/Filter/Rules/Boolean.php</a></span><ul id="files_6c38cd915e7f70ccd86878c46fb7d8a4" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Rules_Boolean.html#Boolean" target="content">Boolean<br></a></span></li></ul>
-</li>
-<li class="closed">
-<span class="file"><a href="db_DMS_Filter_Rules_Float.html" target="content">DMS/Filter/Rules/Float.php</a></span><ul id="files_e02ca0f747ebaae17b6bd1371b65a510" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Rules_Float.html#Float" target="content">Float<br></a></span></li></ul>
-</li>
-<li class="closed">
-<span class="file"><a href="db_DMS_Filter_Rules_Int.html" target="content">DMS/Filter/Rules/Int.php</a></span><ul id="files_787a61cbb2cdc5fafe43f423976a89c5" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Rules_Int.html#Int" target="content">Int<br></a></span></li></ul>
-</li>
-<li class="closed">
-<span class="file"><a href="db_DMS_Filter_Rules_Rule.html" target="content">DMS/Filter/Rules/Rule.php</a></span><ul id="files_250e46ae13b5f16a5330fdec667a8ef1" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Rules_Rule.html#%5CDMS%5CFilter%5CRules%5CRule" target="content">Rule<br></a></span></li></ul>
-</li>
-<li class="closed">
-<span class="file"><a href="db_DMS_Filter_Rules_StripNewlines.html" target="content">DMS/Filter/Rules/StripNewlines.php</a></span><ul id="files_dd90ae530035465ec5de1718288b0a89" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Rules_StripNewlines.html#%5CDMS%5CFilter%5CRules%5CStripNewlines" target="content">StripNewlines<br></a></span></li></ul>
-</li>
-<li class="closed">
-<span class="file"><a href="db_DMS_Filter_Rules_StripTags.html" target="content">DMS/Filter/Rules/StripTags.php</a></span><ul id="files_6ddae94ef220241bf9e18b2b6de05d38" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Rules_StripTags.html#%5CDMS%5CFilter%5CRules%5CStripTags" target="content">StripTags<br></a></span></li></ul>
-</li>
-<li class="closed">
-<span class="file"><a href="db_DMS_Filter_Rules_ToLower.html" target="content">DMS/Filter/Rules/ToLower.php</a></span><ul id="files_63047a6c3005041022734eebfb24ec6a" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Rules_ToLower.html#%5CDMS%5CFilter%5CRules%5CToLower" target="content">ToLower<br></a></span></li></ul>
-</li>
-<li class="closed">
-<span class="file"><a href="db_DMS_Filter_Rules_ToUpper.html" target="content">DMS/Filter/Rules/ToUpper.php</a></span><ul id="files_c2f8a529b66ab79251ff7f03216c2dc5" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Rules_ToUpper.html#%5CDMS%5CFilter%5CRules%5CToUpper" target="content">ToUpper<br></a></span></li></ul>
-</li>
-<li class="closed">
-<span class="file"><a href="db_DMS_Filter_Rules_Trim.html" target="content">DMS/Filter/Rules/Trim.php</a></span><ul id="files_71bdd3cad75bc4959af234394669f076" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Rules_Trim.html#%5CDMS%5CFilter%5CRules%5CTrim" target="content">Trim<br></a></span></li></ul>
-</li>
-<li class="closed">
-<span class="file"><a href="db_DMS_Filter_Version.html" target="content">DMS/Filter/Version.php</a></span><ul id="files_072c0921b29a004165142bb502ba2408" class="filetree"><li><span class="class"><a href="db_DMS_Filter_Version.html#%5CDMS%5CFilter%5CVersion" target="content">Version<br></a></span></li></ul>
-</li>
+</div>
+<h3 id="sidebar-charts">
+<img src="css/docblox/images/icons/chart.png" alt="Charts"><a href="#charts">Charts</a>
+</h3>
+<div class="sidebar-section"><ul style="list-style-image: url('css/docblox/images/icons/chart15x12.png');"><li><a href="graph.html" target="content">Class Inheritance Diagram</a></li></ul></div>
+<h3 id="sidebar-reports">
+<img src="css/docblox/images/icons/reports.png" alt="Reports"><a href="#reports">Reports</a>
+</h3>
+<div class="sidebar-section"><ul style="list-style-image: url('css/docblox/images/icons/reports9x12.png');">
+<li><a href="report_markers.html" target="content">Markers (TODO/FIXME)</a></li>
+<li><a href="report_parse_markers.html" target="content">Parsing errors</a></li>
+<li><a href="report_deprecated.html" target="content">Deprecated elements</a></li>
 </ul></div>
+</div>
+<div id="sidebar-footer">
+        Documentation is generated by <a href="http://docblox-project.org" target="_top"><img src="images/icon48x48.png" height="12" align="top" alt="Logo"> DocBlox 0.17.2</a>, images courtesy of <a href="http://glyphish.com/" target="_top">Glyphish</a>
+</div>
 </div></body></html>

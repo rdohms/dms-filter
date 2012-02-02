@@ -11,13 +11,15 @@
 	</testsuites>
 	
 	<filter>
-		<blacklist>
-			<directory>../tests</directory>
-                        <directory>../vendors</directory>
-		</blacklist>
+
 		<whitelist>
-			<directory suffix=".php">../src</directory>
+			<directory suffix=".php">../src/DMS/Filter</directory>
 		</whitelist>
+        <blacklist>
+            <directory>../tests</directory>
+            <directory>../vendors</directory>
+            <directory>../src/DMS/Bundles</directory>
+        </blacklist>
 	</filter>
 	
 	<logging>

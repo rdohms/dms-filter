@@ -32,7 +32,7 @@ class FilterTest extends \Tests\Testcase
         
         $classClone = clone $class;
         
-        $this->filter->filter($class);
+        $this->filter->filterEntity($class);
         
         $this->assertNotEquals($classClone->name, $class->name);
         $this->assertEquals($classClone->nickname, $class->nickname);
@@ -52,7 +52,7 @@ class FilterTest extends \Tests\Testcase
         
         $classClone = clone $class;
         
-        $this->filter->filter($class);
+        $this->filter->filterEntity($class);
         
         $this->assertNotEquals($classClone->name, $class->name);
         $this->assertEquals($classClone->nickname, $class->nickname);
@@ -109,7 +109,7 @@ class FilterTest extends \Tests\Testcase
     
     public function testNotFailOnNull()
     {
-        $this->filter->filter(null);
+        $this->filter->filterEntity(null);
     }
  
     public function testGetMetadataFactory()

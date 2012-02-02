@@ -31,7 +31,7 @@ class Filter implements FilterInterface
     /**
      * {@inheritDoc}
      */
-    public function filter($object)
+    public function filterEntity($object)
     {
         $this->walkObject($object);
     }

@@ -43,9 +43,9 @@ class Filter
      * 
      * @param object $object 
      */
-    public function filter($object)
+    public function filterEntity($object)
     {
-        $this->filterExecutor->filter($object);
+        $this->filterExecutor->filterEntity($object);
     }
     
     /**
