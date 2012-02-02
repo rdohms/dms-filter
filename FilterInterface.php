@@ -16,7 +16,7 @@ interface FilterInterface
      * 
      * @param mixed $object
      */
-    public function filter($object);
+    public function filterEntity($object);
     
     /**
      * Filters a specific property in an object, replacing the current value
