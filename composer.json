@@ -1,0 +1,27 @@
+{
+    "name":        "dms/dms-filter",
+    "type":        "library",
+    "description": "DMS Filter provides Annotation based entity filtering.",
+    "keywords":    ["filter", "dms"],
+    "homepage":    "https://github.com/rdohms/DMS-Filter",
+    "license":     "MIT",
+
+    "authors": [
+        {
+            "name": "Rafael Dohms",
+            "homepage": "http://doh.ms"
+        }
+    ],
+
+    "require": {
+        "php":  ">=5.3.2"
+    },
+
+    "autoload": {
+        "psr-0": {
+            "DMS\\Filter": ""
+        }
+    },
+
+    "target-dir": "DMS/Filter"
+}
