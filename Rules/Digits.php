@@ -3,14 +3,14 @@
 namespace DMS\Filter\Rules;
 
 /**
- * Alnum Rule (Alphanumeric)
+ * Digits Rule
  *
  * @package DMS
  * @subpackage Filter
  *
  * @Annotation
  */
-class Alnum extends RegExp
+class Digits extends RegExp
 {
 
     /**
@@ -28,8 +28,8 @@ class Alnum extends RegExp
         //Check for Whitespace support
         $whitespaceChar = ($this->allowWhitespace)? " ":"";
 
-        $this->unicodePattern = '/[^\p{L}\p{N}' . $whitespaceChar . ']/u';
-        $this->pattern        = '/[^a-zA-Z0-9' . $whitespaceChar . ']/';
+        $this->unicodePattern = '/[^\p{N}' . $whitespaceChar . ']/';
+        $this->pattern        = '/[^0-9' . $whitespaceChar . ']/';
 
         return parent::applyFilter($value);
     }
