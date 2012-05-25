@@ -5,10 +5,10 @@ namespace DMS\Filter\Rules;
 /**
  * Int Rule
  * Converts content into an Int
- * 
+ *
  * @package DMS
  * @subpackage Filter
- * 
+ *
  * @Annotation
  */
 class Int extends Rule
@@ -18,7 +18,7 @@ class Int extends Rule
      */
     public function applyFilter($value)
     {
-        return (int) ((string) $value);
+        return (int) ($value);
     }
 
 }
