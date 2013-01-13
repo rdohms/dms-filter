@@ -23,20 +23,6 @@ class Alnum extends RegExp
     /**
      * {@inheritDoc}
      */
-    public function applyFilter($value)
-    {
-        //Check for Whitespace support
-        $whitespaceChar = ($this->allowWhitespace)? " ":"";
-
-        $this->unicodePattern = '/[^\p{L}\p{N}' . $whitespaceChar . ']/u';
-        $this->pattern        = '/[^a-zA-Z0-9' . $whitespaceChar . ']/';
-
-        return parent::applyFilter($value);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function getDefaultOption()
     {
         return 'allowWhitespace';

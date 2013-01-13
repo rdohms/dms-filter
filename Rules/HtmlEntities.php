@@ -32,12 +32,4 @@ class HtmlEntities extends Rule
      */
     public $doubleEncode = true;
 
-    /**
-     * {@inheritDoc}
-     */
-    public function applyFilter($value)
-    {
-        return htmlentities($value, $this->flags, $this->encoding, $this->doubleEncode);
-    }
-
 }

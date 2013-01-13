@@ -30,14 +30,6 @@ class PregReplace extends Rule
     /**
      * {@inheritDoc}
      */
-    public function applyFilter($value)
-    {
-        return preg_replace($this->regexp, $this->replacement, $value);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function getDefaultOption()
     {
         return 'regexp';

@@ -23,20 +23,6 @@ class Alpha extends RegExp
     /**
      * {@inheritDoc}
      */
-    public function applyFilter($value)
-    {
-        //Check for Whitespace support
-        $whitespaceChar = ($this->allowWhitespace)? " ":"";
-
-        $this->unicodePattern = '/[^\p{L}' . $whitespaceChar . ']/u';
-        $this->pattern        = '/[^a-zA-Z' . $whitespaceChar . ']/';
-
-        return parent::applyFilter($value);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function getDefaultOption()
     {
         return 'allowWhitespace';

@@ -13,12 +13,5 @@ namespace DMS\Filter\Rules;
  */
 class Int extends Rule
 {
-    /**
-     * {@inheritDoc}
-     */
-    public function applyFilter($value)
-    {
-        return (int) ($value);
-    }
 
 }
