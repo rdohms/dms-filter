@@ -10,8 +10,6 @@ use DMS\Filter\Exception\FilterException;
  *
  * @package DMS
  * @subpackage Filter
- *
- * @Annotation
  */
 class ToLower extends BaseFilter
 {

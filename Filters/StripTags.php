@@ -9,8 +9,6 @@ use DMS\Filter\Rules\Rule;
  *
  * @package DMS
  * @subpackage Filter
- *
- * @Annotation
  */
 class StripTags extends BaseFilter
 {

@@ -5,19 +5,20 @@ namespace DMS\Filter\Filters;
 use DMS\Filter\Rules\Rule;
 
 /**
- * Boolean Filter
+ * Callback Filter
  *
  * @package DMS
  * @subpackage Filter
  */
-class Boolean extends BaseFilter
+class Callback extends BaseFilter
 {
     /**
      * {@inheritDoc}
+     *
+     * @param \DMS\Filter\Rules\Callback $rule
      */
-    public function apply(Rule $rule, $value)
+    public function apply(Rule $rule, $object)
     {
-        return (boolean) $value;
-    }
 
+    }
 }

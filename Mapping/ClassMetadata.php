@@ -4,7 +4,7 @@ namespace DMS\Filter\Mapping;
 
 /**
  * Represents a class that has Annotations
- * 
+ *
  * @package DMS
  * @subpackage Filter
  */
@@ -14,28 +14,28 @@ class ClassMetadata implements ClassMetadataInterface
      * @var string
      */
     public $className;
-    
+
     /**
      * Properties that contain filtering rules
      * @var array
      */
     public $filteredProperties = array();
-    
+
     /**
-     * @var ReflectionClass 
+     * @var \ReflectionClass
      */
     private $reflClass;
-    
+
     /**
      * Constructor
-     * 
-     * @param string $class 
+     *
+     * @param string $class
      */
     public function __construct($class)
     {
         $this->className = $class;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -50,40 +50,40 @@ class ClassMetadata implements ClassMetadataInterface
     public function getPropertyRules($property)
     {
         if ( ! isset($this->filteredProperties[$property])) return;
-        
+
         return $this->filteredProperties[$property]['rules'];
     }
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @todo bend this method into calestenics
      */
     public function mergeRules($metadata)
     {
         foreach ( $metadata->getFilteredProperties() as $property ) {
-            
+
             foreach ($metadata->getPropertyRules($property) as $rule) {
                 $this->addPropertyRule($property, clone $rule);
             }
-            
+
         }
     }
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @todo check for duplicate rules
      */
-    public function addPropertyRule($property, $rule) 
+    public function addPropertyRule($property, $rule)
     {
         if (!isset ($this->filteredProperties[$property])) {
             $this->filteredProperties[$property] = array('rules' => array());
         }
-        
+
         $this->filteredProperties[$property]['rules'][] = $rule;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -91,7 +91,7 @@ class ClassMetadata implements ClassMetadataInterface
     {
         return $this->className;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -103,7 +103,7 @@ class ClassMetadata implements ClassMetadataInterface
 
         return $this->reflClass;
     }
-    
+
 
 
 
