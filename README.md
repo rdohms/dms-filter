@@ -2,6 +2,12 @@
 
 This library provides a service that can be used to filter object values based on annotations
 
+## Installation
+
+### Composer
+
+    composer.phar require dms/dms-filter=~1.1
+
 ## Usage
 
 Your Entity:  
