@@ -2,11 +2,11 @@
 
 namespace DMS\Filter\Mapping\Loader;
 
-use DMS\Filter\Mapping;
+use DMS\Filter\Mapping\ClassMetadataInterface;
 
 /**
  * Interface for a Loader
- * 
+ *
  * @package DMS
  * @subpackage Filter
  */
@@ -15,9 +15,9 @@ interface LoaderInterface
     /**
      * Load a Class Metadata.
      *
-     * @param ClassMetadata $metadata A metadata
+     * @param ClassMetadataInterface $metadata A metadata
      *
      * @return Boolean
      */
-    function loadClassMetadata(Mapping\ClassMetadataInterface $metadata);
+    public function loadClassMetadata(ClassMetadataInterface $metadata);
 }

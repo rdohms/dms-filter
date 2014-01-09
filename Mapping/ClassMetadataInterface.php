@@ -32,9 +32,9 @@ interface ClassMetadataInterface
     /**
      * Merges rules from another metadata object into this one
      *
-     * @param ClassMetadata $metadata
+     * @param ClassMetadataInterface $metadata
      */
-    public function mergeRules($metadata);
+    public function mergeRules(ClassMetadataInterface $metadata);
 
     /**
      * Get name of class represented in this Metadata object
@@ -56,5 +56,5 @@ interface ClassMetadataInterface
      * @param string $property
      * @param Rule $rule
      */
-    public function addPropertyRule($property, $rule);
+    public function addPropertyRule($property, Rule $rule);
 }

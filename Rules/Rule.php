@@ -102,7 +102,7 @@ abstract class Rule
      * @param array $options
      * @param \stdClass $result
      */
-    private function parseOptionsArray($options, $result)
+    private function parseOptionsArray($options, \stdClass $result)
     {
         foreach ($options as $option => $value) {
 
@@ -124,11 +124,11 @@ abstract class Rule
      * @param \stdClass $result
      * @throws \DMS\Filter\Exception\RuleDefinitionException
      */
-    private function parseSingleOption($options, $result)
+    private function parseSingleOption($options, \stdClass $result)
     {
         $option = $this->getDefaultOption();
 
-        //No Default set, usnsure what to do
+        //No Default set, unsure what to do
         if (null === $option) {
             throw new RuleDefinitionException(
                 sprintf('No default option is configured for rule %s', get_class($this))

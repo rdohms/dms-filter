@@ -69,7 +69,7 @@ class ClassMetadataFactory implements ClassMetadataFactoryInterface
      * Reads class metadata for a new and unparsed class
      *
      * @param string $class
-     * @return ClassMetadata
+     * @return ClassMetadataInterface
      */
     private function parseClassMetadata($class)
     {
@@ -107,7 +107,7 @@ class ClassMetadataFactory implements ClassMetadataFactoryInterface
      * Retrieves data from a class already parsed
      *
      * @param string $class
-     * @return ClassMetadata
+     * @return ClassMetadataInterface
      */
     private function getParsedClass($class)
     {
@@ -122,9 +122,9 @@ class ClassMetadataFactory implements ClassMetadataFactoryInterface
      * Stores data from a parsed class
      *
      * @param string $class
-     * @param ClassMetadata $metadata
+     * @param ClassMetadataInterface $metadata
      */
-    private function setParsedClass($class, $metadata)
+    private function setParsedClass($class, ClassMetadataInterface $metadata)
     {
         $this->parsedClasses[$class] = $metadata;
     }
@@ -133,9 +133,9 @@ class ClassMetadataFactory implements ClassMetadataFactoryInterface
      * Checks if the class being parsed has a parent and cascades parsing
      * to its parent
      *
-     * @param ClassMetadata $metadata
+     * @param ClassMetadataInterface $metadata
      */
-    protected function loadParentMetadata($metadata)
+    protected function loadParentMetadata(ClassMetadataInterface $metadata)
     {
         $parent = $metadata->getReflectionClass()->getParentClass();
 
@@ -148,9 +148,9 @@ class ClassMetadataFactory implements ClassMetadataFactoryInterface
      * Checks if the object has interfaces and cascades parsing of annotatiosn
      * to all the interfaces
      *
-     * @param ClassMetadata $metadata
+     * @param ClassMetadataInterface $metadata
      */
-    protected function loadInterfaceMetadata($metadata)
+    protected function loadInterfaceMetadata(ClassMetadataInterface $metadata)
     {
         foreach ($metadata->getReflectionClass()->getInterfaces() as $interface) {
 

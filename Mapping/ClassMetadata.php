@@ -2,6 +2,8 @@
 
 namespace DMS\Filter\Mapping;
 
+use DMS\Filter\Rules\Rule;
+
 /**
  * Represents a class that has Annotations
  *
@@ -61,7 +63,7 @@ class ClassMetadata implements ClassMetadataInterface
      *
      * @todo bend this method into calesthenics
      */
-    public function mergeRules($metadata)
+    public function mergeRules(ClassMetadataInterface $metadata)
     {
         foreach ($metadata->getFilteredProperties() as $property) {
             foreach ($metadata->getPropertyRules($property) as $rule) {
@@ -75,7 +77,7 @@ class ClassMetadata implements ClassMetadataInterface
      *
      * @todo check for duplicate rules
      */
-    public function addPropertyRule($property, $rule)
+    public function addPropertyRule($property, Rule $rule)
     {
         if (!isset ($this->filteredProperties[$property])) {
             $this->filteredProperties[$property] = array('rules' => array());
