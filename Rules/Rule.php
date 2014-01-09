@@ -2,9 +2,10 @@
 
 namespace DMS\Filter\Rules;
 
-use DMS\Filter\Exception\InvalidOptionsException,
-    DMS\Filter\Exception\MissingOptionsException,
-    DMS\Filter\Exception\RuleDefinitionException;
+use DMS\Filter\Exception\InvalidOptionsException;
+use DMS\Filter\Exception\MissingOptionsException;
+use DMS\Filter\Exception\RuleDefinitionException;
+use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 
 /**
  * Base class for a Filtering Rule, it implements common behaviour
@@ -41,14 +42,22 @@ abstract class Rule
 
         if (count($result->invalidOptions) > 0) {
             throw new InvalidOptionsException(
-                sprintf('The options "%s" do not exist in rule %s', implode('", "', $result->invalidOptions), get_class($this)),
+                sprintf(
+                    'The options "%s" do not exist in rule %s',
+                    implode('", "', $result->invalidOptions),
+                    get_class($this)
+                ),
                 $result->invalidOptions
             );
         }
 
         if (count($result->missingOptions) > 0) {
             throw new MissingOptionsException(
-                sprintf('The options "%s" must be set for rule %s', implode('", "', array_keys($result->missingOptions)), get_class($this)),
+                sprintf(
+                    'The options "%s" must be set for rule %s',
+                    implode('", "', array_keys($result->missingOptions)),
+                    get_class($this)
+                ),
                 array_keys($result->missingOptions)
             );
         }
@@ -65,7 +74,7 @@ abstract class Rule
     {
         $parseResult = new \stdClass();
         $parseResult->invalidOptions = array();
-        $parseResult->missingOptions = array_flip((array) $this->getRequiredOptions());
+        $parseResult->missingOptions = array_flip((array)$this->getRequiredOptions());
 
         //Doctrine parses constructor parameter into 'value' array param, restore it
         if (is_array($options) && count($options) == 1 && isset($options['value'])) {
@@ -97,7 +106,7 @@ abstract class Rule
     {
         foreach ($options as $option => $value) {
 
-            if (!property_exists($this, $option)) {
+            if (! property_exists($this, $option)) {
                 $result->invalidOptions[] = $option;
                 continue;
             }
@@ -113,6 +122,7 @@ abstract class Rule
      *
      * @param string $options
      * @param \stdClass $result
+     * @throws \DMS\Filter\Exception\RuleDefinitionException
      */
     private function parseSingleOption($options, $result)
     {
@@ -126,7 +136,7 @@ abstract class Rule
         }
 
         //Default option points to invalid one
-        if (!property_exists($this, $option)) {
+        if (! property_exists($this, $option)) {
             $result->invalidOptions[] = $option;
             return;
         }

@@ -3,8 +3,14 @@ namespace DMS\Filter\Filters\Loader;
 
 use DMS\Filter\Filters\BaseFilter;
 use DMS\Filter\Rules\Rule;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/**
+ * Interface FilterLoaderInterface
+ *
+ * Defines the required interface for a loader capable of finding the executor of a specific rule.
+ *
+ * @package DMS\Filter\Filters\Loader
+ */
 interface FilterLoaderInterface
 {
     /**

@@ -5,6 +5,13 @@ use DMS\Filter\Filters\BaseFilter;
 use DMS\Filter\Rules\Rule;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/**
+ * Class FilterLoader
+ *
+ * Loads the filter that enforces a specific rule.
+ *
+ * @package DMS\Filter\Filters\Loader
+ */
 class FilterLoader implements FilterLoaderInterface
 {
     /**
@@ -34,7 +41,7 @@ class FilterLoader implements FilterLoaderInterface
     {
         $filterIdentifier = $rule->getFilter();
 
-        if (class_exists($filterIdentifier)){
+        if (class_exists($filterIdentifier)) {
             return new $filterIdentifier;
         }
 
@@ -44,6 +51,5 @@ class FilterLoader implements FilterLoaderInterface
 
         $error = "Unable to locate filter for: $filterIdentifier defined in " . get_class($rule);
         throw new \UnexpectedValueException($error);
-
     }
 }

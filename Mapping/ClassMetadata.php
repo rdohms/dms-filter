@@ -49,7 +49,9 @@ class ClassMetadata implements ClassMetadataInterface
      */
     public function getPropertyRules($property)
     {
-        if ( ! isset($this->filteredProperties[$property])) return;
+        if (! isset($this->filteredProperties[$property])) {
+            return null;
+        }
 
         return $this->filteredProperties[$property]['rules'];
     }
@@ -57,16 +59,14 @@ class ClassMetadata implements ClassMetadataInterface
     /**
      * {@inheritDoc}
      *
-     * @todo bend this method into calestenics
+     * @todo bend this method into calesthenics
      */
     public function mergeRules($metadata)
     {
-        foreach ( $metadata->getFilteredProperties() as $property ) {
-
+        foreach ($metadata->getFilteredProperties() as $property) {
             foreach ($metadata->getPropertyRules($property) as $rule) {
                 $this->addPropertyRule($property, clone $rule);
             }
-
         }
     }
 

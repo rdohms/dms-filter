@@ -12,6 +12,13 @@ namespace DMS\Filter;
  */
 use DMS\Filter\Filters\Loader\FilterLoaderInterface;
 
+/**
+ * Class Filter
+ *
+ * Executor, receives objects that need filtering and executes attached rules.
+ *
+ * @package DMS\Filter
+ */
 class Filter implements FilterInterface
 {
     /**
@@ -82,9 +89,9 @@ class Filter implements FilterInterface
      * @param object $object
      * @param string $limitProperty
      */
-    protected function walkObject($object, $limitProperty = null) {
-
-        if ( $object === null ) {
+    protected function walkObject($object, $limitProperty = null)
+    {
+        if ($object === null) {
             return;
         }
 
@@ -94,10 +101,10 @@ class Filter implements FilterInterface
         $walker = new ObjectWalker($object, $this->filterLoader);
 
         //Get all filtered properties or limit with selected
-        $properties = ($limitProperty !== null)? array($limitProperty) : $metadata->getFilteredProperties();
+        $properties = ($limitProperty !== null) ? array($limitProperty) : $metadata->getFilteredProperties();
 
         //Iterate over properties with filters
-        foreach( $properties as $property ) {
+        foreach ($properties as $property) {
 
             $walker->applyFilterRules($property, $metadata->getPropertyRules($property));
 
@@ -114,7 +121,7 @@ class Filter implements FilterInterface
      */
     protected function walkRuleChain($value, $rules)
     {
-        foreach($rules as $rule) {
+        foreach ($rules as $rule) {
             $filter = $this->filterLoader->getFilterForRule($rule);
             $value = $filter->apply($rule, $value);
         }

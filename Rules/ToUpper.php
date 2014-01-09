@@ -2,8 +2,6 @@
 
 namespace DMS\Filter\Rules;
 
-use DMS\Filter\Exception\FilterException;
-
 /**
  * ToUpper Rule
  *

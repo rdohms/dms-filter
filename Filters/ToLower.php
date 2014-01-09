@@ -43,12 +43,10 @@ class ToLower extends BaseFilter
             return false;
         }
 
-        if (!function_exists('mb_strtolower')) {
-            throw new FilterException(
-                'mbstring is required to use ToLower with an encoding.');
+        if (! function_exists('mb_strtolower')) {
+            throw new FilterException('mbstring is required to use ToLower with an encoding.');
         }
 
-        $this->encoding = (string) $rule->encoding;
         $encodings = array_map('strtolower', mb_list_encodings());
 
         if (!in_array(strtolower($rule->encoding), $encodings)) {

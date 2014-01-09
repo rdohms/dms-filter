@@ -4,7 +4,7 @@ namespace DMS\Filter\Exception;
 
 /**
  * Base Exception for errors with rule options
- * 
+ *
  * @package DMS
  * @subpackage Filter
  * @category Exception
@@ -18,9 +18,9 @@ class RuleOptionsException extends FilterException
 
     /**
      * Constructor
-     * 
+     *
      * @param string $message
-     * @param array $options 
+     * @param array $options
      */
     public function __construct($message, array $options)
     {
@@ -31,12 +31,12 @@ class RuleOptionsException extends FilterException
 
     /**
      * Retrieve options that triggered exception
-     * 
+     *
      * @return array
      */
     public function getOptions()
     {
         return $this->options;
-    }    
+    }
 }
 

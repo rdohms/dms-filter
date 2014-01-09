@@ -34,7 +34,7 @@ class ObjectWalker
      * @param object $object
      * @param FilterLoaderInterface $filterLoader
      */
-    public function __construct( $object, $filterLoader )
+    public function __construct($object, $filterLoader)
     {
         $this->object       = $object;
         $this->reflClass    = new \ReflectionClass($object);
@@ -49,7 +49,7 @@ class ObjectWalker
      */
     public function applyFilterRules($property, $filterRules = array())
     {
-        foreach($filterRules as $rule ) {
+        foreach ($filterRules as $rule) {
             $this->applyFilterRule($property, $rule);
         }
     }

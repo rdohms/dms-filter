@@ -4,7 +4,7 @@ This library provides a service that can be used to filter object values based o
 
 ## Usage
 
-Your Entity:  
+Your Entity:
 
 ```php
 <?php
@@ -37,7 +37,7 @@ class User
 
 }
 ?>
-```  
+```
 
 Filtering:
 
@@ -69,7 +69,7 @@ Filtering:
     echo $user->name; //"My name"
     echo $user->email; //"email@mail.com"
 ?>
-```  
+```
 
 Full example: https://gist.github.com/1098352
 
@@ -77,7 +77,7 @@ Full example: https://gist.github.com/1098352
 
 This package relies on these external libraries:
 
-* Doctrine Common: Reader and Cache
+* Doctrine Annotations
 
 ## Contributing
 
@@ -92,6 +92,6 @@ Feel free to send pull requests, just follow these guides:
 
 ## Credits
 
-This library is inspired by the Symfony 2 Validator component and is meant to work alongside it. 
+This library is inspired by the Symfony 2 Validator component and is meant to work alongside it.
 
 Symfony 2 Validator: https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Validator

@@ -24,6 +24,6 @@ abstract class BaseFilter
      *
      * @return mixed
      */
-    abstract function apply( Rule $rule, $value);
+    abstract function apply(Rule $rule, $value);
 
 }

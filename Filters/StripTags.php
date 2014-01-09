@@ -18,7 +18,7 @@ class StripTags extends BaseFilter
      * @param \DMS\Filter\Rules\StripTags $rule
      * @param mixed $filter
      */
-    public function apply( Rule $rule, $value)
+    public function apply(Rule $rule, $value)
     {
         return strip_tags($value, $rule->allowed);
     }
