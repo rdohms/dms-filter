@@ -3,7 +3,6 @@ namespace DMS\Filter\Filters\Loader;
 
 use DMS\Filter\Filters\BaseFilter;
 use DMS\Filter\Rules\Rule;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class FilterLoader
@@ -14,20 +13,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class FilterLoader implements FilterLoaderInterface
 {
-    /**
-     * @var ContainerInterface
-     */
-    protected $container;
-
-    /**
-     * Injects a dependency Injection Container
-     *
-     * @param $container
-     */
-    public function setContainer($container)
-    {
-        $this->container = $container;
-    }
 
     /**
      * Finds the filter responsible for executing a specific rule
@@ -43,10 +28,6 @@ class FilterLoader implements FilterLoaderInterface
 
         if (class_exists($filterIdentifier)) {
             return new $filterIdentifier;
-        }
-
-        if ($this->container !== null && $this->container->has($filterIdentifier)) {
-            return $this->container->get($filterIdentifier);
         }
 
         $error = "Unable to locate filter for: $filterIdentifier defined in " . get_class($rule);
