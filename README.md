@@ -87,7 +87,7 @@ Feel free to send pull requests, just follow these guides:
 * Code
 * Test
     * Tests are in: https://github.com/rdohms/DMS
-    * Just create Testcase and run `phpunit` inside the `tests` folder
+    * Just create FilterTestCase and run `phpunit` inside the `tests` folder
 * Submit PR
 
 ## Credits
