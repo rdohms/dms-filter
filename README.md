@@ -2,6 +2,14 @@
 
 This library provides a service that can be used to filter object values based on annotations
 
+## Install
+
+Use composer to add DMS\Filter to your app
+
+`composer require dms/dms-filter:~2.0`
+
+This will get you the latest compatible version with 2.0 without BC breaks.
+
 ## Usage
 
 Your Entity:
@@ -86,8 +94,7 @@ Feel free to send pull requests, just follow these guides:
 * Fork
 * Code
 * Test
-    * Tests are in: https://github.com/rdohms/DMS
-    * Just create FilterTestCase and run `phpunit` inside the `tests` folder
+    * Just create FilterTestCase and run `phpunit`
 * Submit PR
 
 ## Credits
