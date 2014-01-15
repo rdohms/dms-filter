@@ -40,6 +40,18 @@ class AnnotatedClass
     public $callback2;
 
     /**
+     * @var string
+     * @Filter\Zend("StringToLower")
+     */
+    public $zend;
+
+    /**
+     * @var string
+     * @Filter\Zend(class="Boolean", zendOptions={"casting"=false})
+     */
+    public $zendalternate;
+
+    /**
      * @param $value
      * @return string
      */

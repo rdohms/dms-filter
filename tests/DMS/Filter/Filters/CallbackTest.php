@@ -75,7 +75,19 @@ class CallbackTest extends FilterTestCase
         $this->rule->expects($this->once())->method('getInputType')->will(
             $this->returnValue(CallbackRule::CALLABLE_TYPE)
         );
-        $this->rule->callback = array('DMS\Tests\Dummy\Classes\AnnotatedClass', 'callbackMethod');
+        $this->rule->callback = array('DMS\Tests\Dummy\Classes\AnnotatedClass', 'anotherCallback');
+
+        $result = $this->filter->apply($this->rule, 'value');
+
+        $this->assertEquals('called_back', $result);
+    }
+
+    public function testRuleWithNonStaticCallable()
+    {
+        $this->rule->expects($this->once())->method('getInputType')->will(
+            $this->returnValue(CallbackRule::CALLABLE_TYPE)
+        );
+        $this->rule->callback = array(new AnnotatedClass(), 'callbackMethod');
 
         $result = $this->filter->apply($this->rule, 'value');
 
