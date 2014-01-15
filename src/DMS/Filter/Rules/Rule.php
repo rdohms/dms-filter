@@ -5,7 +5,6 @@ namespace DMS\Filter\Rules;
 use DMS\Filter\Exception\InvalidOptionsException;
 use DMS\Filter\Exception\MissingOptionsException;
 use DMS\Filter\Exception\RuleDefinitionException;
-use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 
 /**
  * Base class for a Filtering Rule, it implements common behaviour
@@ -31,9 +30,6 @@ abstract class Rule
      *                                       options
      * @throws MissingOptionsException       When you don't pass any of the options
      *                                       returned by getRequiredOptions()
-     * @throws ConstraintDefinitionException When you don't pass an associative
-     *                                       array, but getDefaultOption() returns
-     *                                       NULL
      */
     public function __construct($options = null)
     {

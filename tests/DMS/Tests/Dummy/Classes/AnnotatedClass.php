@@ -23,8 +23,37 @@ class AnnotatedClass
     /**
      * @Filter\StripTags("<b><i>")
      *
-     * @var type
+     * @var string
      */
     public $description;
 
+    /**
+     * @var string
+     * @Filter\Callback("callbackMethod")
+     */
+    public $callback;
+
+    /**
+     * @var string
+     * @Filter\Callback({"DMS\Tests\Dummy\Classes\AnnotatedClass", "anotherCallback"})
+     */
+    public $callback2;
+
+    /**
+     * @param $value
+     * @return string
+     */
+    public function callbackMethod($value)
+    {
+        return 'called_back';
+    }
+
+    /**
+     * @param $value
+     * @return string
+     */
+    public static function anotherCallback($value)
+    {
+        return 'called_back';
+    }
 }

@@ -3,6 +3,7 @@
 namespace DMS\Filter;
 
 use DMS\Filter\Filters\Loader\FilterLoaderInterface;
+use DMS\Filter\Filters\ObjectAwareFilter;
 
 /**
  * Walks over the properties of an object applying the filters
@@ -72,6 +73,11 @@ class ObjectWalker
         $value = $this->getPropertyValue($property);
 
         $filter = $this->filterLoader->getFilterForRule($filterRule);
+
+        if ($filter instanceof ObjectAwareFilter) {
+            $filter->setCurrentObject($this->object);
+        }
+
         $filteredValue = $filter->apply($filterRule, $value);
 
         $this->setPropertyValue($property, $filteredValue);
