@@ -2,15 +2,17 @@
 
 This library provides a service that can be used to filter object values based on annotations
 
-## Installation
+## Install
 
-### Composer
+Use composer to add DMS\Filter to your app
 
-    composer.phar require dms/dms-filter=~1.1
+`composer require dms/dms-filter:~2.0`
+
+This will get you the latest compatible version with 2.0 without BC breaks.
 
 ## Usage
 
-Your Entity:  
+Your Entity:
 
 ```php
 <?php
@@ -43,7 +45,7 @@ class User
 
 }
 ?>
-```  
+```
 
 Filtering:
 
@@ -75,7 +77,7 @@ Filtering:
     echo $user->name; //"My name"
     echo $user->email; //"email@mail.com"
 ?>
-```  
+```
 
 Full example: https://gist.github.com/1098352
 
@@ -83,7 +85,7 @@ Full example: https://gist.github.com/1098352
 
 This package relies on these external libraries:
 
-* Doctrine Common: Reader and Cache
+* Doctrine Annotations
 
 ## Contributing
 
@@ -92,12 +94,11 @@ Feel free to send pull requests, just follow these guides:
 * Fork
 * Code
 * Test
-    * Tests are in: https://github.com/rdohms/DMS
-    * Just create Testcase and run `phpunit` inside the `tests` folder
+    * Just create FilterTestCase and run `phpunit`
 * Submit PR
 
 ## Credits
 
-This library is inspired by the Symfony 2 Validator component and is meant to work alongside it. 
+This library is inspired by the Symfony 2 Validator component and is meant to work alongside it.
 
 Symfony 2 Validator: https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Validator
