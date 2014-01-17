@@ -52,6 +52,8 @@ class AlnumTest extends FilterTestCase
             array(true, "My Text21!", "My Text21", false),
             array(true, "João Sorrisão", "João Sorrisão", true),
             array(true, "João Sorrisão", "Joo Sorriso", false),
+            array(true, "GRΣΣK", "GRΣΣK", true),
+            array(true, "GRΣΣK", "GRK", false),
             array(true, "Helgi Þormar Þorbjörnsson", "Helgi Þormar Þorbjörnsson", true),
             array(true, "Helgi Þormar Þorbjörnsson", "Helgi ormar orbjrnsson", false),
             array(true, "Helgi Þormar!@#$&*( )(*&%$#@Þorbjörnsson", "Helgi Þormar Þorbjörnsson", true),
