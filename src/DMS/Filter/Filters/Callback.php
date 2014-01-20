@@ -73,7 +73,7 @@ class Callback extends BaseFilter implements ObjectAwareFilter
      * @param mixed $value
      * @throws \DMS\Filter\Exception\FilterException
      * @throws \DMS\Filter\Exception\InvalidCallbackException
-     * @returns mixed
+     * @return mixed
      */
     protected function useObjectMethod($method, $value)
     {
