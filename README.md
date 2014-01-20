@@ -2,6 +2,8 @@
 
 This library provides a service that can be used to filter object values based on annotations
 
+[![Latest Stable Version](https://poser.pugx.org/dms/dms-filter/v/stable.png)](https://packagist.org/packages/dms/dms-filter) [![Total Downloads](https://poser.pugx.org/dms/dms-filter/downloads.png)](https://packagist.org/packages/dms/dms-filter) [![Latest Unstable Version](https://poser.pugx.org/dms/dms-filter/v/unstable.png)](https://packagist.org/packages/dms/dms-filter) [![License](https://poser.pugx.org/dms/dms-filter/license.png)](https://packagist.org/packages/dms/dms-filter) [![SensioLabsInsight](https://insight.sensiolabs.com/projects/bb7f41c3-ee7c-4473-8fbf-806453a9e899/mini.png)](https://insight.sensiolabs.com/projects/bb7f41c3-ee7c-4473-8fbf-806453a9e899) [![Build Status](https://travis-ci.org/rdohms/dms-filter.png?branch=master)](https://travis-ci.org/rdohms/dms-filter)
+
 ## Install
 
 Use composer to add DMS\Filter to your app
