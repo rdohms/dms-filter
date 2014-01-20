@@ -60,8 +60,6 @@ class ClassMetadata implements ClassMetadataInterface
 
     /**
      * {@inheritDoc}
-     *
-     * @todo bend this method into calesthenics
      */
     public function mergeRules(ClassMetadataInterface $metadata)
     {
@@ -74,8 +72,6 @@ class ClassMetadata implements ClassMetadataInterface
 
     /**
      * {@inheritDoc}
-     *
-     * @todo check for duplicate rules
      */
     public function addPropertyRule($property, Rule $rule)
     {
