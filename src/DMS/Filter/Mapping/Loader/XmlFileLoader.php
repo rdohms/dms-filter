@@ -108,7 +108,11 @@ class XmlFileLoader extends FileLoader
                 }
             }
 
-            $options[(string) $node['name']] = $value;
+            if (isset($node['name'])) {
+                $options[(string) $node['name']] = $value;
+            } else {
+                $options[] = $value;
+            }
         }
 
         return $options;
