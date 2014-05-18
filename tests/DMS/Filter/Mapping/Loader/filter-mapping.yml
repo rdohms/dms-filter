@@ -1,0 +1,16 @@
+DMS\Tests\Dummy\Classes\AnnotatedClass:
+    properties:
+        name:
+            - StripTags: ~
+        nickname:
+            - StripTags: ~
+        description:
+            - StripTags: {allowed: '<b><i>'}
+        callback:
+            - Callback: {callback: 'callbackMethod'}
+        callback2:
+            - Callback: {callback: ["DMS\Tests\Dummy\Classes\AnnotatedClass", "anotherCallback"]}
+        zend:
+            - Zend: {class: 'StringToLower'}
+        zendalternate:
+            - Zend: {class: 'Boolean', zendOptions: {casting:false}}
