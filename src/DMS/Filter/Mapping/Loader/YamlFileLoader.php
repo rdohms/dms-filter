@@ -47,6 +47,14 @@ class YamlFileLoader extends FileLoader
             if (!is_array($this->classes)) {
                 throw new \InvalidArgumentException(sprintf('The file "%s" must contain a YAML array.', $this->file));
             }
+
+            if (isset($this->classes['namespaces'])) {
+                foreach ($this->classes['namespaces'] as $alias => $namespace) {
+                    $this->addNamespaceAlias($alias, $namespace);
+                }
+
+                unset($this->classes['namespaces']);
+            }
         }
 
         if (isset($this->classes[$metadata->getClassName()])) {
@@ -55,7 +63,7 @@ class YamlFileLoader extends FileLoader
             if (isset($yaml['properties']) && is_array($yaml['properties'])) {
                 foreach ($yaml['properties'] as $property => $rules) {
                     if (null !== $rules) {
-                        foreach ($this->getRules($rules) as $rule) {
+                        foreach ($this->parseNodes($rules) as $rule) {
                             $metadata->addPropertyRule($property, $rule);
                         }
                     }
@@ -68,28 +76,35 @@ class YamlFileLoader extends FileLoader
         return false;
     }
 
-    protected function getRules(array $nodes)
+    /**
+     * Parses a collection of YAML nodes
+     *
+     * @param array $nodes The YAML nodes
+     *
+     * @return array An array of values or Constraint instances
+     */
+    protected function parseNodes(array $nodes)
     {
-        $rules = array();
+        $values = array();
 
-        foreach($nodes as $name => $options) {
-            if (strpos($name, '\\') !== false) {
-                $className = (string) $name;
+        foreach ($nodes as $name => $childNodes) {
+            if (is_numeric($name) && is_array($childNodes) && count($childNodes) == 1) {
+                $options = current($childNodes);
+
+                if (is_array($options)) {
+                    $options = $this->parseNodes($options);
+                }
+
+                $values[] = $this->newRule(key($childNodes), $options);
             } else {
-                $className = 'DMS\\Filter\\Rules\\' . $name;
-            }
+                if (is_array($childNodes)) {
+                    $childNodes = $this->parseNodes($childNodes);
+                }
 
-            if (!class_exists($className)) {
-                throw new MappingException(sprintf("Rule class '%s' does not exist", $className));
+                $values[$name] = $childNodes;
             }
-
-            if ($className instanceof Rules\Rule) {
-                throw new MappingException(sprintf("class '%s' is not a rule", $className));
-            }
-
-            $rules[] = new $className($options);
         }
 
-        return $rules;
+        return $values;
     }
 }

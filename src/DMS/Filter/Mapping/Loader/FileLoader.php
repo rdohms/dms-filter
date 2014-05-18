@@ -4,7 +4,7 @@ namespace DMS\Filter\Mapping\Loader;
 
 use DMS\Filter\Exception\MappingException;
 
-abstract class FileLoader implements LoaderInterface
+abstract class FileLoader extends AbstractLoader
 {
     protected $file;
 
