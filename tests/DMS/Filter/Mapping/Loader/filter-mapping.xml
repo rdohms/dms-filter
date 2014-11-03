@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<filter-mapping>
+    <class name="DMS\Tests\Dummy\Classes\AnnotatedClass">
+        <property name="name">
+            <rule name="StripTags" />
+        </property>
+        <property name="nickname">
+            <rule name="StripTags" />
+        </property>
+        <property name="description">
+            <rule name="StripTags">
+                <option name="allowed"><![CDATA[<b><i>]]></option>
+            </rule>
+        </property>
+        <property name="callback">
+            <rule name="Callback">
+                <option name="callback">callbackMethod</option>
+            </rule>
+        </property>
+        <property name="callback2">
+            <rule name="Callback">
+                <option name="callback">
+                    <option>DMS\Tests\Dummy\Classes\AnnotatedClass</option>
+                    <option>anotherCallback</option>
+                </option>
+            </rule>
+        </property>
+        <property name="zend">
+            <rule name="Zend">
+                <option name="class">StringToLower</option>
+            </rule>
+        </property>
+        <property name="zendalternate">
+            <rule name="Zend">
+                <option name="class">Boolean</option>
+                <option name="zendOptions">
+                    <option name="casting">false</option>
+                </option>
+            </rule>
+        </property>
+    </class>
+</filter-mapping>
