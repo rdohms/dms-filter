@@ -3,7 +3,7 @@
 namespace DMS\Filter\Filters;
 
 use DMS\Tests\FilterTestCase;
-use DMS\Filter\Rules\Boolean as BooleanRule;
+use DMS\Filter\Rules\BooleanScalar as BooleanRule;
 
 class BooleanTest extends FilterTestCase
 {
@@ -24,7 +24,7 @@ class BooleanTest extends FilterTestCase
     public function testRule($options, $value, $expectedResult)
     {
         $rule = new BooleanRule($options);
-        $filter = new Boolean();
+        $filter = new BooleanScalar();
 
         $result = $filter->apply($rule, $value);
 

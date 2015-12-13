@@ -5,13 +5,13 @@ namespace DMS\Filter\Filters;
 use DMS\Filter\Rules\Rule;
 
 /**
- * Float Filter
- * Converts content into a Float
+ * FloatScalar Filter
+ * Converts content into a FloatScalar
  *
  * @package DMS
  * @subpackage Filter
  */
-class Float extends BaseFilter
+class FloatScalar extends BaseFilter
 {
     /**
      * {@inheritDoc}

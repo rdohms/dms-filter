@@ -3,15 +3,15 @@
 namespace DMS\Filter\Rules;
 
 /**
- * Int Rule
- * Converts content into an Int
+ * IntScalar Rule
+ * Converts content into an IntScalar
  *
  * @package DMS
  * @subpackage Filter
  *
  * @Annotation
  */
-class Int extends Rule
+class IntScalar extends Rule
 {
 
 }
