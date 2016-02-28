@@ -129,5 +129,4 @@ class Callback extends BaseFilter implements ObjectAwareFilter
 
         return $closure($value);
     }
-
 }

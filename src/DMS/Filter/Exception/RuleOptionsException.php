@@ -39,4 +39,3 @@ class RuleOptionsException extends FilterException
         return $this->options;
     }
 }
-

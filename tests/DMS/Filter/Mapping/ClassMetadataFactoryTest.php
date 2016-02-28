@@ -39,7 +39,6 @@ class ClassMetadataFactoryTest extends FilterTestCase
         $metadataReparsed = $this->factory->getClassMetadata('DMS\Tests\Dummy\Classes\AnnotatedClass');
 
         $this->assertSame($metadata, $metadataReparsed);
-
     }
 
     public function testCachedMetadataFromFactory()
@@ -59,5 +58,3 @@ class ClassMetadataFactoryTest extends FilterTestCase
         $this->assertEquals($metadata, $metadataCached);
     }
 }
-
-?>

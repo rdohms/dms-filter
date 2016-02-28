@@ -13,5 +13,4 @@ namespace DMS\Filter\Rules;
  */
 class FloatScalar extends Rule
 {
-
 }

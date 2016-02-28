@@ -27,5 +27,4 @@ class Digits extends RegExp
     {
         return 'allowWhitespace';
     }
-
 }

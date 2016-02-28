@@ -17,5 +17,4 @@ class InvalidDefaultOptionRule extends Rule
     {
         return 'path';
     }
-
 }

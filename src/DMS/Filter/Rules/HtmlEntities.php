@@ -31,5 +31,4 @@ class HtmlEntities extends Rule
      * @var bool
      */
     public $doubleEncode = true;
-
 }

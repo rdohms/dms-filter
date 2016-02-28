@@ -10,5 +10,4 @@ class NoOptionsRule extends Rule
     {
         return $value;
     }
-
 }
