@@ -27,5 +27,4 @@ class RegExp extends Rule
      * @var string
      */
     public $pattern;
-
 }

@@ -27,11 +27,9 @@ class AlnumTest extends FilterTestCase
         $filter = new Alnum();
 
         if ($unicodeSetting !== null) {
-
             $property = new \ReflectionProperty($filter, 'unicodeEnabled');
             $property->setAccessible(true);
             $property->setValue($filter, $unicodeSetting);
-
         }
 
         $result = $filter->apply($rule, $value);

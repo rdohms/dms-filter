@@ -26,5 +26,4 @@ interface ObjectAwareFilter
      * @return object | null
      */
     public function getCurrentObject();
-
 }

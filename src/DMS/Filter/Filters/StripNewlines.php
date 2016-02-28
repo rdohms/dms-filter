@@ -19,5 +19,4 @@ class StripNewlines extends BaseFilter
     {
         return str_replace(array("\n", "\r"), '', $value);
     }
-
 }

@@ -33,7 +33,6 @@ abstract class Rule
      */
     public function __construct($options = null)
     {
-
         $result = $this->parseOptions($options);
 
         if (count($result->invalidOptions) > 0) {
@@ -101,7 +100,6 @@ abstract class Rule
     private function parseOptionsArray($options, \stdClass $result)
     {
         foreach ($options as $option => $value) {
-
             if (! property_exists($this, $option)) {
                 $result->invalidOptions[] = $option;
                 continue;

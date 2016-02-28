@@ -75,7 +75,7 @@ class ClassMetadata implements ClassMetadataInterface
      */
     public function addPropertyRule($property, Rule $rule)
     {
-        if (!isset ($this->filteredProperties[$property])) {
+        if (!isset($this->filteredProperties[$property])) {
             $this->filteredProperties[$property] = array('rules' => array());
         }
 
@@ -101,9 +101,4 @@ class ClassMetadata implements ClassMetadataInterface
 
         return $this->reflClass;
     }
-
-
-
-
-
 }

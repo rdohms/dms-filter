@@ -48,5 +48,4 @@ class RegExp extends BaseFilter
 
         return static::$unicodeEnabled;
     }
-
 }

@@ -20,5 +20,4 @@ class IntScalar extends BaseFilter
     {
         return (int) ($value);
     }
-
 }

@@ -36,7 +36,7 @@ class BooleanTest extends FilterTestCase
         return array(
             array(null, "My Text", true),
             array(null, "", false),
-            array(null, NULL, false),
+            array(null, null, false),
             array(null, 21.9, true),
             array(null, 21, true),
             array(null, 0, false),
