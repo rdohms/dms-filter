@@ -16,7 +16,6 @@ class StripTags extends BaseFilter
      * {@inheritDoc}
      *
      * @param \DMS\Filter\Rules\StripTags $rule
-     * @param mixed $filter
      */
     public function apply(Rule $rule, $value)
     {

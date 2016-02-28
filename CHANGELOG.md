@@ -1,9 +1,11 @@
-## vX
+# Changelog
 
-This version's changes are mostly in order to make this library PHP 7 compatible.
+From v3.0.0 onwards this file will always be updated with notable changes and BC breaks.
+This project follows semver.
 
-BC:
+## [3.0.0] - 2016-02-28
+### Changed
 - Int, Float and Boolean filters and annotations get `Scalar` suffix to not clash with reserved words
 
-Internal:
+### Fixed
 - The use of `self` in `RegExp` filter was returning the original value not the new updated one, this seems to be a change in PHP, so we now use `static` which makes it more friendly to extensions.
