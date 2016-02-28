@@ -45,7 +45,6 @@ class ClassMetadataFactory implements ClassMetadataFactoryInterface
      */
     public function getClassMetadata($class)
     {
-
         $class = ltrim($class, '\\');
 
         //Already parsed
@@ -55,10 +54,8 @@ class ClassMetadataFactory implements ClassMetadataFactoryInterface
 
         //Check Cache for it
         if ($this->cache !== null && $this->cache->contains($class)) {
-
             $this->setParsedClass($class, $this->cache->fetch($class));
             return $this->getParsedClass($class);
-
         }
 
         //Parse unloaded and uncached class
@@ -153,9 +150,7 @@ class ClassMetadataFactory implements ClassMetadataFactoryInterface
     protected function loadInterfaceMetadata(ClassMetadataInterface $metadata)
     {
         foreach ($metadata->getReflectionClass()->getInterfaces() as $interface) {
-
             $metadata->mergeRules($this->getClassMetadata($interface->getName()));
-
         }
     }
 }

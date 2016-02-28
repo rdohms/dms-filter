@@ -27,11 +27,9 @@ class DigitsTest extends FilterTestCase
         $filter = new Digits();
 
         if ($unicodeSetting !== null) {
-
             $property = new \ReflectionProperty($filter, 'unicodeEnabled');
             $property->setAccessible(true);
             $property->setValue($filter, $unicodeSetting);
-
         }
 
         $result = $filter->apply($rule, $value);

@@ -24,7 +24,7 @@ class ToLowerTest extends FilterTestCase
     public function testRule($options, $value, $expectedResult, $useEncoding)
     {
         if ($useEncoding && !function_exists('mb_strtolower')) {
-            $this->markTestSkipped ('mbstring extension not enabled');
+            $this->markTestSkipped('mbstring extension not enabled');
         }
 
         $rule   = new ToLowerRule($options);
@@ -40,8 +40,8 @@ class ToLowerTest extends FilterTestCase
      */
     public function testInvalidEncoding()
     {
-        if ( ! function_exists('mb_strtolower')) {
-            $this->markTestSkipped ('mbstring extension not enabled');
+        if (! function_exists('mb_strtolower')) {
+            $this->markTestSkipped('mbstring extension not enabled');
         }
 
         $rule = new ToLowerRule(array('encoding' => 'invalid'));

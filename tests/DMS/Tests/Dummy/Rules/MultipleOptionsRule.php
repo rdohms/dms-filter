@@ -15,6 +15,4 @@ class MultipleOptionsRule extends Rule
     {
         return $value;
     }
-
-
 }

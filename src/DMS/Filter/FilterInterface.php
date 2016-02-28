@@ -43,5 +43,4 @@ interface FilterInterface
      * @return Mapping\ClassMetadataFactoryInterface
      */
     public function getMetadataFactory();
-
 }

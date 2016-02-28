@@ -27,5 +27,4 @@ class Alnum extends RegExp
     {
         return 'allowWhitespace';
     }
-
 }

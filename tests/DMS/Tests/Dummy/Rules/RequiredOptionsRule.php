@@ -24,5 +24,4 @@ class RequiredOptionsRule extends Rule
     {
         return array('config', 'path');
     }
-
 }

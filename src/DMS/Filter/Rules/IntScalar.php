@@ -13,5 +13,4 @@ namespace DMS\Filter\Rules;
  */
 class IntScalar extends Rule
 {
-
 }

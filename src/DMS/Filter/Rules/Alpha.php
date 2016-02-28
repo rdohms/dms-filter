@@ -27,5 +27,4 @@ class Alpha extends RegExp
     {
         return 'allowWhitespace';
     }
-
 }

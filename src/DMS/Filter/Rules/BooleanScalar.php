@@ -12,5 +12,4 @@ namespace DMS\Filter\Rules;
  */
 class BooleanScalar extends Rule
 {
-
 }

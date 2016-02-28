@@ -92,11 +92,9 @@ class RuleTest extends FilterTestCase
         try {
             $rule = new MultipleOptionsRule(array('invalid' => 'option'));
         } catch (InvalidOptionsException $e) {
-
             $this->assertInternalType('array', $e->getOptions());
 
             $this->assertContains('invalid', $e->getOptions());
-
         }
     }
 }

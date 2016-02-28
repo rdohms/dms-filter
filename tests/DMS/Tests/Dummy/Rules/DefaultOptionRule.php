@@ -17,5 +17,4 @@ class DefaultOptionRule extends Rule
     {
         return 'config';
     }
-
 }

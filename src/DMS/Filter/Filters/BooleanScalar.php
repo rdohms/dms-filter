@@ -19,5 +19,4 @@ class BooleanScalar extends BaseFilter
     {
         return (boolean) $value;
     }
-
 }

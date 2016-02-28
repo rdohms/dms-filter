@@ -65,7 +65,6 @@ class ObjectWalker
      */
     public function applyFilterRule($property, Rules\Rule $filterRule)
     {
-
         if ($this->filterLoader === null) {
             throw new \UnexpectedValueException("A FilterLoader must be provided");
         }
@@ -81,7 +80,6 @@ class ObjectWalker
         $filteredValue = $filter->apply($filterRule, $value);
 
         $this->setPropertyValue($property, $filteredValue);
-
     }
 
     /**
