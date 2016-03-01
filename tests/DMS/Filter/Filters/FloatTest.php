@@ -3,7 +3,7 @@
 namespace DMS\Filter\Filters;
 
 use DMS\Tests\FilterTestCase;
-use DMS\Filter\Rules\Float as FloatRule;
+use DMS\Filter\Rules\FloatScalar as FloatRule;
 
 class FloatTest extends FilterTestCase
 {
@@ -24,7 +24,7 @@ class FloatTest extends FilterTestCase
     public function testRule($options, $value, $expectedResult)
     {
         $rule   = new FloatRule($options);
-        $filter = new Float();
+        $filter = new FloatScalar();
 
         $result = $filter->apply($rule, $value);
 

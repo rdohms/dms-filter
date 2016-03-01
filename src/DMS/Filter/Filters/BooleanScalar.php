@@ -5,12 +5,12 @@ namespace DMS\Filter\Filters;
 use DMS\Filter\Rules\Rule;
 
 /**
- * Boolean Filter
+ * BooleanScalar Filter
  *
  * @package DMS
  * @subpackage Filter
  */
-class Boolean extends BaseFilter
+class BooleanScalar extends BaseFilter
 {
     /**
      * {@inheritDoc}
@@ -19,5 +19,4 @@ class Boolean extends BaseFilter
     {
         return (boolean) $value;
     }
-
 }

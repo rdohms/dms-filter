@@ -3,7 +3,7 @@
 namespace DMS\Filter\Filters;
 
 use DMS\Tests\FilterTestCase;
-use DMS\Filter\Rules\Int as IntRule;
+use DMS\Filter\Rules\IntScalar as IntRule;
 
 class IntTest extends FilterTestCase
 {
@@ -24,7 +24,7 @@ class IntTest extends FilterTestCase
     public function testRule($options, $value, $expectedResult)
     {
         $rule   = new IntRule($options);
-        $filter = new Int();
+        $filter = new IntScalar();
 
         $result = $filter->apply($rule, $value);
 

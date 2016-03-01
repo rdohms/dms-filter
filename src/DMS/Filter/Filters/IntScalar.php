@@ -5,13 +5,13 @@ namespace DMS\Filter\Filters;
 use DMS\Filter\Rules\Rule;
 
 /**
- * Int Filter
- * Converts content into an Int
+ * IntScalar Filter
+ * Converts content into an IntScalar
  *
  * @package DMS
  * @subpackage Filter
  */
-class Int extends BaseFilter
+class IntScalar extends BaseFilter
 {
     /**
      * {@inheritDoc}
@@ -20,5 +20,4 @@ class Int extends BaseFilter
     {
         return (int) ($value);
     }
-
 }

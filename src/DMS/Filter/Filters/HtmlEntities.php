@@ -20,5 +20,4 @@ class HtmlEntities extends BaseFilter
     {
         return htmlentities($value, $rule->flags, $rule->encoding, $rule->doubleEncode);
     }
-
 }

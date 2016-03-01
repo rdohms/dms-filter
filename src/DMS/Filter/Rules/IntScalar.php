@@ -3,14 +3,14 @@
 namespace DMS\Filter\Rules;
 
 /**
- * Boolean Rule
+ * IntScalar Rule
+ * Converts content into an IntScalar
  *
  * @package DMS
  * @subpackage Filter
  *
  * @Annotation
  */
-class Boolean extends Rule
+class IntScalar extends Rule
 {
-
 }

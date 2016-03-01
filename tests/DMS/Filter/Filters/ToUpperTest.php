@@ -24,7 +24,7 @@ class ToUpperTest extends FilterTestCase
     public function testRule($options, $value, $expectedResult, $useEncoding)
     {
         if ($useEncoding && !function_exists('mb_strtoupper')) {
-            $this->markTestSkipped ('mbstring extension not enabled');
+            $this->markTestSkipped('mbstring extension not enabled');
         }
 
         $rule   = new ToUpperRule($options);
@@ -40,8 +40,8 @@ class ToUpperTest extends FilterTestCase
      */
     public function testInvalidEncoding()
     {
-        if ( ! function_exists('mb_strtoupper')) {
-            $this->markTestSkipped ('mbstring extension not enabled');
+        if (! function_exists('mb_strtoupper')) {
+            $this->markTestSkipped('mbstring extension not enabled');
         }
 
         $rule   = new ToUpperRule(array('encoding' => 'invalid'));

@@ -34,7 +34,6 @@ class AnnotationLoader implements LoaderInterface
 
         //Register Filter Rules Annotation Namespace
         AnnotationRegistry::registerAutoloadNamespace('DMS\Filter\Rules', __DIR__ . '/../../../../');
-
     }
 
     /**
@@ -46,16 +45,12 @@ class AnnotationLoader implements LoaderInterface
      */
     public function loadClassMetadata(ClassMetadataInterface $metadata)
     {
-
         $reflClass = $metadata->getReflectionClass();
 
         //Iterate over properties to get annotations
         foreach ($reflClass->getProperties() as $property) {
-
             $this->readProperty($property, $metadata);
-
         }
-
     }
 
     /**
@@ -83,9 +78,6 @@ class AnnotationLoader implements LoaderInterface
 
             //Add Rule
             $metadata->addPropertyRule($property->getName(), $rule);
-
         }
-
     }
-
 }

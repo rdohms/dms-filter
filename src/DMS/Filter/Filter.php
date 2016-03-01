@@ -65,7 +65,6 @@ class Filter implements FilterInterface
      */
     public function filterValue($value, $rule)
     {
-
         if ($rule instanceof Rules\Rule) {
             $filter = $this->filterLoader->getFilterForRule($rule);
             return $filter->apply($rule, $value);
@@ -105,11 +104,8 @@ class Filter implements FilterInterface
 
         //Iterate over properties with filters
         foreach ($properties as $property) {
-
             $walker->applyFilterRules($property, $metadata->getPropertyRules($property));
-
         }
-
     }
 
     /**
@@ -128,5 +124,4 @@ class Filter implements FilterInterface
 
         return $value;
     }
-
 }

@@ -55,5 +55,4 @@ class Zend extends BaseFilter
             return new $class($options);
         }
     }
-
 }

@@ -42,11 +42,10 @@ class RegExp extends BaseFilter
      */
     public function checkUnicodeSupport()
     {
-        if (null === self::$unicodeEnabled) {
-            self::$unicodeEnabled = (@preg_match('/\pL/u', 'a')) ? true : false;
+        if (null === static::$unicodeEnabled) {
+            static::$unicodeEnabled = (@preg_match('/\pL/u', 'a')) ? true : false;
         }
 
-        return self::$unicodeEnabled;
+        return static::$unicodeEnabled;
     }
-
 }

@@ -3,15 +3,13 @@
 namespace DMS\Filter\Rules;
 
 /**
- * Float Rule
- * Converts content into a Float
+ * BooleanScalar Rule
  *
  * @package DMS
  * @subpackage Filter
  *
  * @Annotation
  */
-class Float extends Rule
+class BooleanScalar extends Rule
 {
-
 }

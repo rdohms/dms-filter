@@ -1,17 +1,44 @@
 language: php
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache
 
 php:
     - 5.3
     - 5.4
     - 5.5
+    - 5.6
+    - 7
     - hhvm
 
-before_script:
-  - composer self-update
-  - composer install --dev
-
-script: phpunit
-
 matrix:
+  include:
+    - php: 5.3
+      env: dependencies=lowest
+    - php: 5.4
+      env: dependencies=lowest
+    - php: 5.5
+      env: dependencies=lowest
+    - php: 5.6
+      env: dependencies=lowest
+    - php: 7
+      env: dependencies=lowest
+    - php: 5.6
+      env: dependencies=highest
+    - php: 7
+      env: dependencies=highest
+  exclude:
+    - php: 5.3
+    - php: 5.4
   allow_failures:
     - php: hhvm
+
+before_script:
+  - composer self-update -q
+  - if [ -z "$dependencies" ]; then composer install --prefer-dist; fi;
+  - if [ "$dependencies" = "lowest" ]; then composer update --prefer-lowest --prefer-dist -n; fi;
+  - if [ "$dependencies" = "highest" ]; then composer update --prefer-dist -n; fi;
+
+script: phpunit
