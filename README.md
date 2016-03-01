@@ -10,8 +10,6 @@ Use composer to add DMS\Filter to your app
 
 `composer require dms/dms-filter`
 
-This will get you the latest compatible version with 2.0 without BC breaks.
-
 ## Usage
 
 Your Entity:
