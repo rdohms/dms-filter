@@ -52,6 +52,12 @@ class AnnotatedClass
     public $zendalternate;
 
     /**
+     * @var string
+     * @Filter\Trim
+     */
+    private $privateProperty;
+
+    /**
      * @param $value
      * @return string
      */
@@ -67,5 +73,15 @@ class AnnotatedClass
     public static function anotherCallback($value)
     {
         return 'called_back';
+    }
+
+    public function setPrivateProperty($value)
+    {
+        $this->privateProperty = $value;
+    }
+
+    public function getPrivateProperty()
+    {
+        return $this->privateProperty;
     }
 }

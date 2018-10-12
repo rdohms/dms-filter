@@ -118,4 +118,14 @@ class FilterTest extends FilterTestCase
     {
         $this->assertInstanceOf('DMS\Filter\Mapping\ClassMetadataFactory', $this->filter->getMetadataFactory());
     }
+
+    public function testFilterPrivate()
+    {
+        $class = new Dummy\Classes\AnotherChildAnnotatedClass();
+        $class->setPrivateProperty('  needs to be trimmed   ');
+
+        $this->filter->filterEntity($class);
+
+        $this->assertEquals($class->getPrivateProperty(), 'needs to be trimmed');
+    }
 }

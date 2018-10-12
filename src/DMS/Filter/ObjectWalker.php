@@ -114,9 +114,24 @@ class ObjectWalker
      */
     private function getAccessibleReflectionProperty($propertyName)
     {
-        $property = $this->reflClass->getProperty($propertyName);
+        $property = $this->getReflectionProperty($this->reflClass, $propertyName);
         $property->setAccessible(true);
 
         return $property;
+    }
+
+    private function getReflectionProperty($class, $name)
+    {
+        try {
+            return $class->getProperty($name);
+        }
+        catch (\ReflectionException $e) {
+            $parent = $class->getParentClass();
+            if (null === $parent) {
+                throw new \Exception(sprintf('property not exists %s', $name));
+            }
+
+            return $this->getReflectionProperty($parent, $name);
+        }
     }
 }
