@@ -8,13 +8,13 @@ use DMS\Filter\Rules\PregReplace as PregReplaceRule;
 class PregReplaceTest extends FilterTestCase
 {
 
-    public function setUp()
-    {
+    public function setUp(): void
+{
         parent::setUp();
     }
 
-    public function tearDown()
-    {
+    public function tearDown(): void
+{
         parent::tearDown();
     }
 

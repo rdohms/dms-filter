@@ -13,15 +13,15 @@ class ClassMetadataFactoryTest extends FilterTestCase
      */
     protected $factory;
 
-    public function setUp()
-    {
+    public function setUp(): void
+{
         parent::setUp();
 
         $this->factory = $this->buildMetadataFactory();
     }
 
-    public function tearDown()
-    {
+    public function tearDown(): void
+{
         parent::tearDown();
     }
 
