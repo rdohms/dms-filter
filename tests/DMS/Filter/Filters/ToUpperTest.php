@@ -8,13 +8,13 @@ use DMS\Filter\Rules\ToUpper as ToUpperRule;
 class ToUpperTest extends FilterTestCase
 {
 
-    public function setUp()
-    {
+    public function setUp(): void
+{
         parent::setUp();
     }
 
-    public function tearDown()
-    {
+    public function tearDown(): void
+{
         parent::tearDown();
     }
 
@@ -35,11 +35,9 @@ class ToUpperTest extends FilterTestCase
         $this->assertEquals($expectedResult, $result);
     }
 
-    /**
-     * @expectedException \DMS\Filter\Exception\FilterException
-     */
     public function testInvalidEncoding()
     {
+        $this->expectException(\DMS\Filter\Exception\FilterException::class);
         if (! function_exists('mb_strtoupper')) {
             $this->markTestSkipped('mbstring extension not enabled');
         }

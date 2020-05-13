@@ -8,13 +8,13 @@ use DMS\Filter\Rules\Trim as TrimRule;
 class TrimTest extends FilterTestCase
 {
 
-    public function setUp()
-    {
+    public function setUp(): void
+{
         parent::setUp();
     }
 
-    public function tearDown()
-    {
+    public function tearDown(): void
+{
         parent::tearDown();
     }
 

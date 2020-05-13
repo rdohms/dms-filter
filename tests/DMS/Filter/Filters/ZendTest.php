@@ -3,6 +3,7 @@
 
 namespace DMS\Filter\Filters;
 
+use DMS\Filter\Exception\InvalidZendFilterException;
 use DMS\Filter\Rules\Zend as ZendRule;
 use DMS\Tests\FilterTestCase;
 
@@ -14,6 +15,7 @@ class ZendTest extends FilterTestCase
         $rule = $this->buildRule('Boolean', array('casting' => false));
         $filter = new Zend();
         $filter->apply($rule, '0');
+        $this->expectNotToPerformAssertions();
     }
 
     public function testFilterFullname()
@@ -21,13 +23,12 @@ class ZendTest extends FilterTestCase
         $rule = $this->buildRule('Zend\Filter\Boolean', array('casting' => false));
         $filter = new Zend();
         $filter->apply($rule, '0');
+        $this->expectNotToPerformAssertions();
     }
 
-    /**
-     * @expectedException \DMS\Filter\Exception\InvalidZendFilterException
-     */
     public function testInvalidFilter()
     {
+        $this->expectException(InvalidZendFilterException::class);
         $rule = $this->buildRule('MissingFilter');
         $filter = new Zend();
         $filter->apply($rule, '0');

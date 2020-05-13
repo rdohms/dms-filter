@@ -15,13 +15,13 @@ use DMS\Tests\FilterTestCase;
 class RuleTest extends FilterTestCase
 {
 
-    public function setUp()
-    {
+    public function setUp(): void
+{
         parent::setUp();
     }
 
-    public function tearDown()
-    {
+    public function tearDown(): void
+{
         parent::tearDown();
     }
 
@@ -53,37 +53,29 @@ class RuleTest extends FilterTestCase
         $this->assertInstanceOf('DMS\Filter\Rules\Rule', $rule);
     }
 
-    /**
-     * @expectedException DMS\Filter\Exception\RuleDefinitionException
-     */
     public function testConstructorNoDefinedDefaultOption()
     {
+        $this->expectException(RuleDefinitionException::class);
         $rule = new NoOptionsRule('value');
 
         $this->assertInstanceOf('DMS\Filter\Rules\Rule', $rule);
     }
 
-    /**
-     * @expectedException DMS\Filter\Exception\InvalidOptionsException
-     */
     public function testConstructorInvalidOption()
     {
+        $this->expectException(InvalidOptionsException::class);
         $rule = new MultipleOptionsRule(array('invalid' => 'option'));
     }
 
-    /**
-     * @expectedException DMS\Filter\Exception\InvalidOptionsException
-     */
     public function testConstructorInvalidDefaultOption()
     {
+        $this->expectException(InvalidOptionsException::class);
         $rule = new InvalidDefaultOptionRule('value');
     }
 
-    /**
-     * @expectedException DMS\Filter\Exception\MissingOptionsException
-     */
     public function testConstructorMissingOption()
     {
+        $this->expectException(MissingOptionsException::class);
         $rule = new RequiredOptionsRule(array('config' => 'option'));
     }
 
@@ -92,7 +84,7 @@ class RuleTest extends FilterTestCase
         try {
             $rule = new MultipleOptionsRule(array('invalid' => 'option'));
         } catch (InvalidOptionsException $e) {
-            $this->assertInternalType('array', $e->getOptions());
+            $this->assertIsArray($e->getOptions());
 
             $this->assertContains('invalid', $e->getOptions());
         }
