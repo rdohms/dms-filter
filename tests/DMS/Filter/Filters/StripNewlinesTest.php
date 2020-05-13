@@ -8,13 +8,13 @@ use DMS\Filter\Rules\StripNewlines as StripNewLinesRule;
 class StripNewlinesTest extends FilterTestCase
 {
 
-    public function setUp()
-    {
+    public function setUp(): void
+{
         parent::setUp();
     }
 
-    public function tearDown()
-    {
+    public function tearDown(): void
+{
         parent::tearDown();
     }
 

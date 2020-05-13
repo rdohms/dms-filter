@@ -13,15 +13,15 @@ class FilterLoaderTest extends FilterTestCase
      */
     protected $loader;
 
-    public function setUp()
-    {
+    public function setUp(): void
+{
         parent::setUp();
 
         $this->loader = new FilterLoader();
     }
 
-    public function tearDown()
-    {
+    public function tearDown(): void
+{
         parent::tearDown();
     }
 
@@ -35,7 +35,7 @@ class FilterLoaderTest extends FilterTestCase
     public function testGetFilterForRule($rule, $return, $expectException)
     {
         if ($expectException) {
-            $this->setExpectedException('\UnexpectedValueException');
+            $this->expectException(\UnexpectedValueException::class);
         }
 
         $this->assertEquals($return, $this->loader->getFilterForRule($rule));

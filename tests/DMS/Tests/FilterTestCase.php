@@ -4,17 +4,18 @@ namespace DMS\Tests;
 
 use DMS\Filter\Mapping;
 use Doctrine\Common\Annotations;
+use PHPUnit\Framework\TestCase;
 
-class FilterTestCase extends \PHPUnit_Framework_TestCase
+class FilterTestCase extends TestCase
 {
     protected $loader;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         parent::tearDown();
     }

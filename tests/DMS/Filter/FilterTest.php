@@ -13,14 +13,14 @@ class FilterTest extends FilterTestCase
      */
     protected $filter;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->filter = new Filter($this->buildMetadataFactory(), new FilterLoader());
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         parent::tearDown();
     }
@@ -40,8 +40,8 @@ class FilterTest extends FilterTestCase
         $this->assertEquals($classClone->nickname, $class->nickname);
         $this->assertNotEquals($classClone->description, $class->description);
 
-        $this->assertNotContains("<script>", $class->name);
-        $this->assertNotContains("<p>", $class->description);
+        $this->assertStringNotContainsString("<script>", $class->name);
+        $this->assertStringNotContainsString("<p>", $class->description);
     }
 
     public function testFilterWithParent()
@@ -61,9 +61,9 @@ class FilterTest extends FilterTestCase
         $this->assertNotEquals($classClone->description, $class->description);
         $this->assertNotEquals($classClone->surname, $class->surname);
 
-        $this->assertNotContains("<script>", $class->name);
-        $this->assertNotContains("<p>", $class->description);
-        $this->assertNotContains(" ", $class->surname);
+        $this->assertStringNotContainsString("<script>", $class->name);
+        $this->assertStringNotContainsString("<p>", $class->description);
+        $this->assertStringNotContainsString(" ", $class->surname);
     }
 
     public function testFilterProperty()
@@ -79,8 +79,8 @@ class FilterTest extends FilterTestCase
         $this->assertEquals($classClone->name, $class->name);
         $this->assertNotEquals($classClone->description, $class->description);
 
-        $this->assertContains("<script>", $class->name);
-        $this->assertNotContains("<p>", $class->description);
+        $this->assertStringContainsString("<script>", $class->name);
+        $this->assertStringNotContainsString("<p>", $class->description);
     }
 
     public function testFilterValue()
@@ -91,8 +91,8 @@ class FilterTest extends FilterTestCase
 
         $this->assertNotEquals($value, $filtered);
 
-        $this->assertNotContains('<b>', $filtered);
-        $this->assertNotContains('<p>', $filtered);
+        $this->assertStringNotContainsString('<b>', $filtered);
+        $this->assertStringNotContainsString('<p>', $filtered);
     }
 
     public function testFilterValueWithArray()
@@ -104,13 +104,14 @@ class FilterTest extends FilterTestCase
 
         $this->assertNotEquals($value, $filtered);
 
-        $this->assertNotContains('<b>', $filtered);
-        $this->assertNotContains('<p>', $filtered);
-        $this->assertNotContains('\n', $filtered);
+        $this->assertStringNotContainsString('<b>', $filtered);
+        $this->assertStringNotContainsString('<p>', $filtered);
+        $this->assertStringNotContainsString('\n', $filtered);
     }
 
     public function testNotFailOnNull()
     {
+        $this->expectNotToPerformAssertions();
         $this->filter->filterEntity(null);
     }
 

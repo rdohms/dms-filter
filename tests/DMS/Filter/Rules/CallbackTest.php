@@ -5,6 +5,7 @@ namespace DMS\Filter\Rules;
 
 use DMS\Tests\Dummy\Classes\AnnotatedClass;
 use DMS\Tests\FilterTestCase;
+use DMS\Filter\Exception\InvalidCallbackException;
 
 class CallbackTest extends FilterTestCase
 {
@@ -19,7 +20,7 @@ class CallbackTest extends FilterTestCase
     public function testGetInputType($input, $expectedOutput, $expectException)
     {
         if ($expectException) {
-            $this->setExpectedException('DMS\Filter\Exception\InvalidCallbackException');
+            $this->expectException(InvalidCallbackException::class);
         }
 
         $rule = new Callback($input);
@@ -35,8 +36,8 @@ class CallbackTest extends FilterTestCase
 
         return array(
             array('objMethod', Callback::SELF_METHOD_TYPE, false),
-            array(array('DMS\Tests\Dummy\Classes\AnnotatedClass', 'anotherCallback'), Callback::CALLABLE_TYPE, false),
-            array(array('DMS\Tests\Dummy\Classes\AnnotatedClass', 'missingCallback'), null, true),
+            array(array(AnnotatedClass::class, 'anotherCallback'), Callback::CALLABLE_TYPE, false),
+            array(array(AnnotatedClass::class, 'missingCallback'), null, true),
             array(array(new AnnotatedClass(), 'callbackMethod'), Callback::CALLABLE_TYPE, false),
             array('strlen', Callback::CALLABLE_TYPE, false),
             array($closure, Callback::CLOSURE_TYPE, false),

@@ -2,14 +2,17 @@
 
 namespace DMS\Filter\Filters;
 
+use DMS\Filter\Exception\FilterException;
+use DMS\Filter\Exception\InvalidCallbackException;
 use DMS\Tests\Dummy\Classes\AnnotatedClass;
 use DMS\Tests\FilterTestCase;
 use DMS\Filter\Rules\Callback as CallbackRule;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class CallbackTest extends FilterTestCase
 {
     /**
-     * @var CallbackRule | \PHPUnit_Framework_MockObject_MockObject
+     * @var CallbackRule | MockObject
      */
     protected $rule;
 
@@ -18,18 +21,18 @@ class CallbackTest extends FilterTestCase
      */
     protected $filter;
 
-    public function setUp()
-    {
+    public function setUp(): void
+{
         parent::setUp();
 
-        $this->rule = $this->getMock('DMS\Filter\Rules\Callback');
+        $this->rule = $this->getMockBuilder(CallbackRule::class)->getMock();
         $this->filter = new Callback();
     }
 
-    public function testRuleWithObjectMethod()
+    public function testRuleWithObjectMethod(): void
     {
-        $this->rule->expects($this->once())->method('getInputType')->will(
-            $this->returnValue(CallbackRule::SELF_METHOD_TYPE)
+        $this->rule->expects($this->once())->method('getInputType')->willReturn(
+            CallbackRule::SELF_METHOD_TYPE
         );
         $this->rule->callback = 'callbackMethod';
 
@@ -41,13 +44,11 @@ class CallbackTest extends FilterTestCase
         $this->assertEquals('called_back', $result);
     }
 
-    /**
-     * @expectedException \DMS\Filter\Exception\InvalidCallbackException
-     */
     public function testRuleWithObjectMethodInvalid()
     {
-        $this->rule->expects($this->once())->method('getInputType')->will(
-            $this->returnValue(CallbackRule::SELF_METHOD_TYPE)
+        $this->expectException(InvalidCallbackException::class);
+        $this->rule->expects($this->once())->method('getInputType')->willReturn(
+            CallbackRule::SELF_METHOD_TYPE
         );
         $this->rule->callback = 'callbackMissingMethod';
 
@@ -57,13 +58,11 @@ class CallbackTest extends FilterTestCase
         $this->filter->apply($this->rule, 'value');
     }
 
-    /**
-     * @expectedException \DMS\Filter\Exception\FilterException
-     */
     public function testRuleWithObjectMethodButNoObject()
     {
-        $this->rule->expects($this->once())->method('getInputType')->will(
-            $this->returnValue(CallbackRule::SELF_METHOD_TYPE)
+        $this->expectException(FilterException::class);
+        $this->rule->expects($this->once())->method('getInputType')->willReturn(
+            CallbackRule::SELF_METHOD_TYPE
         );
         $this->rule->callback = 'callbackMissingMethod';
 
@@ -72,10 +71,10 @@ class CallbackTest extends FilterTestCase
 
     public function testRuleWithCallable()
     {
-        $this->rule->expects($this->once())->method('getInputType')->will(
-            $this->returnValue(CallbackRule::CALLABLE_TYPE)
+        $this->rule->expects($this->once())->method('getInputType')->willReturn(
+            CallbackRule::CALLABLE_TYPE
         );
-        $this->rule->callback = array('DMS\Tests\Dummy\Classes\AnnotatedClass', 'anotherCallback');
+        $this->rule->callback = array(AnnotatedClass::class, 'anotherCallback');
 
         $result = $this->filter->apply($this->rule, 'value');
 
@@ -84,8 +83,8 @@ class CallbackTest extends FilterTestCase
 
     public function testRuleWithNonStaticCallable()
     {
-        $this->rule->expects($this->once())->method('getInputType')->will(
-            $this->returnValue(CallbackRule::CALLABLE_TYPE)
+        $this->rule->expects($this->once())->method('getInputType')->willReturn(
+            CallbackRule::CALLABLE_TYPE
         );
         $this->rule->callback = array(new AnnotatedClass(), 'callbackMethod');
 
@@ -94,15 +93,13 @@ class CallbackTest extends FilterTestCase
         $this->assertEquals('called_back', $result);
     }
 
-    /**
-     * @expectedException \DMS\Filter\Exception\InvalidCallbackException
-     */
     public function testRuleWithCallableInvalid()
     {
-        $this->rule->expects($this->once())->method('getInputType')->will(
-            $this->returnValue(CallbackRule::CALLABLE_TYPE)
+        $this->expectException(InvalidCallbackException::class);
+        $this->rule->expects($this->once())->method('getInputType')->willReturn(
+            CallbackRule::CALLABLE_TYPE
         );
-        $this->rule->callback = array('DMS\Tests\Dummy\Classes\AnnotatedClass', 'callbackMissingMethod');
+        $this->rule->callback = array(AnnotatedClass::class, 'callbackMissingMethod');
 
         $result = $this->filter->apply($this->rule, 'value');
     }
@@ -113,8 +110,8 @@ class CallbackTest extends FilterTestCase
             return 'called_back';
         };
 
-        $this->rule->expects($this->once())->method('getInputType')->will(
-            $this->returnValue(CallbackRule::CLOSURE_TYPE)
+        $this->rule->expects($this->once())->method('getInputType')->willReturn(
+            CallbackRule::CLOSURE_TYPE
         );
         $this->rule->callback = $closure;
 
@@ -123,13 +120,11 @@ class CallbackTest extends FilterTestCase
         $this->assertEquals('called_back', $result);
     }
 
-    /**
-     * @expectedException \DMS\Filter\Exception\InvalidCallbackException
-     */
     public function testRuleWithNonClosure()
     {
-        $this->rule->expects($this->once())->method('getInputType')->will(
-            $this->returnValue(CallbackRule::CLOSURE_TYPE)
+        $this->expectException(InvalidCallbackException::class);
+        $this->rule->expects($this->once())->method('getInputType')->willReturn(
+            CallbackRule::CLOSURE_TYPE
         );
         $this->rule->callback = "i'm not a closure";
 
