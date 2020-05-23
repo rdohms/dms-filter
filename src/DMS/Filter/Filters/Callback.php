@@ -17,7 +17,7 @@ use DMS\Filter\Rules\Rule;
 class Callback extends BaseFilter implements ObjectAwareFilter
 {
     /**
-     * @var object | null
+     * @var object|null
      */
     protected ?object $currentObject = null;
 
@@ -34,7 +34,7 @@ class Callback extends BaseFilter implements ObjectAwareFilter
     /**
      * Retrieves the current Object to be used
      *
-     * @return object | null
+     * @return object|null
      */
     public function getCurrentObject()
     {

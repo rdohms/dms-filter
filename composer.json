@@ -15,7 +15,8 @@
 
     "require": {
         "php":  "^7.4",
-        "doctrine/annotations": "~1.1"
+        "doctrine/annotations": "~1.1",
+        "doctrine/coding-standard": "^7"
     },
 
     "require-dev": {

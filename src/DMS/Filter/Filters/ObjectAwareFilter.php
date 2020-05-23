@@ -22,7 +22,7 @@ interface ObjectAwareFilter
     /**
      * Retrieves the current Object to be used
      *
-     * @return object | null
+     * @return object|null
      */
     public function getCurrentObject();
 }
