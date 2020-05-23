@@ -21,7 +21,7 @@ class AnnotationLoader implements LoaderInterface
      *
      * @var Reader
      */
-    protected $reader;
+    protected Reader $reader;
 
     /**
      * Constructor
@@ -43,7 +43,7 @@ class AnnotationLoader implements LoaderInterface
      * @param ClassMetadataInterface $metadata
      * @return bool|void
      */
-    public function loadClassMetadata(ClassMetadataInterface $metadata)
+    public function loadClassMetadata(ClassMetadataInterface $metadata): bool
     {
         $reflClass = $metadata->getReflectionClass();
 
@@ -51,6 +51,8 @@ class AnnotationLoader implements LoaderInterface
         foreach ($reflClass->getProperties() as $property) {
             $this->readProperty($property, $metadata);
         }
+
+        return true;
     }
 
     /**
@@ -59,7 +61,7 @@ class AnnotationLoader implements LoaderInterface
      * @param ReflectionProperty $property
      * @param ClassMetadataInterface $metadata
      */
-    private function readProperty(ReflectionProperty $property, ClassMetadataInterface $metadata)
+    private function readProperty(ReflectionProperty $property, ClassMetadataInterface $metadata): void
     {
         // Skip if this property is not from this class
         if ($property->getDeclaringClass()->getName()

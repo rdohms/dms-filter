@@ -23,12 +23,12 @@ class HtmlEntities extends Rule
      *
      * @var string
      */
-    public $encoding = 'UTF-8';
+    public string $encoding = 'UTF-8';
 
     /**
      * Convert existing entities
      *
      * @var bool
      */
-    public $doubleEncode = true;
+    public bool $doubleEncode = true;
 }

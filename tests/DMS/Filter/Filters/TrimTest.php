@@ -8,20 +8,14 @@ use DMS\Filter\Rules\Trim as TrimRule;
 class TrimTest extends FilterTestCase
 {
 
-    public function setUp(): void
-{
-        parent::setUp();
-    }
-
-    public function tearDown(): void
-{
-        parent::tearDown();
-    }
-
     /**
      * @dataProvider provideForRule
+     *
+     * @param $options
+     * @param $value
+     * @param $expectedResult
      */
-    public function testRule($options, $value, $expectedResult)
+    public function testRule($options, $value, $expectedResult): void
     {
         $rule   = new TrimRule($options);
         $filter = new Trim();
@@ -31,15 +25,15 @@ class TrimTest extends FilterTestCase
         $this->assertEquals($expectedResult, $result);
     }
 
-    public function provideForRule()
+    public function provideForRule(): array
     {
-        return array(
-            array(array(), " my text", "my text"),
-            array(array(), " my text ", "my text"),
-            array(array(), "my text ", "my text"),
-            array(array('charlist' => "\\"), "\my text", "my text"),
-            array("\\", "\my text", "my text"),
-            array("x", "xmy textx", "my text"),
-        );
+        return [
+            [[], " my text", "my text"],
+            [[], " my text ", "my text"],
+            [[], "my text ", "my text"],
+            [['charlist' => "\\"], "\my text", "my text"],
+            ["\\", "\my text", "my text"],
+            ["x", "xmy textx", "my text"],
+        ];
     }
 }

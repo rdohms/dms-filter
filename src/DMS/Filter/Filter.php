@@ -11,6 +11,7 @@ namespace DMS\Filter;
  *
  */
 use DMS\Filter\Filters\Loader\FilterLoaderInterface;
+use DMS\Filter\Mapping\ClassMetadataFactoryInterface;
 
 /**
  * Class Filter
@@ -25,12 +26,12 @@ class Filter implements FilterInterface
      *
      * @var Mapping\ClassMetadataFactory
      */
-    protected $metadataFactory;
+    protected Mapping\ClassMetadataFactory $metadataFactory;
 
     /**
      * @var FilterLoaderInterface
      */
-    protected $filterLoader;
+    protected FilterLoaderInterface $filterLoader;
 
     /**
      * Constructor
@@ -47,7 +48,7 @@ class Filter implements FilterInterface
     /**
      * {@inheritDoc}
      */
-    public function filterEntity($object)
+    public function filterEntity($object): void
     {
         $this->walkObject($object);
     }
@@ -55,7 +56,7 @@ class Filter implements FilterInterface
     /**
      * {@inheritDoc}
      */
-    public function filterProperty($object, $property)
+    public function filterProperty($object, $property): void
     {
         $this->walkObject($object, $property);
     }
@@ -76,7 +77,7 @@ class Filter implements FilterInterface
     /**
      * {@inheritDoc}
      */
-    public function getMetadataFactory()
+    public function getMetadataFactory(): ClassMetadataFactoryInterface
     {
         return $this->metadataFactory;
     }
@@ -87,8 +88,11 @@ class Filter implements FilterInterface
      *
      * @param object $object
      * @param string $limitProperty
+     *
+     * @throws \ReflectionException
+     * @throws \ReflectionException
      */
-    protected function walkObject($object, $limitProperty = null)
+    protected function walkObject($object, $limitProperty = null): void
     {
         if ($object === null) {
             return;
@@ -100,7 +104,7 @@ class Filter implements FilterInterface
         $walker = new ObjectWalker($object, $this->filterLoader);
 
         //Get all filtered properties or limit with selected
-        $properties = ($limitProperty !== null) ? array($limitProperty) : $metadata->getFilteredProperties();
+        $properties = ($limitProperty !== null) ? [$limitProperty] : $metadata->getFilteredProperties();
 
         //Iterate over properties with filters
         foreach ($properties as $property) {

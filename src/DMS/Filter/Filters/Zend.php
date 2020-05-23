@@ -3,8 +3,11 @@
 namespace DMS\Filter\Filters;
 
 use DMS\Filter\Exception\InvalidZendFilterException;
+use DMS\Filter\FilterInterface;
 use DMS\Filter\Rules\Zend as ZendRule;
 use DMS\Filter\Rules\Rule;
+use ReflectionException;
+use ReflectionMethod;
 
 /**
  * Zend Filter
@@ -31,10 +34,10 @@ class Zend extends BaseFilter
      *
      * @param string $class
      * @param array $options
-     * @return \Zend\Filter\FilterInterface
-     * @throws \DMS\Filter\Exception\InvalidZendFilterException
+     * @return FilterInterface|object
+     * @throws InvalidZendFilterException
      */
-    public function getZendInstance($class, $options)
+    public function getZendInstance($class, $options): object
     {
         if (strpos($class, 'Zend\Filter') === false) {
             $class = "Zend\Filter\\".$class;
@@ -45,13 +48,13 @@ class Zend extends BaseFilter
         }
 
         try {
-            new \ReflectionMethod($class, 'setOptions');
+            new ReflectionMethod($class, 'setOptions');
 
             $filter = new $class();
             $filter->setOptions($options);
 
             return $filter;
-        } catch (\ReflectionException $e) {
+        } catch (ReflectionException $e) {
             return new $class($options);
         }
     }

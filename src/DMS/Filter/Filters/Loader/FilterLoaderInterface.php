@@ -3,6 +3,7 @@ namespace DMS\Filter\Filters\Loader;
 
 use DMS\Filter\Filters\BaseFilter;
 use DMS\Filter\Rules\Rule;
+use UnexpectedValueException;
 
 /**
  * Interface FilterLoaderInterface
@@ -18,8 +19,8 @@ interface FilterLoaderInterface
      *
      * @param Rule $rule
      *
-     * @throws \UnexpectedValueException If filter can't be located
+     * @throws UnexpectedValueException If filter can't be located
      * @return BaseFilter
      */
-    public function getFilterForRule(Rule $rule);
+    public function getFilterForRule(Rule $rule): BaseFilter;
 }

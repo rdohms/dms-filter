@@ -16,5 +16,5 @@ interface ClassMetadataFactoryInterface
      * @param string $class
      * @return ClassMetadataInterface
      */
-    public function getClassMetadata($class);
+    public function getClassMetadata($class): ClassMetadataInterface;
 }

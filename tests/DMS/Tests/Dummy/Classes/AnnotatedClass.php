@@ -11,51 +11,51 @@ class AnnotatedClass
      *
      * @var string
      */
-    public $name;
+    public string $name;
 
     /**
      * @Filter\StripTags()
      *
      * @var string
      */
-    public $nickname;
+    public string $nickname;
 
     /**
      * @Filter\StripTags("<b><i>")
      *
      * @var string
      */
-    public $description;
+    public string $description;
 
     /**
      * @var string
      * @Filter\Callback("callbackMethod")
      */
-    public $callback;
+    public ?string $callback = null;
 
     /**
      * @var string
      * @Filter\Callback({"DMS\Tests\Dummy\Classes\AnnotatedClass", "anotherCallback"})
      */
-    public $callback2;
+    public ?string $callback2 = null;
 
     /**
      * @var string
      * @Filter\Zend("StringToLower")
      */
-    public $zend;
+    public ?string $zend = null;
 
     /**
      * @var string
      * @Filter\Zend(class="Boolean", zendOptions={"casting"=false})
      */
-    public $zendalternate;
+    public ?string $zendalternate = null;
 
     /**
      * @param $value
      * @return string
      */
-    public function callbackMethod($value)
+    public function callbackMethod($value): string
     {
         return 'called_back';
     }
@@ -64,7 +64,7 @@ class AnnotatedClass
      * @param $value
      * @return string
      */
-    public static function anotherCallback($value)
+    public static function anotherCallback($value): string
     {
         return 'called_back';
     }

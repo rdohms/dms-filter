@@ -19,15 +19,15 @@ interface ClassMetadataInterface
      *
      * @return array
      */
-    public function getFilteredProperties();
+    public function getFilteredProperties(): array;
 
     /**
      * Retrieve s list of filtering rules attached to a property
      *
      * @param string $property
-     * @return array
+     * @return array|null
      */
-    public function getPropertyRules($property);
+    public function getPropertyRules($property): ?array;
 
     /**
      * Merges rules from another metadata object into this one
@@ -41,14 +41,14 @@ interface ClassMetadataInterface
      *
      * @return string
      */
-    public function getClassName();
+    public function getClassName(): string;
 
     /**
      * Returns a ReflectionClass instance for this class.
      *
      * @return ReflectionClass
      */
-    public function getReflectionClass();
+    public function getReflectionClass(): ReflectionClass;
 
     /**
      * Adds a new rule to a property

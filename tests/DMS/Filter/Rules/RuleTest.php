@@ -11,78 +11,69 @@ use DMS\Tests\Dummy\Rules\MultipleOptionsRule;
 use DMS\Tests\Dummy\Rules\NoOptionsRule;
 use DMS\Tests\Dummy\Rules\RequiredOptionsRule;
 use DMS\Tests\FilterTestCase;
+use DMS\Filter\Rules\Rule;
 
 class RuleTest extends FilterTestCase
 {
 
-    public function setUp(): void
-{
-        parent::setUp();
-    }
-
-    public function tearDown(): void
-{
-        parent::tearDown();
-    }
-
-    public function testConstructorHappyPath()
+    public function testConstructorHappyPath(): void
     {
         $rule = new NoOptionsRule();
 
-        $this->assertInstanceOf('DMS\Filter\Rules\Rule', $rule);
+        $this->assertInstanceOf(Rule::class, $rule);
     }
 
-    public function testConstructorDefaultOption()
+    public function testConstructorDefaultOption(): void
     {
         $rule = new DefaultOptionRule('value');
 
-        $this->assertInstanceOf('DMS\Filter\Rules\Rule', $rule);
+        $this->assertInstanceOf(Rule::class, $rule);
     }
 
-    public function testConstructorDefaultOptionInArray()
+    public function testConstructorDefaultOptionInArray(): void
     {
-        $rule = new DefaultOptionRule(array('value' => 'optionvalue'));
+        $rule = new DefaultOptionRule(['value' => 'optionvalue']);
 
-        $this->assertInstanceOf('DMS\Filter\Rules\Rule', $rule);
+        $this->assertInstanceOf(Rule::class, $rule);
     }
 
-    public function testConstructorHappyPathWithRequired()
+    public function testConstructorHappyPathWithRequired(): void
     {
-        $rule = new RequiredOptionsRule(array('config' => 'value', 'path' => '/path/to/'));
+        $rule = new RequiredOptionsRule(['config' => 'value', 'path' => '/path/to/']);
 
-        $this->assertInstanceOf('DMS\Filter\Rules\Rule', $rule);
+        $this->assertInstanceOf(Rule::class, $rule);
     }
 
-    public function testConstructorNoDefinedDefaultOption()
+    public function testConstructorNoDefinedDefaultOption(): void
     {
         $this->expectException(RuleDefinitionException::class);
         $rule = new NoOptionsRule('value');
 
-        $this->assertInstanceOf('DMS\Filter\Rules\Rule', $rule);
+        $this->assertInstanceOf(Rule::class, $rule);
     }
 
-    public function testConstructorInvalidOption()
+    public function testConstructorInvalidOption(): void
     {
         $this->expectException(InvalidOptionsException::class);
-        $rule = new MultipleOptionsRule(array('invalid' => 'option'));
+        $rule = new MultipleOptionsRule(['invalid' => 'option']);
     }
 
-    public function testConstructorInvalidDefaultOption()
+    public function testConstructorInvalidDefaultOption(): void
     {
         $this->expectException(InvalidOptionsException::class);
         $rule = new InvalidDefaultOptionRule('value');
     }
 
-    public function testConstructorMissingOption()
+    public function testConstructorMissingOption(): void
     {
         $this->expectException(MissingOptionsException::class);
-        $rule = new RequiredOptionsRule(array('config' => 'option'));
+        $rule = new RequiredOptionsRule(['config' => 'option']);
     }
 
-    public function testOptionExceptionInformation()
+    public function testOptionExceptionInformation(): void
     {
         try {
-            $rule = new MultipleOptionsRule(array('invalid' => 'option'));
+            $rule = new MultipleOptionsRule(['invalid' => 'option']);
         } catch (InvalidOptionsException $e) {
             $this->assertIsArray($e->getOptions());
 
