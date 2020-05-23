@@ -15,17 +15,17 @@ class ClassMetadataFactory implements ClassMetadataFactoryInterface
     /**
      * @var Loader\LoaderInterface
      */
-    protected $loader;
+    protected Loader\LoaderInterface $loader;
 
     /**
-     * @var \Doctrine\Common\Cache\Cache
+     * @var Cache
      */
-    protected $cache;
+    protected ?Cache $cache;
 
     /**
      * @var array
      */
-    protected $parsedClasses = array();
+    protected array $parsedClasses = [];
 
     /**
      * Constructor
@@ -43,7 +43,7 @@ class ClassMetadataFactory implements ClassMetadataFactoryInterface
     /**
      * {@inheritDoc}
      */
-    public function getClassMetadata($class)
+    public function getClassMetadata($class): ClassMetadataInterface
     {
         $class = ltrim($class, '\\');
 
@@ -95,7 +95,7 @@ class ClassMetadataFactory implements ClassMetadataFactoryInterface
      * @param string $class
      * @return boolean
      */
-    private function isParsed($class)
+    private function isParsed($class): bool
     {
         return isset($this->parsedClasses[$class]);
     }
@@ -106,7 +106,7 @@ class ClassMetadataFactory implements ClassMetadataFactoryInterface
      * @param string $class
      * @return ClassMetadataInterface
      */
-    private function getParsedClass($class)
+    private function getParsedClass($class): ?ClassMetadataInterface
     {
         if (! $this->isParsed($class)) {
             return null;
@@ -121,7 +121,7 @@ class ClassMetadataFactory implements ClassMetadataFactoryInterface
      * @param string $class
      * @param ClassMetadataInterface $metadata
      */
-    private function setParsedClass($class, ClassMetadataInterface $metadata)
+    private function setParsedClass($class, ClassMetadataInterface $metadata): void
     {
         $this->parsedClasses[$class] = $metadata;
     }
@@ -132,7 +132,7 @@ class ClassMetadataFactory implements ClassMetadataFactoryInterface
      *
      * @param ClassMetadataInterface $metadata
      */
-    protected function loadParentMetadata(ClassMetadataInterface $metadata)
+    protected function loadParentMetadata(ClassMetadataInterface $metadata): void
     {
         $parent = $metadata->getReflectionClass()->getParentClass();
 
@@ -147,7 +147,7 @@ class ClassMetadataFactory implements ClassMetadataFactoryInterface
      *
      * @param ClassMetadataInterface $metadata
      */
-    protected function loadInterfaceMetadata(ClassMetadataInterface $metadata)
+    protected function loadInterfaceMetadata(ClassMetadataInterface $metadata): void
     {
         foreach ($metadata->getReflectionClass()->getInterfaces() as $interface) {
             $metadata->mergeRules($this->getClassMetadata($interface->getName()));

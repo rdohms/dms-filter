@@ -21,14 +21,14 @@ class Callback extends Rule
      * - array: [Class, Method] to be called
      * - Closure
      *
-     * @var string
+     * @var string|array|callable
      */
-    public $callback = null;
+    public $callback;
 
     /**
      * {@inheritDoc}
      */
-    public function getDefaultOption()
+    public function getDefaultOption(): ?string
     {
         return 'callback';
     }
@@ -37,9 +37,9 @@ class Callback extends Rule
      * Figures out which type of input was provided
      *
      * @return string
-     * @throws \DMS\Filter\Exception\InvalidCallbackException
+     * @throws InvalidCallbackException
      */
-    public function getInputType()
+    public function getInputType(): string
     {
         switch (true) {
             case $this->callback instanceof Closure:
@@ -53,8 +53,8 @@ class Callback extends Rule
         }
 
         throw new InvalidCallbackException(
-            "The input provided for Callback filter is not supported or the callable not valid.
-            Please refer to the class documentation."
+            'The input provided for Callback filter is not supported or the callable not valid.
+            Please refer to the class documentation.'
         );
     }
 }

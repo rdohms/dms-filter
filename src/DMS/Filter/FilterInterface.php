@@ -2,6 +2,8 @@
 
 namespace DMS\Filter;
 
+use DMS\Filter\Mapping\ClassMetadataFactoryInterface;
+
 /**
  * Filters the values of a given object
  *
@@ -40,7 +42,7 @@ interface FilterInterface
     /**
      * Retrieves the metadata factory for class metdatas
      *
-     * @return Mapping\ClassMetadataFactoryInterface
+     * @return ClassMetadataFactoryInterface
      */
-    public function getMetadataFactory();
+    public function getMetadataFactory(): ClassMetadataFactoryInterface;
 }

@@ -15,19 +15,19 @@ class Zend extends Rule
      *
      * @var string
      */
-    public $class;
+    public string $class;
 
     /**
      * Array of options to be passed into the Zend Filter
      *
      * @var array
      */
-    public $zendOptions = array();
+    public array $zendOptions = [];
 
     /**
      * {@inheritDoc}
      */
-    public function getDefaultOption()
+    public function getDefaultOption(): ?string
     {
         return 'class';
     }

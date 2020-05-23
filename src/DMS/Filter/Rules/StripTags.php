@@ -17,12 +17,12 @@ class StripTags extends Rule
      *
      * @var string
      */
-    public $allowed = null;
+    public ?string $allowed = null;
 
     /**
      * {@inheritDoc}
      */
-    public function getDefaultOption()
+    public function getDefaultOption(): ?string
     {
         return 'allowed';
     }

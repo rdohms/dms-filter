@@ -33,10 +33,10 @@ class ToUpper extends BaseFilter
      *
      * @param \DMS\Filter\Rules\ToUpper $rule
      *
-     * @throws \DMS\Filter\Exception\FilterException
+     * @throws FilterException
      * @return boolean
      */
-    public function useEncoding($rule)
+    public function useEncoding($rule): bool
     {
         if ($rule->encoding === null) {
             return false;

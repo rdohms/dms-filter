@@ -14,7 +14,7 @@ class RuleOptionsException extends FilterException
     /**
      * @var array
      */
-    private $options;
+    private array $options;
 
     /**
      * Constructor
@@ -34,7 +34,7 @@ class RuleOptionsException extends FilterException
      *
      * @return array
      */
-    public function getOptions()
+    public function getOptions(): array
     {
         return $this->options;
     }

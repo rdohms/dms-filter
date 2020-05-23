@@ -30,6 +30,7 @@
     },
     
     "suggest": {
-        "laminas/laminas-filter": "Use Laminas Filters via DMS Filter"
+        "laminas/laminas-filter": "Use Laminas Filters via DMS Filter",
+        "ext-mbstring": "for encoding safety"
     }
 }

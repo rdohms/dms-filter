@@ -4,30 +4,28 @@ namespace DMS\Filter\Filters;
 
 use DMS\Tests\FilterTestCase;
 use DMS\Filter\Rules\Alnum as AlnumRule;
+use ReflectionProperty;
 
 class AlnumTest extends FilterTestCase
 {
 
-    public function setUp(): void
-{
-        parent::setUp();
-    }
-
-    public function tearDown(): void
-{
-        parent::tearDown();
-    }
-
     /**
      * @dataProvider provideForRule
+     *
+     * @param      $options
+     * @param      $value
+     * @param      $expectedResult
+     * @param null $unicodeSetting
+     *
+     * @throws \ReflectionException
      */
-    public function testRule($options, $value, $expectedResult, $unicodeSetting = null)
+    public function testRule($options, $value, $expectedResult, $unicodeSetting = null): void
     {
         $rule   = new AlnumRule($options);
         $filter = new Alnum();
 
         if ($unicodeSetting !== null) {
-            $property = new \ReflectionProperty($filter, 'unicodeEnabled');
+            $property = new ReflectionProperty($filter, 'unicodeEnabled');
             $property->setAccessible(true);
             $property->setValue($filter, $unicodeSetting);
         }
@@ -37,25 +35,25 @@ class AlnumTest extends FilterTestCase
         $this->assertEquals($expectedResult, $result);
     }
 
-    public function provideForRule()
+    public function provideForRule(): array
     {
-        return array(
-            array(false, "My Text", "MyText", true),
-            array(false, "My Text", "MyText", false),
-            array(true, "My Text", "My Text", true),
-            array(true, "My Text", "My Text", false),
-            array(true, "My Text!", "My Text", true),
-            array(true, "My Text!", "My Text", false),
-            array(true, "My Text21!", "My Text21", true),
-            array(true, "My Text21!", "My Text21", false),
-            array(true, "João Sorrisão", "João Sorrisão", true),
-            array(true, "João Sorrisão", "Joo Sorriso", false),
-            array(true, "GRΣΣK", "GRΣΣK", true),
-            array(true, "GRΣΣK", "GRK", false),
-            array(true, "Helgi Þormar Þorbjörnsson", "Helgi Þormar Þorbjörnsson", true),
-            array(true, "Helgi Þormar Þorbjörnsson", "Helgi ormar orbjrnsson", false),
-            array(true, "Helgi Þormar!@#$&*( )(*&%$#@Þorbjörnsson", "Helgi Þormar Þorbjörnsson", true),
-            array(true, "Helgi Þormar!@#$&*( )(*&%$#@Þorbjörnsson", "Helgi ormar orbjrnsson", false),
-        );
+        return [
+            [false, "My Text", "MyText", true],
+            [false, "My Text", "MyText", false],
+            [true, "My Text", "My Text", true],
+            [true, "My Text", "My Text", false],
+            [true, "My Text!", "My Text", true],
+            [true, "My Text!", "My Text", false],
+            [true, "My Text21!", "My Text21", true],
+            [true, "My Text21!", "My Text21", false],
+            [true, "João Sorrisão", "João Sorrisão", true],
+            [true, "João Sorrisão", "Joo Sorriso", false],
+            [true, "GRΣΣK", "GRΣΣK", true],
+            [true, "GRΣΣK", "GRK", false],
+            [true, "Helgi Þormar Þorbjörnsson", "Helgi Þormar Þorbjörnsson", true],
+            [true, "Helgi Þormar Þorbjörnsson", "Helgi ormar orbjrnsson", false],
+            [true, "Helgi Þormar!@#$&*( )(*&%$#@Þorbjörnsson", "Helgi Þormar Þorbjörnsson", true],
+            [true, "Helgi Þormar!@#$&*( )(*&%$#@Þorbjörnsson", "Helgi ormar orbjrnsson", false],
+        ];
     }
 }

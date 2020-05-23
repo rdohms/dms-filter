@@ -3,6 +3,8 @@
 namespace DMS\Filter\Mapping;
 
 use DMS\Filter\Rules\Rule;
+use ReflectionClass;
+use ReflectionException;
 
 /**
  * Represents a class that has Annotations
@@ -15,18 +17,13 @@ class ClassMetadata implements ClassMetadataInterface
     /**
      * @var string
      */
-    public $className;
+    public string $className;
 
     /**
      * Properties that contain filtering rules
      * @var array
      */
-    public $filteredProperties = array();
-
-    /**
-     * @var \ReflectionClass
-     */
-    private $reflClass;
+    public array $filteredProperties = [];
 
     /**
      * Constructor
@@ -41,7 +38,7 @@ class ClassMetadata implements ClassMetadataInterface
     /**
      * {@inheritDoc}
      */
-    public function getFilteredProperties()
+    public function getFilteredProperties(): array
     {
         return array_keys($this->filteredProperties);
     }
@@ -49,7 +46,7 @@ class ClassMetadata implements ClassMetadataInterface
     /**
      * {@inheritDoc}
      */
-    public function getPropertyRules($property)
+    public function getPropertyRules($property): ?array
     {
         if (! isset($this->filteredProperties[$property])) {
             return null;
@@ -61,7 +58,7 @@ class ClassMetadata implements ClassMetadataInterface
     /**
      * {@inheritDoc}
      */
-    public function mergeRules(ClassMetadataInterface $metadata)
+    public function mergeRules(ClassMetadataInterface $metadata): void
     {
         foreach ($metadata->getFilteredProperties() as $property) {
             foreach ($metadata->getPropertyRules($property) as $rule) {
@@ -73,10 +70,10 @@ class ClassMetadata implements ClassMetadataInterface
     /**
      * {@inheritDoc}
      */
-    public function addPropertyRule($property, Rule $rule)
+    public function addPropertyRule($property, Rule $rule): void
     {
         if (!isset($this->filteredProperties[$property])) {
-            $this->filteredProperties[$property] = array('rules' => array());
+            $this->filteredProperties[$property] = ['rules' => []];
         }
 
         $this->filteredProperties[$property]['rules'][] = $rule;
@@ -85,20 +82,17 @@ class ClassMetadata implements ClassMetadataInterface
     /**
      * {@inheritDoc}
      */
-    public function getClassName()
+    public function getClassName(): string
     {
         return $this->className;
     }
 
     /**
      * {@inheritDoc}
+     * @throws ReflectionException
      */
-    public function getReflectionClass()
+    public function getReflectionClass(): ReflectionClass
     {
-        if (!$this->reflClass) {
-            $this->reflClass = new \ReflectionClass($this->getClassName());
-        }
-
-        return $this->reflClass;
+        return new ReflectionClass($this->getClassName());
     }
 }

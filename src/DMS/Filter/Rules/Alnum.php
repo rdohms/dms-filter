@@ -18,12 +18,12 @@ class Alnum extends RegExp
      *
      * @var bool
      */
-    public $allowWhitespace = true;
+    public bool $allowWhitespace = true;
 
     /**
      * {@inheritDoc}
      */
-    public function getDefaultOption()
+    public function getDefaultOption(): ?string
     {
         return 'allowWhitespace';
     }

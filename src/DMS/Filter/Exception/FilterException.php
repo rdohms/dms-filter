@@ -2,6 +2,8 @@
 
 namespace DMS\Filter\Exception;
 
+use RuntimeException;
+
 /**
  * Base Exception for Filter Package
  *
@@ -9,6 +11,6 @@ namespace DMS\Filter\Exception;
  * @subpackage Filter
  * @category Exception
  */
-class FilterException extends \RuntimeException
+class FilterException extends RuntimeException
 {
 }

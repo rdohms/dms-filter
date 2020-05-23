@@ -19,12 +19,12 @@ class RegExp extends Rule
      *
      * @var string
      */
-    public $unicodePattern;
+    public string $unicodePattern;
 
     /**
      * Reg Exp Pattern
      *
      * @var string
      */
-    public $pattern;
+    public string $pattern;
 }

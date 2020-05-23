@@ -19,7 +19,7 @@ abstract class BaseFilter
      * Enforces the desired filtering on the the value
      * returning a filtered value.
      *
-     * @param \DMS\Filter\Rules\Rule $rule
+     * @param Rule  $rule
      * @param mixed $value
      *
      * @return mixed

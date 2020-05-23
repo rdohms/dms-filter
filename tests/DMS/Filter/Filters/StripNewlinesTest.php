@@ -8,20 +8,14 @@ use DMS\Filter\Rules\StripNewlines as StripNewLinesRule;
 class StripNewlinesTest extends FilterTestCase
 {
 
-    public function setUp(): void
-{
-        parent::setUp();
-    }
-
-    public function tearDown(): void
-{
-        parent::tearDown();
-    }
-
     /**
      * @dataProvider provideForRule
+     *
+     * @param $options
+     * @param $value
+     * @param $expectedResult
      */
-    public function testRule($options, $value, $expectedResult)
+    public function testRule($options, $value, $expectedResult): void
     {
         $rule   = new StripNewLinesRule($options);
         $filter = new StripNewlines();
@@ -31,14 +25,16 @@ class StripNewlinesTest extends FilterTestCase
         $this->assertEquals($expectedResult, $result);
     }
 
-    public function provideForRule()
+    public function provideForRule(): array
     {
-        return array(
-            array(null, "My \n Text", "My  Text"),
-            array(null, "My \n\r Text", "My  Text"),
-            array(null, "My \r\n Text", "My  Text"),
-            array(null, "My
-Text", "MyText"),
-        );
+        return [
+            [null, "My \n Text", "My  Text"],
+            [null, "My \n\r Text", "My  Text"],
+            [null, "My \r\n Text", "My  Text"],
+            [
+                null, "My
+Text", "MyText"
+            ],
+        ];
     }
 }
