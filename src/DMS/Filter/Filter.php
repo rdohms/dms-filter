@@ -1,45 +1,32 @@
 <?php
+declare(strict_types=1);
 
 namespace DMS\Filter;
 
 /**
  * Filter Object, responsible for retrieving the filtering rules
  * for the object and applying them
- *
- * @package DMS
- * @subpackage Filter
- *
  */
 use DMS\Filter\Filters\Loader\FilterLoaderInterface;
 use DMS\Filter\Mapping\ClassMetadataFactoryInterface;
+use DMS\Filter\Rules\Rule;
+use ReflectionException;
+
+use function get_class;
 
 /**
- * Class Filter
- *
  * Executor, receives objects that need filtering and executes attached rules.
- *
- * @package DMS\Filter
  */
 class Filter implements FilterInterface
 {
-    /**
-     *
-     * @var Mapping\ClassMetadataFactory
-     */
     protected Mapping\ClassMetadataFactory $metadataFactory;
 
-    /**
-     * @var FilterLoaderInterface
-     */
     protected FilterLoaderInterface $filterLoader;
 
     /**
      * Constructor
-     *
-     * @param Mapping\ClassMetadataFactory $metadataFactory
-     * @param FilterLoaderInterface $filterLoader
      */
-    public function __construct(Mapping\ClassMetadataFactory $metadataFactory, $filterLoader)
+    public function __construct(Mapping\ClassMetadataFactory $metadataFactory, FilterLoaderInterface $filterLoader)
     {
         $this->metadataFactory = $metadataFactory;
         $this->filterLoader    = $filterLoader;
@@ -68,15 +55,13 @@ class Filter implements FilterInterface
     {
         if ($rule instanceof Rules\Rule) {
             $filter = $this->filterLoader->getFilterForRule($rule);
+
             return $filter->apply($rule, $value);
         }
 
         return $this->walkRuleChain($value, $rule);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function getMetadataFactory(): ClassMetadataFactoryInterface
     {
         return $this->metadataFactory;
@@ -86,13 +71,10 @@ class Filter implements FilterInterface
      * Iterates over annotated properties in an object filtering the selected
      * values
      *
-     * @param object $object
-     * @param string $limitProperty
-     *
-     * @throws \ReflectionException
-     * @throws \ReflectionException
+     * @throws ReflectionException
+     * @throws ReflectionException
      */
-    protected function walkObject($object, $limitProperty = null): void
+    protected function walkObject(?object $object, ?string $limitProperty = null): void
     {
         if ($object === null) {
             return;
@@ -104,7 +86,7 @@ class Filter implements FilterInterface
         $walker = new ObjectWalker($object, $this->filterLoader);
 
         //Get all filtered properties or limit with selected
-        $properties = ($limitProperty !== null) ? [$limitProperty] : $metadata->getFilteredProperties();
+        $properties = $limitProperty !== null ? [$limitProperty] : $metadata->getFilteredProperties();
 
         //Iterate over properties with filters
         foreach ($properties as $property) {
@@ -115,15 +97,16 @@ class Filter implements FilterInterface
     /**
      * Iterates over an array of filters applying all to the value
      *
-     * @param mixed $value
-     * @param array $rules
+     * @param mixed  $value
+     * @param Rule[] $rules
+     *
      * @return mixed
      */
-    protected function walkRuleChain($value, $rules)
+    protected function walkRuleChain($value, array $rules)
     {
         foreach ($rules as $rule) {
             $filter = $this->filterLoader->getFilterForRule($rule);
-            $value = $filter->apply($rule, $value);
+            $value  = $filter->apply($rule, $value);
         }
 
         return $value;

@@ -1,16 +1,17 @@
 <?php
+declare(strict_types=1);
+
 namespace DMS\Filter\Filters;
 
 use DMS\Filter\Rules\Rule;
+
+use function preg_replace;
 
 /**
  * PregReplace Filter
  *
  * Replaces based on regular expression, will replace with empty if no
  * replacement is defined.
- *
- * @package DMS
- * @subpackage Filter
  */
 class PregReplace extends BaseFilter
 {

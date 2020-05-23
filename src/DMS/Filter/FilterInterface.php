@@ -1,14 +1,13 @@
 <?php
+declare(strict_types=1);
 
 namespace DMS\Filter;
 
 use DMS\Filter\Mapping\ClassMetadataFactoryInterface;
+use DMS\Filter\Rules\Rule;
 
 /**
  * Filters the values of a given object
- *
- * @package DMS
- * @subpackage Filter
  */
 interface FilterInterface
 {
@@ -18,22 +17,21 @@ interface FilterInterface
      *
      * @param mixed $object
      */
-    public function filterEntity($object);
+    public function filterEntity($object): void;
 
     /**
      * Filters a specific property in an object, replacing the current value
      *
      * @param mixed $object
-     * @param string $property
      */
-    public function filterProperty($object, $property);
+    public function filterProperty($object, string $property): void;
 
     /**
      * Runs a given value through one or more filter rules returning the
      * filtered value
      *
-     * @param mixed $value
-     * @param array|Rules\Rule $filter
+     * @param mixed       $value
+     * @param Rule[]|Rule $filter
      *
      * @return mixed
      */
@@ -41,8 +39,6 @@ interface FilterInterface
 
     /**
      * Retrieves the metadata factory for class metdatas
-     *
-     * @return ClassMetadataFactoryInterface
      */
     public function getMetadataFactory(): ClassMetadataFactoryInterface;
 }
