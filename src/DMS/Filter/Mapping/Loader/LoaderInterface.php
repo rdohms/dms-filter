@@ -19,5 +19,5 @@ interface LoaderInterface
      *
      * @return Boolean
      */
-    public function loadClassMetadata(ClassMetadataInterface $metadata);
+    public function loadClassMetadata(ClassMetadataInterface $metadata): bool;
 }

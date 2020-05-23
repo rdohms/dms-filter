@@ -17,12 +17,12 @@ class ToLower extends Rule
      *
      * @var string
      */
-    public $encoding = null;
+    public ?string $encoding = null;
 
     /**
      * {@inheritDoc}
      */
-    public function getDefaultOption()
+    public function getDefaultOption(): ?string
     {
         return 'encoding';
     }

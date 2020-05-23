@@ -17,12 +17,12 @@ class Trim extends Rule
      *
      * @var string
      */
-    public $charlist = null;
+    public ?string $charlist = null;
 
     /**
      * {@inheritDoc}
      */
-    public function getDefaultOption()
+    public function getDefaultOption(): ?string
     {
         return 'charlist';
     }

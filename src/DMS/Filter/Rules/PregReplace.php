@@ -18,19 +18,19 @@ class PregReplace extends Rule
      *
      * @var string
      */
-    public $regexp = null;
+    public ?string $regexp = null;
 
     /**
      * Replacement
      *
      * @var string
      */
-    public $replacement = "";
+    public string $replacement = "";
 
     /**
      * {@inheritDoc}
      */
-    public function getDefaultOption()
+    public function getDefaultOption(): ?string
     {
         return 'regexp';
     }

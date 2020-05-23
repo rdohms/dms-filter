@@ -3,12 +3,17 @@
 namespace DMS\Tests;
 
 use DMS\Filter\Mapping;
+use DMS\Filter\Mapping\ClassMetadataFactory;
 use Doctrine\Common\Annotations;
 use PHPUnit\Framework\TestCase;
 
 class FilterTestCase extends TestCase
 {
-    protected $loader;
+    public function __construct(?string $name = null, array $data = [], $dataName = '')
+    {
+        parent::__construct($name, $data, $dataName);
+        $this->buildMetadataFactory();
+    }
 
     public function setUp(): void
     {
@@ -20,15 +25,12 @@ class FilterTestCase extends TestCase
         parent::tearDown();
     }
 
-    protected function buildMetadataFactory()
+    protected function buildMetadataFactory(): ClassMetadataFactory
     {
         $reader = new Annotations\AnnotationReader();
 
         $loader = new Mapping\Loader\AnnotationLoader($reader);
-        $this->loader = $loader;
 
-        $metadataFactory = new Mapping\ClassMetadataFactory($loader);
-
-        return $metadataFactory;
+        return new ClassMetadataFactory($loader);
     }
 }

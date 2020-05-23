@@ -19,7 +19,7 @@ class RegExp extends BaseFilter
      *
      * @var boolean
      */
-    protected static $unicodeEnabled;
+    protected static bool $unicodeEnabled;
 
     /**
      * {@inheritDoc}
@@ -40,7 +40,7 @@ class RegExp extends BaseFilter
      * Verifies that Regular Expression functions support unicode
      * @return boolean
      */
-    public function checkUnicodeSupport()
+    public function checkUnicodeSupport(): bool
     {
         if (null === static::$unicodeEnabled) {
             static::$unicodeEnabled = (@preg_match('/\pL/u', 'a')) ? true : false;

@@ -19,15 +19,14 @@ class Callback extends BaseFilter implements ObjectAwareFilter
     /**
      * @var object | null
      */
-    protected $currentObject = null;
+    protected ?object $currentObject = null;
 
     /**
      * Set the current object so that the filter can access it
      *
      * @param $object
-     * @return object mixed
      */
-    public function setCurrentObject($object)
+    public function setCurrentObject($object): void
     {
         $this->currentObject = $object;
     }
@@ -49,6 +48,10 @@ class Callback extends BaseFilter implements ObjectAwareFilter
      */
     public function apply(Rule $rule, $value)
     {
+        if ($value === null) {
+            return null;
+        }
+
         $type = $rule->getInputType();
 
         if ($type == CallbackRule::SELF_METHOD_TYPE) {
@@ -71,9 +74,10 @@ class Callback extends BaseFilter implements ObjectAwareFilter
      *
      * @param string $method
      * @param mixed $value
-     * @throws \DMS\Filter\Exception\FilterException
-     * @throws \DMS\Filter\Exception\InvalidCallbackException
+     *
      * @return mixed
+     *@throws InvalidCallbackException
+     * @throws FilterException
      */
     protected function useObjectMethod($method, $value)
     {
@@ -103,8 +107,9 @@ class Callback extends BaseFilter implements ObjectAwareFilter
      *
      * @param callable $callable
      * @param mixed $value
-     * @throws \DMS\Filter\Exception\InvalidCallbackException
+     *
      * @return mixed
+     * @throws InvalidCallbackException
      */
     protected function useCallable($callable, $value)
     {
@@ -118,8 +123,9 @@ class Callback extends BaseFilter implements ObjectAwareFilter
     /**
      * @param Closure $closure
      * @param mixed $value
-     * @throws \DMS\Filter\Exception\InvalidCallbackException
+     *
      * @return mixed
+     *@throws InvalidCallbackException
      */
     protected function useClosure($closure, $value)
     {

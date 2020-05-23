@@ -32,7 +32,7 @@ class User
     *
     * @var string
     */
-    public $name;
+    public string $name;
 
     /**
     * @Filter\StripTags()
@@ -41,7 +41,7 @@ class User
     *
     * @var string
     */
-    public $email;
+    public string $email;
 
 }
 ?>

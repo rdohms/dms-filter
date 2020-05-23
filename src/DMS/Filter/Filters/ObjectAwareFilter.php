@@ -16,7 +16,6 @@ interface ObjectAwareFilter
      * Set the current object so that the filter can access it
      *
      * @param $object
-     * @return object mixed
      */
     public function setCurrentObject($object);
 

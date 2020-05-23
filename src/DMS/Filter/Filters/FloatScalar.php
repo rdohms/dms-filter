@@ -22,6 +22,6 @@ class FloatScalar extends BaseFilter
             return null;
         }
 
-        return floatval($value);
+        return (float) $value;
     }
 }

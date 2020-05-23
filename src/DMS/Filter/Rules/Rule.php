@@ -5,6 +5,7 @@ namespace DMS\Filter\Rules;
 use DMS\Filter\Exception\InvalidOptionsException;
 use DMS\Filter\Exception\MissingOptionsException;
 use DMS\Filter\Exception\RuleDefinitionException;
+use stdClass;
 
 /**
  * Base class for a Filtering Rule, it implements common behaviour
@@ -63,27 +64,28 @@ abstract class Rule
      * for the parsing process
      *
      * @param mixed $options
-     * @return \stdClass
+     * @return stdClass
      */
-    private function parseOptions($options)
+    private function parseOptions($options): stdClass
     {
-        $parseResult = new \stdClass();
-        $parseResult->invalidOptions = array();
-        $parseResult->missingOptions = array_flip((array)$this->getRequiredOptions());
+        $parseResult                 = new stdClass();
+        $parseResult->invalidOptions = [];
+        $parseResult->missingOptions = array_flip($this->getRequiredOptions());
+        $options                     = $this->extractFromValueOption($options);
 
-        //Doctrine parses constructor parameter into 'value' array param, restore it
-        if (is_array($options) && count($options) == 1 && isset($options['value'])) {
-            $options = $options['value'];
+        if ($options === null) {
+            return $parseResult;
         }
 
         //Parse Option Array
-        if (is_array($options) && count($options) > 0 && is_string(key($options))) {
+        if ($this->isNonEmptyMap($options)) {
             $this->parseOptionsArray($options, $parseResult);
             return $parseResult;
         }
 
+
         //Parse Single Value
-        if (null !== $options && ! (is_array($options) && count($options) === 0)) {
+        if ($options !== []) {
             $this->parseSingleOption($options, $parseResult);
             return $parseResult;
         }
@@ -95,9 +97,9 @@ abstract class Rule
      * Parses Options in the array format
      *
      * @param array $options
-     * @param \stdClass $result
+     * @param stdClass $result
      */
-    private function parseOptionsArray($options, \stdClass $result)
+    private function parseOptionsArray($options, stdClass $result): void
     {
         foreach ($options as $option => $value) {
             if (! property_exists($this, $option)) {
@@ -114,11 +116,11 @@ abstract class Rule
     /**
      * Parses single option received
      *
-     * @param string $options
-     * @param \stdClass $result
-     * @throws \DMS\Filter\Exception\RuleDefinitionException
+     * @param string|array $options
+     * @param stdClass $result
+     * @throws RuleDefinitionException
      */
-    private function parseSingleOption($options, \stdClass $result)
+    private function parseSingleOption($options, stdClass $result): void
     {
         $option = $this->getDefaultOption();
 
@@ -148,9 +150,9 @@ abstract class Rule
      * @return array
      * @see __construct()
      */
-    public function getRequiredOptions()
+    public function getRequiredOptions(): array
     {
-        return array();
+        return [];
     }
 
     /**
@@ -158,10 +160,10 @@ abstract class Rule
      *
      * Override this method to define a default option.
      *
-     * @return string
+     * @return string|null
      * @see __construct()
      */
-    public function getDefaultOption()
+    public function getDefaultOption(): ?string
     {
         return null;
     }
@@ -173,8 +175,34 @@ abstract class Rule
      *
      * @return string
      */
-    public function getFilter()
+    public function getFilter(): string
     {
         return str_replace('Rules', 'Filters', get_class($this));
     }
+
+    /**
+     * Doctrine parses constructor parameter into 'value' array param, restore it
+     *
+     * @param mixed $options
+     *
+     * @return array|mixed
+     */
+    private function extractFromValueOption($options)
+    {
+
+        if (is_array($options) && count($options) === 1 && isset($options['value'])) {
+            $options = $options['value'];
+        }
+        return $options;
+    }
+
+    /**
+     * @param mixed $options
+     *
+     * @return bool
+     */
+    private function isNonEmptyMap($options): bool
+    {
+        return is_array($options) && count($options) > 0 && is_string(key($options));
+}
 }
