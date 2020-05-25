@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace DMS\Filter\Filters;
 
@@ -6,9 +7,6 @@ use DMS\Filter\Rules\Rule;
 
 /**
  * BooleanScalar Filter
- *
- * @package DMS
- * @subpackage Filter
  */
 class BooleanScalar extends BaseFilter
 {
@@ -17,6 +15,6 @@ class BooleanScalar extends BaseFilter
      */
     public function apply(Rule $rule, $value)
     {
-        return (boolean) $value;
+        return (bool) $value;
     }
 }

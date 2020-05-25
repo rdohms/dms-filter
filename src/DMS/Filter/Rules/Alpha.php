@@ -1,28 +1,20 @@
 <?php
+declare(strict_types=1);
 
 namespace DMS\Filter\Rules;
 
 /**
  * Alpha Rule
  *
- * @package DMS
- * @subpackage Filter
- *
  * @Annotation
  */
 class Alpha extends RegExp
 {
-
     /**
      * Allow Whitespace or not
-     *
-     * @var bool
      */
     public bool $allowWhitespace = true;
 
-    /**
-     * {@inheritDoc}
-     */
     public function getDefaultOption(): ?string
     {
         return 'allowWhitespace';

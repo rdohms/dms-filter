@@ -1,21 +1,23 @@
 <?php
+declare(strict_types=1);
 
 namespace DMS\Filter\Filters;
 
 use DMS\Filter\Exception\InvalidZendFilterException;
 use DMS\Filter\FilterInterface;
-use DMS\Filter\Rules\Zend as ZendRule;
 use DMS\Filter\Rules\Rule;
+use DMS\Filter\Rules\Zend as ZendRule;
 use ReflectionException;
 use ReflectionMethod;
+
+use function class_exists;
+use function sprintf;
+use function strpos;
 
 /**
  * Zend Filter
  *
  * Instantiates and runs Zend Filters (from ZF2)
- *
- * @package DMS
- * @subpackage Filter
  */
 class Zend extends BaseFilter
 {
@@ -32,19 +34,20 @@ class Zend extends BaseFilter
     /**
      * Instantiates a configured Zend Filter, if it exists
      *
-     * @param string $class
-     * @param array $options
+     * @param mixed[] $options
+     *
      * @return FilterInterface|object
+     *
      * @throws InvalidZendFilterException
      */
-    public function getZendInstance($class, $options): object
+    public function getZendInstance(string $class, array $options): object
     {
         if (strpos($class, 'Zend\Filter') === false) {
-            $class = "Zend\Filter\\".$class;
+            $class = 'Zend\Filter\\' . $class;
         }
 
         if (! class_exists($class)) {
-            throw new InvalidZendFilterException("Could not find or autoload: $class");
+            throw new InvalidZendFilterException(sprintf('Could not find or autoload: %s', $class));
         }
 
         try {

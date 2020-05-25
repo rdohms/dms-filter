@@ -1,43 +1,32 @@
 <?php
+declare(strict_types=1);
 
 namespace DMS\Filter\Mapping;
 
 use Doctrine\Common\Cache\Cache;
 
+use function ltrim;
+
 /**
  * Responsible for loading metadata for selected classes
- *
- * @package DMS
- * @subpackage Filter
  */
 class ClassMetadataFactory implements ClassMetadataFactoryInterface
 {
-    /**
-     * @var Loader\LoaderInterface
-     */
     protected Loader\LoaderInterface $loader;
 
-    /**
-     * @var Cache
-     */
     protected ?Cache $cache;
 
-    /**
-     * @var array
-     */
+    /** @var string[] */
     protected array $parsedClasses = [];
 
     /**
      * Constructor
      * Receives a Loader and a Doctrine Compatible cache instance
-     *
-     * @param Loader\LoaderInterface $loader
-     * @param Cache $cache
      */
-    public function __construct(Loader\LoaderInterface $loader, Cache $cache = null)
+    public function __construct(Loader\LoaderInterface $loader, ?Cache $cache = null)
     {
         $this->loader = $loader;
-        $this->cache = $cache;
+        $this->cache  = $cache;
     }
 
     /**
@@ -55,6 +44,7 @@ class ClassMetadataFactory implements ClassMetadataFactoryInterface
         //Check Cache for it
         if ($this->cache !== null && $this->cache->contains($class)) {
             $this->setParsedClass($class, $this->cache->fetch($class));
+
             return $this->getParsedClass($class);
         }
 
@@ -64,11 +54,8 @@ class ClassMetadataFactory implements ClassMetadataFactoryInterface
 
     /**
      * Reads class metadata for a new and unparsed class
-     *
-     * @param string $class
-     * @return ClassMetadataInterface
      */
-    private function parseClassMetadata($class)
+    private function parseClassMetadata(string $class): ClassMetadataInterface
     {
         $metadata = new ClassMetadata($class);
 
@@ -91,22 +78,16 @@ class ClassMetadataFactory implements ClassMetadataFactoryInterface
 
     /**
      * Checks if a class has already been parsed
-     *
-     * @param string $class
-     * @return boolean
      */
-    private function isParsed($class): bool
+    private function isParsed(string $class): bool
     {
         return isset($this->parsedClasses[$class]);
     }
 
     /**
      * Retrieves data from a class already parsed
-     *
-     * @param string $class
-     * @return ClassMetadataInterface
      */
-    private function getParsedClass($class): ?ClassMetadataInterface
+    private function getParsedClass(string $class): ?ClassMetadataInterface
     {
         if (! $this->isParsed($class)) {
             return null;
@@ -117,11 +98,8 @@ class ClassMetadataFactory implements ClassMetadataFactoryInterface
 
     /**
      * Stores data from a parsed class
-     *
-     * @param string $class
-     * @param ClassMetadataInterface $metadata
      */
-    private function setParsedClass($class, ClassMetadataInterface $metadata): void
+    private function setParsedClass(string $class, ClassMetadataInterface $metadata): void
     {
         $this->parsedClasses[$class] = $metadata;
     }
@@ -129,23 +107,21 @@ class ClassMetadataFactory implements ClassMetadataFactoryInterface
     /**
      * Checks if the class being parsed has a parent and cascades parsing
      * to its parent
-     *
-     * @param ClassMetadataInterface $metadata
      */
     protected function loadParentMetadata(ClassMetadataInterface $metadata): void
     {
         $parent = $metadata->getReflectionClass()->getParentClass();
 
-        if ($parent) {
-            $metadata->mergeRules($this->getClassMetadata($parent->getName()));
+        if (! $parent) {
+            return;
         }
+
+        $metadata->mergeRules($this->getClassMetadata($parent->getName()));
     }
 
     /**
      * Checks if the object has interfaces and cascades parsing of annotatiosn
      * to all the interfaces
-     *
-     * @param ClassMetadataInterface $metadata
      */
     protected function loadInterfaceMetadata(ClassMetadataInterface $metadata): void
     {
