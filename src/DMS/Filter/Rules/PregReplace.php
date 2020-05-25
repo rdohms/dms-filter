@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace DMS\Filter\Rules;
 
 /**
@@ -6,31 +9,21 @@ namespace DMS\Filter\Rules;
  * Replaces based on regular expression, will replace with empty if no
  * replacement is defined.
  *
- * @package DMS
- * @subpackage Filter
- *
  * @Annotation
  */
 class PregReplace extends Rule
 {
     /**
      * Regular Expression to use
-     *
-     * @var string
      */
     public ?string $regexp = null;
 
     /**
      * Replacement
-     *
-     * @var string
      */
-    public string $replacement = "";
+    public string $replacement = '';
 
-    /**
-     * {@inheritDoc}
-     */
-    public function getDefaultOption(): ?string
+    public function getDefaultOption() : ?string
     {
         return 'regexp';
     }

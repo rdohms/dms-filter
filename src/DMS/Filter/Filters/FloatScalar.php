@@ -1,15 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DMS\Filter\Filters;
 
 use DMS\Filter\Rules\Rule;
+use function is_array;
+use function is_object;
 
 /**
  * FloatScalar Filter
  * Converts content into a FloatScalar
- *
- * @package DMS
- * @subpackage Filter
  */
 class FloatScalar extends BaseFilter
 {

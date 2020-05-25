@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 namespace DMS\Filter\Rules;
+
+use const ENT_COMPAT;
 
 /**
  * Html Entities Filter
- *
- * @package DMS
- * @subpackage Filter
  *
  * @Annotation
  */
@@ -13,22 +15,16 @@ class HtmlEntities extends Rule
 {
     /**
      * Flags
-     *
-     * @var int
      */
-    public $flags = ENT_COMPAT;
+    public int $flags = ENT_COMPAT;
 
     /**
      * Encoding to be used
-     *
-     * @var string
      */
     public string $encoding = 'UTF-8';
 
     /**
      * Convert existing entities
-     *
-     * @var bool
      */
     public bool $doubleEncode = true;
 }

@@ -1,14 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DMS\Filter\Filters;
 
 use DMS\Filter\Rules\Rule;
 
 /**
  * Digits Rule
- *
- * @package DMS
- * @subpackage Filter
  */
 class Digits extends RegExp
 {
@@ -20,7 +19,7 @@ class Digits extends RegExp
     public function apply(Rule $rule, $value)
     {
         //Check for Whitespace support
-        $whitespaceChar = ($rule->allowWhitespace)? " ":"";
+        $whitespaceChar = $rule->allowWhitespace? ' ':'';
 
         $rule->unicodePattern = '/[^\p{N}' . $whitespaceChar . ']/';
         $rule->pattern        = '/[^0-9' . $whitespaceChar . ']/';

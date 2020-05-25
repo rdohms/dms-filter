@@ -1,36 +1,32 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DMS\Filter\Mapping;
 
 use DMS\Filter\Rules\Rule;
 use ReflectionClass;
 use ReflectionException;
+use function array_keys;
 
 /**
  * Represents a class that has Annotations
- *
- * @package DMS
- * @subpackage Filter
  */
 class ClassMetadata implements ClassMetadataInterface
 {
-    /**
-     * @var string
-     */
     public string $className;
 
     /**
      * Properties that contain filtering rules
-     * @var array
+     *
+     * @var string[]
      */
     public array $filteredProperties = [];
 
     /**
      * Constructor
-     *
-     * @param string $class
      */
-    public function __construct($class)
+    public function __construct(string $class)
     {
         $this->className = $class;
     }
@@ -38,7 +34,7 @@ class ClassMetadata implements ClassMetadataInterface
     /**
      * {@inheritDoc}
      */
-    public function getFilteredProperties(): array
+    public function getFilteredProperties() : array
     {
         return array_keys($this->filteredProperties);
     }
@@ -46,7 +42,7 @@ class ClassMetadata implements ClassMetadataInterface
     /**
      * {@inheritDoc}
      */
-    public function getPropertyRules($property): ?array
+    public function getPropertyRules($property) : ?array
     {
         if (! isset($this->filteredProperties[$property])) {
             return null;
@@ -55,10 +51,7 @@ class ClassMetadata implements ClassMetadataInterface
         return $this->filteredProperties[$property]['rules'];
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function mergeRules(ClassMetadataInterface $metadata): void
+    public function mergeRules(ClassMetadataInterface $metadata) : void
     {
         foreach ($metadata->getFilteredProperties() as $property) {
             foreach ($metadata->getPropertyRules($property) as $rule) {
@@ -70,28 +63,26 @@ class ClassMetadata implements ClassMetadataInterface
     /**
      * {@inheritDoc}
      */
-    public function addPropertyRule($property, Rule $rule): void
+    public function addPropertyRule($property, Rule $rule) : void
     {
-        if (!isset($this->filteredProperties[$property])) {
+        if (! isset($this->filteredProperties[$property])) {
             $this->filteredProperties[$property] = ['rules' => []];
         }
 
         $this->filteredProperties[$property]['rules'][] = $rule;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function getClassName(): string
+    public function getClassName() : string
     {
         return $this->className;
     }
 
     /**
      * {@inheritDoc}
+     *
      * @throws ReflectionException
      */
-    public function getReflectionClass(): ReflectionClass
+    public function getReflectionClass() : ReflectionClass
     {
         return new ReflectionClass($this->getClassName());
     }

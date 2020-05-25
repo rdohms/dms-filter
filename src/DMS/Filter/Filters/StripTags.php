@@ -1,14 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DMS\Filter\Filters;
 
 use DMS\Filter\Rules\Rule;
+use function strip_tags;
 
 /**
  * StripTags Filter
- *
- * @package DMS
- * @subpackage Filter
  */
 class StripTags extends BaseFilter
 {

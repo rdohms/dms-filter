@@ -1,29 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DMS\Filter\Rules;
 
 /**
  * Digits Rule
  *
- * @package DMS
- * @subpackage Filter
- *
  * @Annotation
  */
 class Digits extends RegExp
 {
-
     /**
      * Allow Whitespace or not
-     *
-     * @var bool
      */
     public bool $allowWhitespace = true;
 
-    /**
-     * {@inheritDoc}
-     */
-    public function getDefaultOption(): ?string
+    public function getDefaultOption() : ?string
     {
         return 'allowWhitespace';
     }

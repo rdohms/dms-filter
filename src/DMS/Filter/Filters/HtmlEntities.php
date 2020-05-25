@@ -1,13 +1,14 @@
 <?php
+
+declare(strict_types=1);
+
 namespace DMS\Filter\Filters;
 
 use DMS\Filter\Rules\Rule;
+use function htmlentities;
 
 /**
  * Html Entities Filter
- *
- * @package DMS
- * @subpackage Filter
  */
 class HtmlEntities extends BaseFilter
 {

@@ -1,32 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DMS\Filter\Mapping\Loader;
 
 use DMS\Filter\Mapping\ClassMetadataInterface;
-use Doctrine\Common\Annotations\Reader;
-use Doctrine\Common\Annotations\AnnotationRegistry;
 use DMS\Filter\Rules;
-use DMS\Filter\Mapping;
+use Doctrine\Common\Annotations\AnnotationRegistry;
+use Doctrine\Common\Annotations\Reader;
 use ReflectionProperty;
 
 /**
  * Loader that reads filtering data from Annotations
- *
- * @package DMS
- * @subpackage Filter
  */
 class AnnotationLoader implements LoaderInterface
 {
-    /**
-     *
-     * @var Reader
-     */
     protected Reader $reader;
 
     /**
      * Constructor
-     *
-     * @param Reader $reader
      */
     public function __construct(Reader $reader)
     {
@@ -40,10 +32,9 @@ class AnnotationLoader implements LoaderInterface
      * Loads annotations data present in the class, using a Doctrine
      * annotation reader
      *
-     * @param ClassMetadataInterface $metadata
      * @return bool|void
      */
-    public function loadClassMetadata(ClassMetadataInterface $metadata): bool
+    public function loadClassMetadata(ClassMetadataInterface $metadata) : bool
     {
         $reflClass = $metadata->getReflectionClass();
 
@@ -57,22 +48,18 @@ class AnnotationLoader implements LoaderInterface
 
     /**
      * Reads annotations for a selected property in the class
-     *
-     * @param ReflectionProperty $property
-     * @param ClassMetadataInterface $metadata
      */
-    private function readProperty(ReflectionProperty $property, ClassMetadataInterface $metadata): void
+    private function readProperty(ReflectionProperty $property, ClassMetadataInterface $metadata) : void
     {
         // Skip if this property is not from this class
         if ($property->getDeclaringClass()->getName()
-            != $metadata->getClassName()
+            !== $metadata->getClassName()
         ) {
             return;
         }
 
         //Iterate over all annotations
         foreach ($this->reader->getPropertyAnnotations($property) as $rule) {
-
             //Skip is its not a rule
             if (! $rule instanceof Rules\Rule) {
                 continue;
