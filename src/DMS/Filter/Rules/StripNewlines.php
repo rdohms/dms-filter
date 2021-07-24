@@ -1,12 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DMS\Filter\Rules;
 
 /**
  * StripNewlines Rule
- *
- * @package DMS
- * @subpackage Filter
  *
  * @Annotation
  */

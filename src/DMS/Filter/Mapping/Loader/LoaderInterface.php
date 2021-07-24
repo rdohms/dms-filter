@@ -1,14 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DMS\Filter\Mapping\Loader;
 
 use DMS\Filter\Mapping\ClassMetadataInterface;
 
 /**
  * Interface for a Loader
- *
- * @package DMS
- * @subpackage Filter
  */
 interface LoaderInterface
 {
@@ -16,8 +15,6 @@ interface LoaderInterface
      * Load a Class Metadata.
      *
      * @param ClassMetadataInterface $metadata A metadata
-     *
-     * @return Boolean
      */
-    public function loadClassMetadata(ClassMetadataInterface $metadata);
+    public function loadClassMetadata(ClassMetadataInterface $metadata) : bool;
 }

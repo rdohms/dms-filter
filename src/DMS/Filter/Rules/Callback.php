@@ -1,8 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 namespace DMS\Filter\Rules;
 
 use Closure;
 use DMS\Filter\Exception\InvalidCallbackException;
+use function is_callable;
+use function is_string;
 
 /**
  * Callback Rule
@@ -11,9 +16,9 @@ use DMS\Filter\Exception\InvalidCallbackException;
  */
 class Callback extends Rule
 {
-    const SELF_METHOD_TYPE = 'self_method';
-    const CALLABLE_TYPE    = 'callable';
-    const CLOSURE_TYPE     = 'closure';
+    public const SELF_METHOD_TYPE = 'self_method';
+    public const CALLABLE_TYPE    = 'callable';
+    public const CLOSURE_TYPE     = 'closure';
 
     /**
      * Callback, can be:
@@ -21,14 +26,11 @@ class Callback extends Rule
      * - array: [Class, Method] to be called
      * - Closure
      *
-     * @var string
+     * @var string|string[]|callable
      */
-    public $callback = null;
+    public $callback;
 
-    /**
-     * {@inheritDoc}
-     */
-    public function getDefaultOption()
+    public function getDefaultOption() : ?string
     {
         return 'callback';
     }
@@ -36,25 +38,22 @@ class Callback extends Rule
     /**
      * Figures out which type of input was provided
      *
-     * @return string
-     * @throws \DMS\Filter\Exception\InvalidCallbackException
+     * @throws InvalidCallbackException
      */
-    public function getInputType()
+    public function getInputType() : string
     {
         switch (true) {
             case $this->callback instanceof Closure:
                 return self::CLOSURE_TYPE;
-
             case is_callable($this->callback, false):
                 return self::CALLABLE_TYPE;
-
             case is_string($this->callback):
                 return self::SELF_METHOD_TYPE;
         }
 
         throw new InvalidCallbackException(
-            "The input provided for Callback filter is not supported or the callable not valid.
-            Please refer to the class documentation."
+            'The input provided for Callback filter is not supported or the callable not valid.
+            Please refer to the class documentation.'
         );
     }
 }

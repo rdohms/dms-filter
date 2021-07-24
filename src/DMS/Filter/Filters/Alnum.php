@@ -1,14 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DMS\Filter\Filters;
 
 use DMS\Filter\Rules\Rule;
 
 /**
  * Alnum Filter (Alphanumeric)
- *
- * @package DMS
- * @subpackage Filter
  */
 class Alnum extends RegExp
 {
@@ -20,7 +19,7 @@ class Alnum extends RegExp
     public function apply(Rule $rule, $value)
     {
         //Check for Whitespace support
-        $whitespaceChar = ($rule->allowWhitespace)? " ":"";
+        $whitespaceChar = $rule->allowWhitespace? ' ':'';
 
         $rule->unicodePattern = '/[^\p{L}\p{N}' . $whitespaceChar . ']/u';
         $rule->pattern        = '/[^a-zA-Z0-9' . $whitespaceChar . ']/';

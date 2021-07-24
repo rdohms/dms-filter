@@ -2,26 +2,22 @@
 
 namespace DMS\Filter\Filters;
 
+use DMS\Filter\Exception\FilterException;
 use DMS\Tests\FilterTestCase;
 use DMS\Filter\Rules\ToLower as ToLowerRule;
 
 class ToLowerTest extends FilterTestCase
 {
 
-    public function setUp()
-    {
-        parent::setUp();
-    }
-
-    public function tearDown()
-    {
-        parent::tearDown();
-    }
-
     /**
      * @dataProvider provideForRule
+     *
+     * @param $options
+     * @param $value
+     * @param $expectedResult
+     * @param $useEncoding
      */
-    public function testRule($options, $value, $expectedResult, $useEncoding)
+    public function testRule($options, $value, $expectedResult, $useEncoding): void
     {
         if ($useEncoding && !function_exists('mb_strtolower')) {
             $this->markTestSkipped('mbstring extension not enabled');
@@ -35,30 +31,28 @@ class ToLowerTest extends FilterTestCase
         $this->assertEquals($expectedResult, $result);
     }
 
-    /**
-     * @expectedException \DMS\Filter\Exception\FilterException
-     */
-    public function testInvalidEncoding()
+    public function testInvalidEncoding(): void
     {
+        $this->expectException(FilterException::class);
         if (! function_exists('mb_strtolower')) {
             $this->markTestSkipped('mbstring extension not enabled');
         }
 
-        $rule = new ToLowerRule(array('encoding' => 'invalid'));
+        $rule = new ToLowerRule(['encoding' => 'invalid']);
         $filter = new ToLower();
 
         $result = $filter->apply($rule, 'x');
     }
 
-    public function provideForRule()
+    public function provideForRule(): array
     {
-        return array(
-            array(array('encoding' => 'utf-8'), "MY TEXT", "my text", true),
-            array(array('encoding' => 'utf-8'), "MY Ã TEXT", "my ã text", true),
-            array(array('encoding' => 'utf-8'), "MY Á TEXT", "my á text", true),
-            array('utf-8', "MY Á TEXT", "my á text", true),
-            array(array(), "MY TEXT", "my text", false ),
-            array(array(), "MY TEXT", "my text", false ),
-        );
+        return [
+            [['encoding' => 'utf-8'], "MY TEXT", "my text", true],
+            [['encoding' => 'utf-8'], "MY Ã TEXT", "my ã text", true],
+            [['encoding' => 'utf-8'], "MY Á TEXT", "my á text", true],
+            ['utf-8', "MY Á TEXT", "my á text", true],
+            [[], "MY TEXT", "my text", false],
+            [[], "MY TEXT", "my text", false],
+        ];
     }
 }

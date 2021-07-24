@@ -5,6 +5,8 @@ namespace DMS\Filter\Rules;
 
 use DMS\Tests\Dummy\Classes\AnnotatedClass;
 use DMS\Tests\FilterTestCase;
+use DMS\Filter\Exception\InvalidCallbackException;
+use stdClass;
 
 class CallbackTest extends FilterTestCase
 {
@@ -16,10 +18,10 @@ class CallbackTest extends FilterTestCase
      *
      * @dataProvider provideInputs
      */
-    public function testGetInputType($input, $expectedOutput, $expectException)
+    public function testGetInputType($input, $expectedOutput, $expectException): void
     {
         if ($expectException) {
-            $this->setExpectedException('DMS\Filter\Exception\InvalidCallbackException');
+            $this->expectException(InvalidCallbackException::class);
         }
 
         $rule = new Callback($input);
@@ -27,21 +29,19 @@ class CallbackTest extends FilterTestCase
         $this->assertEquals($expectedOutput, $rule->getInputType());
     }
 
-    public function provideInputs()
+    public function provideInputs(): array
     {
-        $closure = function ($v) {
-            return;
-        };
+        $closure = static function ($v) {};
 
-        return array(
-            array('objMethod', Callback::SELF_METHOD_TYPE, false),
-            array(array('DMS\Tests\Dummy\Classes\AnnotatedClass', 'anotherCallback'), Callback::CALLABLE_TYPE, false),
-            array(array('DMS\Tests\Dummy\Classes\AnnotatedClass', 'missingCallback'), null, true),
-            array(array(new AnnotatedClass(), 'callbackMethod'), Callback::CALLABLE_TYPE, false),
-            array('strlen', Callback::CALLABLE_TYPE, false),
-            array($closure, Callback::CLOSURE_TYPE, false),
-            array(1, null, true),
-            array(new \stdClass(), null, true),
-        );
+        return [
+            ['objMethod', Callback::SELF_METHOD_TYPE, false],
+            [[AnnotatedClass::class, 'anotherCallback'], Callback::CALLABLE_TYPE, false],
+            [[AnnotatedClass::class, 'missingCallback'], null, true],
+            [[new AnnotatedClass(), 'callbackMethod'], Callback::CALLABLE_TYPE, false],
+            ['strlen', Callback::CALLABLE_TYPE, false],
+            [$closure, Callback::CLOSURE_TYPE, false],
+            [1, null, true],
+            [new stdClass(), null, true],
+        ];
     }
 }

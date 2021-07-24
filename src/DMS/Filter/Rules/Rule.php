@@ -1,21 +1,29 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DMS\Filter\Rules;
 
 use DMS\Filter\Exception\InvalidOptionsException;
 use DMS\Filter\Exception\MissingOptionsException;
 use DMS\Filter\Exception\RuleDefinitionException;
+use stdClass;
+use function array_flip;
+use function array_keys;
+use function count;
+use function implode;
+use function is_array;
+use function is_string;
+use function key;
+use function property_exists;
+use function sprintf;
+use function str_replace;
 
 /**
  * Base class for a Filtering Rule, it implements common behaviour
  *
  * Rules are classes that define the metadata supported by
  * each filter and are used to annotate objects.
- *
- * @package DMS
- * @subpackage Filter
- * @category Rule
- *
  */
 abstract class Rule
 {
@@ -40,7 +48,7 @@ abstract class Rule
                 sprintf(
                     'The options "%s" do not exist in rule %s',
                     implode('", "', $result->invalidOptions),
-                    get_class($this)
+                    static::class
                 ),
                 $result->invalidOptions
             );
@@ -51,7 +59,7 @@ abstract class Rule
                 sprintf(
                     'The options "%s" must be set for rule %s',
                     implode('", "', array_keys($result->missingOptions)),
-                    get_class($this)
+                    static::class
                 ),
                 array_keys($result->missingOptions)
             );
@@ -63,28 +71,29 @@ abstract class Rule
      * for the parsing process
      *
      * @param mixed $options
-     * @return \stdClass
      */
-    private function parseOptions($options)
+    private function parseOptions($options) : stdClass
     {
-        $parseResult = new \stdClass();
-        $parseResult->invalidOptions = array();
-        $parseResult->missingOptions = array_flip((array)$this->getRequiredOptions());
+        $parseResult                 = new stdClass();
+        $parseResult->invalidOptions = [];
+        $parseResult->missingOptions = array_flip($this->getRequiredOptions());
+        $options                     = $this->extractFromValueOption($options);
 
-        //Doctrine parses constructor parameter into 'value' array param, restore it
-        if (is_array($options) && count($options) == 1 && isset($options['value'])) {
-            $options = $options['value'];
+        if ($options === null) {
+            return $parseResult;
         }
 
         //Parse Option Array
-        if (is_array($options) && count($options) > 0 && is_string(key($options))) {
+        if ($this->isNonEmptyMap($options)) {
             $this->parseOptionsArray($options, $parseResult);
+
             return $parseResult;
         }
 
         //Parse Single Value
-        if (null !== $options && ! (is_array($options) && count($options) === 0)) {
+        if ($options !== []) {
             $this->parseSingleOption($options, $parseResult);
+
             return $parseResult;
         }
 
@@ -94,10 +103,9 @@ abstract class Rule
     /**
      * Parses Options in the array format
      *
-     * @param array $options
-     * @param \stdClass $result
+     * @param mixed[] $options
      */
-    private function parseOptionsArray($options, \stdClass $result)
+    private function parseOptionsArray(array $options, stdClass $result) : void
     {
         foreach ($options as $option => $value) {
             if (! property_exists($this, $option)) {
@@ -114,24 +122,25 @@ abstract class Rule
     /**
      * Parses single option received
      *
-     * @param string $options
-     * @param \stdClass $result
-     * @throws \DMS\Filter\Exception\RuleDefinitionException
+     * @param string|mixed[] $options
+     *
+     * @throws RuleDefinitionException
      */
-    private function parseSingleOption($options, \stdClass $result)
+    private function parseSingleOption($options, stdClass $result) : void
     {
         $option = $this->getDefaultOption();
 
         //No Default set, unsure what to do
-        if (null === $option) {
+        if ($option === null) {
             throw new RuleDefinitionException(
-                sprintf('No default option is configured for rule %s', get_class($this))
+                sprintf('No default option is configured for rule %s', static::class)
             );
         }
 
         //Default option points to invalid one
         if (! property_exists($this, $option)) {
             $result->invalidOptions[] = $option;
+
             return;
         }
 
@@ -145,12 +154,13 @@ abstract class Rule
      *
      * Override this method if you want to define required options.
      *
-     * @return array
      * @see __construct()
+     *
+     * @return string[]
      */
-    public function getRequiredOptions()
+    public function getRequiredOptions() : array
     {
-        return array();
+        return [];
     }
 
     /**
@@ -158,10 +168,9 @@ abstract class Rule
      *
      * Override this method to define a default option.
      *
-     * @return string
      * @see __construct()
      */
-    public function getDefaultOption()
+    public function getDefaultOption() : ?string
     {
         return null;
     }
@@ -170,11 +179,33 @@ abstract class Rule
      * Retrieves the Filter class that is responsible for executing this filter
      * It may also be a service name. By default it loads a class with the
      * same name from the Filters namespace.
-     *
-     * @return string
      */
-    public function getFilter()
+    public function getFilter() : string
     {
-        return str_replace('Rules', 'Filters', get_class($this));
+        return str_replace('Rules', 'Filters', static::class);
+    }
+
+    /**
+     * Doctrine parses constructor parameter into 'value' array param, restore it
+     *
+     * @param mixed $options
+     *
+     * @return mixed[]|mixed
+     */
+    private function extractFromValueOption($options)
+    {
+        if (is_array($options) && count($options) === 1 && isset($options['value'])) {
+            $options = $options['value'];
+        }
+
+        return $options;
+    }
+
+    /**
+     * @param mixed $options
+     */
+    private function isNonEmptyMap($options) : bool
+    {
+        return is_array($options) && count($options) > 0 && is_string(key($options));
     }
 }

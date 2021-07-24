@@ -1,29 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DMS\Filter\Rules;
 
 /**
  * Alnum Rule (Alphanumeric)
  *
- * @package DMS
- * @subpackage Filter
- *
  * @Annotation
  */
 class Alnum extends RegExp
 {
-
     /**
      * Allow Whitespace or not
-     *
-     * @var bool
      */
-    public $allowWhitespace = true;
+    public bool $allowWhitespace = true;
 
-    /**
-     * {@inheritDoc}
-     */
-    public function getDefaultOption()
+    public function getDefaultOption() : ?string
     {
         return 'allowWhitespace';
     }

@@ -5,27 +5,20 @@ namespace DMS\Filter;
 use DMS\Filter\Filters\Loader\FilterLoader;
 use DMS\Tests\FilterTestCase;
 use DMS\Tests\Dummy;
+use DMS\Filter\Mapping\ClassMetadataFactory;
 
 class FilterTest extends FilterTestCase
 {
-    /**
-     * @var \DMS\Filter\Filter
-     */
-    protected $filter;
+    protected Filter $filter;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->filter = new Filter($this->buildMetadataFactory(), new FilterLoader());
     }
 
-    public function tearDown()
-    {
-        parent::tearDown();
-    }
-
-    public function testFilter()
+    public function testFilter(): void
     {
         $class = new Dummy\Classes\AnnotatedClass();
         $class->name = "Sir Isaac<script></script> Newton";
@@ -40,11 +33,11 @@ class FilterTest extends FilterTestCase
         $this->assertEquals($classClone->nickname, $class->nickname);
         $this->assertNotEquals($classClone->description, $class->description);
 
-        $this->assertNotContains("<script>", $class->name);
-        $this->assertNotContains("<p>", $class->description);
+        $this->assertStringNotContainsString("<script>", $class->name);
+        $this->assertStringNotContainsString("<p>", $class->description);
     }
 
-    public function testFilterWithParent()
+    public function testFilterWithParent(): void
     {
         $class = new Dummy\Classes\ChildAnnotatedClass();
         $class->name = "Sir Isaac<script></script> Newton";
@@ -61,12 +54,12 @@ class FilterTest extends FilterTestCase
         $this->assertNotEquals($classClone->description, $class->description);
         $this->assertNotEquals($classClone->surname, $class->surname);
 
-        $this->assertNotContains("<script>", $class->name);
-        $this->assertNotContains("<p>", $class->description);
-        $this->assertNotContains(" ", $class->surname);
+        $this->assertStringNotContainsString("<script>", $class->name);
+        $this->assertStringNotContainsString("<p>", $class->description);
+        $this->assertStringNotContainsString(" ", $class->surname);
     }
 
-    public function testFilterProperty()
+    public function testFilterProperty(): void
     {
         $class = new Dummy\Classes\AnnotatedClass();
         $class->name = "Sir Isaac<script></script> Newton";
@@ -79,11 +72,11 @@ class FilterTest extends FilterTestCase
         $this->assertEquals($classClone->name, $class->name);
         $this->assertNotEquals($classClone->description, $class->description);
 
-        $this->assertContains("<script>", $class->name);
-        $this->assertNotContains("<p>", $class->description);
+        $this->assertStringContainsString("<script>", $class->name);
+        $this->assertStringNotContainsString("<p>", $class->description);
     }
 
-    public function testFilterValue()
+    public function testFilterValue(): void
     {
         $value = "this is <b> a string<p> with<b> tags</p> and malformed";
 
@@ -91,31 +84,32 @@ class FilterTest extends FilterTestCase
 
         $this->assertNotEquals($value, $filtered);
 
-        $this->assertNotContains('<b>', $filtered);
-        $this->assertNotContains('<p>', $filtered);
+        $this->assertStringNotContainsString('<b>', $filtered);
+        $this->assertStringNotContainsString('<p>', $filtered);
     }
 
-    public function testFilterValueWithArray()
+    public function testFilterValueWithArray(): void
     {
         $value = "this is <b> a string<p> with<b> tags</p> and\n malformed";
 
-        $filters = array(new Rules\StripTags(), new Rules\StripNewlines());
+        $filters = [new Rules\StripTags(), new Rules\StripNewlines()];
         $filtered = $this->filter->filterValue($value, $filters);
 
         $this->assertNotEquals($value, $filtered);
 
-        $this->assertNotContains('<b>', $filtered);
-        $this->assertNotContains('<p>', $filtered);
-        $this->assertNotContains('\n', $filtered);
+        $this->assertStringNotContainsString('<b>', $filtered);
+        $this->assertStringNotContainsString('<p>', $filtered);
+        $this->assertStringNotContainsString('\n', $filtered);
     }
 
-    public function testNotFailOnNull()
+    public function testNotFailOnNull(): void
     {
+        $this->expectNotToPerformAssertions();
         $this->filter->filterEntity(null);
     }
 
-    public function testGetMetadataFactory()
+    public function testGetMetadataFactory(): void
     {
-        $this->assertInstanceOf('DMS\Filter\Mapping\ClassMetadataFactory', $this->filter->getMetadataFactory());
+        $this->assertInstanceOf(ClassMetadataFactory::class, $this->filter->getMetadataFactory());
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DMS\Filter\Rules;
 
 /**
@@ -7,24 +9,17 @@ namespace DMS\Filter\Rules;
  *
  * Filter using preg_replace and unicode or non-unicode patterns
  *
- * @package DMS
- * @subpackage Filter
- *
  * @Annotation
  */
 class RegExp extends Rule
 {
     /**
      * Unicode version of Pattern
-     *
-     * @var string
      */
-    public $unicodePattern;
+    public string $unicodePattern;
 
     /**
      * Reg Exp Pattern
-     *
-     * @var string
      */
-    public $pattern;
+    public string $pattern;
 }

@@ -3,31 +3,34 @@
 namespace DMS\Tests;
 
 use DMS\Filter\Mapping;
+use DMS\Filter\Mapping\ClassMetadataFactory;
 use Doctrine\Common\Annotations;
+use PHPUnit\Framework\TestCase;
 
-class FilterTestCase extends \PHPUnit_Framework_TestCase
+class FilterTestCase extends TestCase
 {
-    protected $loader;
+    public function __construct(?string $name = null, array $data = [], $dataName = '')
+    {
+        parent::__construct($name, $data, $dataName);
+        $this->buildMetadataFactory();
+    }
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         parent::tearDown();
     }
 
-    protected function buildMetadataFactory()
+    protected function buildMetadataFactory(): ClassMetadataFactory
     {
         $reader = new Annotations\AnnotationReader();
 
         $loader = new Mapping\Loader\AnnotationLoader($reader);
-        $this->loader = $loader;
 
-        $metadataFactory = new Mapping\ClassMetadataFactory($loader);
-
-        return $metadataFactory;
+        return new ClassMetadataFactory($loader);
     }
 }

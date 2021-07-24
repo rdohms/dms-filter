@@ -2,8 +2,12 @@
 
 namespace DMS\Filter\Mapping;
 
+use DMS\Filter\Mapping\Loader\AnnotationLoader;
 use DMS\Tests\FilterTestCase;
+use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Cache\ArrayCache;
+use DMS\Tests\Dummy\Classes\AnnotatedClass;
+use DMS\Filter\Mapping\ClassMetadataInterface;
 
 class ClassMetadataFactoryTest extends FilterTestCase
 {
@@ -11,49 +15,45 @@ class ClassMetadataFactoryTest extends FilterTestCase
     /**
      * @var ClassMetadataFactory
      */
-    protected $factory;
+    protected ClassMetadataFactory $factory;
 
-    public function setUp()
-    {
+    public function setUp(): void
+{
         parent::setUp();
 
         $this->factory = $this->buildMetadataFactory();
     }
 
-    public function tearDown()
+    public function testGetClassMetadata(): void
     {
-        parent::tearDown();
+        $metadata = $this->factory->getClassMetadata(AnnotatedClass::class);
+
+        $this->assertInstanceOf(ClassMetadataInterface::class, $metadata);
     }
 
-    public function testGetClassMetadata()
+    public function testParsedMetadataFromFactory(): void
     {
-        $metadata = $this->factory->getClassMetadata('DMS\Tests\Dummy\Classes\AnnotatedClass');
+        $metadata = $this->factory->getClassMetadata(AnnotatedClass::class);
 
-        $this->assertInstanceOf('DMS\Filter\Mapping\ClassMetadataInterface', $metadata);
-    }
-
-    public function testParsedMetadataFromFactory()
-    {
-        $metadata = $this->factory->getClassMetadata('DMS\Tests\Dummy\Classes\AnnotatedClass');
-
-        $metadataReparsed = $this->factory->getClassMetadata('DMS\Tests\Dummy\Classes\AnnotatedClass');
+        $metadataReparsed = $this->factory->getClassMetadata(AnnotatedClass::class);
 
         $this->assertSame($metadata, $metadataReparsed);
     }
 
-    public function testCachedMetadataFromFactory()
+    public function testCachedMetadataFromFactory(): void
     {
         $cache = new ArrayCache();
+        $reader = new AnnotationReader();
+        $loader = new AnnotationLoader($reader);
+        $this->factory = new ClassMetadataFactory($loader, $cache);
 
-        $this->factory = new ClassMetadataFactory($this->loader, $cache);
+        $metadata = $this->factory->getClassMetadata(AnnotatedClass::class);
 
-        $metadata = $this->factory->getClassMetadata('DMS\Tests\Dummy\Classes\AnnotatedClass');
-
-        $this->assertTrue($cache->contains(ltrim('DMS\Tests\Dummy\Classes\AnnotatedClass', '\\')));
+        $this->assertTrue($cache->contains(ltrim(AnnotatedClass::class, '\\')));
 
         //Get new Factory to retrieve from cache
-        $this->factory = new ClassMetadataFactory($this->loader, $cache);
-        $metadataCached = $this->factory->getClassMetadata('DMS\Tests\Dummy\Classes\AnnotatedClass');
+        $this->factory = new ClassMetadataFactory($loader, $cache);
+        $metadataCached = $this->factory->getClassMetadata(AnnotatedClass::class);
 
         $this->assertEquals($metadata, $metadataCached);
     }
