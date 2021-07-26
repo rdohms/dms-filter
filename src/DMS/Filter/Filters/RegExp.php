@@ -1,25 +1,24 @@
 <?php
+declare(strict_types=1);
 
 namespace DMS\Filter\Filters;
 
 use DMS\Filter\Rules\Rule;
 
+use function preg_match;
+use function preg_replace;
+
 /**
  * RegExp Filter
  *
  * Filter using preg_replace and unicode or non-unicode patterns
- *
- * @package DMS
- * @subpackage Filter
  */
 class RegExp extends BaseFilter
 {
     /**
      * Defines if Unicode is supported
-     *
-     * @var boolean
      */
-    protected static $unicodeEnabled;
+    protected static bool $unicodeEnabled;
 
     /**
      * {@inheritDoc}
@@ -29,7 +28,7 @@ class RegExp extends BaseFilter
     public function apply(Rule $rule, $value)
     {
         //Build pattern
-        $pattern = ($this->checkUnicodeSupport() && $rule->unicodePattern !== null)
+        $pattern = $this->checkUnicodeSupport() && $rule->unicodePattern !== null
             ? $rule->unicodePattern
             : $rule->pattern;
 
@@ -38,12 +37,12 @@ class RegExp extends BaseFilter
 
     /**
      * Verifies that Regular Expression functions support unicode
-     * @return boolean
      */
-    public function checkUnicodeSupport()
+    public function checkUnicodeSupport(): bool
     {
-        if (null === static::$unicodeEnabled) {
-            static::$unicodeEnabled = (@preg_match('/\pL/u', 'a')) ? true : false;
+        if (static::$unicodeEnabled === null) {
+            //phpcs:disable SlevomatCodingStandard.ControlStructures.UselessTernaryOperator.UselessTernaryOperator
+            static::$unicodeEnabled = @preg_match('/\pL/u', 'a') ? true : false;
         }
 
         return static::$unicodeEnabled;

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace DMS\Filter\Filters;
 
@@ -8,36 +9,31 @@ use DMS\Filter\Exception\InvalidCallbackException;
 use DMS\Filter\Rules\Callback as CallbackRule;
 use DMS\Filter\Rules\Rule;
 
+use function call_user_func;
+use function get_class;
+use function is_callable;
+use function method_exists;
+use function sprintf;
+
 /**
  * Callback Filter
- *
- * @package DMS
- * @subpackage Filter
  */
 class Callback extends BaseFilter implements ObjectAwareFilter
 {
-    /**
-     * @var object | null
-     */
-    protected $currentObject = null;
+    protected ?object $currentObject = null;
 
     /**
      * Set the current object so that the filter can access it
-     *
-     * @param $object
-     * @return object mixed
      */
-    public function setCurrentObject($object)
+    public function setCurrentObject(object $object): void
     {
         $this->currentObject = $object;
     }
 
     /**
      * Retrieves the current Object to be used
-     *
-     * @return object | null
      */
-    public function getCurrentObject()
+    public function getCurrentObject(): ?object
     {
         return $this->currentObject;
     }
@@ -49,33 +45,38 @@ class Callback extends BaseFilter implements ObjectAwareFilter
      */
     public function apply(Rule $rule, $value)
     {
+        if ($value === null) {
+            return null;
+        }
+
         $type = $rule->getInputType();
 
-        if ($type == CallbackRule::SELF_METHOD_TYPE) {
+        if ($type === CallbackRule::SELF_METHOD_TYPE) {
             return $this->useObjectMethod($rule->callback, $value);
         }
 
-        if ($type == CallbackRule::CALLABLE_TYPE) {
+        if ($type === CallbackRule::CALLABLE_TYPE) {
             return $this->useCallable($rule->callback, $value);
         }
 
-        if ($type == CallbackRule::CLOSURE_TYPE) {
+        if ($type === CallbackRule::CLOSURE_TYPE) {
             return $this->useClosure($rule->callback, $value);
         }
 
-        throw new InvalidCallbackException("Unsupported callback provided, failed to filter property");
+        throw new InvalidCallbackException('Unsupported callback provided, failed to filter property');
     }
 
     /**
      * Filters by executing a method in the object
      *
-     * @param string $method
      * @param mixed $value
-     * @throws \DMS\Filter\Exception\FilterException
-     * @throws \DMS\Filter\Exception\InvalidCallbackException
+     *
      * @return mixed
+     *
+     * @throws InvalidCallbackException
+     * @throws FilterException
      */
-    protected function useObjectMethod($method, $value)
+    protected function useObjectMethod(string $method, $value)
     {
         $currentObject = $this->getCurrentObject();
 
@@ -101,30 +102,34 @@ class Callback extends BaseFilter implements ObjectAwareFilter
     /**
      * Filters using a callable.
      *
-     * @param callable $callable
-     * @param mixed $value
-     * @throws \DMS\Filter\Exception\InvalidCallbackException
+     * @param mixed             $value
+     * @param string[]|callable $callable
+     *
      * @return mixed
+     *
+     * @throws InvalidCallbackException
      */
     protected function useCallable($callable, $value)
     {
         if (! is_callable($callable, false, $input)) {
-            throw new InvalidCallbackException("The callable $input could not be resolved.");
+            throw new InvalidCallbackException(sprintf('The callable %s could not be resolved.', $input));
         }
 
         return call_user_func($callable, $value);
     }
 
     /**
-     * @param Closure $closure
-     * @param mixed $value
-     * @throws \DMS\Filter\Exception\InvalidCallbackException
+     * @param mixed          $value
+     * @param string|Closure $closure
+     *
      * @return mixed
+     *
+     * @throws InvalidCallbackException
      */
     protected function useClosure($closure, $value)
     {
         if (! $closure instanceof Closure) {
-            throw new InvalidCallbackException("CallbackFilter: the provided closure is invalid");
+            throw new InvalidCallbackException('CallbackFilter: the provided closure is invalid');
         }
 
         return $closure($value);

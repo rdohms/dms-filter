@@ -8,20 +8,14 @@ use DMS\Filter\Rules\BooleanScalar as BooleanRule;
 class BooleanTest extends FilterTestCase
 {
 
-    public function setUp()
-    {
-        parent::setUp();
-    }
-
-    public function tearDown()
-    {
-        parent::tearDown();
-    }
-
     /**
      * @dataProvider provideForRule
+     *
+     * @param $options
+     * @param $value
+     * @param $expectedResult
      */
-    public function testRule($options, $value, $expectedResult)
+    public function testRule($options, $value, $expectedResult): void
     {
         $rule = new BooleanRule($options);
         $filter = new BooleanScalar();
@@ -31,15 +25,15 @@ class BooleanTest extends FilterTestCase
         $this->assertEquals($expectedResult, $result);
     }
 
-    public function provideForRule()
+    public function provideForRule(): array
     {
-        return array(
-            array(null, "My Text", true),
-            array(null, "", false),
-            array(null, null, false),
-            array(null, 21.9, true),
-            array(null, 21, true),
-            array(null, 0, false),
-        );
+        return [
+            [null, "My Text", true],
+            [null, "", false],
+            [null, null, false],
+            [null, 21.9, true],
+            [null, 21, true],
+            [null, 0, false],
+        ];
     }
 }

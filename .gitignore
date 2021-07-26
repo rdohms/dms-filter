@@ -1,2 +1,3 @@
 tests/_reports
 vendor
+/.phpcs.cache

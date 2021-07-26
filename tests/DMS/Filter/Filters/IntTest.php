@@ -8,20 +8,14 @@ use DMS\Filter\Rules\IntScalar as IntRule;
 class IntTest extends FilterTestCase
 {
 
-    public function setUp()
-    {
-        parent::setUp();
-    }
-
-    public function tearDown()
-    {
-        parent::tearDown();
-    }
-
     /**
      * @dataProvider provideForRule
+     *
+     * @param $options
+     * @param $value
+     * @param $expectedResult
      */
-    public function testRule($options, $value, $expectedResult)
+    public function testRule($options, $value, $expectedResult): void
     {
         $rule   = new IntRule($options);
         $filter = new IntScalar();
@@ -31,15 +25,15 @@ class IntTest extends FilterTestCase
         $this->assertEquals($expectedResult, $result);
     }
 
-    public function provideForRule()
+    public function provideForRule(): array
     {
-        return array(
-            array(null, "My Text", 0),
-            array(null, true, 1),
-            array(null, "21", 21),
-            array(null, "21.2", 21),
-            array(null, "21.9", 21),
-            array(null, 21.9, 21),
-        );
+        return [
+            [null, "My Text", 0],
+            [null, true, 1],
+            [null, "21", 21],
+            [null, "21.2", 21],
+            [null, "21.9", 21],
+            [null, 21.9, 21],
+        ];
     }
 }

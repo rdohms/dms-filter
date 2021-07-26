@@ -6,6 +6,9 @@ use DMS\Filter\Rules\Rule;
 
 class DefaultOptionRule extends Rule
 {
+    /**
+     * @var mixed
+     */
     public $config;
 
     public function applyFilter($value)
@@ -13,7 +16,7 @@ class DefaultOptionRule extends Rule
         return $value;
     }
 
-    public function getDefaultOption()
+    public function getDefaultOption(): ?string
     {
         return 'config';
     }

@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace DMS\Filter\Rules;
 
 /**
@@ -12,22 +14,17 @@ class Zend extends Rule
 {
     /**
      * Zend\Filter class, can be either a FQN or just Boolean for example
-     *
-     * @var string
      */
-    public $class;
+    public string $class;
 
     /**
      * Array of options to be passed into the Zend Filter
      *
-     * @var array
+     * @var mixed[]
      */
-    public $zendOptions = array();
+    public array $zendOptions = [];
 
-    /**
-     * {@inheritDoc}
-     */
-    public function getDefaultOption()
+    public function getDefaultOption(): ?string
     {
         return 'class';
     }

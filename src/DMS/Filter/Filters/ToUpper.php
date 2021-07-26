@@ -1,15 +1,21 @@
 <?php
+declare(strict_types=1);
 
 namespace DMS\Filter\Filters;
 
-use DMS\Filter\Rules\Rule;
 use DMS\Filter\Exception\FilterException;
+use DMS\Filter\Rules\Rule;
+
+use function array_map;
+use function function_exists;
+use function in_array;
+use function mb_list_encodings;
+use function mb_strtoupper;
+use function strtolower;
+use function strtoupper;
 
 /**
  * ToUpper Filter
- *
- * @package DMS
- * @subpackage Filter
  */
 class ToUpper extends BaseFilter
 {
@@ -31,28 +37,26 @@ class ToUpper extends BaseFilter
      * Verify is encoding is set and if we have the proper
      * function to use it
      *
-     * @param \DMS\Filter\Rules\ToUpper $rule
-     *
-     * @throws \DMS\Filter\Exception\FilterException
-     * @return boolean
+     * @throws FilterException
      */
-    public function useEncoding($rule)
+    public function useEncoding(\DMS\Filter\Rules\ToUpper $rule): bool
     {
         if ($rule->encoding === null) {
             return false;
         }
 
-        if (!function_exists('mb_strtoupper')) {
+        if (! function_exists('mb_strtoupper')) {
             throw new FilterException(
-                'mbstring is required to use ToLower with an encoding.');
+                'mbstring is required to use ToLower with an encoding.'
+            );
         }
 
         $this->encoding = (string) $rule->encoding;
-        $encodings = array_map('strtolower', mb_list_encodings());
+        $encodings      = array_map('strtolower', mb_list_encodings());
 
-        if (!in_array(strtolower($rule->encoding), $encodings)) {
+        if (! in_array(strtolower($rule->encoding), $encodings)) {
             throw new FilterException(
-                "mbstring does not support the '".$rule->encoding."' encoding"
+                "mbstring does not support the '" . $rule->encoding . "' encoding"
             );
         }
 

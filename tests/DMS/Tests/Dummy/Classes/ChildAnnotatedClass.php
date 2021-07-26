@@ -11,5 +11,5 @@ class ChildAnnotatedClass extends AnnotatedClass implements AnnotatedInterface
      *
      * @var string
      */
-    public $surname;
+    public string $surname;
 }

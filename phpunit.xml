@@ -1,6 +1,15 @@
-<?xml version="1.0"?>
-<phpunit bootstrap="vendor/autoload.php" colors="true" verbose="true">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- https://phpunit.de/manual/current/en/appendixes.configuration.html -->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         backupGlobals="false"
+         colors="true"
+         verbose="true"
+         beStrictAboutOutputDuringTests="true"
+         beStrictAboutTestsThatDoNotTestAnything="true"
+         beStrictAboutTodoAnnotatedTests="true"
+         beStrictAboutChangesToGlobalState="true"
+>
     <testsuites>
         <testsuite name="DMS Filter Suite">
             <directory>tests/DMS</directory>
@@ -11,14 +20,10 @@
         <whitelist>
             <directory suffix=".php">src/DMS</directory>
         </whitelist>
-        <blacklist>
-            <directory>tests</directory>
-            <directory>vendor</directory>
-        </blacklist>
     </filter>
 
     <logging>
-        <log type="coverage-html" target="tests/_reports/coverage/" charset="UTF-8" yui="true" highlight="false" lowUpperBound="35" highLowerBound="70"/>
+        <log type="coverage-html" target="tests/_reports/coverage/" lowUpperBound="35" highLowerBound="70"/>
         <log type="testdox-text" target="tests/_reports/testdox/tests.txt"/>
         <log type="testdox-html" target="tests/_reports/testdox/tests.html"/>
     </logging>

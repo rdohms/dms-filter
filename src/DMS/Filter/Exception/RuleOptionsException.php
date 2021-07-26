@@ -1,28 +1,22 @@
 <?php
+declare(strict_types=1);
 
 namespace DMS\Filter\Exception;
 
 /**
  * Base Exception for errors with rule options
- *
- * @package DMS
- * @subpackage Filter
- * @category Exception
  */
 class RuleOptionsException extends FilterException
 {
-    /**
-     * @var array
-     */
-    private $options;
+    /** @var string[] */
+    private array $options;
 
     /**
      * Constructor
      *
-     * @param string $message
-     * @param array $options
+     * @param string[] $options
      */
-    public function __construct($message, array $options)
+    public function __construct(string $message, array $options)
     {
         parent::__construct($message);
 
@@ -32,9 +26,9 @@ class RuleOptionsException extends FilterException
     /**
      * Retrieve options that triggered exception
      *
-     * @return array
+     * @return string[]
      */
-    public function getOptions()
+    public function getOptions(): array
     {
         return $this->options;
     }
