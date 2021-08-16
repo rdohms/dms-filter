@@ -32,6 +32,7 @@ class PregReplaceTest extends FilterTestCase
             [['regexp' => '/(old)/', 'replacement' => 'new'], "the crazy old fox", "the crazy new fox"],
             [['regexp' => '/([0-9]*)/'], "this is day 21", "this is day "],
             [['regexp' => '/(style=\"[^\"]*\")/'], "<table style=\"width: 23px\" class=\"myclass\">", "<table  class=\"myclass\">"],
+            [['regexp' => '/(style=\"[^\"]*\")/'], null, null],
         ];
     }
 }

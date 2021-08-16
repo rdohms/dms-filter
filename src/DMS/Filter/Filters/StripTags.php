@@ -5,6 +5,7 @@ namespace DMS\Filter\Filters;
 
 use DMS\Filter\Rules\Rule;
 
+use function is_string;
 use function strip_tags;
 
 /**
@@ -19,6 +20,6 @@ class StripTags extends BaseFilter
      */
     public function apply(Rule $rule, $value)
     {
-        return strip_tags($value, $rule->allowed);
+        return is_string($value) ? strip_tags($value, $rule->allowed) : $value;
     }
 }

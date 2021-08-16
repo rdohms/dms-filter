@@ -53,6 +53,7 @@ class ToUpperTest extends FilterTestCase
             ['utf-8', "my á text", "MY Á TEXT", true],
             [[], "my text", "MY TEXT", false],
             [[], "my text", "MY TEXT", false],
+            [[], null, null, false],
         ];
     }
 }

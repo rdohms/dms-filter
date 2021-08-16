@@ -5,6 +5,7 @@ namespace DMS\Filter\Filters;
 
 use DMS\Filter\Rules\Rule;
 
+use function is_string;
 use function str_replace;
 
 /**
@@ -17,6 +18,6 @@ class StripNewlines extends BaseFilter
      */
     public function apply(Rule $rule, $value)
     {
-        return str_replace(["\n", "\r"], '', $value);
+        return is_string($value) ? str_replace(["\n", "\r"], '', $value) : $value;
     }
 }

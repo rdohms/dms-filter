@@ -5,6 +5,7 @@ namespace DMS\Filter\Filters;
 
 use DMS\Filter\Rules\Rule;
 
+use function is_string;
 use function preg_replace;
 
 /**
@@ -20,6 +21,6 @@ class PregReplace extends BaseFilter
      */
     public function apply(Rule $rule, $value)
     {
-        return preg_replace($rule->regexp, $rule->replacement, $value);
+        return is_string($value) ? preg_replace($rule->regexp, $rule->replacement, $value) : $value;
     }
 }
