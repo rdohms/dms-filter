@@ -17,6 +17,6 @@ class StripNewlines extends BaseFilter
      */
     public function apply(Rule $rule, $value)
     {
-        return str_replace(["\n", "\r"], '', $value);
+        return is_string($value) ? str_replace(["\n", "\r"], '', $value) : $value;
     }
 }

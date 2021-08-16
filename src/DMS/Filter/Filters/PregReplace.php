@@ -20,6 +20,6 @@ class PregReplace extends BaseFilter
      */
     public function apply(Rule $rule, $value)
     {
-        return preg_replace($rule->regexp, $rule->replacement, $value);
+        return is_string($value) ? preg_replace($rule->regexp, $rule->replacement, $value) : $value;
     }
 }

@@ -32,7 +32,7 @@ class RegExp extends BaseFilter
             ? $rule->unicodePattern
             : $rule->pattern;
 
-        return preg_replace($pattern, '', $value);
+        return is_string($value) ? preg_replace($pattern, '', $value) : $value;
     }
 
     /**

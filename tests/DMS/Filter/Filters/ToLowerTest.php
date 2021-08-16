@@ -53,6 +53,7 @@ class ToLowerTest extends FilterTestCase
             ['utf-8', "MY Á TEXT", "my á text", true],
             [[], "MY TEXT", "my text", false],
             [[], "MY TEXT", "my text", false],
+            [[], null, null, false],
         ];
     }
 }

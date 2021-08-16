@@ -34,6 +34,7 @@ class TrimTest extends FilterTestCase
             [['charlist' => "\\"], "\my text", "my text"],
             ["\\", "\my text", "my text"],
             ["x", "xmy textx", "my text"],
+            [[], null, null],
         ];
     }
 }

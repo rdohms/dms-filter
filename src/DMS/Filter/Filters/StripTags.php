@@ -19,6 +19,6 @@ class StripTags extends BaseFilter
      */
     public function apply(Rule $rule, $value)
     {
-        return strip_tags($value, $rule->allowed);
+        return is_string($value) ? strip_tags($value, $rule->allowed) : $value;
     }
 }

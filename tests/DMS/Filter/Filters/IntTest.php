@@ -34,6 +34,7 @@ class IntTest extends FilterTestCase
             [null, "21.2", 21],
             [null, "21.9", 21],
             [null, 21.9, 21],
+            [null, null, null],
         ];
     }
 }
