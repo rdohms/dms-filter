@@ -41,7 +41,7 @@ class RegExp extends BaseFilter
      */
     public function checkUnicodeSupport(): bool
     {
-        if (static::$unicodeEnabled === null) {
+        if (! isset(static::$unicodeEnabled)) {
             //phpcs:disable SlevomatCodingStandard.ControlStructures.UselessTernaryOperator.UselessTernaryOperator
             static::$unicodeEnabled = @preg_match('/\pL/u', 'a') ? true : false;
         }
