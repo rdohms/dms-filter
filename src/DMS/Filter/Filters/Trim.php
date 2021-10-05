@@ -19,6 +19,10 @@ class Trim extends BaseFilter
      */
     public function apply(Rule $rule, $value)
     {
+        if (! is_string($value)) {
+            return $value;
+        }
+        
         //trim() only operates in default mode
         //if no second argument is passed, it
         //cannot be passed as null
