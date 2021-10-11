@@ -35,6 +35,7 @@ class StripNewlinesTest extends FilterTestCase
                 null, "My
 Text", "MyText"
             ],
+            [null, null, null],
         ];
     }
 }

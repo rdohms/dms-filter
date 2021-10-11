@@ -5,6 +5,7 @@ namespace DMS\Filter\Filters;
 
 use DMS\Filter\Rules\Rule;
 
+use function is_string;
 use function preg_match;
 use function preg_replace;
 
@@ -32,7 +33,7 @@ class RegExp extends BaseFilter
             ? $rule->unicodePattern
             : $rule->pattern;
 
-        return preg_replace($pattern, '', $value);
+        return is_string($value) ? preg_replace($pattern, '', $value) : $value;
     }
 
     /**
@@ -40,7 +41,7 @@ class RegExp extends BaseFilter
      */
     public function checkUnicodeSupport(): bool
     {
-        if (static::$unicodeEnabled === null) {
+        if (! isset(static::$unicodeEnabled)) {
             //phpcs:disable SlevomatCodingStandard.ControlStructures.UselessTernaryOperator.UselessTernaryOperator
             static::$unicodeEnabled = @preg_match('/\pL/u', 'a') ? true : false;
         }

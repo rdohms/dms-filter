@@ -52,6 +52,7 @@ class AlphaTest extends FilterTestCase
             [true, "Helgi Þormar Þorbjörnsson", "Helgi ormar orbjrnsson", false],
             [true, "Helgi Þormar!@#$&*( )(*&%$#@Þorbjörnsson", "Helgi Þormar Þorbjörnsson", true],
             [true, "Helgi Þormar!@#$&*( )(*&%$#@Þorbjörnsson", "Helgi ormar orbjrnsson", false],
+            [true, null, null, false],
         ];
     }
 }

@@ -33,6 +33,7 @@ class StripTagsTest extends FilterTestCase
             [[], "<b>in this case a < 2 a > 3;</b>", "in this case a < 2 a > 3;"],
             [['allowed' => "<p>"], "<b><p>my text</p></b>", "<p>my text</p>"],
             ["<p>", "<b><p>my text</p></b>", "<p>my text</p>"],
+            [[], null, null],
         ];
     }
 }
