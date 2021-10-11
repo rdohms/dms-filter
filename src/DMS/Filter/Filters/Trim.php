@@ -5,6 +5,7 @@ namespace DMS\Filter\Filters;
 
 use DMS\Filter\Rules\Rule;
 
+use function is_string;
 use function trim;
 
 /**
@@ -19,7 +20,7 @@ class Trim extends BaseFilter
      */
     public function apply(Rule $rule, $value)
     {
-        if (!is_string($value)) {
+        if (! is_string($value)) {
             return $value;
         }
 
