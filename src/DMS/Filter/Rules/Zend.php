@@ -9,6 +9,7 @@ namespace DMS\Filter\Rules;
  * Allows the use for Zend Filters
  *
  * @Annotation
+ * @deprecated Replaced with {@link Laminas}
  */
 class Zend extends Rule
 {
