@@ -18,6 +18,8 @@ use function strpos;
  * Zend Filter
  *
  * Instantiates and runs Zend Filters (from ZF2)
+ *
+ * @deprecated Replaced with {@link Laminas}
  */
 class Zend extends BaseFilter
 {

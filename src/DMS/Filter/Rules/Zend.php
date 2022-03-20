@@ -8,6 +8,8 @@ namespace DMS\Filter\Rules;
  *
  * Allows the use for Zend Filters
  *
+ * @deprecated Replaced with {@link Laminas}
+ *
  * @Annotation
  */
 class Zend extends Rule

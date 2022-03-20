@@ -14,8 +14,9 @@
     ],
 
     "require": {
-        "php":  "^7.4 || ^8.0",
-        "doctrine/annotations": "^1.13"
+        "php": "^7.4 || ~8.0 || ~8.1",
+        "doctrine/annotations": "^1.13",
+        "laminas/laminas-zendframework-bridge": "^1.0"
     },
 
     "require-dev": {
@@ -33,5 +34,10 @@
     "suggest": {
         "laminas/laminas-filter": "Use Laminas Filters via DMS Filter",
         "ext-mbstring": "for encoding safety"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     }
 }
