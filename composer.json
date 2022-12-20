@@ -15,7 +15,7 @@
 
     "require": {
         "php": "^7.4 || ~8.0 || ~8.1",
-        "doctrine/annotations": "^1.13",
+        "doctrine/annotations": "^1.13 || ^2.0",
         "laminas/laminas-zendframework-bridge": "^1.0"
     },
 
