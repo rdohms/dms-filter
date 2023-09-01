@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace DMS\Filter\Rules;
 
+use Attribute;
+
 use const ENT_COMPAT;
 
 /**
@@ -10,6 +12,7 @@ use const ENT_COMPAT;
  *
  * @Annotation
  */
+#[Attribute]
 class HtmlEntities extends Rule
 {
     /**

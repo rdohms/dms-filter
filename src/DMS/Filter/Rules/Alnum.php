@@ -3,11 +3,14 @@ declare(strict_types=1);
 
 namespace DMS\Filter\Rules;
 
+use Attribute;
+
 /**
  * Alnum Rule (Alphanumeric)
  *
  * @Annotation
  */
+#[Attribute]
 class Alnum extends RegExp
 {
     /**

@@ -3,11 +3,14 @@ declare(strict_types=1);
 
 namespace DMS\Filter\Rules;
 
+use Attribute;
+
 /**
  * Trim Rule
  *
  * @Annotation
  */
+#[Attribute]
 class Trim extends Rule
 {
     /**

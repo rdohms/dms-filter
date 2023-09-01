@@ -6,28 +6,22 @@ use DMS\Filter\Filters\Loader\FilterLoader;
 use DMS\Tests\FilterTestCase;
 use DMS\Tests\Dummy;
 use DMS\Filter\Mapping\ClassMetadataFactory;
+use Generator;
 
 class FilterTest extends FilterTestCase
 {
-    protected Filter $filter;
-
-    public function setUp(): void
+    /**
+     * @dataProvider filterClassDataProvider
+     */
+    public function testFilter(Filter $filter, $class): void
     {
-        parent::setUp();
-
-        $this->filter = new Filter($this->buildMetadataFactory(), new FilterLoader());
-    }
-
-    public function testFilter(): void
-    {
-        $class = new Dummy\Classes\AnnotatedClass();
         $class->name = "Sir Isaac<script></script> Newton";
         $class->nickname = "justaname";
         $class->description = "This is <b>an apple</b>. <p>Isn't it?</p>";
 
         $classClone = clone $class;
 
-        $this->filter->filterEntity($class);
+        $filter->filterEntity($class);
 
         $this->assertNotEquals($classClone->name, $class->name);
         $this->assertEquals($classClone->nickname, $class->nickname);
@@ -37,9 +31,11 @@ class FilterTest extends FilterTestCase
         $this->assertStringNotContainsString("<p>", $class->description);
     }
 
-    public function testFilterWithParent(): void
+    /**
+     * @dataProvider filterChildClassDataProvider
+     */
+    public function testFilterWithParent(Filter $filter, $class): void
     {
-        $class = new Dummy\Classes\ChildAnnotatedClass();
         $class->name = "Sir Isaac<script></script> Newton";
         $class->nickname = "justaname";
         $class->description = "This is <b>an apple</b>. <p>Isn't it?</p>";
@@ -47,7 +43,7 @@ class FilterTest extends FilterTestCase
 
         $classClone = clone $class;
 
-        $this->filter->filterEntity($class);
+        $filter->filterEntity($class);
 
         $this->assertNotEquals($classClone->name, $class->name);
         $this->assertEquals($classClone->nickname, $class->nickname);
@@ -59,15 +55,17 @@ class FilterTest extends FilterTestCase
         $this->assertStringNotContainsString(" ", $class->surname);
     }
 
-    public function testFilterProperty(): void
+    /**
+     * @dataProvider filterClassDataProvider
+     */
+    public function testFilterProperty(Filter $filter, $class): void
     {
-        $class = new Dummy\Classes\AnnotatedClass();
         $class->name = "Sir Isaac<script></script> Newton";
         $class->description = "This is <b>an apple</b>. <p>Isn't it?</p>";
 
         $classClone = clone $class;
 
-        $this->filter->filterProperty($class, 'description');
+        $filter->filterProperty($class, 'description');
 
         $this->assertEquals($classClone->name, $class->name);
         $this->assertNotEquals($classClone->description, $class->description);
@@ -76,11 +74,14 @@ class FilterTest extends FilterTestCase
         $this->assertStringNotContainsString("<p>", $class->description);
     }
 
-    public function testFilterValue(): void
+    /**
+     * @dataProvider filterDataProvider
+     */
+    public function testFilterValue(Filter $filter): void
     {
         $value = "this is <b> a string<p> with<b> tags</p> and malformed";
 
-        $filtered = $this->filter->filterValue($value, new Rules\StripTags());
+        $filtered = $filter->filterValue($value, new Rules\StripTags());
 
         $this->assertNotEquals($value, $filtered);
 
@@ -88,12 +89,15 @@ class FilterTest extends FilterTestCase
         $this->assertStringNotContainsString('<p>', $filtered);
     }
 
-    public function testFilterValueWithArray(): void
+    /**
+     * @dataProvider filterDataProvider
+     */
+    public function testFilterValueWithArray(Filter $filter): void
     {
         $value = "this is <b> a string<p> with<b> tags</p> and\n malformed";
 
         $filters = [new Rules\StripTags(), new Rules\StripNewlines()];
-        $filtered = $this->filter->filterValue($value, $filters);
+        $filtered = $filter->filterValue($value, $filters);
 
         $this->assertNotEquals($value, $filtered);
 
@@ -102,14 +106,57 @@ class FilterTest extends FilterTestCase
         $this->assertStringNotContainsString('\n', $filtered);
     }
 
-    public function testNotFailOnNull(): void
+    /**
+     * @dataProvider filterDataProvider
+     */
+    public function testNotFailOnNull(Filter $filter): void
     {
         $this->expectNotToPerformAssertions();
-        $this->filter->filterEntity(null);
+        $filter->filterEntity(null);
     }
 
-    public function testGetMetadataFactory(): void
+    /**
+     * @dataProvider filterDataProvider
+     */
+    public function testGetMetadataFactory(Filter $filter): void
     {
-        $this->assertInstanceOf(ClassMetadataFactory::class, $this->filter->getMetadataFactory());
+        $this->assertInstanceOf(ClassMetadataFactory::class, $filter->getMetadataFactory());
+    }
+    
+    public function filterClassDataProvider(): Generator
+    {
+        yield 'Annotation' => [
+            new Filter($this->buildMetadataFactoryWithAnnotationLoader(), new FilterLoader()),
+            new Dummy\Classes\AnnotatedClass(),
+        ];
+
+        yield 'Attribute' => [
+            new Filter($this->buildMetadataFactoryWithAttributeLoader(), new FilterLoader()),
+            new Dummy\Classes\AttributedClass(),
+        ];
+    }
+
+    public function filterChildClassDataProvider(): Generator
+    {
+        yield 'Annotation' => [
+            new Filter($this->buildMetadataFactoryWithAnnotationLoader(), new FilterLoader()),
+            new Dummy\Classes\ChildAnnotatedClass(),
+        ];
+
+        yield 'Attribute' => [
+            new Filter($this->buildMetadataFactoryWithAttributeLoader(), new FilterLoader()),
+            new Dummy\Classes\ChildAttributedClass(),
+        ];
+    }
+    
+    public function filterDataProvider(): Generator
+    {
+        yield 'Annotation' => [
+            new Filter($this->buildMetadataFactoryWithAnnotationLoader(), new FilterLoader()),
+        ];
+
+        yield 'Attribute' => [
+            new Filter($this->buildMetadataFactoryWithAttributeLoader(), new FilterLoader()),
+        ];
     }
 }

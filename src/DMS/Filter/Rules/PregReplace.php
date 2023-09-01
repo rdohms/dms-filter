@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace DMS\Filter\Rules;
 
+use Attribute;
+
 /**
  * PregReplace Rule
  * Replaces based on regular expression, will replace with empty if no
@@ -10,6 +12,7 @@ namespace DMS\Filter\Rules;
  *
  * @Annotation
  */
+#[Attribute]
 class PregReplace extends Rule
 {
     /**

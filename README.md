@@ -12,6 +12,8 @@ Use composer to add DMS\Filter to your app
 
 ## Usage
 
+### Annotation way
+
 Your Entity:
 
 ```php
@@ -80,6 +82,60 @@ Filtering:
 ```
 
 Full example: https://gist.github.com/1098352
+
+### Attribute way
+
+Your Entity:
+
+```php
+<?php
+
+namespace App\Entity;
+
+//Import Attributes
+use DMS\Filter\Rules as Filter;
+
+class User
+{
+    #[Filter\StripTags]
+    #[Filter\Trim]
+    #[Filter\StripNewlines]
+    public string $name;
+
+    #[Filter\StripTags]
+    #[Filter\Trim]
+    #[Filter\StripNewlines]
+    public string $email;
+}
+?>
+```
+
+Filtering:
+```php
+<?php
+    //Load AttributeLoader
+    $loader = new Mapping\Loader\AttributeLoader();
+    $this->loader = $loader;
+
+    //Get a MetadataFactory
+    $metadataFactory = new Mapping\ClassMetadataFactory($loader);
+
+    //Get a Filter
+    $filter = new DMS\Filter\Filter($metadataFactory);
+
+
+    //Get your Entity
+    $user = new App\Entity\User();
+    $user->name = "My <b>name</b>";
+    $user->email = " email@mail.com";
+
+    //Filter you entity
+    $filter->filter($user);
+
+    echo $user->name; //"My name"
+    echo $user->email; //"email@mail.com"
+?>
+```
 
 ## Dependencies
 

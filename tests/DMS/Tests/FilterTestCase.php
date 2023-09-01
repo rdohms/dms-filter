@@ -9,12 +9,6 @@ use PHPUnit\Framework\TestCase;
 
 class FilterTestCase extends TestCase
 {
-    public function __construct(?string $name = null, array $data = [], $dataName = '')
-    {
-        parent::__construct($name, $data, $dataName);
-        $this->buildMetadataFactory();
-    }
-
     public function setUp(): void
     {
         parent::setUp();
@@ -25,11 +19,18 @@ class FilterTestCase extends TestCase
         parent::tearDown();
     }
 
-    protected function buildMetadataFactory(): ClassMetadataFactory
+    protected function buildMetadataFactoryWithAnnotationLoader(): ClassMetadataFactory
     {
         $reader = new Annotations\AnnotationReader();
 
         $loader = new Mapping\Loader\AnnotationLoader($reader);
+
+        return new ClassMetadataFactory($loader);
+    }
+
+    protected function buildMetadataFactoryWithAttributeLoader(): ClassMetadataFactory
+    {
+        $loader = new Mapping\Loader\AttributeLoader();
 
         return new ClassMetadataFactory($loader);
     }

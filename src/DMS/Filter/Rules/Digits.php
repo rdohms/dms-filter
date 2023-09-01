@@ -3,11 +3,14 @@ declare(strict_types=1);
 
 namespace DMS\Filter\Rules;
 
+use Attribute;
+
 /**
  * Digits Rule
  *
  * @Annotation
  */
+#[Attribute]
 class Digits extends RegExp
 {
     /**
