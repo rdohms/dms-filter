@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace DMS\Filter\Rules;
 
-use Attribute;
-
 /**
  * RegExp Rule
  *
@@ -12,7 +10,7 @@ use Attribute;
  *
  * @Annotation
  */
-#[Attribute]
+#[\Attribute]
 class RegExp extends Rule
 {
     /**

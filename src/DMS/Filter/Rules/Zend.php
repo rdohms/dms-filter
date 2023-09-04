@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace DMS\Filter\Rules;
 
-use Attribute;
-
 /**
  * Zend Rule
  *
@@ -14,7 +12,7 @@ use Attribute;
  *
  * @Annotation
  */
-#[Attribute]
+#[\Attribute]
 class Zend extends Rule
 {
     /**

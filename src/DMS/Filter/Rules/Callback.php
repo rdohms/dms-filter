@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace DMS\Filter\Rules;
 
-use Attribute;
 use Closure;
 use DMS\Filter\Exception\InvalidCallbackException;
 
@@ -15,7 +14,7 @@ use function is_string;
  *
  * @Annotation
  */
-#[Attribute]
+#[\Attribute]
 class Callback extends Rule
 {
     public const SELF_METHOD_TYPE = 'self_method';

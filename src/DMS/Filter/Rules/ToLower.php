@@ -3,14 +3,12 @@ declare(strict_types=1);
 
 namespace DMS\Filter\Rules;
 
-use Attribute;
-
 /**
  * ToLower Rule
  *
  * @Annotation
  */
-#[Attribute]
+#[\Attribute]
 class ToLower extends Rule
 {
     /**

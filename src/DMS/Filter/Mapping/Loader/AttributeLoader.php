@@ -18,7 +18,7 @@ class AttributeLoader implements LoaderInterface
 
         return true;
     }
-    
+
     private function readProperty(ReflectionProperty $property, ClassMetadataInterface $metadata): void
     {
         if ($property->getDeclaringClass()->getName() !== $metadata->getClassName()) {
