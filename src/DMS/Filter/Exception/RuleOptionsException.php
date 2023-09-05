@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DMS\Filter\Exception;
@@ -8,19 +9,14 @@ namespace DMS\Filter\Exception;
  */
 class RuleOptionsException extends FilterException
 {
-    /** @var string[] */
-    private array $options;
-
     /**
      * Constructor
      *
      * @param string[] $options
      */
-    public function __construct(string $message, array $options)
+    public function __construct(string $message, private array $options)
     {
         parent::__construct($message);
-
-        $this->options = $options;
     }
 
     /**

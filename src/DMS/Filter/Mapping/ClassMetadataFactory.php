@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DMS\Filter\Mapping;
@@ -12,10 +13,6 @@ use function ltrim;
  */
 class ClassMetadataFactory implements ClassMetadataFactoryInterface
 {
-    protected Loader\LoaderInterface $loader;
-
-    protected ?Cache $cache;
-
     /** @var string[] */
     protected array $parsedClasses = [];
 
@@ -23,10 +20,8 @@ class ClassMetadataFactory implements ClassMetadataFactoryInterface
      * Constructor
      * Receives a Loader and a Doctrine Compatible cache instance
      */
-    public function __construct(Loader\LoaderInterface $loader, ?Cache $cache = null)
+    public function __construct(protected Loader\LoaderInterface $loader, protected Cache|null $cache = null)
     {
-        $this->loader = $loader;
-        $this->cache  = $cache;
     }
 
     /**
@@ -87,7 +82,7 @@ class ClassMetadataFactory implements ClassMetadataFactoryInterface
     /**
      * Retrieves data from a class already parsed
      */
-    private function getParsedClass(string $class): ?ClassMetadataInterface
+    private function getParsedClass(string $class): ClassMetadataInterface|null
     {
         if (! $this->isParsed($class)) {
             return null;

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DMS\Filter\Filters;
@@ -26,7 +27,7 @@ class Laminas extends BaseFilter
      *
      * @param LaminasRule $rule
      */
-    public function apply(Rule $rule, $value)
+    public function apply(Rule $rule, $value): mixed
     {
         return $this->getLaminasInstance($rule->class, $rule->laminasOptions)->filter($value);
     }
@@ -57,7 +58,7 @@ class Laminas extends BaseFilter
             $filter->setOptions($options);
 
             return $filter;
-        } catch (ReflectionException $e) {
+        } catch (ReflectionException) {
             return new $class($options);
         }
     }

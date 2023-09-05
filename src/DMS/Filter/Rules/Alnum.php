@@ -1,14 +1,17 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DMS\Filter\Rules;
+
+use Attribute;
 
 /**
  * Alnum Rule (Alphanumeric)
  *
  * @Annotation
  */
-#[\Attribute]
+#[Attribute]
 class Alnum extends RegExp
 {
     /**
@@ -16,7 +19,7 @@ class Alnum extends RegExp
      */
     public bool $allowWhitespace = true;
 
-    public function getDefaultOption(): ?string
+    public function getDefaultOption(): string|null
     {
         return 'allowWhitespace';
     }

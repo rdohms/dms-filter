@@ -1,7 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DMS\Filter\Rules;
+
+use Attribute;
 
 /**
  * Zend Rule
@@ -12,7 +15,7 @@ namespace DMS\Filter\Rules;
  *
  * @Annotation
  */
-#[\Attribute]
+#[Attribute]
 class Zend extends Rule
 {
     /**
@@ -27,7 +30,7 @@ class Zend extends Rule
      */
     public array $zendOptions = [];
 
-    public function getDefaultOption(): ?string
+    public function getDefaultOption(): string|null
     {
         return 'class';
     }

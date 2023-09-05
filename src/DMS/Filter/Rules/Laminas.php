@@ -1,7 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DMS\Filter\Rules;
+
+use Attribute;
 
 /**
  * Laminas Rule
@@ -10,7 +13,7 @@ namespace DMS\Filter\Rules;
  *
  * @Annotation
  */
-#[\Attribute]
+#[Attribute]
 class Laminas extends Rule
 {
     /**
@@ -25,7 +28,7 @@ class Laminas extends Rule
      */
     public array $laminasOptions = [];
 
-    public function getDefaultOption(): ?string
+    public function getDefaultOption(): string|null
     {
         return 'class';
     }

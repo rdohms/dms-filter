@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DMS\Filter\Filters;
@@ -26,7 +27,7 @@ class RegExp extends BaseFilter
      *
      * @param \DMS\Filter\Rules\RegExp $rule
      */
-    public function apply(Rule $rule, $value)
+    public function apply(Rule $rule, $value): mixed
     {
         //Build pattern
         $pattern = $this->checkUnicodeSupport() && $rule->unicodePattern !== null

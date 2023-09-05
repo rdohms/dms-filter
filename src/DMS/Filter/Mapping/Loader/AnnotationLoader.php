@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DMS\Filter\Mapping\Loader;
@@ -14,15 +15,11 @@ use ReflectionProperty;
  */
 class AnnotationLoader implements LoaderInterface
 {
-    protected Reader $reader;
-
     /**
      * Constructor
      */
-    public function __construct(Reader $reader)
+    public function __construct(protected Reader $reader)
     {
-        $this->reader = $reader;
-
         //Register Filter Rules Annotation Namespace
         AnnotationRegistry::registerAutoloadNamespace('DMS\Filter\Rules', __DIR__ . '/../../../../');
     }

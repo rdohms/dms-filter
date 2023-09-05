@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DMS\Filter\Filters;
@@ -16,5 +17,5 @@ interface ObjectAwareFilter
     /**
      * Retrieves the current Object to be used
      */
-    public function getCurrentObject(): ?object;
+    public function getCurrentObject(): object|null;
 }

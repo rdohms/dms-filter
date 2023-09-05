@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DMS\Filter\Filters;
@@ -18,7 +19,7 @@ class Trim extends BaseFilter
      *
      * @param \DMS\Filter\Rules\Trim $rule
      */
-    public function apply(Rule $rule, $value)
+    public function apply(Rule $rule, $value): mixed
     {
         if (! is_string($value)) {
             return $value;

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DMS\Filter\Mapping;
@@ -24,7 +25,7 @@ interface ClassMetadataInterface
      *
      * @return Rule[]|null
      */
-    public function getPropertyRules(string $property): ?array;
+    public function getPropertyRules(string $property): array|null;
 
     /**
      * Merges rules from another metadata object into this one

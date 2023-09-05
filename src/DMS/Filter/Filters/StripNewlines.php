@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DMS\Filter\Filters;
@@ -16,7 +17,7 @@ class StripNewlines extends BaseFilter
     /**
      * {@inheritDoc}
      */
-    public function apply(Rule $rule, $value)
+    public function apply(Rule $rule, $value): mixed
     {
         return is_string($value) ? str_replace(["\n", "\r"], '', $value) : $value;
     }

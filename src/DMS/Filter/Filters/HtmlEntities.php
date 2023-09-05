@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DMS\Filter\Filters;
@@ -17,7 +18,7 @@ class HtmlEntities extends BaseFilter
      *
      * @param \DMS\Filter\Rules\HtmlEntities $rule
      */
-    public function apply(Rule $rule, $value)
+    public function apply(Rule $rule, $value): mixed
     {
         return htmlentities($value, $rule->flags, $rule->encoding, $rule->doubleEncode);
     }

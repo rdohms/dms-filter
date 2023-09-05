@@ -1,7 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DMS\Filter\Rules;
+
+use Attribute;
 
 /**
  * FloatScalar Rule
@@ -9,7 +12,7 @@ namespace DMS\Filter\Rules;
  *
  * @Annotation
  */
-#[\Attribute]
+#[Attribute]
 class FloatScalar extends Rule
 {
 }

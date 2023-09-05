@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DMS\Filter\Filters;
@@ -15,7 +16,7 @@ class Alnum extends RegExp
      *
      * @param \DMS\Filter\Rules\Alnum $rule
      */
-    public function apply(Rule $rule, $value)
+    public function apply(Rule $rule, $value): mixed
     {
         //Check for Whitespace support
         $whitespaceChar = $rule->allowWhitespace ? ' ' : '';

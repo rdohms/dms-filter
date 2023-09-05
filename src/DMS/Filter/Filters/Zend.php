@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DMS\Filter\Filters;
@@ -28,7 +29,7 @@ class Zend extends BaseFilter
      *
      * @param ZendRule $rule
      */
-    public function apply(Rule $rule, $value)
+    public function apply(Rule $rule, $value): mixed
     {
         return $this->getZendInstance($rule->class, $rule->zendOptions)->filter($value);
     }
@@ -59,7 +60,7 @@ class Zend extends BaseFilter
             $filter->setOptions($options);
 
             return $filter;
-        } catch (ReflectionException $e) {
+        } catch (ReflectionException) {
             return new $class($options);
         }
     }

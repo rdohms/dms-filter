@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DMS\Filter;
@@ -12,24 +13,16 @@ use DMS\Filter\Mapping\ClassMetadataFactoryInterface;
 use DMS\Filter\Rules\Rule;
 use ReflectionException;
 
-use function get_class;
-
 /**
  * Executor, receives objects that need filtering and executes attached rules.
  */
 class Filter implements FilterInterface
 {
-    protected Mapping\ClassMetadataFactory $metadataFactory;
-
-    protected FilterLoaderInterface $filterLoader;
-
     /**
      * Constructor
      */
-    public function __construct(Mapping\ClassMetadataFactory $metadataFactory, FilterLoaderInterface $filterLoader)
+    public function __construct(protected Mapping\ClassMetadataFactory $metadataFactory, protected FilterLoaderInterface $filterLoader)
     {
-        $this->metadataFactory = $metadataFactory;
-        $this->filterLoader    = $filterLoader;
     }
 
     /**
@@ -48,10 +41,7 @@ class Filter implements FilterInterface
         $this->walkObject($object, $property);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function filterValue($value, $rule)
+    public function filterValue(mixed $value, array|Rule $rule): mixed
     {
         if ($rule instanceof Rules\Rule) {
             $filter = $this->filterLoader->getFilterForRule($rule);
@@ -74,13 +64,13 @@ class Filter implements FilterInterface
      * @throws ReflectionException
      * @throws ReflectionException
      */
-    protected function walkObject(?object $object, ?string $limitProperty = null): void
+    protected function walkObject(object|null $object, string|null $limitProperty = null): void
     {
         if ($object === null) {
             return;
         }
 
-        $metadata = $this->metadataFactory->getClassMetadata(get_class($object));
+        $metadata = $this->metadataFactory->getClassMetadata($object::class);
 
         //Get a Object Handler/Walker
         $walker = new ObjectWalker($object, $this->filterLoader);
@@ -97,12 +87,9 @@ class Filter implements FilterInterface
     /**
      * Iterates over an array of filters applying all to the value
      *
-     * @param mixed  $value
      * @param Rule[] $rules
-     *
-     * @return mixed
      */
-    protected function walkRuleChain($value, array $rules)
+    protected function walkRuleChain(mixed $value, array $rules): mixed
     {
         foreach ($rules as $rule) {
             $filter = $this->filterLoader->getFilterForRule($rule);

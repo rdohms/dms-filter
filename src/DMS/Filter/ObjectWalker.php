@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DMS\Filter;
@@ -17,11 +18,7 @@ use UnexpectedValueException;
  */
 class ObjectWalker
 {
-    protected object $object;
-
     protected ReflectionClass $reflClass;
-
-    protected FilterLoaderInterface $filterLoader;
 
     /**
      * Constructor
@@ -29,11 +26,9 @@ class ObjectWalker
      * @throws ReflectionException
      * @throws ReflectionException
      */
-    public function __construct(object $object, FilterLoaderInterface $filterLoader)
+    public function __construct(protected object $object, protected FilterLoaderInterface $filterLoader)
     {
-        $this->object       = $object;
-        $this->reflClass    = new ReflectionClass($object);
-        $this->filterLoader = $filterLoader;
+        $this->reflClass = new ReflectionClass($object);
     }
 
     /**
@@ -78,12 +73,10 @@ class ObjectWalker
     /**
      * Retrieves the value of the property, overcoming visibility problems
      *
-     * @return mixed
-     *
      * @throws ReflectionException
      * @throws ReflectionException
      */
-    private function getPropertyValue(string $propertyName)
+    private function getPropertyValue(string $propertyName): mixed
     {
         return $this->getAccessibleReflectionProperty($propertyName)
                ->getValue($this->object);
@@ -92,12 +85,10 @@ class ObjectWalker
     /**
      * Overrides the value of a property, overcoming visibility problems
      *
-     * @param mixed $value
-     *
      * @throws ReflectionException
      * @throws ReflectionException
      */
-    private function setPropertyValue(string $propertyName, $value): void
+    private function setPropertyValue(string $propertyName, mixed $value): void
     {
         $this->getAccessibleReflectionProperty($propertyName)
         ->setValue($this->object, $value);
