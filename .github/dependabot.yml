@@ -13,5 +13,5 @@ updates:
     schedule:
       interval: "daily"
     labels:
-      - "ci"
-      - "dependencies"
+      - "CI"
+      - "Dependencies"
