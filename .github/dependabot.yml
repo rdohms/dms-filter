@@ -7,3 +7,11 @@ updates:
     labels:
       - "Dependencies"
     versioning-strategy: auto
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    labels:
+      - "ci"
+      - "dependencies"
