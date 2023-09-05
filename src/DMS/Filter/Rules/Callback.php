@@ -1,8 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DMS\Filter\Rules;
 
+use Attribute;
 use Closure;
 use DMS\Filter\Exception\InvalidCallbackException;
 
@@ -14,7 +16,7 @@ use function is_string;
  *
  * @Annotation
  */
-#[\Attribute]
+#[Attribute]
 class Callback extends Rule
 {
     public const SELF_METHOD_TYPE = 'self_method';
@@ -31,7 +33,7 @@ class Callback extends Rule
      */
     public $callback;
 
-    public function getDefaultOption(): ?string
+    public function getDefaultOption(): string|null
     {
         return 'callback';
     }
@@ -56,7 +58,7 @@ class Callback extends Rule
 
         throw new InvalidCallbackException(
             'The input provided for Callback filter is not supported or the callable not valid.
-            Please refer to the class documentation.'
+            Please refer to the class documentation.',
         );
     }
 }

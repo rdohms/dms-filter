@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DMS\Filter\Filters\Loader;
@@ -8,7 +9,6 @@ use DMS\Filter\Rules\Rule;
 use UnexpectedValueException;
 
 use function class_exists;
-use function get_class;
 use function sprintf;
 
 /**
@@ -29,7 +29,7 @@ class FilterLoader implements FilterLoaderInterface
             return new $filterIdentifier();
         }
 
-        $error = sprintf('Unable to locate filter for: %s defined in %s', $filterIdentifier, get_class($rule));
+        $error = sprintf('Unable to locate filter for: %s defined in %s', $filterIdentifier, $rule::class);
 
         throw new UnexpectedValueException($error);
     }

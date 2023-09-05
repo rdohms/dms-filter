@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DMS\Filter\Rules;
@@ -39,7 +40,7 @@ abstract class Rule
      * @throws MissingOptionsException       When you don't pass any of the options
      *                                       returned by getRequiredOptions()
      */
-    public function __construct($options = null)
+    public function __construct(mixed $options = null)
     {
         $result = $this->parseOptions($options);
 
@@ -48,9 +49,9 @@ abstract class Rule
                 sprintf(
                     'The options "%s" do not exist in rule %s',
                     implode('", "', $result->invalidOptions),
-                    static::class
+                    static::class,
                 ),
-                $result->invalidOptions
+                $result->invalidOptions,
             );
         }
 
@@ -59,9 +60,9 @@ abstract class Rule
                 sprintf(
                     'The options "%s" must be set for rule %s',
                     implode('", "', array_keys($result->missingOptions)),
-                    static::class
+                    static::class,
                 ),
-                array_keys($result->missingOptions)
+                array_keys($result->missingOptions),
             );
         }
     }
@@ -69,10 +70,8 @@ abstract class Rule
     /**
      * Parses provided options into their properties and returns results
      * for the parsing process
-     *
-     * @param mixed $options
      */
-    private function parseOptions($options): stdClass
+    private function parseOptions(mixed $options): stdClass
     {
         $parseResult                 = new stdClass();
         $parseResult->invalidOptions = [];
@@ -122,18 +121,18 @@ abstract class Rule
     /**
      * Parses single option received
      *
-     * @param string|mixed[] $options
+     * @param string|mixed[]|scalar $options
      *
      * @throws RuleDefinitionException
      */
-    private function parseSingleOption($options, stdClass $result): void
+    private function parseSingleOption(mixed $options, stdClass $result): void
     {
         $option = $this->getDefaultOption();
 
         //No Default set, unsure what to do
         if ($option === null) {
             throw new RuleDefinitionException(
-                sprintf('No default option is configured for rule %s', static::class)
+                sprintf('No default option is configured for rule %s', static::class),
             );
         }
 
@@ -170,7 +169,7 @@ abstract class Rule
      *
      * @see __construct()
      */
-    public function getDefaultOption(): ?string
+    public function getDefaultOption(): string|null
     {
         return null;
     }
@@ -187,12 +186,8 @@ abstract class Rule
 
     /**
      * Doctrine parses constructor parameter into 'value' array param, restore it
-     *
-     * @param mixed $options
-     *
-     * @return mixed[]|mixed
      */
-    private function extractFromValueOption($options)
+    private function extractFromValueOption(mixed $options): mixed
     {
         if (is_array($options) && count($options) === 1 && isset($options['value'])) {
             $options = $options['value'];
@@ -201,10 +196,7 @@ abstract class Rule
         return $options;
     }
 
-    /**
-     * @param mixed $options
-     */
-    private function isNonEmptyMap($options): bool
+    private function isNonEmptyMap(mixed $options): bool
     {
         return is_array($options) && count($options) > 0 && is_string(key($options));
     }

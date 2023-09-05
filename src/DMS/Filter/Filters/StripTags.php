@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DMS\Filter\Filters;
@@ -18,7 +19,7 @@ class StripTags extends BaseFilter
      *
      * @param \DMS\Filter\Rules\StripTags $rule
      */
-    public function apply(Rule $rule, $value)
+    public function apply(Rule $rule, mixed $value): mixed
     {
         return is_string($value) ? strip_tags($value, $rule->allowed) : $value;
     }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DMS\Filter\Mapping;
@@ -42,7 +43,7 @@ class ClassMetadata implements ClassMetadataInterface
     /**
      * {@inheritDoc}
      */
-    public function getPropertyRules($property): ?array
+    public function getPropertyRules($property): array|null
     {
         if (! isset($this->filteredProperties[$property])) {
             return null;

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DMS\Filter\Filters;
@@ -19,7 +20,7 @@ class PregReplace extends BaseFilter
     /**
      * {@inheritDoc}
      */
-    public function apply(Rule $rule, $value)
+    public function apply(Rule $rule, $value): mixed
     {
         return is_string($value) ? preg_replace($rule->regexp, $rule->replacement, $value) : $value;
     }

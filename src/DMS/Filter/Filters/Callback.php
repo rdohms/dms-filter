@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DMS\Filter\Filters;
@@ -10,7 +11,6 @@ use DMS\Filter\Rules\Callback as CallbackRule;
 use DMS\Filter\Rules\Rule;
 
 use function call_user_func;
-use function get_class;
 use function is_callable;
 use function method_exists;
 use function sprintf;
@@ -20,7 +20,7 @@ use function sprintf;
  */
 class Callback extends BaseFilter implements ObjectAwareFilter
 {
-    protected ?object $currentObject = null;
+    protected object|null $currentObject = null;
 
     /**
      * Set the current object so that the filter can access it
@@ -33,7 +33,7 @@ class Callback extends BaseFilter implements ObjectAwareFilter
     /**
      * Retrieves the current Object to be used
      */
-    public function getCurrentObject(): ?object
+    public function getCurrentObject(): object|null
     {
         return $this->currentObject;
     }
@@ -43,7 +43,7 @@ class Callback extends BaseFilter implements ObjectAwareFilter
      *
      * @param CallbackRule $rule
      */
-    public function apply(Rule $rule, $value)
+    public function apply(Rule $rule, $value): mixed
     {
         if ($value === null) {
             return null;
@@ -69,20 +69,16 @@ class Callback extends BaseFilter implements ObjectAwareFilter
     /**
      * Filters by executing a method in the object
      *
-     * @param mixed $value
-     *
-     * @return mixed
-     *
      * @throws InvalidCallbackException
      * @throws FilterException
      */
-    protected function useObjectMethod(string $method, $value)
+    protected function useObjectMethod(string $method, mixed $value): mixed
     {
         $currentObject = $this->getCurrentObject();
 
         if ($currentObject === null) {
             throw new FilterException(
-                "The target object was not provided to the filter, can't execute method. Please report this."
+                "The target object was not provided to the filter, can't execute method. Please report this.",
             );
         }
 
@@ -91,8 +87,8 @@ class Callback extends BaseFilter implements ObjectAwareFilter
                 sprintf(
                     "CallbackFilter: Method '%s' not found in object of type '%s'",
                     $method,
-                    get_class($currentObject)
-                )
+                    $currentObject::class,
+                ),
             );
         }
 
@@ -102,14 +98,11 @@ class Callback extends BaseFilter implements ObjectAwareFilter
     /**
      * Filters using a callable.
      *
-     * @param mixed             $value
      * @param string[]|callable $callable
-     *
-     * @return mixed
      *
      * @throws InvalidCallbackException
      */
-    protected function useCallable($callable, $value)
+    protected function useCallable(array|callable $callable, mixed $value): mixed
     {
         if (! is_callable($callable, false, $input)) {
             throw new InvalidCallbackException(sprintf('The callable %s could not be resolved.', $input));
@@ -119,14 +112,9 @@ class Callback extends BaseFilter implements ObjectAwareFilter
     }
 
     /**
-     * @param mixed          $value
-     * @param string|Closure $closure
-     *
-     * @return mixed
-     *
      * @throws InvalidCallbackException
      */
-    protected function useClosure($closure, $value)
+    protected function useClosure(string|Closure $closure, mixed $value): mixed
     {
         if (! $closure instanceof Closure) {
             throw new InvalidCallbackException('CallbackFilter: the provided closure is invalid');

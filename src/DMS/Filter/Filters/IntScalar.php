@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DMS\Filter\Filters;
@@ -14,7 +15,7 @@ class IntScalar extends BaseFilter
     /**
      * {@inheritDoc}
      */
-    public function apply(Rule $rule, $value)
+    public function apply(Rule $rule, $value): mixed
     {
         return (int) ($value);
     }

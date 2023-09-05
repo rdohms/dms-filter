@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DMS\Filter\Filters;
@@ -23,7 +24,7 @@ class ToLower extends BaseFilter
      *
      * @param \DMS\Filter\Rules\ToLower $rule
      */
-    public function apply(Rule $rule, $value)
+    public function apply(Rule $rule, $value): mixed
     {
         if ($this->useEncoding($rule)) {
             return mb_strtolower((string) $value, $rule->encoding);
@@ -52,7 +53,7 @@ class ToLower extends BaseFilter
 
         if (! in_array(strtolower($rule->encoding), $encodings)) {
             throw new FilterException(
-                "mbstring does not support the '" . $rule->encoding . "' encoding"
+                "mbstring does not support the '" . $rule->encoding . "' encoding",
             );
         }
 

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DMS\Filter\Filters;
@@ -24,7 +25,7 @@ class ToUpper extends BaseFilter
      *
      * @param \DMS\Filter\Rules\ToUpper $rule
      */
-    public function apply(Rule $rule, $value)
+    public function apply(Rule $rule, $value): mixed
     {
         if ($this->useEncoding($rule)) {
             return mb_strtoupper((string) $value, $rule->encoding);
@@ -47,7 +48,7 @@ class ToUpper extends BaseFilter
 
         if (! function_exists('mb_strtoupper')) {
             throw new FilterException(
-                'mbstring is required to use ToLower with an encoding.'
+                'mbstring is required to use ToLower with an encoding.',
             );
         }
 
@@ -56,7 +57,7 @@ class ToUpper extends BaseFilter
 
         if (! in_array(strtolower($rule->encoding), $encodings)) {
             throw new FilterException(
-                "mbstring does not support the '" . $rule->encoding . "' encoding"
+                "mbstring does not support the '" . $rule->encoding . "' encoding",
             );
         }
 

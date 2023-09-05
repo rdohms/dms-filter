@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DMS\Filter\Filters;
@@ -17,7 +18,7 @@ class FloatScalar extends BaseFilter
     /**
      * {@inheritDoc}
      */
-    public function apply(Rule $rule, $value)
+    public function apply(Rule $rule, $value): mixed
     {
         if (is_array($value) || is_object($value)) {
             return null;

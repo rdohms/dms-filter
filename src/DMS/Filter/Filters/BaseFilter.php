@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DMS\Filter\Filters;
@@ -18,10 +19,6 @@ abstract class BaseFilter
     /**
      * Enforces the desired filtering on the the value
      * returning a filtered value.
-     *
-     * @param mixed $value
-     *
-     * @return mixed
      */
-    abstract public function apply(Rule $rule, $value);
+    abstract public function apply(Rule $rule, mixed $value): mixed;
 }
