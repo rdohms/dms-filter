@@ -10,6 +10,7 @@ namespace DMS\Filter\Rules;
  *
  * @Annotation
  */
+#[\Attribute]
 class Laminas extends Rule
 {
     /**

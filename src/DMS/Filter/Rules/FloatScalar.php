@@ -9,6 +9,7 @@ namespace DMS\Filter\Rules;
  *
  * @Annotation
  */
+#[\Attribute]
 class FloatScalar extends Rule
 {
 }

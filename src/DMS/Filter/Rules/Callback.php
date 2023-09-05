@@ -14,6 +14,7 @@ use function is_string;
  *
  * @Annotation
  */
+#[\Attribute]
 class Callback extends Rule
 {
     public const SELF_METHOD_TYPE = 'self_method';

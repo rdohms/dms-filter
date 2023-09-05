@@ -8,6 +8,7 @@ namespace DMS\Filter\Rules;
  *
  * @Annotation
  */
+#[\Attribute]
 class Digits extends RegExp
 {
     /**

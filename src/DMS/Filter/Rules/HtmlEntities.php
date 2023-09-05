@@ -10,6 +10,7 @@ use const ENT_COMPAT;
  *
  * @Annotation
  */
+#[\Attribute]
 class HtmlEntities extends Rule
 {
     /**

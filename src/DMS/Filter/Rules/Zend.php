@@ -12,6 +12,7 @@ namespace DMS\Filter\Rules;
  *
  * @Annotation
  */
+#[\Attribute]
 class Zend extends Rule
 {
     /**

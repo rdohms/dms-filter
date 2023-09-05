@@ -4,6 +4,7 @@
 namespace DMS\Filter\Rules;
 
 use DMS\Tests\Dummy\Classes\AnnotatedClass;
+use DMS\Tests\Dummy\Classes\AttributedClass;
 use DMS\Tests\FilterTestCase;
 use DMS\Filter\Exception\InvalidCallbackException;
 use stdClass;
@@ -38,6 +39,9 @@ class CallbackTest extends FilterTestCase
             [[AnnotatedClass::class, 'anotherCallback'], Callback::CALLABLE_TYPE, false],
             [[AnnotatedClass::class, 'missingCallback'], null, true],
             [[new AnnotatedClass(), 'callbackMethod'], Callback::CALLABLE_TYPE, false],
+            [[AttributedClass::class, 'anotherCallback'], Callback::CALLABLE_TYPE, false],
+            [[AttributedClass::class, 'missingCallback'], null, true],
+            [[new AttributedClass(), 'callbackMethod'], Callback::CALLABLE_TYPE, false],
             ['strlen', Callback::CALLABLE_TYPE, false],
             [$closure, Callback::CLOSURE_TYPE, false],
             [1, null, true],
