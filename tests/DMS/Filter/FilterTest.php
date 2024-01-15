@@ -159,4 +159,14 @@ class FilterTest extends FilterTestCase
             new Filter($this->buildMetadataFactoryWithAttributeLoader(), new FilterLoader()),
         ];
     }
+
+    public function testFilterPrivate()
+    {
+        $class = new Dummy\Classes\AnotherChildAnnotatedClass();
+        $class->setPrivateProperty('  needs to be trimmed   ');
+
+        $this->filter->filterEntity($class);
+
+        $this->assertEquals($class->getPrivateProperty(), 'needs to be trimmed');
+    }
 }
