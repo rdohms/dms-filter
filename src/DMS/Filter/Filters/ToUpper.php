@@ -25,7 +25,7 @@ class ToUpper extends BaseFilter
      *
      * @param \DMS\Filter\Rules\ToUpper $rule
      */
-    public function apply(Rule $rule, $value): mixed
+    public function apply(Rule $rule, $value): string
     {
         if ($this->useEncoding($rule)) {
             return mb_strtoupper((string) $value, $rule->encoding);
@@ -52,8 +52,7 @@ class ToUpper extends BaseFilter
             );
         }
 
-        $this->encoding = (string) $rule->encoding;
-        $encodings      = array_map('strtolower', mb_list_encodings());
+        $encodings = array_map('strtolower', mb_list_encodings());
 
         if (! in_array(strtolower($rule->encoding), $encodings)) {
             throw new FilterException(

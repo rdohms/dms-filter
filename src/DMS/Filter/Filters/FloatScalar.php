@@ -18,7 +18,7 @@ class FloatScalar extends BaseFilter
     /**
      * {@inheritDoc}
      */
-    public function apply(Rule $rule, $value): mixed
+    public function apply(Rule $rule, $value): ?float
     {
         if (is_array($value) || is_object($value)) {
             return null;
