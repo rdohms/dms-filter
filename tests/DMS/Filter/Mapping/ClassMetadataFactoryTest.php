@@ -2,21 +2,18 @@
 
 namespace DMS\Filter\Mapping;
 
-use DMS\Filter\Mapping\Loader\AnnotationLoader;
 use DMS\Filter\Mapping\Loader\AttributeLoader;
 use DMS\Filter\Mapping\Loader\LoaderInterface;
 use DMS\Tests\Dummy\Classes\AttributedClass;
 use DMS\Tests\FilterTestCase;
-use Doctrine\Common\Annotations\AnnotationReader;
-use Doctrine\Common\Cache\ArrayCache;
-use DMS\Tests\Dummy\Classes\AnnotatedClass;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Psr\Cache\InvalidArgumentException;
+use Symfony\Component\Cache\Adapter\ArrayAdapter;
 
 class ClassMetadataFactoryTest extends FilterTestCase
 {
-    /**
-     * @dataProvider factoryDataProvider
-     */
+    #[DataProvider('factoryDataProvider')]
     public function testGetClassMetadata(ClassMetadataFactory $factory, $class): void
     {
         $metadata = $factory->getClassMetadata($class);
@@ -25,8 +22,9 @@ class ClassMetadataFactoryTest extends FilterTestCase
     }
 
     /**
-     * @dataProvider factoryDataProvider
+     * @throws InvalidArgumentException
      */
+    #[DataProvider('factoryDataProvider')]
     public function testParsedMetadataFromFactory(ClassMetadataFactory $factory, $class): void
     {
         $metadata = $factory->getClassMetadata($class);
@@ -37,16 +35,17 @@ class ClassMetadataFactoryTest extends FilterTestCase
     }
 
     /**
-     * @dataProvider loaderDataProvider
+     * @throws InvalidArgumentException
      */
+    #[DataProvider('loaderDataProvider')]
     public function testCachedMetadataFromFactory(LoaderInterface $loader, $class): void
     {
-        $cache = new ArrayCache();
+        $cache = new ArrayAdapter();
         $factory = new ClassMetadataFactory($loader, $cache);
 
         $metadata = $factory->getClassMetadata($class);
 
-        $this->assertTrue($cache->contains(ltrim($class, '\\')));
+        $this->assertTrue($cache->getItem(ltrim($class, '\\'))->isHit());
 
         //Get new Factory to retrieve from cache
         $factory = new ClassMetadataFactory($loader, $cache);
@@ -55,26 +54,16 @@ class ClassMetadataFactoryTest extends FilterTestCase
         $this->assertEquals($metadata, $metadataCached);
     }
 
-    public function factoryDataProvider(): Generator
+    public static function factoryDataProvider(): Generator
     {
-        yield 'Annotation' => [
-            $this->buildMetadataFactoryWithAnnotationLoader(),
-            AnnotatedClass::class,
-        ];
-
         yield 'Attribute' => [
-            $this->buildMetadataFactoryWithAttributeLoader(),
+            self::buildMetadataFactoryWithAttributeLoader(),
             AttributedClass::class,
         ];
     }
-    
-    public function loaderDataProvider(): Generator
-    {
-        yield 'Annotation' => [
-            new AnnotationLoader(new AnnotationReader()),
-            AnnotatedClass::class,
-        ];
 
+    public static function loaderDataProvider(): Generator
+    {
         yield 'Attribute' => [
             new AttributeLoader(),
             AttributedClass::class,

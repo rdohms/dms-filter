@@ -17,16 +17,16 @@ class AttributedClass
 
     #[Filter\Callback("callbackMethod")]
     public ?string $callback = null;
-    
+
     #[Filter\Callback(["DMS\Tests\Dummy\Classes\AnnotatedClass", "anotherCallback"])]
     public ?string $callback2 = null;
 
-    public function callbackMethod($value): string
+    public function callbackMethod(): string
     {
         return 'called_back';
     }
-    
-    public static function anotherCallback($value): string
+
+    public static function anotherCallback(): string
     {
         return 'called_back';
     }

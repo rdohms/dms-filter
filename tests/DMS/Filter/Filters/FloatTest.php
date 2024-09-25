@@ -4,20 +4,13 @@ namespace DMS\Filter\Filters;
 
 use DMS\Tests\FilterTestCase;
 use DMS\Filter\Rules\FloatScalar as FloatRule;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class FloatTest extends FilterTestCase
 {
-
-    /**
-     * @dataProvider provideForRule
-     *
-     * @param $options
-     * @param $value
-     * @param $expectedResult
-     */
-    public function testRule($options, $value, $expectedResult): void
+    #[DataProvider('provideForRule')]
+    public function testRule(FloatRule $rule, $value, $expectedResult): void
     {
-        $rule   = new FloatRule($options);
         $filter = new FloatScalar();
 
         $result = $filter->apply($rule, $value);
@@ -25,13 +18,13 @@ class FloatTest extends FilterTestCase
         $this->assertEquals($expectedResult, $result);
     }
 
-    public function provideForRule(): array
+    public static function provideForRule(): array
     {
         return [
-            [null, "My Text", 0.0],
-            [null, "21", 21.0],
-            [null, "21.2", 21.2],
-            [null, 21.9, 21.9],
+            [new FloatRule(), "My Text", 0.0],
+            [new FloatRule(), "21", 21.0],
+            [new FloatRule(), "21.2", 21.2],
+            [new FloatRule(), 21.9, 21.9],
         ];
     }
 }

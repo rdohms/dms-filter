@@ -4,20 +4,13 @@ namespace DMS\Filter\Filters;
 
 use DMS\Tests\FilterTestCase;
 use DMS\Filter\Rules\StripNewlines as StripNewLinesRule;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class StripNewlinesTest extends FilterTestCase
 {
-
-    /**
-     * @dataProvider provideForRule
-     *
-     * @param $options
-     * @param $value
-     * @param $expectedResult
-     */
-    public function testRule($options, $value, $expectedResult): void
+    #[DataProvider('provideForRule')]
+    public function testRule(StripNewLinesRule $rule, $value, $expectedResult): void
     {
-        $rule   = new StripNewLinesRule($options);
         $filter = new StripNewlines();
 
         $result = $filter->apply($rule, $value);
@@ -25,17 +18,14 @@ class StripNewlinesTest extends FilterTestCase
         $this->assertEquals($expectedResult, $result);
     }
 
-    public function provideForRule(): array
+    public static function provideForRule(): array
     {
         return [
-            [null, "My \n Text", "My  Text"],
-            [null, "My \n\r Text", "My  Text"],
-            [null, "My \r\n Text", "My  Text"],
-            [
-                null, "My
-Text", "MyText"
-            ],
-            [null, null, null],
+            [new StripNewLinesRule(), "My \n Text", "My  Text"],
+            [new StripNewLinesRule(), "My \n\r Text", "My  Text"],
+            [new StripNewLinesRule(), "My \r\n Text", "My  Text"],
+            [new StripNewLinesRule(), "MyText", "MyText"],
+            [new StripNewLinesRule(), null, null],
         ];
     }
 }

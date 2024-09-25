@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 namespace DMS\Filter\Filters;
 
@@ -9,21 +10,26 @@ use DMS\Tests\FilterTestCase;
 
 class LaminasTest extends FilterTestCase
 {
-
-    public function testFilterShortname(): void
+    public function testFilterDenyList(): void
     {
-        $rule = $this->buildRule('Boolean', ['casting' => false]);
+        $rule = $this->buildRule(
+            'Laminas\Filter\DenyList',
+            ['list' => ['blocked@example.com', 'spam@example.com']]
+        );
+
         $filter = new Laminas();
-        $filter->apply($rule, '0');
-        $this->expectNotToPerformAssertions();
+        $this->assertTrue(!is_null($filter->apply($rule, 'billy@example.com')));
+        $this->assertTrue(is_null($filter->apply($rule, 'blocked@example.com')));
+        $this->assertTrue(!is_null($filter->apply($rule, 'menphis@example.com')));
+        $this->assertTrue(is_null($filter->apply($rule, 'spam@example.com')));
+        $this->assertTrue(!is_null($filter->apply($rule, 'spam12@example.com')));
     }
 
-    public function testFilterFullname(): void
+    public function testFilterBaseName(): void
     {
-        $rule = $this->buildRule('Laminas\Filter\Boolean', ['casting' => false]);
+        $rule = $this->buildRule('Laminas\Filter\BaseName');
         $filter = new Laminas();
-        $filter->apply($rule, '0');
-        $this->expectNotToPerformAssertions();
+        $this->assertSame('file.txt', $filter->apply($rule, '/path/to/file.txt'));
     }
 
     public function testInvalidFilter(): void
@@ -36,11 +42,6 @@ class LaminasTest extends FilterTestCase
 
     protected function buildRule($class, $options = []): LaminasRule
     {
-        return new LaminasRule(
-            [
-                'class'   => $class,
-                'laminasOptions' => $options,
-            ]
-        );
+        return new LaminasRule($class, $options);
     }
 }

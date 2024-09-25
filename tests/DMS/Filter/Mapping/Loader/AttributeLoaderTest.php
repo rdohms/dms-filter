@@ -15,16 +15,16 @@ final class AttributeLoaderTest extends FilterTestCase
     {
         $loader   = new AttributeLoader();
         $metadata = new ClassMetadata(AttributedClass::class);
-        
+
         $loadMetadataResult = $loader->loadClassMetadata($metadata);
-        
+
         $this->assertTrue($loadMetadataResult);
-        
+
         $classProperties = array_map(
-            fn (ReflectionProperty $property) => $property->getName(), 
+            fn (ReflectionProperty $property) => $property->getName(),
             $metadata->getReflectionClass()->getProperties()
         );
-        
+
         $this->assertSame($classProperties, $metadata->getFilteredProperties());
     }
 }

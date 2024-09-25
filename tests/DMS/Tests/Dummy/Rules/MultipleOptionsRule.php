@@ -6,7 +6,6 @@ use DMS\Filter\Rules\Rule;
 
 class MultipleOptionsRule extends Rule
 {
-
     /**
      * @var mixed
      */

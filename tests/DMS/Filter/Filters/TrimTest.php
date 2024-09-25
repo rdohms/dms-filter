@@ -4,20 +4,13 @@ namespace DMS\Filter\Filters;
 
 use DMS\Tests\FilterTestCase;
 use DMS\Filter\Rules\Trim as TrimRule;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class TrimTest extends FilterTestCase
 {
-
-    /**
-     * @dataProvider provideForRule
-     *
-     * @param $options
-     * @param $value
-     * @param $expectedResult
-     */
-    public function testRule($options, $value, $expectedResult): void
+    #[DataProvider('provideForRule')]
+    public function testRule(TrimRule $rule, $value, $expectedResult): void
     {
-        $rule   = new TrimRule($options);
         $filter = new Trim();
 
         $result = $filter->apply($rule, $value);
@@ -25,16 +18,16 @@ class TrimTest extends FilterTestCase
         $this->assertEquals($expectedResult, $result);
     }
 
-    public function provideForRule(): array
+    public static function provideForRule(): array
     {
         return [
-            [[], " my text", "my text"],
-            [[], " my text ", "my text"],
-            [[], "my text ", "my text"],
-            [['charlist' => "\\"], "\my text", "my text"],
-            ["\\", "\my text", "my text"],
-            ["x", "xmy textx", "my text"],
-            [[], null, null],
+            [new TrimRule(), " my text", "my text"],
+            [new TrimRule(), " my text ", "my text"],
+            [new TrimRule(), "my text ", "my text"],
+            [new TrimRule(charlist: '\\'), "\my text", "my text"],
+            [new TrimRule(charlist: "#"), "#my text##", "my text"],
+            [new TrimRule(charlist: 'x'), "xmy textx", "my text"],
+            [new TrimRule(), null, null],
         ];
     }
 }

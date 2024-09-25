@@ -5,25 +5,17 @@ namespace DMS\Filter\Filters;
 use DMS\Filter\Exception\FilterException;
 use DMS\Tests\FilterTestCase;
 use DMS\Filter\Rules\ToLower as ToLowerRule;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class ToLowerTest extends FilterTestCase
 {
-
-    /**
-     * @dataProvider provideForRule
-     *
-     * @param $options
-     * @param $value
-     * @param $expectedResult
-     * @param $useEncoding
-     */
-    public function testRule($options, $value, $expectedResult, $useEncoding): void
+    #[DataProvider('provideForRule')]
+    public function testRule(ToLowerRule $rule, $value, $expectedResult, $useEncoding): void
     {
         if ($useEncoding && !function_exists('mb_strtolower')) {
             $this->markTestSkipped('mbstring extension not enabled');
         }
 
-        $rule   = new ToLowerRule($options);
         $filter = new ToLower();
 
         $result = $filter->apply($rule, $value);
@@ -38,22 +30,22 @@ class ToLowerTest extends FilterTestCase
             $this->markTestSkipped('mbstring extension not enabled');
         }
 
-        $rule = new ToLowerRule(['encoding' => 'invalid']);
+        $rule = new ToLowerRule(encoding : 'invalid');
         $filter = new ToLower();
 
-        $result = $filter->apply($rule, 'x');
+        $filter->apply($rule, 'x');
     }
 
-    public function provideForRule(): array
+    public static function provideForRule(): array
     {
         return [
-            [['encoding' => 'utf-8'], "MY TEXT", "my text", true],
-            [['encoding' => 'utf-8'], "MY Ã TEXT", "my ã text", true],
-            [['encoding' => 'utf-8'], "MY Á TEXT", "my á text", true],
-            ['utf-8', "MY Á TEXT", "my á text", true],
-            [[], "MY TEXT", "my text", false],
-            [[], "MY TEXT", "my text", false],
-            [[], null, null, false],
+            [new ToLowerRule(encoding: 'utf-8'), "MY TEXT", "my text", true],
+            [new ToLowerRule(encoding: 'utf-8'), "MY Ã TEXT", "my ã text", true],
+            [new ToLowerRule(encoding: 'utf-8'), "MY Á TEXT", "my á text", true],
+            [new ToLowerRule(encoding: 'utf-8'), "MY À TEXT", "my à text", true],
+            [new ToLowerRule(), "MY TEXT", "my text", false],
+            [new ToLowerRule(), "MY TEXT", "my text", false],
+            [new ToLowerRule(), null, null, false],
         ];
     }
 }
