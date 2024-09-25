@@ -13,10 +13,8 @@ use function is_string;
 
 /**
  * Callback Rule
- *
- * @Annotation
  */
-#[Attribute]
+#[Attribute(Attribute::TARGET_PROPERTY)]
 class Callback extends Rule
 {
     public const SELF_METHOD_TYPE = 'self_method';
@@ -28,14 +26,10 @@ class Callback extends Rule
      * - string: method of filtered object or function
      * - array: [Class, Method] to be called
      * - Closure
-     *
-     * @var string|string[]|callable
      */
-    public $callback;
-
-    public function getDefaultOption(): string|null
-    {
-        return 'callback';
+    public function __construct(
+        public mixed $callback
+    ) {
     }
 
     /**

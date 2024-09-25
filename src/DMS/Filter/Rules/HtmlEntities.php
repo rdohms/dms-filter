@@ -10,24 +10,19 @@ use const ENT_COMPAT;
 
 /**
  * Html Entities Filter
- *
- * @Annotation
  */
-#[Attribute]
+#[Attribute(Attribute::TARGET_PROPERTY)]
 class HtmlEntities extends Rule
 {
     /**
-     * Flags
+     * @param int $flags Flags
+     * @param string $encoding Encoding to be used
+     * @param bool $doubleEncode Convert existing entities
      */
-    public int $flags = ENT_COMPAT;
-
-    /**
-     * Encoding to be used
-     */
-    public string $encoding = 'UTF-8';
-
-    /**
-     * Convert existing entities
-     */
-    public bool $doubleEncode = true;
+    public function __construct(
+        public int $flags = ENT_COMPAT,
+        public string $encoding = 'UTF-8',
+        public bool $doubleEncode = true
+    ) {
+    }
 }

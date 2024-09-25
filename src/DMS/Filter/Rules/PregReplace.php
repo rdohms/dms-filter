@@ -10,24 +10,17 @@ use Attribute;
  * PregReplace Rule
  * Replaces based on regular expression, will replace with empty if no
  * replacement is defined.
- *
- * @Annotation
  */
-#[Attribute]
+#[Attribute(Attribute::TARGET_PROPERTY)]
 class PregReplace extends Rule
 {
     /**
-     * Regular Expression to use
+     * @param string|null $regexp Regular Expression to use
+     * @param string $replacement Replacement
      */
-    public string|null $regexp = null;
-
-    /**
-     * Replacement
-     */
-    public string $replacement = '';
-
-    public function getDefaultOption(): string|null
-    {
-        return 'regexp';
+    public function __construct(
+        public string|null $regexp = null,
+        public string $replacement = '',
+    ) {
     }
 }

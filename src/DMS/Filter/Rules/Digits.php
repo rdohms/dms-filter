@@ -8,19 +8,15 @@ use Attribute;
 
 /**
  * Digits Rule
- *
- * @Annotation
  */
-#[Attribute]
+#[Attribute(Attribute::TARGET_PROPERTY)]
 class Digits extends RegExp
 {
     /**
      * Allow Whitespace or not
      */
-    public bool $allowWhitespace = true;
-
-    public function getDefaultOption(): string|null
-    {
-        return 'allowWhitespace';
+    public function __construct(
+        public bool $allowWhitespace = true
+    ) {
     }
 }

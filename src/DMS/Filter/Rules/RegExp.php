@@ -10,10 +10,8 @@ use Attribute;
  * RegExp Rule
  *
  * Filter using preg_replace and unicode or non-unicode patterns
- *
- * @Annotation
  */
-#[Attribute]
+#[Attribute(Attribute::TARGET_PROPERTY)]
 class RegExp extends Rule
 {
     /**

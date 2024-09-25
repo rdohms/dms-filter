@@ -8,19 +8,15 @@ use Attribute;
 
 /**
  * StripTags Rule
- *
- * @Annotation
  */
-#[Attribute]
+#[Attribute(Attribute::TARGET_PROPERTY)]
 class StripTags extends Rule
 {
     /**
      * String of allowed tags. Ex: <b><i><a>
      */
-    public string|null $allowed = null;
-
-    public function getDefaultOption(): string|null
-    {
-        return 'allowed';
+    public function __construct(
+        public string|null $allowed = null
+    ) {
     }
 }

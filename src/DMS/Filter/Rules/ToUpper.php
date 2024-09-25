@@ -8,19 +8,15 @@ use Attribute;
 
 /**
  * ToUpper Rule
- *
- * @Annotation
  */
-#[Attribute]
+#[Attribute(Attribute::TARGET_PROPERTY)]
 class ToUpper extends Rule
 {
     /**
      * Encoding to be used
      */
-    public string|null $encoding = null;
-
-    public function getDefaultOption(): string|null
-    {
-        return 'encoding';
+    public function __construct(
+        public string|null $encoding = null
+    ) {
     }
 }
