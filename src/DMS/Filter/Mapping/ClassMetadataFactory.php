@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace DMS\Filter\Mapping;
 
-use Doctrine\Common\Cache\Cache;
+use Psr\Cache\InvalidArgumentException;
+use Symfony\Component\Cache\Adapter\AdapterInterface;
 
 use function ltrim;
 
@@ -20,12 +21,13 @@ class ClassMetadataFactory implements ClassMetadataFactoryInterface
      * Constructor
      * Receives a Loader and a Doctrine Compatible cache instance
      */
-    public function __construct(protected Loader\LoaderInterface $loader, protected Cache|null $cache = null)
+    public function __construct(protected Loader\LoaderInterface $loader, protected AdapterInterface|null $cache = null)
     {
     }
 
     /**
      * {@inheritDoc}
+     * @throws InvalidArgumentException
      */
     public function getClassMetadata($class): ClassMetadataInterface
     {
@@ -37,8 +39,8 @@ class ClassMetadataFactory implements ClassMetadataFactoryInterface
         }
 
         //Check Cache for it
-        if ($this->cache !== null && $this->cache->contains($class)) {
-            $this->setParsedClass($class, $this->cache->fetch($class));
+        if ($this->cache !== null && $this->cache->getItem($class)->isHit()) {
+            $this->setParsedClass($class, $this->cache->getItem($class)->get());
 
             return $this->getParsedClass($class);
         }
@@ -49,6 +51,7 @@ class ClassMetadataFactory implements ClassMetadataFactoryInterface
 
     /**
      * Reads class metadata for a new and unparsed class
+     * @throws InvalidArgumentException
      */
     private function parseClassMetadata(string $class): ClassMetadataInterface
     {
@@ -58,14 +61,16 @@ class ClassMetadataFactory implements ClassMetadataFactoryInterface
         $this->loadParentMetadata($metadata);
         $this->loadInterfaceMetadata($metadata);
 
-        //Load Annotations from Reader
+        //Load Attributes from Reader
         $this->loader->loadClassMetadata($metadata);
 
         //Store internally
         $this->setParsedClass($class, $metadata);
 
         if ($this->cache !== null) {
-            $this->cache->save($class, $metadata);
+            $cachedClass = $this->cache->getItem($class);
+            $cachedClass->set($metadata);
+            $this->cache->save($cachedClass);
         }
 
         return $metadata;
@@ -102,6 +107,7 @@ class ClassMetadataFactory implements ClassMetadataFactoryInterface
     /**
      * Checks if the class being parsed has a parent and cascades parsing
      * to its parent
+     * @throws InvalidArgumentException
      */
     protected function loadParentMetadata(ClassMetadataInterface $metadata): void
     {
@@ -115,8 +121,9 @@ class ClassMetadataFactory implements ClassMetadataFactoryInterface
     }
 
     /**
-     * Checks if the object has interfaces and cascades parsing of annotatiosn
+     * Checks if the object has interfaces and cascades parsing of attributes
      * to all the interfaces
+     * @throws InvalidArgumentException
      */
     protected function loadInterfaceMetadata(ClassMetadataInterface $metadata): void
     {
