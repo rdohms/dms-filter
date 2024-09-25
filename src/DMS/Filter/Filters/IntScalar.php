@@ -15,7 +15,7 @@ class IntScalar extends BaseFilter
     /**
      * {@inheritDoc}
      */
-    public function apply(Rule $rule, $value): mixed
+    public function apply(Rule $rule, $value): int
     {
         return (int) ($value);
     }

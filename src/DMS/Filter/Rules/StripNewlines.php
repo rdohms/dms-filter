@@ -8,10 +8,8 @@ use Attribute;
 
 /**
  * StripNewlines Rule
- *
- * @Annotation
  */
-#[Attribute]
+#[Attribute(Attribute::TARGET_PROPERTY)]
 class StripNewlines extends Rule
 {
 }

@@ -8,19 +8,15 @@ use Attribute;
 
 /**
  * Trim Rule
- *
- * @Annotation
  */
-#[Attribute]
+#[Attribute(Attribute::TARGET_PROPERTY)]
 class Trim extends Rule
 {
     /**
      * Comma separated string of allowed tags
      */
-    public string|null $charlist = null;
-
-    public function getDefaultOption(): string|null
-    {
-        return 'charlist';
+    public function __construct(
+        public string|null $charlist = null
+    ) {
     }
 }

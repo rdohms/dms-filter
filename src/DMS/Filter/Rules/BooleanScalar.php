@@ -8,10 +8,8 @@ use Attribute;
 
 /**
  * BooleanScalar Rule
- *
- * @Annotation
  */
-#[Attribute]
+#[Attribute(Attribute::TARGET_PROPERTY)]
 class BooleanScalar extends Rule
 {
 }

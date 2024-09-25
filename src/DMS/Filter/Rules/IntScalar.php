@@ -9,10 +9,8 @@ use Attribute;
 /**
  * IntScalar Rule
  * Converts content into an IntScalar
- *
- * @Annotation
  */
-#[Attribute]
+#[Attribute(Attribute::TARGET_PROPERTY)]
 class IntScalar extends Rule
 {
 }

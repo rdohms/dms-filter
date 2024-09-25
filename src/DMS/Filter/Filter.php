@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace DMS\Filter;
 
-/**
- * Filter Object, responsible for retrieving the filtering rules
- * for the object and applying them
- */
 use DMS\Filter\Filters\Loader\FilterLoaderInterface;
 use DMS\Filter\Mapping\ClassMetadataFactoryInterface;
 use DMS\Filter\Rules\Rule;
 use ReflectionException;
+
+/**
+ * Filter Object, responsible for retrieving the filtering rules
+ * for the object and applying them
+ */
 
 /**
  * Executor, receives objects that need filtering and executes attached rules.
@@ -21,8 +22,10 @@ class Filter implements FilterInterface
     /**
      * Constructor
      */
-    public function __construct(protected Mapping\ClassMetadataFactory $metadataFactory, protected FilterLoaderInterface $filterLoader)
-    {
+    public function __construct(
+        protected Mapping\ClassMetadataFactory $metadataFactory,
+        protected FilterLoaderInterface $filterLoader
+    ) {
     }
 
     /**

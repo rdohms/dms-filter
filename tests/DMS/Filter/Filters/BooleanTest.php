@@ -4,20 +4,13 @@ namespace DMS\Filter\Filters;
 
 use DMS\Tests\FilterTestCase;
 use DMS\Filter\Rules\BooleanScalar as BooleanRule;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class BooleanTest extends FilterTestCase
 {
-
-    /**
-     * @dataProvider provideForRule
-     *
-     * @param $options
-     * @param $value
-     * @param $expectedResult
-     */
-    public function testRule($options, $value, $expectedResult): void
+    #[DataProvider('provideForRule')]
+    public function testRule(BooleanRule $rule, $value, $expectedResult): void
     {
-        $rule = new BooleanRule($options);
         $filter = new BooleanScalar();
 
         $result = $filter->apply($rule, $value);
@@ -25,15 +18,15 @@ class BooleanTest extends FilterTestCase
         $this->assertEquals($expectedResult, $result);
     }
 
-    public function provideForRule(): array
+    public static function provideForRule(): array
     {
         return [
-            [null, "My Text", true],
-            [null, "", false],
-            [null, null, false],
-            [null, 21.9, true],
-            [null, 21, true],
-            [null, 0, false],
+            [new BooleanRule(), "My Text", true],
+            [new BooleanRule(), "", false],
+            [new BooleanRule(), null, false],
+            [new BooleanRule(), 21.9, true],
+            [new BooleanRule(), 21, true],
+            [new BooleanRule(), 0, false],
         ];
     }
 }

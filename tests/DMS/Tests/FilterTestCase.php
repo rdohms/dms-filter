@@ -4,7 +4,6 @@ namespace DMS\Tests;
 
 use DMS\Filter\Mapping;
 use DMS\Filter\Mapping\ClassMetadataFactory;
-use Doctrine\Common\Annotations;
 use PHPUnit\Framework\TestCase;
 
 class FilterTestCase extends TestCase
@@ -19,16 +18,7 @@ class FilterTestCase extends TestCase
         parent::tearDown();
     }
 
-    protected function buildMetadataFactoryWithAnnotationLoader(): ClassMetadataFactory
-    {
-        $reader = new Annotations\AnnotationReader();
-
-        $loader = new Mapping\Loader\AnnotationLoader($reader);
-
-        return new ClassMetadataFactory($loader);
-    }
-
-    protected function buildMetadataFactoryWithAttributeLoader(): ClassMetadataFactory
+    protected static function buildMetadataFactoryWithAttributeLoader(): ClassMetadataFactory
     {
         $loader = new Mapping\Loader\AttributeLoader();
 

@@ -5,6 +5,7 @@ namespace DMS\Filter\Filters\Loader;
 use DMS\Filter\Rules\StripTags;
 use DMS\Tests\Dummy\Rules\NoOptionsRule;
 use DMS\Tests\FilterTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use UnexpectedValueException;
 
 class FilterLoaderTest extends FilterTestCase
@@ -12,19 +13,13 @@ class FilterLoaderTest extends FilterTestCase
     protected FilterLoaderInterface $loader;
 
     public function setUp(): void
-{
+    {
         parent::setUp();
 
         $this->loader = new FilterLoader();
     }
 
-    /**
-     * @param $rule
-     * @param $return
-     * @param $expectException
-     *
-     * @dataProvider provideForGetFilter
-     */
+    #[DataProvider('provideForGetFilter')]
     public function testGetFilterForRule($rule, $return, $expectException): void
     {
         if ($expectException) {
@@ -34,7 +29,7 @@ class FilterLoaderTest extends FilterTestCase
         $this->assertEquals($return, $this->loader->getFilterForRule($rule));
     }
 
-    public function provideForGetFilter(): array
+    public static function provideForGetFilter(): array
     {
         return [
             [new StripTags(), new \DMS\Filter\Filters\StripTags(), false],

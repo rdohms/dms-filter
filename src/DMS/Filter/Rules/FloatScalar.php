@@ -9,10 +9,8 @@ use Attribute;
 /**
  * FloatScalar Rule
  * Converts content into a FloatScalar
- *
- * @Annotation
  */
-#[Attribute]
+#[Attribute(Attribute::TARGET_PROPERTY)]
 class FloatScalar extends Rule
 {
 }

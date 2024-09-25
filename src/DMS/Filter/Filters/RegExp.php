@@ -30,7 +30,7 @@ class RegExp extends BaseFilter
     public function apply(Rule $rule, $value): mixed
     {
         //Build pattern
-        $pattern = $this->checkUnicodeSupport() && $rule->unicodePattern !== null
+        $pattern = $this->checkUnicodeSupport()
             ? $rule->unicodePattern
             : $rule->pattern;
 
@@ -43,8 +43,7 @@ class RegExp extends BaseFilter
     public function checkUnicodeSupport(): bool
     {
         if (! isset(static::$unicodeEnabled)) {
-            //phpcs:disable SlevomatCodingStandard.ControlStructures.UselessTernaryOperator.UselessTernaryOperator
-            static::$unicodeEnabled = @preg_match('/\pL/u', 'a') ? true : false;
+            static::$unicodeEnabled = (bool)(@preg_match('/\pL/u', 'a'));
         }
 
         return static::$unicodeEnabled;

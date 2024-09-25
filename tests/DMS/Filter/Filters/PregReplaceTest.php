@@ -4,20 +4,13 @@ namespace DMS\Filter\Filters;
 
 use DMS\Tests\FilterTestCase;
 use DMS\Filter\Rules\PregReplace as PregReplaceRule;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class PregReplaceTest extends FilterTestCase
 {
-
-    /**
-     * @dataProvider provideForRule
-     *
-     * @param $options
-     * @param $value
-     * @param $expectedResult
-     */
-    public function testRule($options, $value, $expectedResult): void
+    #[DataProvider('provideForRule')]
+    public function testRule(PregReplaceRule $rule, $value, $expectedResult): void
     {
-        $rule   = new PregReplaceRule($options);
         $filter = new PregReplace();
 
         $result = $filter->apply($rule, $value);
@@ -25,14 +18,16 @@ class PregReplaceTest extends FilterTestCase
         $this->assertEquals($expectedResult, $result);
     }
 
-    public function provideForRule(): array
+    public static function provideForRule(): array
     {
         return [
-            [['regexp' => '/(old )/'], "the crazy old fox", "the crazy fox"],
-            [['regexp' => '/(old)/', 'replacement' => 'new'], "the crazy old fox", "the crazy new fox"],
-            [['regexp' => '/([0-9]*)/'], "this is day 21", "this is day "],
-            [['regexp' => '/(style=\"[^\"]*\")/'], "<table style=\"width: 23px\" class=\"myclass\">", "<table  class=\"myclass\">"],
-            [['regexp' => '/(style=\"[^\"]*\")/'], null, null],
+            [new PregReplaceRule(regexp : '/(old )/'), "the crazy old fox", "the crazy fox"],
+            [new PregReplaceRule(regexp : '/(old)/', replacement : 'new'), "the crazy old fox", "the crazy new fox"],
+            [new PregReplaceRule(regexp : '/([0-9]*)/'), "this is day 21", "this is day "],
+            [new PregReplaceRule(regexp : '/(style=\"[^\"]*\")/'),
+                "<table style=\"width: 23px\" class=\"myclass\">", "<table  class=\"myclass\">"
+            ],
+            [new PregReplaceRule(regexp : '/(style=\"[^\"]*\")/'), null, null],
         ];
     }
 }

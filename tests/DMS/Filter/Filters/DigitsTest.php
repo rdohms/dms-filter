@@ -4,24 +4,18 @@ namespace DMS\Filter\Filters;
 
 use DMS\Tests\FilterTestCase;
 use DMS\Filter\Rules\Digits as DigitsRule;
+use PHPUnit\Framework\Attributes\DataProvider;
+use ReflectionException;
 use ReflectionProperty;
 
 class DigitsTest extends FilterTestCase
 {
-
     /**
-     * @dataProvider provideForRule
-     *
-     * @param      $options
-     * @param      $value
-     * @param      $expectedResult
-     * @param null $unicodeSetting
-     *
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
-    public function testRule($options, $value, $expectedResult, $unicodeSetting = null): void
+    #[DataProvider('provideForRule')]
+    public function testRule(DigitsRule $rule, $value, $expectedResult, $unicodeSetting = null): void
     {
-        $rule   = new DigitsRule($options);
         $filter = new Digits();
 
         if ($unicodeSetting !== null) {
@@ -35,21 +29,21 @@ class DigitsTest extends FilterTestCase
         $this->assertEquals($expectedResult, $result);
     }
 
-    public function provideForRule(): array
+    public static function provideForRule(): array
     {
         return [
-            [false, "My Text", ""],
-            [false, "001 t55", "00155"],
-            [true, "My 23 dogs", " 23 "],
-            [false, "My 23 dogs", "23"],
-            [true, "233 055", "233 055", true],
-            [true, "233 055", "233 055", false],
-            [true, "233 t055s", "233 055"],
-            [true, "My Text21!", " 21"], //TODO verify this.
-            [true, "João Sorrisão", " ", true],
-            [true, "João Sorrisão", " ", false],
-            [true, "001Helgi Þormar Þorbjörnsson", "001  ", true],
-            [true, "001Helgi Þormar Þorbjörnsson", "001  ", false],
+            [new DigitsRule(false), "My Text", ""],
+            [new DigitsRule(false), "001 t55", "00155"],
+            [new DigitsRule(true), "My 23 dogs", " 23 "],
+            [new DigitsRule(false), "My 23 dogs", "23"],
+            [new DigitsRule(true), "233 055", "233 055", true],
+            [new DigitsRule(true), "233 055", "233 055", false],
+            [new DigitsRule(true), "233 t055s", "233 055"],
+            [new DigitsRule(true), "My Text21!", " 21"], //TODO verify this.
+            [new DigitsRule(true), "João Sorrisão", " ", true],
+            [new DigitsRule(true), "João Sorrisão", " ", false],
+            [new DigitsRule(true), "001Helgi Þormar Þorbjörnsson", "001  ", true],
+            [new DigitsRule(true), "001Helgi Þormar Þorbjörnsson", "001  ", false],
         ];
     }
 }

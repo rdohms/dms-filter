@@ -4,20 +4,13 @@ namespace DMS\Filter\Filters;
 
 use DMS\Tests\FilterTestCase;
 use DMS\Filter\Rules\IntScalar as IntRule;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class IntTest extends FilterTestCase
 {
-
-    /**
-     * @dataProvider provideForRule
-     *
-     * @param $options
-     * @param $value
-     * @param $expectedResult
-     */
-    public function testRule($options, $value, $expectedResult): void
+    #[DataProvider('provideForRule')]
+    public function testRule(IntRule $rule, $value, $expectedResult): void
     {
-        $rule   = new IntRule($options);
         $filter = new IntScalar();
 
         $result = $filter->apply($rule, $value);
@@ -25,16 +18,16 @@ class IntTest extends FilterTestCase
         $this->assertEquals($expectedResult, $result);
     }
 
-    public function provideForRule(): array
+    public static function provideForRule(): array
     {
         return [
-            [null, "My Text", 0],
-            [null, true, 1],
-            [null, "21", 21],
-            [null, "21.2", 21],
-            [null, "21.9", 21],
-            [null, 21.9, 21],
-            [null, null, null],
+            [new IntRule(), "My Text", 0],
+            [new IntRule(), true, 1],
+            [new IntRule(), "21", 21],
+            [new IntRule(), "21.2", 21],
+            [new IntRule(), "21.9", 21],
+            [new IntRule(), 21.9, 21],
+            [new IntRule(), null, null],
         ];
     }
 }

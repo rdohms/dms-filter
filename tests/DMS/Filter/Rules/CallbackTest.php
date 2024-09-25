@@ -1,24 +1,16 @@
 <?php
 
-
 namespace DMS\Filter\Rules;
 
-use DMS\Tests\Dummy\Classes\AnnotatedClass;
 use DMS\Tests\Dummy\Classes\AttributedClass;
 use DMS\Tests\FilterTestCase;
 use DMS\Filter\Exception\InvalidCallbackException;
+use PHPUnit\Framework\Attributes\DataProvider;
 use stdClass;
 
 class CallbackTest extends FilterTestCase
 {
-
-    /**
-     * @param $input
-     * @param $expectedOutput
-     * @param $expectException
-     *
-     * @dataProvider provideInputs
-     */
+    #[DataProvider('provideInputs')]
     public function testGetInputType($input, $expectedOutput, $expectException): void
     {
         if ($expectException) {
@@ -30,15 +22,13 @@ class CallbackTest extends FilterTestCase
         $this->assertEquals($expectedOutput, $rule->getInputType());
     }
 
-    public function provideInputs(): array
+    public static function provideInputs(): array
     {
-        $closure = static function ($v) {};
+        $closure = static function ($v) {
+        };
 
         return [
             ['objMethod', Callback::SELF_METHOD_TYPE, false],
-            [[AnnotatedClass::class, 'anotherCallback'], Callback::CALLABLE_TYPE, false],
-            [[AnnotatedClass::class, 'missingCallback'], null, true],
-            [[new AnnotatedClass(), 'callbackMethod'], Callback::CALLABLE_TYPE, false],
             [[AttributedClass::class, 'anotherCallback'], Callback::CALLABLE_TYPE, false],
             [[AttributedClass::class, 'missingCallback'], null, true],
             [[new AttributedClass(), 'callbackMethod'], Callback::CALLABLE_TYPE, false],

@@ -14,7 +14,7 @@ class BooleanScalar extends BaseFilter
     /**
      * {@inheritDoc}
      */
-    public function apply(Rule $rule, $value): mixed
+    public function apply(Rule $rule, $value): bool
     {
         return (bool) $value;
     }

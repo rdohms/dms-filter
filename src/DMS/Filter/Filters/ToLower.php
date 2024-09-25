@@ -24,7 +24,7 @@ class ToLower extends BaseFilter
      *
      * @param \DMS\Filter\Rules\ToLower $rule
      */
-    public function apply(Rule $rule, $value): mixed
+    public function apply(Rule $rule, $value): string
     {
         if ($this->useEncoding($rule)) {
             return mb_strtolower((string) $value, $rule->encoding);

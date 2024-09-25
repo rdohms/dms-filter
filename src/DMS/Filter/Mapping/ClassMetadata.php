@@ -11,7 +11,7 @@ use ReflectionException;
 use function array_keys;
 
 /**
- * Represents a class that has Annotations
+ * Represents a class that has Attributes
  */
 class ClassMetadata implements ClassMetadataInterface
 {

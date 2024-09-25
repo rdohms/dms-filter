@@ -7,12 +7,11 @@ use DMS\Tests\FilterTestCase;
 use DMS\Tests\Dummy;
 use DMS\Filter\Mapping\ClassMetadataFactory;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class FilterTest extends FilterTestCase
 {
-    /**
-     * @dataProvider filterClassDataProvider
-     */
+    #[DataProvider('filterClassDataProvider')]
     public function testFilter(Filter $filter, $class): void
     {
         $class->name = "Sir Isaac<script></script> Newton";
@@ -31,9 +30,7 @@ class FilterTest extends FilterTestCase
         $this->assertStringNotContainsString("<p>", $class->description);
     }
 
-    /**
-     * @dataProvider filterChildClassDataProvider
-     */
+    #[DataProvider('filterChildClassDataProvider')]
     public function testFilterWithParent(Filter $filter, $class): void
     {
         $class->name = "Sir Isaac<script></script> Newton";
@@ -55,9 +52,7 @@ class FilterTest extends FilterTestCase
         $this->assertStringNotContainsString(" ", $class->surname);
     }
 
-    /**
-     * @dataProvider filterClassDataProvider
-     */
+    #[DataProvider('filterClassDataProvider')]
     public function testFilterProperty(Filter $filter, $class): void
     {
         $class->name = "Sir Isaac<script></script> Newton";
@@ -74,9 +69,7 @@ class FilterTest extends FilterTestCase
         $this->assertStringNotContainsString("<p>", $class->description);
     }
 
-    /**
-     * @dataProvider filterDataProvider
-     */
+    #[DataProvider('filterDataProvider')]
     public function testFilterValue(Filter $filter): void
     {
         $value = "this is <b> a string<p> with<b> tags</p> and malformed";
@@ -89,9 +82,7 @@ class FilterTest extends FilterTestCase
         $this->assertStringNotContainsString('<p>', $filtered);
     }
 
-    /**
-     * @dataProvider filterDataProvider
-     */
+    #[DataProvider('filterDataProvider')]
     public function testFilterValueWithArray(Filter $filter): void
     {
         $value = "this is <b> a string<p> with<b> tags</p> and\n malformed";
@@ -106,57 +97,39 @@ class FilterTest extends FilterTestCase
         $this->assertStringNotContainsString('\n', $filtered);
     }
 
-    /**
-     * @dataProvider filterDataProvider
-     */
+    #[DataProvider('filterDataProvider')]
     public function testNotFailOnNull(Filter $filter): void
     {
         $this->expectNotToPerformAssertions();
         $filter->filterEntity(null);
     }
 
-    /**
-     * @dataProvider filterDataProvider
-     */
+    #[DataProvider('filterDataProvider')]
     public function testGetMetadataFactory(Filter $filter): void
     {
         $this->assertInstanceOf(ClassMetadataFactory::class, $filter->getMetadataFactory());
     }
-    
-    public function filterClassDataProvider(): Generator
-    {
-        yield 'Annotation' => [
-            new Filter($this->buildMetadataFactoryWithAnnotationLoader(), new FilterLoader()),
-            new Dummy\Classes\AnnotatedClass(),
-        ];
 
+    public static function filterClassDataProvider(): Generator
+    {
         yield 'Attribute' => [
-            new Filter($this->buildMetadataFactoryWithAttributeLoader(), new FilterLoader()),
+            new Filter(self::buildMetadataFactoryWithAttributeLoader(), new FilterLoader()),
             new Dummy\Classes\AttributedClass(),
         ];
     }
 
-    public function filterChildClassDataProvider(): Generator
+    public static function filterChildClassDataProvider(): Generator
     {
-        yield 'Annotation' => [
-            new Filter($this->buildMetadataFactoryWithAnnotationLoader(), new FilterLoader()),
-            new Dummy\Classes\ChildAnnotatedClass(),
-        ];
-
         yield 'Attribute' => [
-            new Filter($this->buildMetadataFactoryWithAttributeLoader(), new FilterLoader()),
+            new Filter(self::buildMetadataFactoryWithAttributeLoader(), new FilterLoader()),
             new Dummy\Classes\ChildAttributedClass(),
         ];
     }
-    
-    public function filterDataProvider(): Generator
-    {
-        yield 'Annotation' => [
-            new Filter($this->buildMetadataFactoryWithAnnotationLoader(), new FilterLoader()),
-        ];
 
+    public static function filterDataProvider(): Generator
+    {
         yield 'Attribute' => [
-            new Filter($this->buildMetadataFactoryWithAttributeLoader(), new FilterLoader()),
+            new Filter(self::buildMetadataFactoryWithAttributeLoader(), new FilterLoader()),
         ];
     }
 }
