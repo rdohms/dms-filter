@@ -34,10 +34,6 @@ jobs:
         run: |
           composer install --prefer-dist --no-progress
 
-      - name: Check
-        run: |
-          ls -la vendor/bin
-
       - name: Check Code Style
         run: ./vendor/bin/phpcs --report-full --report-checkstyle=./phpcs-report.xml
 
